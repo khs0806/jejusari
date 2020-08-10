@@ -110,12 +110,38 @@
 		<!-- 주소 검색시 생겨날 창 -->
 		<div id="addr_result" class="row">
 			<div id="addr_detail" class="col">
-				<input type="text" id="sample4_postcode" placeholder="우편번호">
-				<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-				<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+				<div class="input-group input-group-sm mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-sm">우 편 번 호</span>
+					</div>
+				  <input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호" readonly>
+				</div>
+				<div class="input-group input-group-sm mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-sm">도로명주소</span>
+					</div>
+				  <input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" readonly>
+				</div>
+				<div class="input-group input-group-sm mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-sm">지 번 주 소</span>
+					</div>
+				  <input type="text" class="form-control" id="sample4_jibunAddress" placeholder="지번주소" readonly>
+				</div>
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-				<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+				<div class="input-group input-group-sm mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-sm">상 세 주 소</span>
+					</div>
+				  <input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소를 입력하세요">
+				</div>
+				<div class="input-group input-group-sm mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-sm">참 고 항 목</span>
+					</div>
+				  <input type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목" readonly>
+				</div>
+				
 			</div>
 			<div class="col mr-3" id="map" style="width:400px;height:250px;margin-top:10px;display:none"></div>
 		</div>
