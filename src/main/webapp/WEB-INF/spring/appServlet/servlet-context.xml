@@ -21,21 +21,23 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"/>
 	</beans:bean> 
 
 	<!-- Tiles2 -->
-   <!-- <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+   <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
       <beans:property name="definitions">
          <beans:list>
             <beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
          </beans:list>
       </beans:property>
-   </beans:bean> -->
+   </beans:bean>
    
    <!-- tiles ViewResolver -->
-   <!-- <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+   <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
       <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>   
-   </beans:bean> -->
+      <beans:property name="order" value="1"/>   
+   </beans:bean>
    
    <!-- fileUpload -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -43,8 +45,7 @@
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
 	
+	<!-- 빈 스캔 -->
 	<context:component-scan base-package="com.kitri..*" />
-	
-	
 	
 </beans:beans>
