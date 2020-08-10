@@ -215,16 +215,22 @@ $(document).ready(function() {
 	</div>
 
 	<!-- 매물 이미지 -->
-	<div id="sales_img">
-		<div class="img_all">
-			<div class="img"><img/></div>
-			<div class="img"><img/></div>
-			<div class="img"><img/></div>
-			<!-- 3개 이상일 경우 -->
-			<div class="img_more"><img src="${root}/img/next1.png" width="30px" height="30px"/></div>	<!-- 꺽은 모양;3개 이상시 보임 -->
-			<!-- <div class="img"><img/></div>	 -->	<!-- 3개이상시 클릭하면-->
-		</div>
-	</div>
+	  <!-- 매물 이미지 -->
+	  <div id="sales_img">
+		   <div class="img_all">
+		    <%-- <c:forEach ></c:forEach>  --%> 
+			    <div class="img"><img/></div>
+			    <div class="img"><img/></div>
+			    <div class="img"><img/></div>
+			    <!-- 3개 이상일 경우 -->
+			    <%-- <c:if test=""/> --%>
+			    <div class="img_more"><img src="${root }/img/next1.png" width="30px" height="30px"/></div> <!-- 꺽은 모양;3개 이상시 보임 -->
+			    <div class="imgs"><img/></div>  <!-- 3개이상시 클릭하면-->
+			    <div class="imgs"><img/></div> 
+			    <div class="imgs"><img/></div> 
+		    <div class="img_small"><img src="${root }/img/next2.png" width="30px" height="30px"/></div>
+		   </div>
+	  </div>
 
 	<!-- 중개인정보,매물더보기 -->
 	<div id="member_btn">
