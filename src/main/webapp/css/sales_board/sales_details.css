@@ -180,7 +180,7 @@ img{
 	overflow:hidden;
 }
 
-#sales_img .img{
+#sales_img .img,#sales_img .imgs{
 	width:211px;
 	height:220px;
 	border:solid 1px grey;
@@ -188,7 +188,7 @@ img{
 	margin: 10px;
 }
 
-#sales_img .img_more{
+#sales_img .img_more, #sales_img .img_small {
 	width:30px;
 	margin-left: 340px;
 	border:solid 0px blue;
