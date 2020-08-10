@@ -11,7 +11,7 @@
 <body>
 
 	<div align = "center" style = "margin-top: 100px;">
-		<form method = "post" action = "${root}/notice/notice_deleteOk.do">
+		<form method = "post" action = "${root}/notice/delete">
 			<input type = "hidden" value = "${boardNumber}" name = "boardNumber"/>
 			<input type = "hidden" value = "${pageNumber}" name = "pageNumber"/>
 			
@@ -22,7 +22,7 @@
 			<br/><br/>
 			<div>
 				<input type = "submit" value = "글삭제"/>
-				<input type = "button" value = "목록보기" onclick = "location.href = ${root}/fileBoard/list.do?pageNumber=${pageNumber}"/>
+				<input type = "button" value = "목록보기" onclick = "location.href = ${root}/notice/list"/>
 			</div>
 		</form>
 	</div>

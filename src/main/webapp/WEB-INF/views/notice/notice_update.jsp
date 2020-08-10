@@ -14,7 +14,7 @@
 	<div id = "board">
 		<h3 class="text-success">[공지사항 작성]</h3>
 		<span class="badge badge-success">관리자</span>
-		<form action="${root}/notice/notice_writeOk.do" method = "post" onsubmit = "return noticeCheck(this)" enctype = "multipart/form-data">
+		<form action="${root}/notice/update" method = "post" onsubmit = "return noticeCheck(this)" enctype = "multipart/form-data">
 			<%-- <input type = "hidden" name = "noticeNumber" value = "${noticeNumber}"/>
 			<input type = "hidden" name = "pageNumber" value = "${pageNumber}"/>--%>
 				<div id = "box">
@@ -51,7 +51,7 @@
 					
 					
 					<div class = "text" style = "text-align: right;">
-						<button class="btn btn-success" type="button" onclick = "location.href = '${root}/notice/notice_list.do'">목록</button>
+						<button class="btn btn-success" type="button" onclick = "location.href = '${root}/notice'">목록</button>
 						<button class="btn btn-success" type="reset">취소</button>
 						<button class="btn btn-success" type="submit">작성</button>
 						<%-- <input type = "button" value = "목록" onclick = "location.href = '${root}/notice/notice_list.do'"/> --%>

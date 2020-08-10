@@ -3,15 +3,18 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var = "root" value = "${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>공지사항 상세</title>
 <link type = "text/css" rel = "stylesheet" href = "${root}/css/admin/notice_read.css"/>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
-</head>
-<body>
+<script>
+	$(function(){
+		$(".update-btn").click(function(){
+			location.href='${root}/notice/update';
+		});
+		$(".delete-btn").click(function(){
+			location.href='${root}/notice/delete';
+		});
+	})
+</script>
 	<div id = "board">
 				<div id = "box">
 					<h3 class="text-success">[공지사항]</h3>
@@ -24,8 +27,8 @@
 						<input type = "button" value = "삭제"/> -->
 						
 						<button class="btn btn-success" type="button" onclick = "location.href = '${root}/notice/notice_list.do'">목록</button>
-						<button class="btn btn-success" type="button">수정</button>
-						<button class="btn btn-success" type="button">삭제</button>
+						<button class="btn btn-success update-btn" type="button">수정</button>
+						<button class="btn btn-success delete-btn" type="button">삭제</button>
 					</div>
 				
 					<div class = "title">
@@ -75,5 +78,3 @@
 			
 			
 	</div>
-</body>
-</html>

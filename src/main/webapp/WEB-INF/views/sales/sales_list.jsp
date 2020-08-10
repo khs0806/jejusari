@@ -78,7 +78,7 @@
 				<div class="col-md-1"><strong>가격</strong></div>
 			</div>
 		<c:forEach begin="0" end="10">	
-			<a href="${root}/salesdetail">
+			<a href="${root}/sales/detail">
 			<div class="row border-bottom" id="table_td">
 				<div class="col-md-8"><strong>프리미엄 럭셔리 인테리어 최고급 샷시</strong><p>논현신동아파밀리에 105동</p></div>
 				<div class="col-md-1">아파트</div>
@@ -113,8 +113,8 @@
 		</div>
 		<script>
 			$(function(){
-				$(".btn-sales").onclick(function(){
-					location.href='${root}/saleswrite';
+				$(".btn-sales").click(function(){
+					location.href='${root}/sales/write';
 				});
 			});
 		</script>

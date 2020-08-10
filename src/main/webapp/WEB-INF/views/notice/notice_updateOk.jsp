@@ -12,14 +12,14 @@
 	<c:if test = "${check > 0}">
 		<script type="text/javascript">
 			alert("[관리자 페이지]게시글이 수정 되었습니다.");
-			location.href = "${root}/notice/notice_list.do";
+			location.href = "${root}/notice";
 		</script>
 	</c:if>
 	
 	<c:if test = "${check == 0}">
 		<script type="text/javascript">
 			alert("[관리자 페이지]게시글이 수정 되지 않았습니다.");
-			location.href = "${root}/notice/notice_update.do";
+			location.href = "${root}/notice/update";
 		</script>
 	</c:if>
 </body>

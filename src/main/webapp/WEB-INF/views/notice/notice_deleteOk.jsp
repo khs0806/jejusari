@@ -12,14 +12,14 @@
 	<c:if test = "${check > 0}">
 		<script type="text/javascript">
 			alert("[관리자 페이지]게시물이 삭제되었습니다.");
-			location.href = "${root}/notice/notice_list.do?pageNumber=${pageNumber}";
+			location.href = "${root}/notice?pageNumber=${pageNumber}";
 		</script>
 	</c:if>
 	
 	<c:if test = "${check == 0}">
 		<script type="text/javascript">
 			alert("[관리자 페이지]게시물이 삭제되지 않았습니다. 다시 시도해주세요.");
-			location.href = "${root}/notice/notice_read.do?pageNumber=${pageNumber}";
+			location.href = "${root}/notice?pageNumber=${pageNumber}";
 		</script>
 	</c:if>
 </body>

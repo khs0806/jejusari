@@ -11,7 +11,7 @@
 		</div>
 		<div class="kakao">
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee
-			&redirect_uri=http://localhost:8282${root}&response_type=code">
+			&redirect_uri=http://localhost:8282/jeju&response_type=code">
 				<img alt="카카오톡로그인" src="${root}/img/kakao_login_medium_wide.png">
 			</a>
 		</div>

@@ -10,6 +10,6 @@
 </head>
 <body>
 	<h3>신고 게시판</h3>
-	<a href="${root}/reportwrite">신고작성</a>
+	<a href="${root}/report/write">신고작성</a>
 </body>
 </html>

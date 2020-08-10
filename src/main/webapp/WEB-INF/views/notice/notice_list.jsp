@@ -10,6 +10,13 @@
 <title>공지사항</title>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="${root}/css/admin/notice_list.css">
+<script>
+	$(function(){
+		$(".write-btn").click(function(){
+			location.href='${root}/notice/write';
+		});
+	});
+</script>
 </head>
 <body>
 <form action="#" method="POST" onsubmit="">
@@ -17,7 +24,7 @@
 		<h3 class="text-success">[공지사항]</h3>
 		<span class="badge badge-success">관리자</span>
 		<br/>
-		<button class="btn btn-success" type="button" style = "margin-bottom: 5px;">글작성</button>
+		<button class="btn btn-success write-btn" type="button" style = "margin-bottom: 5px;">글작성</button>
 		<table>
 				<tr>
 					<th>1</th>
@@ -28,7 +35,7 @@
 				</tr>
 				
 				<tr>
-			      <td>Column content</td>
+			      <td><a href="${root}/notice/detail">Column content</a></td>
 			      <td>Column content</td>
 			      <td>Column content</td>
 			      <td>Column content</td>
