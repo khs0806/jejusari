@@ -191,7 +191,7 @@ img{
  display:none;
 }
 
-#sales_img .img_more,#sales_img .img_small{
+#sales_img .img_more, #sales_img .img_small{
  width:30px;
  margin-left: 340px;
  border:solid 0px blue;

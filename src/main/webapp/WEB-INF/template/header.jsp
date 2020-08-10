@@ -5,7 +5,7 @@
 <c:set var="root" value="${ pageContext.request.contextPath }"/>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.css">
 <link rel="stylesheet" href="${root}/css/board/footer.css">
 <link rel="stylesheet" href="${root}/css/board/board_main.css">
