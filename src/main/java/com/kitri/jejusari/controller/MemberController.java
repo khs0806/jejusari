@@ -27,11 +27,17 @@ public class MemberController {
 		return "member/member_signup";
 	}
 	
-	// 회원 정보 제공 동의
-	@RequestMapping(value="/member/withdraw")
+	// 회원 탈퇴
+	@RequestMapping(value="/member/withdraw1")
 	public String withdraw() {
 		
-		return "member/member_withdraw";
+		return "member/member_withdraw1";
+	}
+	// 회원 탈퇴
+	@RequestMapping(value="/member/withdraw2")
+	public String withdrawOk() {
+		
+		return "member/member_withdraw2";
 	}
 		
 	// 로그인
