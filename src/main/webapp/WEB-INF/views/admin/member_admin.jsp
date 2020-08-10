@@ -25,7 +25,7 @@ function memberDrop(obj){
 </script>
 </head>
 <body>
-<form action="#" method="POST" onsubmit="">
+<form action="#" method="POST" onsubmit="return memberDrop(this)">
 	<div id="admin_container">
 		<div id="title" class="text-success"><h3>&#91;회원관리&#93;</h3></div>
 		<span  style="margin-top:0px;" class="badge badge-success">관리자</span>
@@ -40,7 +40,7 @@ function memberDrop(obj){
 					<th>6</th>
 				</tr>
 				<tr>
-					<td><input type="checkbox" value="" name=""/></td>
+					<td><input type="checkbox" value="1" name="drop"/></td>
 					<td>dd</td>
 					<td>dd</td>
 					<td>dd</td>
@@ -48,7 +48,7 @@ function memberDrop(obj){
 					<td>dd</td>
 				</tr>
 				<tr class="table-success">
-					<td><input type="checkbox" value="" name=""/></td>
+					<td><input type="checkbox" value="2" name="drop"/></td>
 					<td>dd</td>
 					<td>dd</td>
 					<td>dd</td>
@@ -56,7 +56,7 @@ function memberDrop(obj){
 					<td>dd</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" value="" name=""/></td>
+					<td><input type="checkbox" value="3" name="drop"/></td>
 					<td>dd</td>
 					<td>dd</td>
 					<td>dd</td>
@@ -64,7 +64,7 @@ function memberDrop(obj){
 					<td>dd</td>
 				</tr>
 				<tr class="table-success">
-					<td><input type="checkbox" value="" name=""/></td>
+					<td><input type="checkbox" value="4" name="drop"/></td>
 					<td>dd</td>
 					<td>dd</td>
 					<td>dd</td>
@@ -72,7 +72,7 @@ function memberDrop(obj){
 					<td>dd</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" value="" name=""/></td>
+					<td><input type="checkbox" value="5" name="drop"/></td>
 					<td>dd</td>
 					<td>dd</td>
 					<td>dd</td>
