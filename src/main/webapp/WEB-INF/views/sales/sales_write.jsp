@@ -21,7 +21,7 @@
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form>
+		<form action="${root }/sales/writeOk.do">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			

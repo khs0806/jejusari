@@ -17,6 +17,12 @@ public class SalesController {
 		return "sales/sales_write";
 	}
 	
+	@RequestMapping(value="/sales/writeOk")
+	public String saleswriteOk() {
+		
+		return "sales/sales_write";
+	}
+	
 	@RequestMapping(value="/sales/detail")
 	public String salesdetail() {
 		
