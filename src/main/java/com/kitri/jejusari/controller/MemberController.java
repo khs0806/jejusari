@@ -11,6 +11,11 @@ public class MemberController {
 		return "main/main";
 	}
 	
+	@RequestMapping(value="/introduce")
+	public String introduce() {
+		return "main/introduce";
+	}
+	
 	@RequestMapping(value="/login")
 	public String login() {
 		
@@ -40,5 +45,13 @@ public class MemberController {
 		
 		return "member/member_withdraw";
 	}
+	
+	@RequestMapping(value="/memberadmin")
+	public String admin() {
+		
+		return "admin/member_admin";
+	}
+	
+	
 	
 }

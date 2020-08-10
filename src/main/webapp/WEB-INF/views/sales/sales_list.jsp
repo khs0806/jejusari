@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${root }/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
 <style type="text/css">
 	a {color: black; text-decoration: none !important;}
 </style>
@@ -82,7 +82,7 @@
 				<div class="col-md-1"><strong>가격</strong></div>
 			</div>
 		<c:forEach begin="0" end="10">	
-			<a href="#">
+			<a href="${root}/salesdetail">
 			<div class="row border-bottom" id="table_td">
 				<div class="col-md-8"><strong>프리미엄 럭셔리 인테리어 최고급 샷시</strong><p>논현신동아파밀리에 105동</p></div>
 				<div class="col-md-1">아파트</div>

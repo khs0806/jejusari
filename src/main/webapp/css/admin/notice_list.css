@@ -7,7 +7,7 @@
 	#admin_container>#title{
 		font-weight: bold;
 		font-size: 24px;
-		margin-bottom: 8px;
+		margin-bottom: 20px;
 	}
 	
 	#admin_container>table{
@@ -24,8 +24,8 @@
 		background-color: rgb(84, 207, 43);
 	}
 	
-	#admin_container>.btn-success{
+	#admin_container>input{
 	  margin-top:20px;
-	  margin-left:74.2%;
+	  margin-left:76%;
 	}
 	

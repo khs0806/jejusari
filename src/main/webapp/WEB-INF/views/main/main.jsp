@@ -11,49 +11,27 @@
 		  <button type="submit" class="btn btn-warning">검색</button>
 		</form>
 	</div>
+<div class="main_back">
 	<div class="mainn">
-	<div id="main_board">
-		<div>
-			<div class="title">공지사항</div>
-			<div class="content">
-				&#9786;공지사항
+		<div id="main_board">
+			<div>
+				<div class="title">공지사항</div>
+				<div class="content">&#9786;공지사항</div>
+				<div class="content">&#9786;공지사항</div>
+				<div class="content">&#9786;공지사항</div>
+				<div class="content">&#9786;공지사항</div>
+				<div class="content">&#9786;공지사항</div>
+				<div class="content">&#9786;공지사항</div>
 			</div>
-			<div class="content">
-				&#9786;공지사항
+			<div>
+				<div class="title">최신뉴스</div>
+				<div class="content">&#9786;최신뉴스</div>
+				<div class="content">&#9786;최신뉴스</div>
+				<div class="content">&#9786;최신뉴스</div>
+				<div class="content">&#9786;최신뉴스</div>
+				<div class="content">&#9786;최신뉴스</div>
+				<div class="content">&#9786;최신뉴스</div>
 			</div>
-			<div class="content">
-				&#9786;공지사항
-			</div>
-			<div class="content">
-				&#9786;공지사항
-			</div>
-			<div class="content">
-				&#9786;공지사항
-			</div>
-			<div class="content">
-				&#9786;공지사항
-			</div>
-		</div>
-		<div>
-			<div class="title">최신뉴스</div>
-			<div class="content">
-				&#9786;최신뉴스
-			</div>
-			<div class="content">
-				&#9786;최신뉴스
-			</div>
-			<div class="content">
-				&#9786;최신뉴스
-			</div>
-			<div class="content">
-				&#9786;최신뉴스
-			</div>
-			<div class="content">
-				&#9786;최신뉴스
-			</div>
-			<div class="content">
-				&#9786;최신뉴스
-			</div>
-		</div>
 		</div>
 	</div>
+</div>

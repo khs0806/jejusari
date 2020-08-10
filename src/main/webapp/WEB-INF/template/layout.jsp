@@ -8,7 +8,6 @@
 	<!-- 계속 바뀌는 content -->
 	<tiles:insertAttribute name="content"/> 
 	
-	<hr>
 	<!-- footer -->
 	<tiles:insertAttribute name="footer"/>
 	

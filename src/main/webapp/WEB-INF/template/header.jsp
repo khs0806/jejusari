@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${root}/css/board/board_main.css">
 <link rel="stylesheet" href="${root}/css/member/memberJoin.css">
 <!--===============================================================================================-->
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script> 
+<script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
 
 		<div class="navbar-collapse justify-content-center" id="navbarColor01">
 			<ul class="navbar-nav mx-5">
-				<li class="nav-item active mx-5"><a class="nav-link" href="#">소개
+				<li class="nav-item active mx-5"><a class="nav-link" href="${root}/introduce">소개
 						<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item mx-5"><a class="nav-link" href="${root}/saleslist">매물정보</a></li>

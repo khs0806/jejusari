@@ -12,9 +12,15 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/saleswrite")
-	public String login() {
+	public String saleswrite() {
 		
 		return "sales/sales_write";
+	}
+	
+	@RequestMapping(value="/salesdetail")
+	public String salesdetail() {
+		
+		return "sales/sales_details";
 	}
 	
 	@RequestMapping(value="/news")
@@ -29,10 +35,16 @@ public class SalesController {
 		return "notice/notice_list";
 	}
 	
-	@RequestMapping(value="/report")
+	@RequestMapping(value="/reportwrite")
 	public String report() {
 		
-		return "report/report_list";
+		return "report/report_write";
+	}
+	
+	@RequestMapping(value="/reportadmin")
+	public String reportAdmin() {
+		
+		return "admin/report_admin";
 	}
 	
 }

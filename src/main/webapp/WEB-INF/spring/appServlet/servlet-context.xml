@@ -13,7 +13,7 @@
 	<annotation-driven />
 
 	<!-- 정작파일(css,js) 경로 -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/img/**" location="/img/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/javascript/**" location="/javascript/" />
 
