@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
 <style type="text/css">
 	a {color: black; text-decoration: none !important;}
+	#addr_detail{display: none;}
 </style>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>

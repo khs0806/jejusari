@@ -127,7 +127,7 @@ img{
 
 #sales_sum .all_opt {
  border: solid 0px blue;
- margin: 5px auto;
+ margin: 40px auto;
  height:100px;
  width:500px;
 }
@@ -145,14 +145,15 @@ img{
 
 #sales_index .all_index {
  border: solid 0px blue;
- margin: 5px auto;
+ margin: 40px auto;
  height:330px;
  width:500px;
 }
 
 #sales_index .index{
  float:left;
- width:150px;
+ width: 100px;
+ margin-bottom: 20px;
 }
 
 #sales_index .index_sum{
