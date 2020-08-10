@@ -45,37 +45,101 @@
 
 	var map = new kakao.maps.Map(container, options);
 	
-	$(document).ready(function() {    
-		$(".report_btn").on("click",function(){
-			location.href='${root}/reportwrite';
-		})
+$(document).ready(function() {    
+	$(".report_btn").on("click",function(){
+		location.href='${root}/reportwrite';
 	});
+	//스크랩 클릭시
+	$("input:button[name=scrap_btn]").one("click",function(){
+		alert("ok");
+		$("input:button[name=scrap_btn]").css("color","#212529");
+		$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+		$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+	})
+	
+	//신고하기 클릭시
+	$("input:button[name=report_btn]").click(function(){
+		var check=confirm("이 매물을 신고하시겠습니까?");
+		if(check==true){
+			alert("ok");
+		}
+	})
+	
+	//이미지 더 보기 클릭시
+	$(".img_more").click(function(){
+		//alert("ok");
+		$(".imgs").show();
+		$(".img_small").show();
+		$(".img_more").hide();
+	})
+	
+	//이미지 줄여보기?
+	$(".img_small").click(function(){
+		//alert("ok");
+		$(".imgs").hide();
+		$(".img_small").hide();
+		$(".img_more").show();
+	})
+	
+	//중개인 더보기 클릭시
+	$("input:button[name=member_info]").click(function(){
+		alert("ok");
+	})
+	
+	//매물 더보기 클릭시
+	$("input:button[name=more_sales]").click(function(){
+		alert("ok");
+	})
+	
+	//수정 클릭시
+	$("input:button[name=sales_update]").click(function(){
+		var check=confirm("매물 정보를 수정하시겠습니까?");
+		if(check==true){
+			alert("ok");
+		}
+	})
+	
+	//신고처리 클릭시
+	$("input:button[name=report_update]").click(function(){
+		var check=confirm("매물 정보를 신고처리하시겠습니까?");
+		if(check==true){
+			alert("ok");
+		}
+	})
+	
+	//삭제 클릭시
+	$("input:button[name=sales_delete]").click(function(){
+		var check=confirm("매물 정보 게시글을 삭제하시겠습니까?");
+		if(check==true){
+			alert("ok");
+		}
+	})
+});
 	
 </script>
 
 	<!-- 매물 상세 설명 :면적,평수,준공년월일,층수 -->
 	<div id="sales_info">
-		<img src="${root}/img/home4.png" width="60px" height="60px"/>
+		<img src="${root }/img/home4.png" width="60px" height="60px"/>
 		<div>
-			<div class="col1">
-				<span>면적(m²)</span>
-				<span>면적</span>
-			</div>
-			<div class="col2" style="margin-bottom:5px;">
-				<span>평형</span>
-				<span>평형-면적으로 계산</span>
-			</div>
-			<div class="col1">
-				<span>준공년월일</span>
-				<span>준공년월일</span>
-			</div>
-			<div class="col2">
-				<span>층수</span>
-				<span>층수</span>			
-			</div>
+			<table class="row1">
+				<tr>
+					<td class="info_name">면적(m²)</td>
+					<td>면적</td>
+					<td class="info_name">평형</td>		
+					<td>평형</td>		<!-- 면적으로 계산 -->
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td class="info_name">중공년월일</td>
+					<td>중공년월일</td>
+					<td class="info_name">층수</td>
+					<td>층수</td>
+				</tr>
+			</table>
 		</div>
 	</div>
-
 
 	<!-- 매물요약 -->
 	<div id="sales_sum">
