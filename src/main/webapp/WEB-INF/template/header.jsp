@@ -32,8 +32,17 @@
 				<li class="nav-item mx-5"><a class="nav-link" href="${root}/news">최신뉴스</a></li>
 			</ul>
 		</div>
+		<c:if test="${user == null}">
+			<ul class="navbar-nav ml-md-auto">
+				<%-- <li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee&redirect_uri=http://localhost:8282${root}&response_type=code">로그인</a></li> --%>
+				<li class="nav-item"><a class="nav-link" href="${root}/member/login" style="font-size:15px;">로그인 · 회원가입</a></li>
+			</ul>
+		</c:if>
+		<c:if test="${user != null}">
 		<ul class="navbar-nav ml-md-auto">
 			<%-- <li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee&redirect_uri=http://localhost:8282${root}&response_type=code">로그인</a></li> --%>
-			<li class="nav-item"><a class="nav-link" href="${root}/member/login" style="font-size:15px;">로그인 · 회원가입</a></li>
+			<li class="nav-item"><a class="nav-link" href="${root}/member/mypage" style="font-size:15px;">마이페이지</a></li>
+			<li class="nav-item"><a class="nav-link" href="${root}/member/logout" style="font-size:15px;">로그아웃</a></li>
 		</ul>
+		</c:if>
 	</header>
