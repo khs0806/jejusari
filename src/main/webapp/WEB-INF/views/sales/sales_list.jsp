@@ -8,9 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
-<style type="text/css">
-	a {color: black; text-decoration: none !important;}
-</style>
+
 </head>
 <body>
 	<div class="container" id="sales_list">

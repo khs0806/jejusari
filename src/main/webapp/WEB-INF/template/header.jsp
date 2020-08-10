@@ -10,6 +10,10 @@
 <link rel="stylesheet" href="${root}/css/board/footer.css">
 <link rel="stylesheet" href="${root}/css/board/board_main.css">
 <link rel="stylesheet" href="${root}/css/member/memberJoin.css">
+<link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
+<style type="text/css">
+	a {color: black; text-decoration: none !important;}
+</style>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <title>Insert title here</title>
