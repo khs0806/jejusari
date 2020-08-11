@@ -11,12 +11,13 @@
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <style type="text/css">
 #full_broker{
-	 margin:20px;
+	 margin:20px auto;
+	 width:300px;
 }
 
 #infoinfo{
 	 width:260px;
-	 border:1px solid #c0c0c0;
+	 border:2px solid #c0c0c0;
 	 overflow:hidden;
 	 line-height:50px;
 	 margin-bottom:20px;
