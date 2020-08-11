@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.kitri.jejusari.mapper.MemberMapper">
+<mapper namespace="com.kitri.jejusari.mapper.BoardMapper">
 	
+	<select id="member_id_check" resultType="String">
+		select * from member
+	</select>
 </mapper>
