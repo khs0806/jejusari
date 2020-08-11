@@ -118,7 +118,7 @@
 
 	<!-- 매물 상세 설명 :면적,평수,준공년월일,층수 -->
 	<div id="sales_info">
-		<img src="${root }/img/home4.png" width="60px" height="60px"/>
+		<img src="${root }/img/heart.png" width="60px" height="60px"/>
 		<div>
 			<table class="row1">
 				<tr>
@@ -145,7 +145,7 @@
 		<div class="all_opt">		<!-- 있으면 그 자리에 아이콘 나오기 -->
 			<div class="opt">
 				<ul>
-					<li><img src="${root}/img/room.png" width="60px" height="60px"/></li>
+					<li><img src="${root}/img/armchair.png" width="60px" height="60px"/></li>
 					<li>풀옵션</li>
 				</ul>
 			</div>
@@ -190,7 +190,7 @@
 			</div>
 			<div class="index">
 				<ul>
-					<li><img src="${root}/img/cityhall.png" width="50px" height="50px"/></li>
+					<li><img src="${root}/img/hall.png" width="50px" height="50px"/></li>
 					<li>공공기관</li>
 					<li>지수 값</li>
 				</ul>
@@ -204,7 +204,7 @@
 			</div>
 			<div class="index">
 				<ul>
-					<li><img src="${root}/img/park.png" width="50px" height="50px"/></li>
+					<li><img src="${root}/img/entertainment.png" width="50px" height="50px"/></li>
 					<li>관광</li>
 					<li>지수 값</li>
 				</ul>

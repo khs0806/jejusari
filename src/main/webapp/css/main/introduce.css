@@ -14,7 +14,7 @@ h2 {
 .first,.second {
 	margin: 0px auto 60px;
 	border: 0px solid red;
-	width:700px;
+	width:100%;
 	text-align:center;
 }
 
@@ -32,13 +32,17 @@ h2 {
 	margin: 0 0 10px 0;
 }
 
-.second img:first-child,.secondh2{
+.secondh2, .about img{
 	float:left;
 }
 
 .second .tot{
 	border: 0px solid red;
-	width:700px;
+	width:100%;
+}
+
+.second .tot img{
+	margin-bottom:5px;
 }
 
 .second .tot li:first-child {
@@ -47,16 +51,16 @@ h2 {
 }
 
 .about_tot{
-	margin: 10px 50px;
-	padding:20px;
-	width:600px;
+	margin: 10px auto;
+	padding:5%;
+	width:80%;
 	border:solid 2px #dddddd;
 	border-radius: 50px;
 	text-align: left;
 }
 
 .about img{
-	margin-right:30px;
+	margin-right:10%;
 }
 
 .about li:first-child{
