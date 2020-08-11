@@ -76,11 +76,12 @@
 	});		
 </script>
 
-<div id="details">
+<div class="container" id="sales_detail">
 	<!-- 매물이름, 가격 -->
 	<div id="title">
-		<span>매물이름(주소)</span>
+		<span>매물이름</span>
 		<span>가격(전월세/매매)</span>
+		<div>주소입니다..............</div>
 	</div>
 
 	<!-- 신고처리(문의 문구) -->
@@ -103,41 +104,47 @@
 			<input type="button" name="report_btn" value="신고하기" class="btn btn-outline-danger btn-sm report_btn"/>
 		</div>
 	</div>
-
-	<!-- 지도 -->
-	<div id="map"></div>
-	<script>
-		var container = document.getElementById('map');
-		var options = {	
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
 	
-		var map = new kakao.maps.Map(container, options);
-	</script>
-
-	<!-- 매물 상세 설명 :면적,평수,준공년월일,층수 -->
-	<div id="sales_info">
-		<img src="${root }/img/heart.png" width="60px" height="60px"/>
-		<div>
-			<table class="row1">
-				<tr>
-					<td class="info_name">면적(m²)</td>
-					<td>면적</td>
-					<td class="info_name">평형</td>		
-					<td>평형</td>		<!-- 면적으로 계산 -->
-				</tr>
-			</table>
-			<table>
-				<tr>
-					<td class="info_name">중공년월일</td>
-					<td>중공년월일</td>
-					<td class="info_name">층수</td>
-					<td>층수</td>
-				</tr>
-			</table>
+	<!-- 주소, 매물요약 -->
+	<div id="map_plus_sales" class="row justify-content-between">
+			<div class="col mr-3" id="map" style="width:50%;height:250px;margin-top:10px;"></div>
+			<div class="col ml-2 mt-3 pr-0">		
+				<div class="input-group input-group mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing ">면 적 (m²)</span>
+					</div>
+				  <input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호" readonly>
+				</div>
+				<div class="input-group input-group  mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing ">평 형</span>
+					</div>
+				  <input name="road_address" type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" readonly>
+				</div>
+				<div class="input-group input-group  mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing ">중 공 년 도</span>
+					</div>
+				  <input name="jibun_address" type="text" class="form-control" id="sample4_jibunAddress" placeholder="지번주소" readonly>
+				</div>
+				<div class="input-group input-group  mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing ">층 수</span>
+					</div>
+				  <input name="extra_address" type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목" readonly>
+				</div>
+				
+			</div>
 		</div>
-	</div>
+		<script>
+			var container = document.getElementById('map');
+			var options = {	
+				center: new kakao.maps.LatLng(33.450701, 126.570667),
+				level: 3
+			};
+		
+			var map = new kakao.maps.Map(container, options);
+		</script>
 	
 	<!-- 매물요약 -->
 	<div id="sales_sum">
@@ -211,7 +218,7 @@
 			</div>
 			<div class="index_sum">
 				<ul>
-					<li><img src="${root}/img/fruit.png" width="80px" height="80px"/></li>
+					<li><img src="${root}/img/fruit.png" width="50px" height="50px"/></li>
 					<li>총 귤 지수</li>
 					<li>지수 값</li>
 				</ul>
@@ -220,8 +227,8 @@
 	</div>
 
 	<!-- 매물 소개-중개인 작성 내용 -->
-	<div id="sales_content">
-		<textarea rows="20" cols="20" readOnly="readOnly">매물 내용</textarea>
+	<div id="form-group">
+		 <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" readOnly="readOnly">매물내용</textarea>
 	</div>
 
 	<!-- 매물 이미지 -->
@@ -238,7 +245,7 @@
 			    <div class="imgs"><img/></div>  <!-- 3개이상시 클릭하면-->
 			    <div class="imgs"><img/></div> 
 			    <div class="imgs"><img/></div> 
-		    <div class="img_small"><img src="${root }/img/next2.png" width="30px" height="30px"/></div>
+		    	<div class="img_small"><img src="${root }/img/next2.png" width="30px" height="30px"/></div>
 		   </div>
 	  </div>
 
