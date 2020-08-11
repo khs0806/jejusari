@@ -59,15 +59,11 @@
 			<div class="form-group row">
 				<label for="staticEmail" class="col-sm-2 col-form-label">전화번호</label>
 				<div class="col-sm-10">
-					<select class="custom-select" style="margin-bottom: 8px; width: 150px; display: inline-block;">
-						<option selected>010</option>
-						<option value="1">011</option>
-						<option value="2">016</option>
-					</select>
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_first">
 					-
-					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;">
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_second">
 					-
-					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;">
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_third">
 					
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input" id="customCheck1">
