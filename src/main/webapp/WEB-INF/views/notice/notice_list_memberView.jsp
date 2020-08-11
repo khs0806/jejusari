@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="${root}/css/admin/notice_list.css">
+<link rel="stylesheet" href="${root}/css/admin/notice_list_memberView.css">
 <script>
 	$(function(){
 		$(".write-btn").click(function(){
