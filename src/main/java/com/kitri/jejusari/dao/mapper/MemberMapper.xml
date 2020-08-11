@@ -5,6 +5,6 @@
   
 <mapper namespace="dto.member">
 	<select id="member_id_check" resultType="String">
-		select '하위' from dual
+		select * from member
 	</select>
 </mapper>
