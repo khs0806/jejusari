@@ -9,6 +9,13 @@
 <title>공지사항 작성</title>
 <link type = "text/css" rel = "stylesheet" href = "${root}/css/admin/notice_write.css"/>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
+<!-- 공지사항 작성 툴 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 </head>
 <body>
 	<div id = "board">
@@ -45,8 +52,30 @@
 					</div> -->
 					
 					<div class="category">
-				      <textarea class="form-control" id="exampleTextarea" rows="3">공지사항입니당. 내용을 써주세요!!!!</textarea>
+				      <textarea class="form-control" id="summernote" rows="3" style = "height: 100px;"></textarea>
     				</div>
+    				
+    				<script>
+    					$('#summernote').summernote({
+    					  height: 300,
+    					  minHeight: null,
+    					  maxHeight: null,
+    					  focus: true
+    					});
+    					
+    					$('.dropdown-toggle').dropdown();
+    					
+    					$("#summernote").summernote({
+    					    toolbar: [
+    					        ['para', ['ul']]
+    					    ],
+    					    focus: true,
+    					    disableResize: true,
+    					    disableResizeEditor: true,
+    					    resize: false
+    					});
+    					$('.note-statusbar').hide()
+    				</script>
 					
 					
 					<div class = "text" style = "text-align: right;">
