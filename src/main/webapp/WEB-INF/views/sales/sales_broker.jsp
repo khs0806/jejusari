@@ -12,7 +12,7 @@
 <style type="text/css">
 #full_broker{
 	 margin:20px auto;
-	 width:300px;
+	 width:260px;
 }
 
 #infoinfo{
