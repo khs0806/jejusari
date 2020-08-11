@@ -9,15 +9,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root }/css/bootstrap/bootstrap.min.css">
 
-<!-- 공지사항 작성 툴 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<!-- 공지사항 작성 툴 -->
-
 <script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="${root }/javascript/bootstrap/bootstrap.min.js"></script>
 
@@ -161,8 +152,8 @@
 		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="14"></textarea>
 		</div>
 		
-		<script>
-    					$('#exampleFormControlTextarea1').summernote({
+		<!-- <script>
+    					$('#summernote').summernote({
     					  height: 300,
     					  minHeight: null,
     					  maxHeight: null,
@@ -171,7 +162,7 @@
     					
     					$('.dropdown-toggle').dropdown();
     					
-    					$("#exampleFormControlTextarea1").summernote({
+    					$("#summernote").summernote({
     					    toolbar: [
     					        ['para', ['ul']]
     					    ],
@@ -181,7 +172,7 @@
     					    resize: false
     					});
     					$('.note-statusbar').hide()
-    	</script>
+    	</script> -->
 		
 		<!-- 파일업로드 -->
 		<div class="input-group mb-3">
