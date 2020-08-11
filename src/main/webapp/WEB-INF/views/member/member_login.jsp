@@ -10,21 +10,23 @@
 			<div>다양한 서비스를 이용하세요.</div>
 		</div>
 		<div class="kakao">
+			<!-- 카카오로 로그인 링크 -----------------------------------------------------------------
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee
-			&redirect_uri=http://localhost:8282${root}&response_type=code">
+			&redirect_uri=http://localhost:8282/jeju&response_type=code"> ----------------------------->
+			<a href="${root}/member/signup">
 				<img alt="카카오톡로그인" src="${root}/img/kakao_login_medium_wide.png">
 			</a>
 		</div>
 		<div class="foot">
 			<div>다른 방법으로 시작하기</div>
-			<a href="">
-				<img alt="페이스북로그인" src="//s.zigbang.com/zigbang-account/prod/_next/static/btn_content_login_fb_36x36-df6b07d3564954ead2a9ed323aa2b8ca.png">
-			</a>
-			<a href="">
-				<img alt="구글로그인" src="//s.zigbang.com/zigbang-account/prod/_next/static/btn_content_login_google_36x36-cd1a611ed48bc787e3acc89a8e876800.png">
-			</a>
-			<a href="">
-				<img alt="이메일로그인" src="//s.zigbang.com/zigbang-account/prod/_next/static/btn_content_login_email_36x36-e87aa45322ef0190edc5473519396308.png">
-			</a>
+				<a href="">
+					<img alt="페이스북로그인" src="//s.zigbang.com/zigbang-account/prod/_next/static/btn_content_login_fb_36x36-df6b07d3564954ead2a9ed323aa2b8ca.png">
+				</a>
+				<a href="">
+					<img alt="구글로그인" src="//s.zigbang.com/zigbang-account/prod/_next/static/btn_content_login_google_36x36-cd1a611ed48bc787e3acc89a8e876800.png">
+				</a>
+				<a href="">
+					<img alt="이메일로그인" src="//s.zigbang.com/zigbang-account/prod/_next/static/btn_content_login_email_36x36-e87aa45322ef0190edc5473519396308.png">
+				</a>
 		</div>
 	</div>

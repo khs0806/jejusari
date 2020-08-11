@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="footer">
-	<div id="footer_body">
+	<div id="footer_body" class="mt-5">
 		<div id="happycall">
 			<div class="center">고객센터</div>
 			

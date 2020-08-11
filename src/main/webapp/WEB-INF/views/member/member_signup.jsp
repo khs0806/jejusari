@@ -23,7 +23,7 @@
 </script>
 </head>
 <body>
-	<form id="plus_info" action="#" method="post">
+	<form id="plus_info" action="${root}/member/login" method="post">
 		<div class="tit">추가 정보 입력</div>
 		
 		<div class="nickname">

@@ -15,7 +15,7 @@
 		<div class="info">
 			<p>회원 정보 수정</p>
 			<a href="#" id="a-first">기본 정보 수정</a>
-			<a href="#" id="a-second">회원 탈퇴</a>
+			<a href="${root}/member/withdraw1" id="a-second">회원 탈퇴</a>
 		</div>
 		
 		<br>

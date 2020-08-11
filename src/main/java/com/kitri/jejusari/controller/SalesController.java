@@ -1,50 +1,38 @@
 package com.kitri.jejusari.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class SalesController {
 
-	@RequestMapping(value="/saleslist")
-	public String sales() {
+	@RequestMapping(value="/sales")
+	public String sales(HttpServletRequest request, HttpServletResponse response) {
 		return "sales/sales_list";
 	}
 	
-	@RequestMapping(value="/saleswrite")
-	public String saleswrite() {
+	@RequestMapping(value="/sales/write")
+	public String saleswrite(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "sales/sales_write";
 	}
 	
-	@RequestMapping(value="/salesdetail")
-	public String salesdetail() {
+	@RequestMapping(value="/sales/writeOk")
+	public String saleswriteOk(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject(request);
+		
+		return "sales/sales_write";
+	}
+	
+	@RequestMapping(value="/sales/detail")
+	public String salesdetail(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "sales/sales_details";
-	}
-	
-	@RequestMapping(value="/news")
-	public String news() {
-		
-		return "news/news_list";
-	}
-	
-	@RequestMapping(value="/notice")
-	public String notice() {
-		
-		return "notice/notice_list";
-	}
-	
-	@RequestMapping(value="/reportwrite")
-	public String report() {
-		
-		return "report/report_write";
-	}
-	
-	@RequestMapping(value="/reportadmin")
-	public String reportAdmin() {
-		
-		return "admin/report_admin";
 	}
 	
 }
