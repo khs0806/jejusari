@@ -42,7 +42,7 @@
 		
 		//중개인 더보기 클릭시
 		$("input:button[name=member_info]").click(function(){
-			window.open('${root}/sales/broker', '', 'width = 300, height = 300');
+			window.open('${root}/sales/broker', '', 'width = 300, height = 250');
 		})
 		
 		//매물 더보기 클릭시
