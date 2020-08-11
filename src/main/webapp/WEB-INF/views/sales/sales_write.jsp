@@ -7,9 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!--  -->
+<script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+
+<!--  -->
 <link rel="stylesheet" href="${root }/css/bootstrap/bootstrap.min.css">
 
-<script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
+
 <script type="text/javascript" src="${root }/javascript/bootstrap/bootstrap.min.js"></script>
 
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18514d37ace0e69349e647543ecf89f8&libraries=services"></script>
@@ -149,30 +159,35 @@
 		<!-- 본문 -->
 		<div class="form-group">
 		    <label for="exampleFormControlTextarea1">내용</label>
-		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="14"></textarea>
+		    <textarea class="form-control" id="summernote" rows="14"></textarea>
 		</div>
 		
-		<!-- <script>
-    					$('#summernote').summernote({
-    					  height: 300,
-    					  minHeight: null,
-    					  maxHeight: null,
-    					  focus: true
-    					});
-    					
-    					$('.dropdown-toggle').dropdown();
-    					
-    					$("#summernote").summernote({
-    					    toolbar: [
-    					        ['para', ['ul']]
-    					    ],
-    					    focus: true,
-    					    disableResize: true,
-    					    disableResizeEditor: true,
-    					    resize: false
-    					});
-    					$('.note-statusbar').hide()
-    	</script> -->
+		<script>
+		$(document).ready(function() {
+			  $('#summernote').summernote();
+			});
+		
+			$('#summernote').summernote({
+				  height: 300,
+				  minHeight: null,
+				  maxHeight: null,
+				  focus: true
+				});
+				
+				$('.dropdown-toggle').dropdown();
+				
+				$("#summernote").summernote({
+				    toolbar: [
+				        ['para', ['ul']]
+				    ],
+				    focus: true,
+				    disableResize: true,
+				    disableResizeEditor: true,
+				    resize: false
+				});
+				$('.note-statusbar').hide()
+			
+    	</script>
 		
 		<!-- 파일업로드 -->
 		<div class="input-group mb-3">
