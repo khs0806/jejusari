@@ -27,8 +27,8 @@
 <body>
 <form action="#" method="POST" onsubmit="">
 	<div id="admin_container">
-		<h3 class="text-success">[공지사항]</h3>
-		<span class="badge badge-success">관리자</span>
+		<h3 class="text-warning">[공지사항]</h3>
+		<span class="badge badge-warning">회원</span>
 		<br/>
 		
 		<table>
@@ -46,13 +46,14 @@
 			      <td>11</td>
 			    </tr>
 				
-				<tr class="table-success">
+				<tr class="table-warning">
 			      <th scope="row">2</th>
 			      <td><a href="${root}/notice/detail">안녕하세요.</a></td>
 			      <td>2020-08-11</td>
 			      <td>14</td>
     			</tr>
     			
+	
     			<tr>
 			      <td>3</td>
 			      <td><a href="${root}/notice/detail">코로나관련 공지사항</a></td>
@@ -60,7 +61,7 @@
 			      <td>56</td>
 			    </tr>
     			
-    			<tr class="table-success">
+    			<tr class="table-warning">
 			      <th scope="row">4</th>
 			      <td><a href="${root}/notice/detail">중개업자 공지사항</a></td>
 			      <td>2020-08-11</td>
@@ -74,7 +75,7 @@
 			      <td>100</td>
 			    </tr>
 				
-				<tr class="table-success">
+				<tr class="table-warning">
 			      <th scope="row">6</th>
 			      <td><a href="${root}/notice/detail">축! 제주살이 사이트 오픈 기념 행사</a></td>
 			      <td>2020-08-11</td>
@@ -88,14 +89,13 @@
 			      <td>576</td>
 			    </tr>
 				
-				<tr class="table-success">
+				<tr class="table-warning">
 			      <th scope="row">8</th>
 			      <td><a href="${root}/notice/detail">제주살이 할인행사</a></td>
 			      <td>2020-08-11</td>
 			      <td>475</td>
     			</tr>
 		</table>
-		<button class="btn btn-success write-btn" type="button" style = "margin-top: 5px;">글작성</button>
 		
 <%-- 		<!-- 페이지 번호 들어갈 자리. -->
 		<div align = "center">
