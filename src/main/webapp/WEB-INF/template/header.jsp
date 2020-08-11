@@ -20,7 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header class="navbar navbar-expand-lg navbar-light border-bottom border-primary">
+	<header class="navbar navbar-expand-lg navbar-light border-bottom">
 		<a class="navbar-brand" href="${root}/">제주살이</a>
 		
 		<div class="navbar-collapse justify-content-center" id="navbarColor01">

@@ -26,7 +26,7 @@
 						
 						<input type = "button" value = "삭제"/> -->
 						
-						<button class="btn btn-success" type="button" onclick = "location.href = '${root}/notice/notice_list.do'">목록</button>
+						<button class="btn btn-success" type="button" onclick = "location.href = '${root}/notice'">목록</button>
 						<button class="btn btn-success update-btn" type="button">수정</button>
 						<button class="btn btn-success delete-btn" type="button">삭제</button>
 					</div>

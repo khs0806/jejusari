@@ -10,7 +10,8 @@ li {
 
 .footer {
 	overflow:hidden;
-	background-color: #adfcf5;
+    background-color: #EFEFEF;
+    MARGIN-TOP: 200px;
 }
 
 #footer_body {
