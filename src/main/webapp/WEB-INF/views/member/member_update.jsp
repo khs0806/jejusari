@@ -48,10 +48,16 @@
 				<div class="col-sm-10">
 					<select class="custom-select" style="width: 150px;">
 						<option selected>선택하세요</option>
-						<option value="1">기사</option>
-						<option value="2">도적</option>
-						<option value="3">궁수</option>
-						<option value="3">마법사</option>
+						<option value="student">학생</option>
+						<option value="teacher">교사</option>
+						<option value="public">공무원</option>
+						<option value="military ">군인</option>
+						<option value="homemaker">주부</option>
+						<option value="self">자영업</option>
+						<option value="health">보건</option>
+						<option value="normal">일반사무</option>
+						<option value="sales">영업</option>
+						<option value="etc">기타</option>
 					</select>
 				</div>
 			</div>
