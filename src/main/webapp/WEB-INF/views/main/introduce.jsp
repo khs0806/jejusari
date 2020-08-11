@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${root}/css/main/introduce.css">
-	<div id="content">
+	<div class="container">
 		<div class="first">
 			<h2>제주살이</h2>
 			<p>제주살이는 제주거주를 꿈꾸는 이들을 위한 부동산 매물 정보 제공 사이트입니다.</p>
@@ -13,11 +13,13 @@
 		</div>
 
 		<div class="second">
-			<img src="${root}/img/fruit.png" width="50px" height="50px"/>
 			<h2>귤점 산정 방식</h2>
 			<div class="tot">
 				<ul>
-					<li>감귤 지수</li>
+					<li>
+						<img src="${root}/img/fruit.png" width="20px" height="20px"/>
+						감귤 지수
+					</li>
 					<li>모든 지수의 총 합을 10점 만점으로 하여 산정합니다.</li>
 				</ul>
 			</div>
@@ -38,7 +40,7 @@
 					</ul>
 				</div>
 				<div class="about">
-					<img src="${root}/img/cityhall.png" width="50px" height="50px"/>
+					<img src="${root}/img/hall.png" width="50px" height="50px"/>
 					<ul>
 						<li>공공기관 지수</li>
 						<li>매물 주택에서 3km이내에 공공기관이 있으면 귤점이 올라갑니다.</li>
@@ -52,7 +54,7 @@
 					</ul>
 				</div>
 				<div class="about">
-					<img src="${root}/img/park.png" width="50px" height="50px"/>
+					<img src="${root}/img/entertainment.png" width="50px" height="50px"/>
 					<ul>
 						<li>관광명소 지수</li>
 						<li>매물 주택에서 3km이내에 관광명소가 있으면 귤점이 올라갑니다.</li>

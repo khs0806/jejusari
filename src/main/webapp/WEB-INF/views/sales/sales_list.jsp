@@ -7,6 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
+		<script>
+		function updateCostInput(val) {
+          document.getElementById('costInput').value=val; 
+        }
+		function updateAreaInput(val) {
+          document.getElementById('areaInput').value=val; 
+        }
+		</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,8 +39,6 @@
 					</label>
 				</div>
 			<input type="hidden" value="위에 li값 가져오기" name="sales_type">
-			<!-- <input type="text" placeholder="지역명을 입력하세요.">
-			<input type="submit" value="검색" class="btn btn-warning"> -->
 
 			<div class="input-group mb-3">
 				<select class="custom-select col-md-1">
@@ -46,14 +52,13 @@
 			    <button class="btn btn-outline-warning" type="submit" id="button-addon2"><strong>검색</strong></button>
 			  </div>
 			</div>
-			
+
 			<!-- range -->
-			<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
-			  Tooltip with HTML
-			</button>
-			<c:set var="i" value="0"/>
-			<input type="range" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>${i }</u> <b>HTML</b>"> <label>가격</label>
-			<input type="range"> <label>면적</label>
+
+			<input type="range" min="0" max="20" step="0.1" onchange="updateCostInput(this.value);"> <label>가격</label>
+			<input type="text" style="text-align:center;"size="1" id="costInput" value=""><span>억</span>
+			<input type="range"  onchange="updateAreaInput(this.value);"> <label>면적</label>
+			<input type="text" style="text-align:center;"size="1" id="areaInput" value=""><span>평</span>
 			<br>
 			
 			<div class="form-check form-check-inline">
@@ -85,6 +90,8 @@
 		</select>
 		  </div>
 		</nav>
+		
+		<!-- 게시판 목록 -->
 		<div class="table active">
 			<div class="row border-bottom" id="table_th">
 				<div class="col-md-8"><strong>제목</strong></div>
@@ -104,6 +111,8 @@
 			</a>
 		</c:forEach>
 		</div>
+		
+		<!-- 페이징 -->
 		<div class="d-flex bd-highlight">
 			 <div class="p-2 w-100 bd-highlight">
 				<nav aria-label="Page navigation">
@@ -121,6 +130,7 @@
 				  
 				</nav>
 			 </div>
+			 
 			 <!-- 매매업자에게만 보이는 글쓰기 버튼 -->
 			 <div class="p-2 flex-shrink-1 bd-highlight">
 			  	<input type="button" value="매물올리기" class="btn btn-warning btn-sales">

@@ -6,7 +6,11 @@
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <script type="text/javascript"
 	src="${root}/javascript/bootstrap/bootstrap.min.js"></script>
-
+<script>
+	function funcCancel(){
+		self.close();
+	}
+</script>
 <div class="container" id="sales_list">
 	<br />
 	<h3>신고 글쓰기</h3>
@@ -49,7 +53,7 @@
 
 		<div class="float-right">
 			<button type="submit" class="btn btn-warning">작성</button>
-			<button type="button" class="btn btn-light">취소</button>
+			<button type="button" class="btn btn-light" onclick="funcCancel()">취소</button>
 		</div>
 	</form>
 </div>
