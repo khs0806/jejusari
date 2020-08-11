@@ -158,30 +158,30 @@
 		<!-- 본문 -->
 		<div class="form-group">
 		    <label for="exampleFormControlTextarea1">내용</label>
-		    <textarea class="form-control" id="summernote" rows="14"></textarea>
+		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="14"></textarea>
 		</div>
 		
 		<script>
-    		$('#summernote').summernote({
-   				height: 300,
-    			minHeight: null,
-    			maxHeight: null,
-    			focus: true
-    		});
+    					$('#exampleFormControlTextarea1').summernote({
+    					  height: 300,
+    					  minHeight: null,
+    					  maxHeight: null,
+    					  focus: true
+    					});
     					
-    		$('.dropdown-toggle').dropdown();
+    					$('.dropdown-toggle').dropdown();
     					
-    		$("#summernote").summernote({
-    			toolbar: [
-    				['para', ['ul']]
-    					],
-    			focus: true,
-    			disableResize: true,
-    			disableResizeEditor: true,
-    			resize: false
-    		});
-    		$('.note-statusbar').hide()
-    		</script>
+    					$("#exampleFormControlTextarea1").summernote({
+    					    toolbar: [
+    					        ['para', ['ul']]
+    					    ],
+    					    focus: true,
+    					    disableResize: true,
+    					    disableResizeEditor: true,
+    					    resize: false
+    					});
+    					$('.note-statusbar').hide()
+    	</script>
 		
 		<!-- 파일업로드 -->
 		<div class="input-group mb-3">

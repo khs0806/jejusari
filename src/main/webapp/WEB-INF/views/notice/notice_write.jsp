@@ -63,7 +63,7 @@
     					  focus: true
     					});
     					
-    					$('.dropdown-toggle').dropdown();
+/*     					$('.dropdown-toggle').dropdown();
     					
     					$("#summernote").summernote({
     					    toolbar: [
@@ -74,7 +74,7 @@
     					    disableResizeEditor: true,
     					    resize: false
     					});
-    					$('.note-statusbar').hide()
+    					$('.note-statusbar').hide() */
     				</script>
 					
 					
