@@ -45,30 +45,30 @@
 				</div>
 				<!-- 전월세/매매 선택 셀렉트 박스 -->
 				<div class="input-group mb-3 align-items-center">
-					<select class="custom-select col-md-2">
+					<select name="rent_option" class="custom-select col-md-2">
 						<option value="">옵션</option>
 						<option value="sales">매매</option>
 						<option value="rent_year">전세</option>
 						<option value="rent_month">월세</option>
 					</select>
-				  <input type="text" class="form-control" placeholder="제목을 입력하세요." aria-label="제목을 입력하세요.">
+				  <input name="title" type="text" class="form-control" placeholder="제목을 입력하세요." aria-label="제목을 입력하세요.">
 				</div>
 				
 				<!-- 옵션 선택 태그 -->
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="풀옵션">
+				  <input name="option" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="풀옵션">
 				  <label class="form-check-label" for="inlineCheckbox1">풀옵션</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="주차장">
+				  <input name="option" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="주차장">
 				  <label class="form-check-label" for="inlineCheckbox2">주차장</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="신축">
+				  <input name="option" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="신축">
 				  <label class="form-check-label" for="inlineCheckbox3">CCTV</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="신축">
+				  <input name="option" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="신축">
 				  <label class="form-check-label" for="inlineCheckbox3">엘레베이터</label>
 				</div>
 				<!-- 주소찾기 검색창 -->
