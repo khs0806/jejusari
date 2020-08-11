@@ -18,6 +18,14 @@
 			  <button type="button" class="btn btn-secondary">쓰리룸</button>
 			  <button type="button" class="btn btn-secondary">오피스텔</button>
 			</div>
+		<script>
+		function updateCostInput(val) {
+          document.getElementById('costInput').value=val; 
+        }
+		function updateAreaInput(val) {
+          document.getElementById('areaInput').value=val; 
+        }
+		</script>
 		<form>
 			<br>
 			<input type="hidden" value="위에 li값 가져오기" name="sales_type">
@@ -37,8 +45,10 @@
 			  </div>
 			</div>
 			
-			<input type="range"> <label>가격</label>
-			<input type="range"> <label>면적</label>
+			<input type="range" min="0" max="20" step="0.1" onchange="updateCostInput(this.value);"> <label>가격</label>
+			<input type="text" style="text-align:center;"size="1" id="costInput" value=""><span>억</span>
+			<input type="range"  onchange="updateAreaInput(this.value);"> <label>면적</label>
+			<input type="text" style="text-align:center;"size="1" id="areaInput" value=""><span>평</span>
 			<br>
 			
 			<div class="form-check form-check-inline">

@@ -23,34 +23,34 @@ public class MemberController {
 	public String main() {
 		
 		
-		return "main/main";
+		return "main/main.tiles";
 	}
 	
 	// 회원가입
 	@RequestMapping(value="/member/signup")
 	public String signUp() {
 		
-		return "member/member_signup";
+		return "member/member_signup.tiles";
 	}
 	
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw1")
 	public String withdraw() {
 		
-		return "member/member_withdraw1";
+		return "member/member_withdraw1.tiles";
 	}
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw2")
 	public String withdrawOk() {
 		
-		return "member/member_withdraw2";
+		return "member/member_withdraw2.tiles";
 	}
 		
 	// 로그인 뷰
 	@RequestMapping(value="/member/login")
 	public String login(HttpSession session) {
 		
-		return "member/member_login";
+		return "member/member_login.tiles";
 	}
 	
 	// 로그인
@@ -75,21 +75,21 @@ public class MemberController {
 	@RequestMapping(value="/member/mypage")
 	public String myPage() {
 		
-		return "member/member_mypage";
+		return "member/member_mypage.tiles";
 	}
 	
 	// 회원수정
 	@RequestMapping(value="/member/update")
 	public String update() {
 		
-		return "member/member_update";
+		return "member/member_update.tiles";
 	}
 	
 	// 회원 관리
 	@RequestMapping(value="/member/admin")
 	public String admin() {
 		
-		return "admin/member_admin";
+		return "admin/member_admin.tiles";
 	}
 	
 }
