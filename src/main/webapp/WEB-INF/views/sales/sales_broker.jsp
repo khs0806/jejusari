@@ -8,14 +8,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root }/css/bootstrap/bootstrap.min.css">
+<script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <style type="text/css">
 #full_broker{
-	 margin:20px;
+	 margin:20px auto;
+	 width:260px;
 }
 
 #infoinfo{
 	 width:260px;
-	 border:1px solid #c0c0c0;
+	 border:2px solid #c0c0c0;
 	 overflow:hidden;
 	 line-height:50px;
 	 margin-bottom:20px;
@@ -42,6 +44,13 @@
 	 text-align:center;
 }
 </style>
+<script>
+	$(function(){
+		$("input[type=button]").click(function(){
+			self.close();
+		});
+	});
+</script>
 </head>
 <body>
 	 <div id="full_broker">

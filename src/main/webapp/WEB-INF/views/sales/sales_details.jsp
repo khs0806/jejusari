@@ -8,9 +8,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2992107a6cdd4a70cae5c448140c5fd1"></script>
 <script type="text/javascript">
 	$(document).ready(function() {    
-		$(".report_btn").on("click",function(){
-			location.href='${root}/reportwrite';
-		});
 		//스크랩 클릭시
 		$("input:button[name=scrap_btn]").one("click",function(){
 			alert("ok");
@@ -23,7 +20,7 @@
 		$("input:button[name=report_btn]").click(function(){
 			var check=confirm("이 매물을 신고하시겠습니까?");
 			if(check==true){
-				alert("ok");
+				window.open('${root}/report/write', '', 'width = 600, height = 600');
 			}
 		})
 		
@@ -45,7 +42,7 @@
 		
 		//중개인 더보기 클릭시
 		$("input:button[name=member_info]").click(function(){
-			alert("ok");
+			window.open('${root}/sales/broker', '', 'width = 300, height = 250');
 		})
 		
 		//매물 더보기 클릭시
@@ -224,7 +221,7 @@
 
 	<!-- 매물 소개-중개인 작성 내용 -->
 	<div id="sales_content">
-		<textarea rows="20" readOnly="readOnly">매물 내용</textarea>
+		<textarea rows="20" cols="20" readOnly="readOnly">매물 내용</textarea>
 	</div>
 
 	<!-- 매물 이미지 -->
