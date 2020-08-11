@@ -1,9 +1,12 @@
 package com.kitri.jejusari.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MemberController {
@@ -43,17 +46,25 @@ public class MemberController {
 		return "member/member_withdraw2";
 	}
 		
-	// 로그인
+	// 로그인 뷰
 	@RequestMapping(value="/member/login")
 	public String login(HttpSession session) {
 		
-		// 임시로 세션을 부여해주고 메인으로 리다이렉트
-		session.setAttribute("user", "user");
-		return "redirect:/";
-		
-		//return "member/member_login";
+		return "member/member_login";
 	}
 	
+	// 로그인
+	@RequestMapping(value="/member/login", method=RequestMethod.POST)
+	public String loginOk(HttpServletRequest request, HttpSession session) {
+		
+		// 임시코드, 세션을 부여해주고 메인으로 리다이렉트
+		String name = request.getParameter("nickname");
+		System.out.println(name);
+		session.setAttribute("user", name);
+		
+		return "redirect:/";
+	}
+	// 로그아웃
 	@RequestMapping(value="/member/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("user");

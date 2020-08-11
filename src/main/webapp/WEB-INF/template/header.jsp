@@ -40,10 +40,11 @@
 			</ul>
 		</c:if>
 		<c:if test="${user != null}">
-		<ul class="navbar-nav ml-md-auto">
-			<%-- <li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee&redirect_uri=http://localhost:8282${root}&response_type=code">로그인</a></li> --%>
-			<li class="nav-item"><a class="nav-link" href="${root}/member/mypage" style="font-size:15px;">마이페이지</a></li>
-			<li class="nav-item"><a class="nav-link" href="${root}/member/logout" style="font-size:15px;">로그아웃</a></li>
-		</ul>
+			<span>${user} 님 환영합니다.</span>
+			<ul class="navbar-nav ml-md-auto">
+				<%-- <li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee&redirect_uri=http://localhost:8282${root}&response_type=code">로그인</a></li> --%>
+				<li class="nav-item"><a class="nav-link" href="${root}/member/mypage" style="font-size:15px;">마이페이지</a></li>
+				<li class="nav-item"><a class="nav-link" href="${root}/member/logout" style="font-size:15px;">로그아웃</a></li>
+			</ul>
 		</c:if>
 	</header>
