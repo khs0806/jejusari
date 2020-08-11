@@ -38,28 +38,28 @@
 				<!-- 아파트/원룸투룸쓰리룸/오피스텔 라디오박스 -->
 				<div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="room_type" id="APT">아파트
+						<input type="radio" name="room_type" value="APT" id="APT">아파트
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="room_type" id="ONE">원룸
+						<input type="radio" name="room_type" value="ONE" id="ONE">원룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="room_type" id="TWO">투룸
+						<input type="radio" name="room_type" value="TWO" id="TWO">투룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="room_type" id="THREE">쓰리룸
+						<input type="radio" name="room_type" value="THREE" id="THREE">쓰리룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="room_type" id="OFFICE">오피스텔
+						<input type="radio" name="room_type" value="OFFICE" id="OFFICE">오피스텔
 					</label>
 				</div>
 				<!-- 전월세/매매 선택 셀렉트 박스 -->
 				<div class="input-group mb-3 align-items-center">
 					<select name="rent_option" class="custom-select col-md-2">
 						<option value="">옵션</option>
-						<option value="sales">매매</option>
-						<option value="rent_year">전세</option>
-						<option value="rent_month">월세</option>
+						<option value="매매">매매</option>
+						<option value="전세">전세</option>
+						<option value="월세">월세</option>
 					</select>
 				  <input name="title" type="text" class="form-control" placeholder="제목을 입력하세요." aria-label="제목을 입력하세요.">
 				</div>
@@ -100,19 +100,19 @@
 					<div class="input-group-prepend">
 				    	<span class="input-group-text" id="inputGroup-sizing-sm">가격  (원)</span>
 					</div>
-					<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					<input name="cost" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2">
 					<div class="input-group-prepend">
 				    	<span class="input-group-text" id="inputGroup-sizing-sm">면적(m<sup>2</sup>)</span>
 					</div>
-					<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					<input name="area" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2">
 					<div class="input-group-prepend">
 				    	<span class="input-group-text" id="inputGroup-sizing-sm">준공년도</span>
 					</div>
-					<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					<input name="build_year" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 				</div>
 			</div>
 			
@@ -130,26 +130,26 @@
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing-sm">도로명주소</span>
 					</div>
-				  <input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" readonly>
+				  <input name="road_address" type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" readonly>
 				</div>
 				<div class="input-group input-group-sm mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing-sm">지 번 주 소</span>
 					</div>
-				  <input type="text" class="form-control" id="sample4_jibunAddress" placeholder="지번주소" readonly>
+				  <input name="jibun_address" type="text" class="form-control" id="sample4_jibunAddress" placeholder="지번주소" readonly>
 				</div>
 				<span id="guide" style="color:#999;display:none"></span>
 				<div class="input-group input-group-sm mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing-sm">상 세 주 소</span>
 					</div>
-				  <input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소를 입력하세요">
+				  <input name="detail_address" type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소를 입력하세요">
 				</div>
 				<div class="input-group input-group-sm mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing-sm">참 고 항 목</span>
 					</div>
-				  <input type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목" readonly>
+				  <input name="extra_address" type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목" readonly>
 				</div>
 				
 			</div>
