@@ -14,87 +14,52 @@
 </style>
 </head>
 <body>
-	<div id="admin_container">
-		<div id="title" class="text-success"><h3>&#91;신고관리&#93;</h3></div>
-		<span  style="margin-top:0px;"class="badge badge-success">관리자</span>
-		<table>
-	
-				<tr>
-					<th>신고번호</th>
-					<th>작성자</th>
-					<th>날짜</th>
-					<th>매물번호</th>
-					<th>제목</th>
-					<th>내용</th>
-					<th width="100px;">처리여부</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>abc123</td>
-					<td>2020-08-11</td>
-					<td>1</td>
-					<td>프리미엄 럭셔리 인테리어 최고급 샷시</td>
-					<td>논현신동아파밀리에..</td>
-					<td>미처리</td>
-				</tr>
-			
-				<tr class="table-success">
-					<td>2</td>
-					<td>abc123</td>
-					<td>2020-08-11</td>
-					<td>1</td>
-					<td>프리미엄 럭셔리 인테리어 최고급 샷시</td>
-					<td>논현신동아파밀리에..</td>
-					<td>미처리</td>
-				</tr>
-			
-				<tr>
-					<td>3</td>
-					<td>abc123</td>
-					<td>2020-08-11</td>
-					<td>1</td>
-					<td>프리미엄 럭셔리 인테리어 최고급 샷시</td>
-					<td>논현신동아파밀리에..</td>
-					<td>미처리</td>
-				</tr>
-			
-				<tr class="table-success">
-					<td>4</td>
-					<td>abc123</td>
-					<td>2020-08-11</td>
-					<td>1</td>
-					<td>프리미엄 럭셔리 인테리어 최고급 샷시</td>
-					<td>논현신동아파밀리에..</td>
-					<td>미처리</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>abc123</td>
-					<td>2020-08-11</td>
-					<td>1</td>
-					<td>프리미엄 럭셔리 인테리어 최고급 샷시</td>
-					<td>논현신동아파밀리에..</td>
-					<td>미처리</td>
-				</tr>
-				<tr class="table-success">
-					<td>5</td>
-					<td>abc123</td>
-					<td>2020-08-11</td>
-					<td>1</td>
-					<td>프리미엄 럭셔리 인테리어 최고급 샷시</td>
-					<td>논현신동아파밀리에..</td>
-					<td>미처리</td>
-				</tr>
-				<tr>
-					<td>6</td>
-					<td>abc123</td>
-					<td>2020-08-11</td>
-					<td>1</td>
-					<td>프리미엄 럭셔리 인테리어 최고급 샷시</td>
-					<td>논현신동아파밀리에..</td>
-					<td>미처리</td>
-				</tr>
-		</table>
+	<div class="container">
+		<div id="title" class="text-secondary"><h3>&#91;신고관리&#93;</h3></div>
+		<span  style="margin-top:0px;"class="badge badge-secondary">관리자</span>
+		<div class="table active">
+			<div class="row border-bottom" id="table_th">
+
+				<div class="col-md-1"><strong>신고번호</strong></div>
+				<div class="col-md-2"><strong>작성자</strong></div>
+				<div class="col-md-2"><strong>날짜</strong></div>
+				<div class="col-md-2"><strong>매물번호</strong></div>
+				<div class="col-md-2"><strong>제목</strong></div>
+				<div class="col-md-2"><strong>내용</strong></div>
+				<div class="col-md-1"><strong>처리여부</strong></div>
+			</div>
+		<c:forEach begin="0" end="10">	
+			<div class="row border-bottom" id="table_td">
+				<div class="col-md-1">1</div>
+				<div class="col-md-2"><strong>abc123</strong></div>
+				<div class="col-md-2"><strong>2020-08-11</strong></div>
+				<div class="col-md-2">1</div>
+				<div class="col-md-2">프리미엄 럭셔리 인테리어 최고급 샷시</div>
+				<div class="col-md-2">논현신동아파밀리에..</div>
+				<div class="col-md-1">미처리</div>
+			</div>
+		</c:forEach>
+		</div>
+		
+		<!-- 페이징 -->
+		<div class="d-flex bd-highlight">
+			 <div class="p-2 w-100 bd-highlight">
+				<nav aria-label="Page navigation">
+				  <ul class="pagination justify-content-center">
+				    <li class="page-item disabled">
+				      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+				    </li>
+				    <li class="page-item"><a class="page-link" href="#">1</a></li>
+				    <li class="page-item"><a class="page-link" href="#">2</a></li>
+				    <li class="page-item"><a class="page-link" href="#">3</a></li>
+				    <li class="page-item">
+				      <a class="page-link" href="#">Next</a>
+				    </li>
+				  </ul>
+				  
+				</nav>
+			 </div>
+		</div>
 	</div>
 </body>
 </html>
