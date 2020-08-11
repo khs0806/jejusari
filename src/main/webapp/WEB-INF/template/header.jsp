@@ -14,6 +14,7 @@
 <style type="text/css">
 	a {color: black; text-decoration: none !important;}
 	#addr_detail{display: none;}
+	#sales_list 
 </style>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
