@@ -32,52 +32,52 @@ function memberDrop(obj){
 		<table>
 	
 				<tr>
-					<th>1</th>
-					<th>2</th>
-					<th>3</th>
-					<th>4</th>
-					<th>5</th>
-					<th>6</th>
+					<th>&nbsp;</th>
+					<th>번호</th>
+					<th>아이디</th>
+					<th>이메일</th>
+					<th>등급</th>
+					<th>가입일시</th>
 				</tr>
 				<tr>
 					<td><input type="checkbox" value="1" name="drop"/></td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
+					<td>1</td>
+					<td>abc123</td>
+					<td>abc123@naver.com</td>
+					<td>일반</td>
+					<td>2020-08-11</td>
 				</tr>
 				<tr class="table-success">
 					<td><input type="checkbox" value="2" name="drop"/></td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
+					<td>2</td>
+					<td>abc123</td>
+					<td>abc123@naver.com</td>
+					<td>일반</td>
+					<td>2020-08-11</td>
 				</tr>
 				<tr>
 					<td><input type="checkbox" value="3" name="drop"/></td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
+					<td>3</td>
+					<td>abc123</td>
+					<td>abc123@naver.com</td>
+					<td>일반</td>
+					<td>2020-08-11</td>
 				</tr>
 				<tr class="table-success">
 					<td><input type="checkbox" value="4" name="drop"/></td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
+					<td>4</td>
+					<td>abc123</td>
+					<td>abc123@naver.com</td>
+					<td>일반</td>
+					<td>2020-08-11</td>
 				</tr>
 				<tr>
 					<td><input type="checkbox" value="5" name="drop"/></td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
-					<td>dd</td>
+					<td>5</td>
+					<td>abc123</td>
+					<td>abc123@naver.com</td>
+					<td>일반</td>
+					<td>2020-08-11</td>
 				</tr>
 		</table>
 		<input type="submit"  class="btn btn-success" value="회원탈퇴"/>

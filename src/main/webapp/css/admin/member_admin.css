@@ -1,6 +1,10 @@
 @charset "UTF-8";
+	body{
+		overflow-x:hidden;
+	}
+
 	#admin_container{
-		width:100%;
+		width:80%;
 		margin:10%;
 	}
 	
@@ -12,7 +16,7 @@
 	
 	#admin_container>table{
 		text-align:center;  
-		width:80%;
+		width:70%;
 	}
 	
 	table,tr,th,td{

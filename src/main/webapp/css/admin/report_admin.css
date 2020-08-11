@@ -1,4 +1,9 @@
 @charset "UTF-8";
+
+	body{
+		overflow-x:hidden;
+	}
+	
 	#admin_container{
 		width:100%;
 		margin:10%;
