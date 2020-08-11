@@ -13,7 +13,7 @@ import com.kitri.jejusari.service.SalesService;
 
 @Controller
 public class SalesController {
-
+	
 	@Autowired
 	SalesService salesService;
 	
@@ -30,9 +30,11 @@ public class SalesController {
 	
 	@RequestMapping(value="/sales/writeOk")
 	public String saleswriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
+		
 		ModelAndView mav= new ModelAndView();
 		mav.addObject(request);
 		System.out.println(salesDto);
+		
 		return "sales/sales_write.tiles";
 	}
 	

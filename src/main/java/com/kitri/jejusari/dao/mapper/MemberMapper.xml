@@ -5,4 +5,8 @@
   
 <mapper namespace="com.kitri.jejusari.mapper.MemberMapper">
 	
+	<select id="member_id_check" resultType="String">
+		select * from member
+	</select>
+	
 </mapper>

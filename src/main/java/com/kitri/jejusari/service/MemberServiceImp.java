@@ -9,12 +9,14 @@ import com.kitri.jejusari.dao.MemberDao;
 
 @Service
 public class MemberServiceImp implements MemberService{
-	
+
 	@Autowired
 	MemberDao memberDao;
 	
 	@Override
 	public List<String> testDB() {
+		// TODO Auto-generated method stub
 		return memberDao.testDB();
 	}
+	
 }

@@ -5,7 +5,4 @@
   
 <mapper namespace="com.kitri.jejusari.mapper.BoardMapper">
 	
-	<select id="member_id_check" resultType="String">
-		select * from member
-	</select>
 </mapper>

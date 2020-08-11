@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SalesDaoImp {
+public class SalesDaoImp implements SalesDao {
 	
 	@Autowired
 	SqlSessionTemplate session;

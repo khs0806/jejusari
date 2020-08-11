@@ -5,17 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kitri.jejusari.dao.MemberDao;
 import com.kitri.jejusari.dao.SalesDao;
 
 @Service
-public class SalesServiceImp implements MemberService{
+public class SalesServiceImp implements SalesService {
 	
 	@Autowired
 	SalesDao salesDao;
 	
 	@Override
 	public List<String> testDB() {
+		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }
