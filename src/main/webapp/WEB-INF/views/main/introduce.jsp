@@ -8,19 +8,56 @@
 			<h2>제주살이</h2>
 			<p>제주살이는 제주거주를 꿈꾸는 이들을 위한 부동산 매물 정보 제공 사이트입니다.</p>
 			<p>제주도 주택의 매매 및 전월세 정보뿐만 아니라,</p>
-			<p>바다, 감귤, 대중교통, 마트와 같은 항목을 점수를 산정해 지수로 제공합니다.</p>
+			<p>주유소, 대형마트, 공공기관, 병원, 관광명소와 같은 항목을 점수를 산정해 귤점으로 제공합니다.</p>
 			<p>제주살이를 통해서 당신만의 특별한 제주살이를 실현하세요!</p>
 		</div>
 
 		<div class="second">
-			<h2>지수 선정 방식</h2>
-			<p>감귤 지수</p>
-			<p>모든 지수의 총 합을 10점 만점으로 하여 산정합니다.</p>
-			<p>해안가 지수</p>
-			<p>매물 주택에서 가장 가까운 해안가와의 거리를 계산하여 점수를 산정합니다.</p>
-			<p>대중교통 지수</p>
-			<p>매물 주택에서 이용할 수 있는 버스 정류장과의 거리를 수집하여, 점수를 산정합니다.</p>
-			<p>마트 지수</p>
-			<p>매물 주택 주위에 있는 마트에 대한 정보를 수집하여, 정보를 산정합니다.</p>
+			<img src="${root}/img/fruit.png" width="50px" height="50px"/>
+			<h2>귤점 산정 방식</h2>
+			<div class="tot">
+				<ul>
+					<li>감귤 지수</li>
+					<li>모든 지수의 총 합을 10점 만점으로 하여 산정합니다.</li>
+				</ul>
+			</div>
+
+			<div class="about_tot">
+				<div class="about">
+					<img src="${root}/img/gas.png" width="50px" height="50px"/>
+					<ul>
+						<li>주유소 지수</li>
+						<li>매물 주택에서 3km이내에 주유소가 있으면 귤점이 올라갑니다.</li>
+					</ul>
+				</div>
+				<div class="about">
+					<img src="${root}/img/market.png" width="50px" height="50px"/>
+					<ul>
+						<li>대형마트 지수</li>
+						<li>매물 주택에서 3km이내에 대형마트가 있으면 귤점이 올라갑니다.</li>
+					</ul>
+				</div>
+				<div class="about">
+					<img src="${root}/img/cityhall.png" width="50px" height="50px"/>
+					<ul>
+						<li>공공기관 지수</li>
+						<li>매물 주택에서 3km이내에 공공기관이 있으면 귤점이 올라갑니다.</li>
+					</ul>
+				</div>
+				<div class="about">
+					<img src="${root}/img/hospital.png" width="50px" height="50px"/>
+					<ul>
+						<li>병원 지수</li>
+						<li>매물 주택에서 3km이내에 병원이 있으면 귤점이 올라갑니다.</li>
+					</ul>
+				</div>
+				<div class="about">
+					<img src="${root}/img/park.png" width="50px" height="50px"/>
+					<ul>
+						<li>관광명소 지수</li>
+						<li>매물 주택에서 3km이내에 관광명소가 있으면 귤점이 올라갑니다.</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
