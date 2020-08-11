@@ -48,10 +48,16 @@
 				<div class="col-sm-10">
 					<select class="custom-select" style="width: 150px;">
 						<option selected>선택하세요</option>
-						<option value="1">기사</option>
-						<option value="2">도적</option>
-						<option value="3">궁수</option>
-						<option value="3">마법사</option>
+						<option value="student">학생</option>
+						<option value="teacher">교사</option>
+						<option value="public">공무원</option>
+						<option value="military ">군인</option>
+						<option value="homemaker">주부</option>
+						<option value="self">자영업</option>
+						<option value="health">보건</option>
+						<option value="normal">일반사무</option>
+						<option value="sales">영업</option>
+						<option value="etc">기타</option>
 					</select>
 				</div>
 			</div>
@@ -59,15 +65,11 @@
 			<div class="form-group row">
 				<label for="staticEmail" class="col-sm-2 col-form-label">전화번호</label>
 				<div class="col-sm-10">
-					<select class="custom-select" style="margin-bottom: 8px; width: 150px; display: inline-block;">
-						<option selected>010</option>
-						<option value="1">011</option>
-						<option value="2">016</option>
-					</select>
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_first">
 					-
-					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;">
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_second">
 					-
-					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;">
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_third">
 					
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input" id="customCheck1">
