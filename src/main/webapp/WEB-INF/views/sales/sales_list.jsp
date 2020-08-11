@@ -6,20 +6,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물게시판</h3>
-			<div class="btn-group" role="group" aria-label="room_type">
-			  <button type="button" class="btn btn-warning">아파트</button>
-			  <button type="button" class="btn btn-secondary">원룸</button>
-			  <button type="button" class="btn btn-secondary">투룸</button>
-			  <button type="button" class="btn btn-secondary">쓰리룸</button>
-			  <button type="button" class="btn btn-secondary">오피스텔</button>
-			</div>
 		<form>
-			<br>
+			<div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+					<label class="btn btn-outline-warning">
+						<input type="checkbox" name="room_type" value="APT" id="APT">아파트
+					</label>
+					<label class="btn btn-outline-warning">
+						<input type="checkbox" name="room_type" value="ONE" id="ONE">원룸
+					</label>
+					<label class="btn btn-outline-warning">
+						<input type="checkbox" name="room_type" value="TWO" id="TWO">투룸
+					</label>
+					<label class="btn btn-outline-warning">
+						<input type="checkbox" name="room_type" value="THREE" id="THREE">쓰리룸
+					</label>
+					<label class="btn btn-outline-warning">
+						<input type="checkbox" name="room_type" value="OFFICE" id="OFFICE">오피스텔
+					</label>
+				</div>
 			<input type="hidden" value="위에 li값 가져오기" name="sales_type">
 			<!-- <input type="text" placeholder="지역명을 입력하세요.">
 			<input type="submit" value="검색" class="btn btn-warning"> -->
@@ -37,24 +47,29 @@
 			  </div>
 			</div>
 			
-			<input type="range"> <label>가격</label>
+			<!-- range -->
+			<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+			  Tooltip with HTML
+			</button>
+			<c:set var="i" value="0"/>
+			<input type="range" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>${i }</u> <b>HTML</b>"> <label>가격</label>
 			<input type="range"> <label>면적</label>
 			<br>
 			
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="풀옵션">
+			  <input class="form-check-input" type="checkbox" id="foolOption" value="풀옵션">
 			  <label class="form-check-label" for="inlineCheckbox1">풀옵션</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="주차장">
+			  <input class="form-check-input" type="checkbox" id="parking" value="주차장">
 			  <label class="form-check-label" for="inlineCheckbox2">주차장</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="신축">
+			  <input class="form-check-input" type="checkbox" id="cctv" value="CCTV">
 			  <label class="form-check-label" for="inlineCheckbox3">CCTV</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="신축">
+			  <input class="form-check-input" type="checkbox" id="elevator" value="엘레베이터">
 			  <label class="form-check-label" for="inlineCheckbox3">엘레베이터</label>
 			</div>
 			
@@ -122,5 +137,11 @@
 		<br>
 		<br>
 	</div>
+<!-- 	<script type="text/javascript">
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+	$('#example').tooltip(options)
+	</script> -->
 </body>
 </html>

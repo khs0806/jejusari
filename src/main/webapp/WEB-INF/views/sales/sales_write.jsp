@@ -18,9 +18,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <!-- 공지사항 작성 툴 -->
 
-<script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="${root }/javascript/bootstrap/bootstrap.min.js"></script>
-
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18514d37ace0e69349e647543ecf89f8&libraries=services"></script>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

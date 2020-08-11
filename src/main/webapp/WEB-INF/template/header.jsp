@@ -22,6 +22,7 @@
 </style>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="${root }/javascript/bootstrap/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
