@@ -24,10 +24,10 @@
 			</div>
 			
 			<c:forEach begin="0" end="10">	
-				<a href="#">
+				<a href="http://www.busan.com/view/busan/view.php?code=2020081016015263823">
 					<div class="row border-bottom" id="table_td">
-						<div class="col-md-8"><strong>[그알]살인 의뢰인을 찾아서-제주 이변호사 살인사건 2부</strong></div>
-						<div class="col-md-1">2020.08.08</div>
+						<div class="col-md-8"><strong>'태풍 온다는데…' 제주서 서핑 즐긴 레저객 6명 해경 적발</strong></div>
+						<div class="col-md-1">2020.08.11</div>
 					</div>
 				</a>
 			</c:forEach>

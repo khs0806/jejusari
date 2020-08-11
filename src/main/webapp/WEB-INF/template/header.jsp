@@ -14,13 +14,14 @@
 <style type="text/css">
 	a {color: black; text-decoration: none !important;}
 	#addr_detail{display: none;}
+	#sales_list 
 </style>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<header class="navbar navbar-expand-lg navbar-light border-bottom border-primary">
+	<header class="navbar navbar-expand-lg navbar-light border-bottom">
 		<a class="navbar-brand" href="${root}/">제주살이</a>
 		
 		<div class="navbar-collapse justify-content-center" id="navbarColor01">

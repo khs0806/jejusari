@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.dto.SalesDto;
+
 @Controller
 public class SalesController {
 
@@ -22,10 +24,10 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/writeOk")
-	public String saleswriteOk(HttpServletRequest request, HttpServletResponse response) {
+	public String saleswriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
 		ModelAndView mav= new ModelAndView();
 		mav.addObject(request);
-		
+		System.out.println(salesDto);
 		return "sales/sales_write";
 	}
 	
