@@ -80,6 +80,8 @@
 		</select>
 		  </div>
 		</nav>
+		
+		<!-- 게시판 목록 -->
 		<div class="table active">
 			<div class="row border-bottom" id="table_th">
 				<div class="col-md-8"><strong>제목</strong></div>
@@ -99,6 +101,8 @@
 			</a>
 		</c:forEach>
 		</div>
+		
+		<!-- 페이징 -->
 		<div class="d-flex bd-highlight">
 			 <div class="p-2 w-100 bd-highlight">
 				<nav aria-label="Page navigation">
@@ -116,6 +120,7 @@
 				  
 				</nav>
 			 </div>
+			 
 			 <!-- 매매업자에게만 보이는 글쓰기 버튼 -->
 			 <div class="p-2 flex-shrink-1 bd-highlight">
 			  	<input type="button" value="매물올리기" class="btn btn-warning btn-sales">

@@ -221,7 +221,7 @@
 
 	<!-- 매물 소개-중개인 작성 내용 -->
 	<div id="sales_content">
-		<textarea rows="20" readOnly="readOnly">매물 내용</textarea>
+		<textarea rows="20" cols="20" readOnly="readOnly">매물 내용</textarea>
 	</div>
 
 	<!-- 매물 이미지 -->

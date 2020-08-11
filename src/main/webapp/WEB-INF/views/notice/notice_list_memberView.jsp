@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항</title>
-<link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="${root}/css/admin/notice_list_memberView.css">
+<%-- <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css"> --%>
+<%-- <link rel="stylesheet" href="${root}/css/admin/notice_list_memberView.css"> --%>
 <script>
 	$(function(){
 		$(".write-btn").click(function(){
@@ -26,77 +26,57 @@
 </head>
 <body>
 <form action="#" method="POST" onsubmit="">
-	<div id="admin_container">
-		<h3 class="text-warning">[공지사항]</h3>
-		<span class="badge badge-warning">회원</span>
+	<div class = "container" id="admin_container">
+		<h3 class="text-secondary">[공지사항]</h3>
+		<span class="badge badge-secondary">회원</span>
 		<br/>
 		
-		<table>
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>날짜</th>
-					<th>조회수</th>
-				</tr>
-				
-				<tr>
-			      <td>1</td>
-			      <td><a href="${root}/notice/detail">제주살이 필독</a></td>
-			      <td>2020-08-11</td>
-			      <td>11</td>
-			    </tr>
-				
-				<tr class="table-warning">
-			      <th scope="row">2</th>
-			      <td><a href="${root}/notice/detail">안녕하세요.</a></td>
-			      <td>2020-08-11</td>
-			      <td>14</td>
-    			</tr>
-    			
-	
-    			<tr>
-			      <td>3</td>
-			      <td><a href="${root}/notice/detail">코로나관련 공지사항</a></td>
-			      <td>2020-08-11</td>
-			      <td>56</td>
-			    </tr>
-    			
-    			<tr class="table-warning">
-			      <th scope="row">4</th>
-			      <td><a href="${root}/notice/detail">중개업자 공지사항</a></td>
-			      <td>2020-08-11</td>
-			      <td>75</td>
-    			</tr>
-				
-				<tr>
-			      <td>5</td>
-			      <td><a href="${root}/notice/detail">회원 공지사항</a></td>
-			      <td>2020-08-11</td>
-			      <td>100</td>
-			    </tr>
-				
-				<tr class="table-warning">
-			      <th scope="row">6</th>
-			      <td><a href="${root}/notice/detail">축! 제주살이 사이트 오픈 기념 행사</a></td>
-			      <td>2020-08-11</td>
-			      <td>897</td>
-    			</tr>
-    			
-    			<tr>
-			      <td>7</td>
-			      <td><a href="${root}/notice/detail">제주살이 이벤트</a></td>
-			      <td>2020-08-11</td>
-			      <td>576</td>
-			    </tr>
-				
-				<tr class="table-warning">
-			      <th scope="row">8</th>
-			      <td><a href="${root}/notice/detail">제주살이 할인행사</a></td>
-			      <td>2020-08-11</td>
-			      <td>475</td>
-    			</tr>
-		</table>
+		<div class="table active">
+			<div class="row border-bottom" id="table_th">
+				<div class="col-md-1"><strong>글번호</strong></div>
+				<div class="col-md-8"><strong>내용</strong></div>
+				<div class="col-md-1"><strong>조회수</strong></div>
+				<div class="col-md-2"><strong>날짜</strong></div>
+			</div>
+		<c:forEach begin="0" end="10">	
+			<a href="${root}/notice/detail">
+			<div class="row border-bottom" id="table_td">
+				<div class="col-md-1">1</div>
+				<div class="col-md-8"><p><strong>공지사항입니다.</strong></p></div>
+				<div class="col-md-1">100</div>
+				<div class="col-md-2">2020-08-11</div>
+			<!-- 	<div class="col-md-2"></div> -->
+			</div>
+			</a>
+		</c:forEach>
+		</div>
 		
+		<!-- 페이징 -->
+		<div class="d-flex bd-highlight">
+			 <div class="p-2 w-100 bd-highlight">
+				<nav aria-label="Page navigation">
+				  <ul class="pagination justify-content-center">
+				    <li class="page-item disabled">
+				      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+				    </li>
+				    <li class="page-item"><a class="page-link" href="#">1</a></li>
+				    <li class="page-item"><a class="page-link" href="#">2</a></li>
+				    <li class="page-item"><a class="page-link" href="#">3</a></li>
+				    <li class="page-item">
+				      <a class="page-link" href="#">Next</a>
+				    </li>
+				  </ul>
+				  
+				</nav>
+			 </div>
+			 
+			 <!-- 관리자에게만 보이는 글쓰기 버튼 -->
+			 <div class="p-2 flex-shrink-1 bd-highlight">
+			  	<input type="button" value="글작성" class="btn btn-secondary">
+			 </div>
+		</div>
+<!-- 		<button class="btn btn-success write-btn" type="button" style = "margin-top: 5px;">글작성</button>
+ -->		
 <%-- 		<!-- 페이지 번호 들어갈 자리. -->
 		<div align = "center">
 			<fmt:parseNumber var = "pageCount" value = "${count / boardSize + (count % boardSize == 0 ? 0 : 1)}" integerOnly = "true"/>
