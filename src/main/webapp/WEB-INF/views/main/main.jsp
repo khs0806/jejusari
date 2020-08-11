@@ -42,8 +42,8 @@
 						<c:forEach begin="1" end="7" var="i" step="1">
 						<a href="#">
 							<div class="row table active ">
-								<div class="col-md-1">${i} </div>
-								<div class="col-md-8">&#9786;공지사항</div>
+								<div class="col-md-1 pl-5">${i} </div>
+								<div class="col-md-7">&#9786;공지사항</div>
 								<div class="col-md-3">2020-08-10 </div>
 							</div>
 						</a>
@@ -54,8 +54,8 @@
 					<c:forEach begin="1" end="7" var="i" step="1">
 					<a href="#">
 						<div class="row table active">
-							<div class="col-md-1">${i} </div>
-							<div class="col-md-8">&#9786;최신뉴스</div>
+							<div class="col-md-1 pl-5">${i} </div>
+							<div class="col-md-7">&#9786;최신뉴스</div>
 							<div class="col-md-3">2020-08-10 </div>
 						</div>
 					</a>
