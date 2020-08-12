@@ -79,9 +79,13 @@
 <div class="container" id="sales_detail">
 	<!-- 매물이름, 가격 -->
 	<div id="title">
-		<span>매물이름</span>
-		<span>가격(전월세/매매)</span>
-		<div>주소입니다..............</div>
+		<span>${salesDto.sales_title }</span>
+		<span>${salesDto.sales_category_rent }</span>
+		<c:if test="${salesDto.sales_category_rent=='전세' }">
+			<span>${salesDto.sales_category_rent } / ${salesDto.sales_category_rent }</span>
+		</c:if>	
+		<span>만원</span>		
+		<div>${salesDto.sales_address }</div>
 	</div>
 
 	<!-- 신고처리(문의 문구) -->
@@ -107,8 +111,14 @@
 	
 	<!-- 주소, 매물요약 -->
 	<div id="map_plus_sales" class="row justify-content-between">
-			<div class="col mr-3" id="map" style="width:50%;height:250px;margin-top:10px;"></div>
-			<div class="col ml-2 mt-3 pr-0">		
+			<div class="col mr-3 mt-3" id="map" style="width:70%;height:250px;margin-top:10px;"></div>
+			<div class="col ml-2">	
+				<div class="input-group input-group  mt-3">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing ">구 조</span>
+					</div>
+				  <input name="extra_address" type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목" readonly>
+				</div>	
 				<div class="input-group input-group mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing ">면 적 (m²)</span>
@@ -133,7 +143,6 @@
 					</div>
 				  <input name="extra_address" type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목" readonly>
 				</div>
-				
 			</div>
 		</div>
 		<script>

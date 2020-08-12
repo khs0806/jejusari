@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,21 +16,25 @@ import com.kitri.jejusari.service.SalesService;
 public class SalesController {
 	
 	@Autowired
-	SalesService salesService;
+	private SalesService salesService;
 	
 	@RequestMapping(value="/sales")
-	public String sales(HttpServletRequest request, HttpServletResponse response) {
-		return "sales/sales_list.tiles";
+	public ModelAndView salesList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		
+		salesService.salesList(mav);
+		return mav;
 	}
 	
 	@RequestMapping(value="/sales/write")
-	public String saleswrite(HttpServletRequest request, HttpServletResponse response) {
+	public String salesWrite(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "sales/sales_write.tiles";
 	}
 	
 	@RequestMapping(value="/sales/writeOk")
-	public String saleswriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
+	public String salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
 		
 		ModelAndView mav= new ModelAndView();
 		mav.addObject(request);
@@ -39,18 +44,19 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/detail")
-	public String salesdetail(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView salesDetail(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+
+		salesService.salesDetail(mav);
 		
-		return "sales/sales_details.tiles";
+		return mav;
 	}
 	
 	@RequestMapping(value="/sales/broker")
-	public String salesbroker(HttpServletRequest request, HttpServletResponse response) {
+	public String salesBroker(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "sales/sales_broker.empty";
 	}
-	
-	
-	
-	
+
 }
