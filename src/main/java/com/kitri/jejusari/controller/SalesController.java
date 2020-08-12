@@ -28,13 +28,13 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/write")
-	public String saleswrite(HttpServletRequest request, HttpServletResponse response) {
+	public String salesWrite(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "sales/sales_write.tiles";
 	}
 	
 	@RequestMapping(value="/sales/writeOk")
-	public String saleswriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
+	public String salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
 		
 		ModelAndView mav= new ModelAndView();
 		mav.addObject(request);
@@ -50,25 +50,19 @@ public class SalesController {
 		
 		salesService.salesDetail(mav);
 		
+//		ModelAndView mav = new ModelAndView();
+//		String id = "khs";
+//		mav.addObject("id", id);
+//		salesService.salesDetail(mav);
+		
 		return "sales/sales_details.tiles";
 	}
 	
 	@RequestMapping(value="/sales/broker")
-	public String salesdroker(HttpServletRequest request, HttpServletResponse response) {
+	public String salesBroker(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "sales/sales_broker.empty";
 	}
 	
-	@RequestMapping(value="/sales/test")
-	public ModelAndView salesTest(HttpServletRequest request, HttpServletResponse response) {
-		
-		
-		ModelAndView mav = new ModelAndView();
-		String id = "khs";
-		mav.addObject("id", id);
-		salesService.salesDetail(mav);
-		
-		return null;
-	}
 	
 }
