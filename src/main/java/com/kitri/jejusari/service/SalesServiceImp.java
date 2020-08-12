@@ -56,8 +56,6 @@ public class SalesServiceImp implements SalesService {
 		if(count>0) {
 			//startRow, endRow
 			salesList=salesDao.salesList(startRow, endRow);
-			System.out.println("list size : "+salesList.size());
-			
 		}
 		
 		
