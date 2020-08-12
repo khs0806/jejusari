@@ -62,7 +62,8 @@
     					  height: 300,
     					  minHeight: null,
     					  maxHeight: null,
-    					  focus: true
+    					  focus: true,
+    					  placeholder: '최대 2048자까지 작성할 수 있습니다.'
     					});
     					
     					$('.dropdown-toggle').dropdown();
