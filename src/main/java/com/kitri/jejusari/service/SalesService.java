@@ -10,6 +10,8 @@ public interface SalesService {
 	public List<String> testDB();
 	
 	//상세페이지
-	public String salesDetail(ModelAndView mav); 
+	public String salesDetail(ModelAndView mav);
+
+	public void salesList(ModelAndView mav);
 	
 }

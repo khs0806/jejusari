@@ -16,11 +16,15 @@ import com.kitri.jejusari.service.SalesService;
 public class SalesController {
 	
 	@Autowired
-	SalesService salesService;
+	private SalesService salesService;
 	
 	@RequestMapping(value="/sales")
-	public String sales(HttpServletRequest request, HttpServletResponse response) {
-		return "sales/sales_list.tiles";
+	public ModelAndView sales(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		
+		salesService.salesList(mav);
+		return mav;
 	}
 	
 	@RequestMapping(value="/sales/write")
