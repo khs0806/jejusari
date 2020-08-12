@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- css -->
 <link rel="stylesheet" href="${root}/css/sales_board/sales_details.css"/>
@@ -81,8 +82,14 @@
 	<div id="title">
 		<span>${salesDto.sales_title }</span>
 		<span>${salesDto.sales_category_rent }</span>
+		<c:if test="${salesDto.sales_category_rent=='매매' }">
+			<span>${salesDto.sales_cost }</span>
+		</c:if>	
 		<c:if test="${salesDto.sales_category_rent=='전세' }">
-			<span>${salesDto.sales_category_rent } / ${salesDto.sales_category_rent }</span>
+			<span>${salesDto.sales_deposit }</span>
+		</c:if>	
+		<c:if test="${salesDto.sales_category_rent=='월세' }">
+			<span>${salesDto.sales_deposit } / ${salesDto.sales_cost }</span>
 		</c:if>	
 		<span>만원</span>		
 		<div>${salesDto.sales_address }</div>
@@ -90,15 +97,17 @@
 
 	<!-- 신고처리(문의 문구) -->
 	<div id="if_report">
-		<span>신고당한 게시글입니다. 중개인 혹은 관리자에게 문의하세요.</span>
-		<span>!</span>		<!-- 이미지? 그냥 해도 될 듯 -->
+		<c:if test="${salesDto.sales_check_blind>0 }">
+			<span>신고당한 게시글입니다. 중개인 혹은 관리자에게 문의하세요.</span>
+			<span>!</span>	
+		</c:if>
 	</div>
 	
 	<!-- 중개인정보, 스크랩수, 신고수?, 스크랩신고버튼 -->
 	<div id="info">
 		<div class="borker">
 			<img src="${root}/img/중개인.png" width="25px" height="25px"/>		
-			<span>홍길동</span>		<!-- 중개업자 이름 -->
+			<span>${salesDto.member_id }</span>	<!-- 이름으로 뽑아와야함 -->
 		</div>
 
 		<div class="scrap_report">
@@ -111,37 +120,38 @@
 	
 	<!-- 주소, 매물요약 -->
 	<div id="map_plus_sales" class="row justify-content-between">
-			<div class="col mr-3 mt-3" id="map" style="width:70%;height:250px;margin-top:10px;"></div>
+			<div class="col mr-3 mt-3" id="map" style="width:50%;height:250px;margin-top:10px;"></div>
 			<div class="col ml-2">	
 				<div class="input-group input-group  mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing ">구 조</span>
 					</div>
-				  <input name="extra_address" type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목" readonly>
+				  <input type="text" class="form-control" readonly value="${salesDto.sales_category_type }">
 				</div>	
 				<div class="input-group input-group mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing ">면 적 (m²)</span>
 					</div>
-				  <input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호" readonly>
+				  <input type="text" class="form-control" readonly value="${salesDto.sales_area } m²">
 				</div>
 				<div class="input-group input-group  mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing ">평 형</span>
 					</div>
-				  <input name="road_address" type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" readonly>
+					<fmt:formatNumber var="pyung" value="${salesDto.sales_area/(3.3) }" type="number" pattern="0.0"/>
+				  <input type="text" class="form-control" readonly value="${pyung} 평">
 				</div>
 				<div class="input-group input-group  mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing ">중 공 년 도</span>
 					</div>
-				  <input name="jibun_address" type="text" class="form-control" id="sample4_jibunAddress" placeholder="지번주소" readonly>
+				  <input type="text" class="form-control" readonly value="${salesDto.sales_build_year} 년도">
 				</div>
 				<div class="input-group input-group  mt-3">
 					<div class="input-group-prepend">
 					    <span class="input-group-text" id="inputGroup-sizing ">층 수</span>
 					</div>
-				  <input name="extra_address" type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목" readonly>
+				  <input type="text" class="form-control" readonly value="${salesDto.sales_floor}층 ">
 				</div>
 			</div>
 		</div>
@@ -228,8 +238,8 @@
 			<div class="index_sum">
 				<ul>
 					<li><img src="${root}/img/fruit.png" width="50px" height="50px"/></li>
-					<li>총 귤 지수</li>
-					<li>지수 값</li>
+					<li>총 귤 점수</li>
+					<li>${salesDto.sales_factor_total}</li>
 				</ul>
 			</div>
 		</div>
@@ -237,7 +247,7 @@
 
 	<!-- 매물 소개-중개인 작성 내용 -->
 	<div id="form-group">
-		 <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" readOnly="readOnly">매물내용</textarea>
+		 <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" readOnly="readOnly">${salesDto.sales_content}</textarea>
 	</div>
 
 	<!-- 매물 이미지 -->

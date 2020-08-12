@@ -101,11 +101,11 @@
 				<div class="col-md-1"><strong>가격</strong></div>
 			</div>
 		<c:forEach var="salesList" items="${salesList }">	
-			<a href="${root}/sales/detail">
+			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }">
 			<div class="row border-bottom" id="table_td">
 				<div class="col-md-8"><strong>${salesList.sales_title }</strong><p>${salesList.sales_address }</p></div>
 				<div class="col-md-1">${salesList.sales_category_type }</div>
-				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3) }" type="number" pattern="0"/>평/${salesList.sales_area }m<sup>2</sup>/${salesList.sales_floor }층</div>
+				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3) }" type="number" pattern="0.0"/>평/${salesList.sales_area }m<sup>2</sup>/${salesList.sales_floor }층</div>
 				<div class="col-md-1">${salesList.sales_deposit }<span>${salesList.sales_cost }</span></div>
 			<!-- 	<div class="col-md-2"></div> -->
 			</div>
