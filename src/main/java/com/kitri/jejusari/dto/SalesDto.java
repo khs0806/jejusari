@@ -6,9 +6,10 @@ public class SalesDto {
 	private String sales_date;
 	private String sales_title;
 	private String sales_content;
-	private String sales_category_type;
-	private int sales_category_rent;
+	private String sales_category_type;		// 매매
+	private String sales_category_rent;		// 전월세
 	private int sales_deposit;
+	private int sales_cost;					// 매매가 or 전월세
 	private int sales_factor_total;
 	private int sales_area;
 	private String sales_address;
@@ -22,7 +23,7 @@ public class SalesDto {
 	}
 
 	public SalesDto(int sales_number, String member_id, String sales_date, String sales_title, String sales_content,
-			String sales_category_type, int sales_category_rent, int sales_deposit, int sales_factor_total,
+			String sales_category_type, String sales_category_rent, int sales_deposit, int sales_cost, int sales_factor_total,
 			int sales_area, String sales_address, int sales_check_blind, int sales_count, String option,
 			int sales_build_year, String sales_floor) {
 		super();
@@ -34,6 +35,7 @@ public class SalesDto {
 		this.sales_category_type = sales_category_type;
 		this.sales_category_rent = sales_category_rent;
 		this.sales_deposit = sales_deposit;
+		this.sales_cost = sales_cost;
 		this.sales_factor_total = sales_factor_total;
 		this.sales_area = sales_area;
 		this.sales_address = sales_address;
@@ -92,11 +94,11 @@ public class SalesDto {
 		this.sales_category_type = sales_category_type;
 	}
 
-	public int getSales_category_rent() {
+	public String getSales_category_rent() {
 		return sales_category_rent;
 	}
 
-	public void setSales_category_rent(int sales_category_rent) {
+	public void setSales_category_rent(String sales_category_rent) {
 		this.sales_category_rent = sales_category_rent;
 	}
 
@@ -108,6 +110,14 @@ public class SalesDto {
 		this.sales_deposit = sales_deposit;
 	}
 
+	public int getSales_cost() {
+		return sales_cost;
+	}
+	
+	public void setSales_cost(int sales_cost) {
+		this.sales_cost = sales_cost;
+	}
+	
 	public int getSales_factor_total() {
 		return sales_factor_total;
 	}
@@ -177,10 +187,10 @@ public class SalesDto {
 		return "SalesDto [sales_number=" + sales_number + ", member_id=" + member_id + ", sales_date=" + sales_date
 				+ ", sales_title=" + sales_title + ", sales_content=" + sales_content + ", sales_category_type="
 				+ sales_category_type + ", sales_category_rent=" + sales_category_rent + ", sales_deposit="
-				+ sales_deposit + ", sales_factor_total=" + sales_factor_total + ", sales_area=" + sales_area
-				+ ", sales_address=" + sales_address + ", sales_check_blind=" + sales_check_blind + ", sales_count="
-				+ sales_count + ", option=" + option + ", sales_build_year=" + sales_build_year + ", sales_floor="
-				+ sales_floor + "]";
+				+ sales_deposit + ", sales_cost=" + sales_cost + ", sales_factor_total=" + sales_factor_total
+				+ ", sales_area=" + sales_area + ", sales_address=" + sales_address + ", sales_check_blind="
+				+ sales_check_blind + ", sales_count=" + sales_count + ", option=" + option + ", sales_build_year="
+				+ sales_build_year + ", sales_floor=" + sales_floor + "]";
 	}
 	
 }
