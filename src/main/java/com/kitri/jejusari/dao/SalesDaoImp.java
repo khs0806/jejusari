@@ -10,4 +10,10 @@ public class SalesDaoImp implements SalesDao {
 	@Autowired
 	SqlSessionTemplate session;
 	
+	@Override
+	public String salesDetail(String id) {
+		
+		return session.selectOne("selectttt",id);
+	}
+	
 }

@@ -5,4 +5,8 @@
   
 <mapper namespace="com.kitri.jejusari.mapper.SalesMapper">
 	
+	<select id="selectttt" parameterType="String" resultType="String">
+		select sales_title from sales where id=#{id}
+	</select>
+	
 </mapper>

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,13 +40,17 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/detail")
-	public String salesdetail(HttpServletRequest request, HttpServletResponse response) {
+	public String salesDetail(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		
+		salesService.salesDetail(mav);
 		
 		return "sales/sales_details.tiles";
 	}
 	
 	@RequestMapping(value="/sales/broker")
-	public String salesbroker(HttpServletRequest request, HttpServletResponse response) {
+	public String salesdroker(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "sales/sales_broker.empty";
 	}
