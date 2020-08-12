@@ -1,23 +1,23 @@
 package com.kitri.jejusari.dto;
 
 public class SalesDto {
-	private int sales_number;
-	private String member_id;
-	private String sales_date;
-	private String sales_title;
-	private String sales_content;
-	private String sales_category_type;		// 매매
-	private String sales_category_rent;		// 전월세
-	private int sales_deposit;
+	private int sales_number;				//게시글 번호
+	private String member_id;				// 작성자
+	private String sales_date;				// 작성일자
+	private String sales_title;				// 글 제목
+	private String sales_content;			// 글 내용
+	private String sales_category_type;		// 아파트/원룸/오피스텔 구분
+	private String sales_category_rent;		// 전월세 구분
+	private int sales_deposit;				// 보증금
 	private int sales_cost;					// 매매가 or 전월세
-	private int sales_factor_total;
-	private int sales_area;
-	private String sales_address;
-	private int sales_check_blind;
-	private int sales_count;
-	private String option;
-	private int sales_build_year;
-	private String sales_floor;
+	private int sales_factor_total;			// 귤지수
+	private int sales_area;					// 면적(m^2)
+	private String sales_address;			// 주소
+	private int sales_check_blind;			// 신고처리시 블라인드 처리 유무
+	private int sales_count;				//조회수
+	private String option;					// 옵션
+	private int sales_build_year;			//준공년도
+	private String sales_floor;				//층수
 	
 	public SalesDto() {
 	}

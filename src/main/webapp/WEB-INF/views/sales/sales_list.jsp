@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 <html>
@@ -99,13 +100,13 @@
 				<div class="col-md-2"><strong>면적</strong></div>
 				<div class="col-md-1"><strong>가격</strong></div>
 			</div>
-		<c:forEach begin="0" end="10">	
+		<c:forEach var="salesList" items="${salesList }">	
 			<a href="${root}/sales/detail">
 			<div class="row border-bottom" id="table_td">
-				<div class="col-md-8"><strong>프리미엄 럭셔리 인테리어 최고급 샷시</strong><p>논현신동아파밀리에 105동</p></div>
-				<div class="col-md-1">아파트</div>
-				<div class="col-md-2">52/35m^2중층/13층</div>
-				<div class="col-md-1">전세5억<span>월세</span></div>
+				<div class="col-md-8"><strong>${salesList.sales_title }</strong><p>${salesList.sales_address }</p></div>
+				<div class="col-md-1">${salesList.sales_category_type }</div>
+				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3) }" type="number" pattern="0"/>평/${salesList.sales_area }m<sup>2</sup>/${salesList.sales_floor }층</div>
+				<div class="col-md-1">${salesList.sales_deposit }<span>${salesList.sales_cost }</span></div>
 			<!-- 	<div class="col-md-2"></div> -->
 			</div>
 			</a>
@@ -113,18 +114,43 @@
 		</div>
 		
 		<!-- 페이징 -->
+		<fmt:parseNumber var="pageCount" value="${count/boardSize + (count%boardSize==0?0:1)}" integerOnly="true"/>
+		<c:set var="pageBlock" value="${5}"/>		<%-- 페이징 넘버 표시할 갯수 --%>
+		<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
+		<c:set var="startPage" value="${result*pageBlock +1}"/>
+		<c:set var="endPage" value="${startPage+pageBlock-1}"/>
+		<c:if test="${endPage > pageCount }">
+			<c:set var="endPage" value="${pageCount }"/>
+		</c:if>
+
+	<c:if test="${startPage > pageBlock }">
+		<script type="text/javascript">
+			$(function(){
+				$('#previous').removeClass('disabled');
+			})
+		</script>
+	</c:if>
+	<c:if test="${endPage < pageCount }">
+		<script type="text/javascript">
+			$(function(){
+				$('#next').removeClass('disabled');
+			})
+		</script>
+	</c:if>
+		
+		
 		<div class="d-flex bd-highlight">
 			 <div class="p-2 w-100 bd-highlight">
 				<nav aria-label="Page navigation">
 				  <ul class="pagination justify-content-center">
-				    <li class="page-item disabled">
-				      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+				    <li id="previous" class="page-item disabled">
+				      <a class="page-link" href="${root }/sales?pageNumber=${startPage-pageBlock}" tabindex="-1" aria-disabled="true">Previous</a>
 				    </li>
-				    <li class="page-item"><a class="page-link" href="#">1</a></li>
-				    <li class="page-item"><a class="page-link" href="#">2</a></li>
-				    <li class="page-item"><a class="page-link" href="#">3</a></li>
-				    <li class="page-item">
-				      <a class="page-link" href="#">Next</a>
+				  <c:forEach var="i" begin="${startPage }" end="${endPage }">
+				    <li class="page-item"><a class="page-link" href="${root }/sales?pageNumber=${i}">${i }</a></li>
+				  </c:forEach>
+				    <li id="next" class="page-item disabled">
+				      <a class="page-link" href="${root }/sales?pageNumber=${startPage+pageBlock}">Next</a>
 				    </li>
 				  </ul>
 				  
