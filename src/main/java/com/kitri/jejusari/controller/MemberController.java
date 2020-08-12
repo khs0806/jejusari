@@ -18,6 +18,7 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
+	// DB 테스트용 메서드
 	@RequestMapping("/test")
 	public String test() {
 		
@@ -48,6 +49,8 @@ public class MemberController {
 	// 회원가입
 	@RequestMapping(value="/member/signup")
 	public String signUp() {
+		
+		
 		
 		return "member/member_signup.tiles";
 	}

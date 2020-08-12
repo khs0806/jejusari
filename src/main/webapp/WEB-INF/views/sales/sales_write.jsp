@@ -19,9 +19,6 @@
 <!--  -->
 <link rel="stylesheet" href="${root }/css/bootstrap/bootstrap.min.css">
 
-
-<script type="text/javascript" src="${root }/javascript/bootstrap/bootstrap.min.js"></script>
-
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18514d37ace0e69349e647543ecf89f8&libraries=services"></script>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
