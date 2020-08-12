@@ -60,6 +60,7 @@ public class SalesServiceImp implements SalesService {
 			
 		}
 		
+		
 		mav.addObject("salesList", salesList);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);

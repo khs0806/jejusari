@@ -19,7 +19,7 @@ public class SalesController {
 	private SalesService salesService;
 	
 	@RequestMapping(value="/sales")
-	public ModelAndView sales(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView salesList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		
