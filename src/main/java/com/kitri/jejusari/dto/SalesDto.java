@@ -15,7 +15,7 @@ public class SalesDto {
 	private String sales_address;			// 주소
 	private int sales_check_blind;			// 신고처리시 블라인드 처리 유무
 	private int sales_count;				//조회수
-	private String option;					// 옵션
+	private String sales_option;			// 옵션
 	private int sales_build_year;			//준공년도
 	private String sales_floor;				//층수
 	
@@ -24,7 +24,7 @@ public class SalesDto {
 
 	public SalesDto(int sales_number, String member_id, String sales_date, String sales_title, String sales_content,
 			String sales_category_type, String sales_category_rent, int sales_deposit, int sales_cost, int sales_factor_total,
-			int sales_area, String sales_address, int sales_check_blind, int sales_count, String option,
+			int sales_area, String sales_address, int sales_check_blind, int sales_count, String sales_option,
 			int sales_build_year, String sales_floor) {
 		super();
 		this.sales_number = sales_number;
@@ -41,7 +41,7 @@ public class SalesDto {
 		this.sales_address = sales_address;
 		this.sales_check_blind = sales_check_blind;
 		this.sales_count = sales_count;
-		this.option = option;
+		this.sales_option = sales_option;
 		this.sales_build_year = sales_build_year;
 		this.sales_floor = sales_floor;
 	}
@@ -158,13 +158,14 @@ public class SalesDto {
 		this.sales_count = sales_count;
 	}
 
-	public String getOption() {
-		return option;
+	public String getSales_option() {
+		return sales_option;
+	}
+	
+	public void setSales_option(String sales_option) {
+		this.sales_option = sales_option;
 	}
 
-	public void setOption(String option) {
-		this.option = option;
-	}
 
 	public int getSales_build_year() {
 		return sales_build_year;
@@ -189,8 +190,10 @@ public class SalesDto {
 				+ sales_category_type + ", sales_category_rent=" + sales_category_rent + ", sales_deposit="
 				+ sales_deposit + ", sales_cost=" + sales_cost + ", sales_factor_total=" + sales_factor_total
 				+ ", sales_area=" + sales_area + ", sales_address=" + sales_address + ", sales_check_blind="
-				+ sales_check_blind + ", sales_count=" + sales_count + ", option=" + option + ", sales_build_year="
-				+ sales_build_year + ", sales_floor=" + sales_floor + "]";
+				+ sales_check_blind + ", sales_count=" + sales_count + ", sales_option=" + sales_option
+				+ ", sales_build_year=" + sales_build_year + ", sales_floor=" + sales_floor + "]";
 	}
+
+
 	
 }
