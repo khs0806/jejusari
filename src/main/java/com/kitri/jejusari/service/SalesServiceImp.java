@@ -26,15 +26,13 @@ public class SalesServiceImp implements SalesService {
 	
 	@Override
 	public String salesDetail(ModelAndView mav) {
-		Map<String,Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		
-		String id=request.getParameter("member_id");
+		Map<String,Object> map = mav.getModelMap();
+		String id ="1";
 		
 		String tit=salesDao.salesDetail(id);
 		System.out.println(tit);
 		
-		return null;
+		return tit;
 	}
 	
 }

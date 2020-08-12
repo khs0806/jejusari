@@ -55,4 +55,16 @@ public class SalesController {
 		return "sales/sales_broker.empty";
 	}
 	
+	@RequestMapping(value="/sales/test")
+	public ModelAndView salesTest(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		ModelAndView mav = new ModelAndView();
+		String id = "khs";
+		mav.addObject("id", id);
+		salesService.salesDetail(mav);
+		
+		return null;
+	}
+	
 }
