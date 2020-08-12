@@ -11,7 +11,7 @@ public class SalesDto {
 	private int sales_deposit;				// 보증금
 	private int sales_cost;					// 매매가 or 전월세
 	private int sales_factor_total;			// 귤지수
-	private int sales_area;					// 면적(m^2)
+	private float sales_area;					// 면적(m^2)
 	private String sales_address;			// 주소
 	private int sales_check_blind;			// 신고처리시 블라인드 처리 유무
 	private int sales_count;				//조회수
@@ -24,7 +24,7 @@ public class SalesDto {
 
 	public SalesDto(int sales_number, String member_id, String sales_date, String sales_title, String sales_content,
 			String sales_category_type, String sales_category_rent, int sales_deposit, int sales_cost, int sales_factor_total,
-			int sales_area, String sales_address, int sales_check_blind, int sales_count, String sales_option,
+			float sales_area, String sales_address, int sales_check_blind, int sales_count, String sales_option,
 			int sales_build_year, String sales_floor) {
 		super();
 		this.sales_number = sales_number;
@@ -126,11 +126,11 @@ public class SalesDto {
 		this.sales_factor_total = sales_factor_total;
 	}
 
-	public int getSales_area() {
+	public float getSales_area() {
 		return sales_area;
 	}
 
-	public void setSales_area(int sales_area) {
+	public void setSales_area(float sales_area) {
 		this.sales_area = sales_area;
 	}
 
