@@ -5,8 +5,8 @@
   
 <mapper namespace="com.kitri.jejusari.mapper.SalesMapper">
 	
-	<select id="selectttt" parameterType="String" resultType="String">
-		select sales_title from sales where sales_number = #{id}
+	<select id="sales_detail_select" parameterType="int" resultType="com.kitri.jejusari.dto.SalesDto">
+		select * from sales where sales_number = #{sales_number}
 	</select>
 	
 </mapper>

@@ -40,18 +40,13 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/detail")
-	public String salesDetail(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView salesDetail(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
-		
+
 		salesService.salesDetail(mav);
 		
-//		ModelAndView mav = new ModelAndView();
-//		String id = "khs";
-//		mav.addObject("id", id);
-//		salesService.salesDetail(mav);
-		
-		return "sales/sales_details.tiles";
+		return mav;
 	}
 	
 	@RequestMapping(value="/sales/broker")

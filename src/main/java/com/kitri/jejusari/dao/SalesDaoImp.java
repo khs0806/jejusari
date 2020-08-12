@@ -4,6 +4,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kitri.jejusari.dto.SalesDto;
+
 @Repository
 public class SalesDaoImp implements SalesDao {
 	
@@ -11,9 +13,9 @@ public class SalesDaoImp implements SalesDao {
 	SqlSessionTemplate session;
 	
 	@Override
-	public String salesDetail(String id) {
+	public SalesDto salesDetail(int sales_number) {
 		
-		return session.selectOne("selectttt",id);
+		return session.selectOne("sales_detail_select",sales_number);
 	}
 	
 }
