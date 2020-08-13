@@ -12,4 +12,9 @@ public interface MemberDao {
 	// 아이디 중복 체크
 	public int member_id_check(String member_id);
 	
+	// 회원 리스트
+	public List<String> memberList();
+	
+	// 회원 삭제
+	public int dropMember(List<String> list);
 }

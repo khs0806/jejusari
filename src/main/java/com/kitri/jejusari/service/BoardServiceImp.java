@@ -378,4 +378,57 @@ public class BoardServiceImp implements BoardService{
 
 
 	}
+	
+	@Override
+	public void getReportList(ModelAndView mav) {
+		
+		List<String> reportList = boardDao.reportList();
+		
+		mav.addObject("ReportList", reportList);
+		//System.out.println(reportList);
+		
+		mav.setViewName("/admin/report_admin.tiles");
+	}
+
+	
+	  @Override 
+	  public void AdDelete(ModelAndView mav) {
+	  int check=0;
+	  Map<String, Object> map=mav.getModelMap();
+	  HttpServletRequest request=(HttpServletRequest)map.get("request");
+	  
+	  int sales_number = Integer.parseInt(request.getParameter("sales_number"));
+	 
+	  check = boardDao.AdDelete(sales_number); 
+	  
+	  //System.out.println(check);
+	 
+	  //System.out.println("BoardService:"+sales_number+"\t"+check);
+	  
+	  mav.addObject("check", check); 
+	  mav.addObject("sales_number",sales_number);
+	  
+	  }
+
+	@Override
+	public void ReportDetail(ModelAndView mav) {
+		
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		
+		int report_number = Integer.parseInt(request.getParameter("report_number"));
+		
+	
+		
+		List<ReportDto> list = boardDao.ReportDetail(report_number);
+		
+		mav.addObject("list", list);
+		mav.addObject("report_number", report_number);
+		//System.out.println("BoardServiceDetail:"+report_number);
+		//System.out.println("BoardServiceDetail:"+list);
+	
+	
+		mav.setViewName("/report/report_detail");
+		
+	}
 }

@@ -25,4 +25,17 @@ public class MemberDaoImp implements MemberDao{
 		return session.selectOne("member_id_check",member_id);
 	}
 	
+	@Override
+	public List<String> memberList() {
+		
+		return session.selectList("memberList");
+	}
+
+
+	@Override
+	public int dropMember(List<String> list) {
+
+		return session.delete("dropMember", list);
+	}
+	
 }

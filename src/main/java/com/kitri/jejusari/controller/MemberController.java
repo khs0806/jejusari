@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.common.KakaoLoginAPI;
@@ -164,10 +167,29 @@ public class MemberController {
 	}
 	
 	// 회원 관리
-	@RequestMapping(value="/member/admin")
-	public String admin() {
+	@RequestMapping(value = "/member/admin")
+	public ModelAndView adminMemberList() {
+		ModelAndView mav = new ModelAndView();
+
+		memberService.getMemberList(mav);
+
+		return mav;
+
+	}
+
+	// 관리자 회원 삭제
+	@ResponseBody
+	@RequestMapping(value ="/member/drop", method = RequestMethod.POST)
+	public int dropMember(@RequestParam(value="drop[]") List<String> list, HttpServletResponse response) {
+	
+		//System.out.println(list); 
 		
-		return "admin/member_admin.tiles";
+		int dropUser = memberService.dropMember(list);
+		
+		//System.out.println(dropUser);
+		
+		return dropUser;
+
 	}
 	
 }

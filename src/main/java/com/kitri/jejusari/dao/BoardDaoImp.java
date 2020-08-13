@@ -79,4 +79,21 @@ public class BoardDaoImp implements BoardDao{
 		public int noticeUpdate(NoticeDto noticeDto) {
 			return session.update("notice_update", noticeDto);
 		}
+		
+		@Override
+		public List<String> reportList() {
+			return session.selectList("reportList");
+		}
+
+		@Override
+		public int AdDelete(int sales_number) {
+			return session.delete("reportDel", sales_number);
+		}
+
+		@Override
+		public List<ReportDto> ReportDetail(int report_number) {
+			
+			return session.selectList("detailSelect",report_number);
+		}
+		
 }
