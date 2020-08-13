@@ -6,7 +6,7 @@
 <mapper namespace="com.kitri.jejusari.mapper.BoardMapper">
 
 	<insert id="report_insert" parameterType="com.kitri.jejusari.dto.ReportDto">
-		insert into report values(seq_report_number.nextval,'123',sysdate,#{report_title},#{report_content},0,#{sales_number})
+		insert into report values(seq_report_number.nextval, #{member_id}, sysdate,#{report_title},#{report_content},0,#{sales_number})
 		
 	</insert>
 </mapper>

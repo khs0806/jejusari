@@ -215,6 +215,9 @@ public class BoardServiceImp implements BoardService{
 		 */
 		ReportDto reportDto=(ReportDto) map.get("reportDto");
 		
+		//session받아서 id넣어주기 : "kke"대신에 (String)session.getAttr~( );
+		reportDto.setMember_id("kke");
+		
 		int check=boardDao.reportInsert(reportDto);
 		System.out.println("check : " + check);
 		
