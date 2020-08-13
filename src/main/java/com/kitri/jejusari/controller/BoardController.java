@@ -98,13 +98,21 @@ public class BoardController {
 	@RequestMapping(value="/report/write", method = RequestMethod.GET)
 	public ModelAndView report(HttpServletRequest request, HttpServletResponse response) {
 		
-		return new ModelAndView("report/report_write.empty");
+		ModelAndView mav = new ModelAndView();
+		String sales_number = request.getParameter("sales_number");
+		String sales_title = request.getParameter("sales_title");
+		mav.addObject("sales_number", sales_number);
+		mav.addObject("sales_title", sales_title);
+		mav.setViewName("report/report_write.empty");
+		
+		return mav;
 	}
 	
 	// 신고작성 ok
 	@RequestMapping(value="/report/write", method=RequestMethod.POST)
 	public ModelAndView memberRegisterOk(HttpServletRequest request, HttpServletResponse response, ReportDto reportDto) {
-		System.out.println( "memberDto : " + reportDto.toString());			// 넘어오는지 확인
+		System.out.println( "reportDto : " + reportDto.toString());			// 넘어오는지 확인
+		
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("reportDto", reportDto);

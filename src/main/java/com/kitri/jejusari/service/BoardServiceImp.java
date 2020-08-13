@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ContainerFactory;
@@ -206,11 +207,17 @@ public class BoardServiceImp implements BoardService{
 		// TODO Auto-generated method stub
 		
 		Map<String, Object> map=mav.getModelMap();
+		/*
+		 * HttpServletRequest request=(HttpServletRequest)map.get("request");
+		 * HttpSession session=request.getSession();
+		 * 
+		 * session.getAttribute(name);
+		 */
 		ReportDto reportDto=(ReportDto) map.get("reportDto");
 		
-
 		int check=boardDao.reportInsert(reportDto);
 		System.out.println("check : " + check);
+		
 		
 		mav.addObject("check", check);
 		mav.setViewName("report/report_writeOk");
