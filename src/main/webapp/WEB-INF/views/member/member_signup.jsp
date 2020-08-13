@@ -52,11 +52,11 @@
 			  </select>
 		</div>
 		
-		<div class="member_type">
+		<div class="member_level">
 			<div class="label">가입 유형</div>
-			<input type="radio" name="member_type" value="general"/>
+			<input type="radio" name="member_level" value="GE"/>
 			일반회원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
-			<input type="radio" name="member_type" value="broker"/>
+			<input type="radio" name="member_level" value="BR"/>
 			중개업자
 		</div>
 		

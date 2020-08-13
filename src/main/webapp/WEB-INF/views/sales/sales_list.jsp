@@ -101,7 +101,7 @@
 				<div class="col-md-1"><strong>가격</strong></div>
 			</div>
 		<c:forEach var="salesList" items="${salesList }">	
-			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }">
+			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }&pageNumber=${currentPage}">
 			<div class="row border-bottom" id="table_td">
 				<div class="col-md-8"><strong>${salesList.sales_title }</strong><p>${salesList.sales_address }</p></div>
 				<div class="col-md-1">${salesList.sales_category_type }</div>
