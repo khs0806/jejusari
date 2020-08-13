@@ -47,6 +47,11 @@ public class SalesServiceImp implements SalesService {
 			if(sales_option[i].equals("엘리베이터")) salesDto.setSales_ele(1);
 		}
 		
+		map.put("member_id",session_member_id);
+		map.put("sales_number",salesDto.getSales_number());
+		int scrap_check=salesDao.salesScrapCheck(map);
+		mav.addObject("scrap_check",scrap_check);
+		
 		String member_id=salesDto.getMember_id();
 		MemberDto memberDto=salesDao.salesBroker(member_id); 
 		
@@ -79,10 +84,10 @@ public class SalesServiceImp implements SalesService {
 		
 		//수정필요
 		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
-		String member_name=(String) session.getAttribute("user");
-		System.out.println(sales_number+" , "+member_name);
+		String member_id=(String) session.getAttribute("user");
+		System.out.println(sales_number+" , "+member_id);
 		map.put("sales_number",sales_number);
-		map.put("member_id", member_name);
+		map.put("member_id", member_id);
 		
 		int check=0;
 		int scrap_check=salesDao.salesScrapCheck(map);

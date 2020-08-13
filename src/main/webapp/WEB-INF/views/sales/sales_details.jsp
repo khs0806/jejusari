@@ -149,10 +149,10 @@
 		</div>
 
 		<div class="scrap_report">
-			<c:if test="${scrap_count==0 }">
+			<c:if test="${scrap_check==0 }">
 				<img class="scrap_star" src="${root}/img/star.png" width="20px" height="20px"/>
 			</c:if>
-			<c:if test="${scrap_count>0 }">
+			<c:if test="${scrap_check>0 }">
 				<img class="scrap_star" src="${root}/img/star2.png" width="20px" height="20px"/>
 			</c:if>
 			<span class="scrap_count">${scrap_count }</span>
