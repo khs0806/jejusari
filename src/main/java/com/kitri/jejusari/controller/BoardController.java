@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.dto.NoticeDto;
 import com.kitri.jejusari.dto.ReportDto;
 import com.kitri.jejusari.service.BoardService;
 
@@ -39,60 +40,106 @@ public class BoardController {
 	}
 	
 	// 공지사항 목록
-	@RequestMapping(value="/notice")
-	public String notice() {
-		
-		return "notice/notice_list.tiles";
-	}
+		@RequestMapping(value="/notice")
+		public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) {
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("request", request);
+			
+			boardService.noticeList(mav);
+			return mav;
+		}
 	
-	// 공지사항 상세보기
-	@RequestMapping(value="/notice/detail")
-	public String noticeDetail() {
-		
-		return "notice/notice_read.tiles";
-	}
+		// 공지사항 상세보기
+		@RequestMapping(value="/notice/detail")
+		public ModelAndView noticeDetail(HttpServletRequest request, HttpServletResponse response) {
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("request", request);
+			
+			boardService.noticeDetail(mav);
+			
+			return mav;
+		}
 	
-	// 공지사항 작성 화면
-	@RequestMapping(value="/notice/write")
-	public String noticeWrite() {
+		// 공지사항 작성 화면
+		@RequestMapping(value="/notice/write")
+		public ModelAndView noticeWrite(HttpServletRequest request, HttpServletResponse response) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("request", request);
+			
+			boardService.noticeWrite(mav);
+			
+			return mav;
+			//return "notice/notice_write.tiles";
+		}
 		
-		return "notice/notice_write.tiles";
-	}
 	
-	// 공지사항 작성
-	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
-	public String noticeWriteDo() {
-		
-		return "notice/notice_writeOk.tiles";
-	}
+			// 공지사항 작성
+			@RequestMapping(value="/notice/writeOk", method=RequestMethod.POST)
+			public ModelAndView noticeWriteDo(HttpServletRequest request, HttpServletResponse response, NoticeDto noticeDto) {
+				ModelAndView mav = new ModelAndView();
+				System.out.println("controller : " + noticeDto);
+				mav.addObject("request", request);
+				mav.addObject("noticeDto", noticeDto);
+				
+				boardService.noticeWriteOk(mav);
+				
+				return mav;
+				//return "notice/notice_writeOk.tiles";
+			}
 	
-	// 공지사항 수정 화면
-	@RequestMapping(value="/notice/update")
-	public String noticeUpdate() {
-		
-		return "notice/notice_update.tiles";
-	}
+			// 공지사항 수정 화면
+			@RequestMapping(value="/notice/update")
+			public ModelAndView noticeUpdate(HttpServletRequest request, HttpServletResponse response) {
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("request", request);
+				
+				boardService.noticeUpdate(mav);
+				
+				return mav;
+				
+				//return "notice/notice_update.tiles";
+			}
 	
-	// 공지사항 수정
-	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
-	public String noticeUpdateDo() {
-		
-		return "notice/notice_updateOk.tiles";
-	}
+			// 공지사항 수정
+			@RequestMapping(value="/notice/updateOk", method=RequestMethod.POST)
+			public ModelAndView noticeUpdateDo(HttpServletRequest request, HttpServletResponse response, NoticeDto noticeDto) {
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("request", request);
+				mav.addObject("noticeDto", noticeDto);
+				
+				boardService.noticeUpdateOk(mav);
+				
+				return mav;
+				
+				//return "notice/notice_updateOk.tiles";
+			}
 	
-	// 공지사항 삭제화면
-	@RequestMapping(value="/notice/delete")
-	public String noticeDelete() {
-		
-		return "notice/notice_delete.tiles";
-	}
+			// 공지사항 삭제화면
+			@RequestMapping(value="/notice/delete")
+			public ModelAndView noticeDelete(HttpServletRequest request, HttpServletResponse response) {
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("request", request);
+				
+				boardService.noticeDelete(mav);
+				
+				return mav;
+			}
 	
-	// 공지사항 삭제
-	@RequestMapping(value="/notice/delete", method=RequestMethod.POST)
-	public String noticeDeleteDo() {
-		
-		return "notice/notice_deleteOk.tiles";
-	}
+			// 공지사항 삭제
+			@RequestMapping(value="/notice/deleteOk", method=RequestMethod.POST)
+			public ModelAndView noticeDeleteDo(HttpServletRequest request, HttpServletResponse response) {
+				
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("request", request);
+				
+				boardService.noticeDeleteOk(mav);
+				
+				return mav;
+				
+				//return "notice/notice_deleteOk.tiles";
+			}
 	
 	// 신고 작성
 	@RequestMapping(value="/report/write", method = RequestMethod.GET)
