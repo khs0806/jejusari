@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dao.SalesDao;
+import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.dto.SalesDto;
 
 @Service
@@ -28,13 +30,67 @@ public class SalesServiceImp implements SalesService {
 	public void salesDetail(ModelAndView mav) {
 		Map<String,Object> map = mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
-		int sales_number=Integer.parseInt(request.getParameter("sales_number"));	
+		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		HttpSession session=request.getSession();
+		
+		//수정필요
+		String session_member_id=(String) session.getAttribute("user");
+		mav.addObject("session_member_id",session_member_id);
 		
 		SalesDto salesDto=salesDao.salesDetail(sales_number);
-		System.out.println(salesDto);
+		String[] sales_option=salesDto.getSales_option().split(",");
+		for(int i=0;i<sales_option.length;i++) {
+			if(sales_option[i].equals("풀옵션")) salesDto.setSales_full(1);
+			if(sales_option[i].equals("주차장")) salesDto.setSales_parking(1);;
+			if(sales_option[i].equals("CCTV")) salesDto.setSales_cctv(1);
+			if(sales_option[i].equals("엘리베이터")) salesDto.setSales_ele(1);
+		}
 		
+		String member_id=salesDto.getMember_id();
+		MemberDto memberDto=salesDao.salesBroker(member_id); 
+		
+		int scrap_count=salesDao.salesScrapCount(sales_number);
+		
+		mav.addObject("scrap_count",scrap_count);
+		mav.addObject("pageNumber",pageNumber);
+		mav.addObject("memberDto",memberDto);
 		mav.addObject("salesDto",salesDto);
 		mav.setViewName("sales/sales_details.tiles");
+	}
+	
+	@Override
+	public void salesBroker(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		String member_id=request.getParameter("member_id");
+		
+		MemberDto memberDto=salesDao.salesBroker(member_id); 
+		
+		mav.addObject("memberDto",memberDto);
+		mav.setViewName("sales/sales_broker.empty");
+	}
+	
+	@Override
+	public int salesScrap(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpSession session=request.getSession();
+		
+		//수정필요
+		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
+		String member_name=(String) session.getAttribute("user");
+		System.out.println(sales_number+" , "+member_name);
+		map.put("sales_number",sales_number);
+		map.put("member_id", member_name);
+		
+		int check=0;
+		int scrap_check=salesDao.salesScrapCheck(map);
+		if(scrap_check==0) {
+			check=salesDao.salesScrap(map);
+		}
+		
+		return check;
 	}
 
 	@Override

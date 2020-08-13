@@ -1,5 +1,7 @@
 package com.kitri.jejusari.controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -61,9 +63,22 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/broker")
-	public String salesBroker(HttpServletRequest request, HttpServletResponse response) {
-		
-		return "sales/sales_broker.empty";
+	public ModelAndView salesBroker(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+
+		salesService.salesBroker(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value="/sales/scrap")
+	public void salesScrap(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+
+		int check=salesService.salesScrap(mav);
+		PrintWriter out=response.getWriter();
+		out.print(check);
 	}
 	
 	

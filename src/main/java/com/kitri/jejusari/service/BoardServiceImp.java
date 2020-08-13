@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dao.BoardDao;
+import com.kitri.jejusari.dto.NoticeDto;
 import com.kitri.jejusari.dto.ReportDto;
 
 @Service
@@ -225,4 +227,158 @@ public class BoardServiceImp implements BoardService{
 		mav.addObject("check", check);
 		mav.setViewName("report/report_writeOk");
 	}
+	
+	
+	
+	
+	//공지사항
+	//공지사항 게시판 읽기
+		@Override
+		public void noticeDetail(ModelAndView mav) {
+			Map<String,Object> map = mav.getModelMap();
+			HttpServletRequest request=(HttpServletRequest) map.get("request");
+			int notice_number=Integer.parseInt(request.getParameter("notice_number"));	
+			
+			boardDao.noticeCountPlus(notice_number);
+			NoticeDto noticeDto = boardDao.noticeDetail(notice_number);
+			System.out.println(noticeDto);
+			mav.addObject("noticeDto",noticeDto);
+			mav.setViewName("notice/notice_read.tiles");
+			
+		}
+		
+		//공지사항 게시판
+		@Override
+		public void noticeList(ModelAndView mav) {
+			Map<String, Object> map= mav.getModelMap();
+			HttpServletRequest request = (HttpServletRequest)map.get("request");
+			
+			//페이징
+			String pageNumber=request.getParameter("pageNumber");
+			if(pageNumber == null) pageNumber = "1";
+			int currentPage = Integer.parseInt(pageNumber);	//요청한 페이지
+			int boardSize = 10;		// [1] start:1, end:10  [2] start:11, end:20
+			
+			int startRow = (currentPage - 1) * boardSize + 1;	//1  11 21 31
+			int endRow = currentPage * boardSize;			//10 20 30 40
+			
+			//count 사용해서 글이 아예 없는경우 페이징 사라지게
+			int count = boardDao.noticeCount();
+			List<NoticeDto> noticeList = null;
+			
+			if(count > 0) {
+				//startRow, endRow
+				noticeList = boardDao.noticeList(startRow, endRow);
+			}
+			
+			
+			mav.addObject("noticeList", noticeList);
+			mav.addObject("boardSize", boardSize);
+			mav.addObject("currentPage", currentPage);
+			mav.addObject("count", count);
+			mav.setViewName("/notice/notice_list.tiles");
+			
+		}
+		
+		//공지사항 게시판 쓰기
+		@Override
+		public void noticeWrite(ModelAndView mav) {	//글작성 누르면 띄워지는 공지사항 글작성 페이지
+			
+			mav.setViewName("/notice/notice_write.tiles");
+			
+		}
+		
+		//공지사항 게시판 쓰기 완료
+		@Override
+		public void noticeWriteOk(ModelAndView mav) {
+			
+			Map<String, Object> map = mav.getModelMap();	//불러오기
+			NoticeDto noticeDto = (NoticeDto) map.get("noticeDto");
+			HttpServletRequest request = (HttpServletRequest) map.get("request");
+			System.out.println(noticeDto.toString());
+
+			noticeDto.setNotice_date(new Date());
+			noticeDto.setNotice_count(0);
+			
+			int check = boardDao.noticeWrite(noticeDto);
+			System.out.println(check);
+			
+			mav.addObject("check", check);
+			mav.setViewName("/notice/notice_writeOk.tiles");
+			
+		}
+		
+		//공지사항 삭제
+		@Override
+		public void noticeDelete(ModelAndView mav) {
+			Map<String, Object> map = mav.getModelMap();
+			HttpServletRequest request = (HttpServletRequest) map.get("request");
+			
+			int notice_number = Integer.parseInt(request.getParameter("notice_number"));
+			System.out.println(notice_number);
+			
+			mav.addObject("notice_number", notice_number);
+			
+			mav.setViewName("notice/notice_delete.tiles");
+			
+		}
+		
+		//공지사항 삭제 완료
+		@Override
+		public void noticeDeleteOk(ModelAndView mav) {
+			Map<String, Object> map = mav.getModelMap();
+			HttpServletRequest request = (HttpServletRequest) map.get("request");
+			
+			int notice_number = Integer.parseInt(request.getParameter("notice_number"));
+			System.out.println(notice_number);
+			
+			int check = boardDao.noticeDelete(notice_number);
+			System.out.println(check);
+			
+			mav.addObject("notice_number", notice_number);
+			mav.addObject("check", check);
+			
+			mav.setViewName("notice/notice_deleteOk.tiles");
+			
+		}
+		
+		//공지사항 수정 기존의 정보 뿌리기
+		@Override
+		public void noticeUpdate(ModelAndView mav) {
+			Map<String, Object> map = mav.getModelMap();
+			HttpServletRequest request = (HttpServletRequest) map.get("request");
+			
+			int notice_number = Integer.parseInt(request.getParameter("notice_number"));
+			System.out.println("update_notice_number : " + notice_number);
+			
+			NoticeDto noticeDto = boardDao.noticeSelect(notice_number);
+			
+			mav.addObject("notice_number", notice_number);
+			mav.addObject("noticeDto", noticeDto);
+			
+			mav.setViewName("notice/notice_update.tiles");
+		}
+		
+		//공지사항 수정 완료
+		@Override
+		public void noticeUpdateOk(ModelAndView mav) {
+			Map<String, Object> map = mav.getModelMap();
+			NoticeDto noticeDto = (NoticeDto) map.get("noticeDto");
+			HttpServletRequest request = (HttpServletRequest) map.get("request");
+			System.out.println(noticeDto.toString());
+			
+			int notice_number = Integer.parseInt(request.getParameter("notice_number"));
+			System.out.println("updateOk_notice_number : " + notice_number);
+			
+			int check = boardDao.noticeUpdate(noticeDto);
+			System.out.println("check : " + check);
+			
+			mav.addObject("notice_number", notice_number);
+			mav.addObject("noticeDto", noticeDto);
+			mav.addObject("check", check);
+			
+			mav.setViewName("notice/notice_updateOk.tiles");
+			
+			
+		}
 }

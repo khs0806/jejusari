@@ -15,6 +15,8 @@
 		function updateAreaInput(val) {
           document.getElementById('areaInput').value=val; 
         }
+		
+		
 		</script>
 <title>Insert title here</title>
 </head>
@@ -95,18 +97,54 @@
 		<!-- 게시판 목록 -->
 		<div class="table active">
 			<div class="row border-bottom" id="table_th">
-				<div class="col-md-8"><strong>제목</strong></div>
-				<div class="col-md-1"><strong>구분</strong></div>
+				<div class="col-md-6"><strong>제목</strong></div>
+				<div class="col-md-1"><strong>종류</strong></div>
 				<div class="col-md-2"><strong>면적</strong></div>
-				<div class="col-md-1"><strong>가격</strong></div>
+				<div class="col-md-1"><strong>구분</strong></div>
+				<div class="col-md-2"><strong>가격</strong></div>
 			</div>
-		<c:forEach var="salesList" items="${salesList }">	
-			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }">
+		<c:forEach var="salesList" items="${salesList }">
+		<script type="text/javascript">
+			$(function(){	
+			// 보증금가 1억이상일때 표현을 몇 억 000만원 으로 표시되게
+				var billion=Math.floor('${salesList.sales_deposit}'/10000);
+				var deposit=null;
+				if(billion>=1 ? deposit=billion+'억'+('${salesList.sales_deposit}'%10000)+"만원" : deposit='${salesList.sales_deposit}'+"만원");
+				console.log("보증금 : "+deposit);
+				/* { 
+					var deposit=billion+'억'+sales_deposit(sales_cost) % 10000+"만원";
+				 }
+				if(billion < 1){
+					var deposit=sales_deposit;
+				} */
+				$("#sales_deposit${salesList.sales_number }").text(deposit);
+				
+			// 매매가가 1억이상일때 표현을 몇 억 000만원 으로 표시되게 (sales_cost)
+				var billion1=Math.floor('${salesList.sales_cost}'/10000);
+				var deposit1=null;
+				if(billion1>=1 ? deposit1=billion1+'억'+('${salesList.sales_cost}'%10000)+"만원" : deposit1='${salesList.sales_cost}'+"만원");
+				console.log("매매가 : "+deposit1);
+				$("#sales_cost${salesList.sales_number }").text(deposit1);
+				
+			// 보증금, 매매가 0일때 감추는 jquery. c:forEach 사이에 존재해야함
+				if('${salesList.sales_deposit}'==0){
+					$("#sales_deposit${salesList.sales_number }").hide();
+				}
+				if('${salesList.sales_cost}'==0){
+					$("#sales_cost${salesList.sales_number }").hide();
+				}
+				if('${salesList.sales_deposit}'!=0 && '${salesList.sales_cost}'!= 0){
+					$('#slash${salesList.sales_number }').text(" / ");
+				}
+			});
+		</script>
+			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }&pageNumber=${currentPage}">
 			<div class="row border-bottom" id="table_td">
-				<div class="col-md-8"><strong>${salesList.sales_title }</strong><p>${salesList.sales_address }</p></div>
+				<div class="col-md-6"><strong>${salesList.sales_title }</strong><p>${salesList.sales_address }</p></div>
 				<div class="col-md-1">${salesList.sales_category_type }</div>
 				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3) }" type="number" pattern="0.0"/>평/${salesList.sales_area }m<sup>2</sup>/${salesList.sales_floor }층</div>
-				<div class="col-md-1">${salesList.sales_deposit }<span>${salesList.sales_cost }</span></div>
+				<div class="col-md-1">${salesList.sales_category_rent }</div>
+				<div class="col-md-2"><span id="sales_deposit${salesList.sales_number }"></span><span id="slash${salesList.sales_number }"></span><span id="sales_cost${salesList.sales_number }"></span></div>
 			<!-- 	<div class="col-md-2"></div> -->
 			</div>
 			</a>
