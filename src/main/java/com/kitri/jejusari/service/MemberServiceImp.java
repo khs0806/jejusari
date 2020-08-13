@@ -1,6 +1,6 @@
 package com.kitri.jejusari.service;
 
-import java.util.List;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,6 @@ public class MemberServiceImp implements MemberService{
 
 	@Autowired
 	MemberDao memberDao;
-	
-	@Override
-	public List<String> testDB() {
-		// TODO Auto-generated method stub
-		return memberDao.testDB();
-	}
 	
 	@Override
 	public int memberJoin(MemberDto memberDto) {
