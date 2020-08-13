@@ -36,29 +36,31 @@
 				<!-- 아파트/원룸투룸쓰리룸/오피스텔 라디오박스 -->
 				<div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="sales_category_type" value="APT" id="APT">아파트
+						<input type="radio" name="sales_category_type" value="아파트" id="APT">아파트
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="sales_category_type" value="ONE" id="ONE">원룸
+						<input type="radio" name="sales_category_type" value="원룸" id="ONE">원룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="sales_category_type" value="TWO" id="TWO">투룸
+						<input type="radio" name="sales_category_type" value="투룸" id="TWO">투룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="sales_category_type" value="THREE" id="THREE">쓰리룸
+						<input type="radio" name="sales_category_type" value="쓰리룸" id="THREE">쓰리룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="radio" name="sales_category_type" value="OFFICE" id="OFFICE">오피스텔
+						<input type="radio" name="sales_category_type" value="오피스텔" id="OFFICE">오피스텔
 					</label>
 				</div>
 				<!-- 전월세/매매 선택 셀렉트 박스 -->
 				<div class="input-group mb-3 align-items-center">
-					<select name="sales_category_rent" class="custom-select col-md-2">
+					<select id="sales_category_rent" name="sales_category_rent" class="custom-select col-md-2">
 						<option value="">옵션</option>
 						<option value="매매">매매</option>
 						<option value="전세">전세</option>
 						<option value="월세">월세</option>
 					</select>
+					
+					
 				  <input name="sales_title" type="text" class="form-control" placeholder="제목을 입력하세요." aria-label="제목을 입력하세요.">
 				</div>
 				
@@ -94,29 +96,53 @@
 			
 			<!-- 우측상단 3개 입력정보 -->
 			<div class="col-md-3">
-			
+			<script type="text/javascript">
+					$(function(){	//매매, 전세, 월세 선택에 따라 보증금, 매매가(월세) 입력란 드러나고 감춰지게
+						$("select[name='sales_category_rent']").click(function(){
+							//console.log($("#sales_category_rent option:selected").val());
+							if($("#sales_category_rent option:selected").val()=='전세'){
+								$("#sales_cost").hide();
+								$("#sales_deposit").show();
+							}
+							if($("#sales_category_rent option:selected").val()=='월세'){
+								$("#sales_cost").show();
+								$("#sales_deposit").show();
+							}
+							if($("#sales_category_rent option:selected").val()=='매매'){
+								$("#sales_cost").show();
+								$("#sales_deposit").hide();
+							}
+						});
+					});
+			</script>
 			<!-- 여기에 c:if써서 월세면 보증금도 추가, 전세면 보증금만 나오게, 매매는 가격만 나오게 -->
-				<div class="input-group input-group-sm mb-2">
+				<div class="input-group input-group-sm mb-2" id="sales_deposit">
 					<div class="input-group-prepend">
-				    	<span class="input-group-text" id="inputGroup-sizing-sm">가격  (원)</span>
+				    	<span class="input-group-text">가격 (만원)</span>
 					</div>
-					<input name="sales_cost" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_cost" type="text" class="form-control" placeholder="보증금"  aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group input-group-sm mb-2" id="sales_cost">
+					<div class="input-group-prepend">
+				    	<span class="input-group-text">가격 (만원)</span>
+					</div>
+					<input name="sales_cost" type="text" class="form-control" placeholder="매매가(혹은 월세)" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2">
 					<div class="input-group-prepend">
-				    	<span class="input-group-text" id="inputGroup-sizing-sm">면적(m<sup>2</sup>)</span>
+				    	<span class="input-group-text" id="sales_area">면적(m<sup>2</sup>)</span>
 					</div>
 					<input name="sales_area" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2">
 					<div class="input-group-prepend">
-				    	<span class="input-group-text" id="inputGroup-sizing-sm">준공년도</span>
+				    	<span class="input-group-text" id="sales_build_year">준공년도</span>
 					</div>
 					<input name="sales_build_year" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2">
 					<div class="input-group-prepend">
-				    	<span class="input-group-text" id="inputGroup-sizing-sm">&nbsp;&nbsp;층&nbsp;&nbsp;수&nbsp;&nbsp;</span>
+				    	<span class="input-group-text" id="sales_floor">&nbsp;&nbsp;층&nbsp;&nbsp;수&nbsp;&nbsp;</span>
 					</div>
 					<input name="sales_floor" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 				</div>
