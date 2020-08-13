@@ -42,4 +42,21 @@
 	<update id="notice_update" parameterType = "com.kitri.jejusari.dto.NoticeDto">
 		update notice set notice_title = #{notice_title}, notice_content = #{notice_content} where notice_number = #{notice_number}
 	</update>
+	
+	<!-- 관리자 신고 -->
+	<!-- 신고 내역 리스트 -->
+	<select id="reportList" parameterType="java.lang.String" resultType="com.kitri.jejusari.dto.ReportDto">
+		select * from report
+	</select>
+	
+	<!-- 신고 및 매물 삭제 -->
+	<delete id="reportDel"  parameterType="int">
+		delete from sales where sales_number=#{sales_number}
+	</delete>	
+	
+	<!-- 신고 상세 보기 -->
+	<select id="detailSelect" parameterType="int" resultType="com.kitri.jejusari.dto.ReportDto">
+		select * from report
+		where report_number=#{report_number} 
+	</select>
 </mapper>

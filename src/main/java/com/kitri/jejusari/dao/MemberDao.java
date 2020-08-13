@@ -15,4 +15,9 @@ public interface MemberDao {
 	// 회원탈퇴
 	public int member_delete(String member_id);
 	
+	// 회원 리스트
+	public List<String> memberList();
+	
+	// 회원 삭제
+	public int dropMember(List<String> list);
 }

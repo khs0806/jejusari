@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.common.KakaoLoginAPI;
@@ -39,6 +42,7 @@ public class MemberController {
 		
 		return "main/main.tiles";
 	}
+	
 	
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw1")
@@ -91,6 +95,7 @@ public class MemberController {
 			// 이미 가입된 회원일 경우 바로 로그인
 			HttpSession session = request.getSession();
 			if (userInfo.get("id") != null) {
+				
 				session.setAttribute("member_id", member_id);
 				session.setAttribute("member_name", member_name);
 				session.setAttribute("access_Token", access_Token);
@@ -161,10 +166,29 @@ public class MemberController {
 	}
 	
 	// 회원 관리
-	@RequestMapping(value="/member/admin")
-	public String admin() {
+	@RequestMapping(value = "/member/admin")
+	public ModelAndView adminMemberList() {
+		ModelAndView mav = new ModelAndView();
+
+		memberService.getMemberList(mav);
+
+		return mav;
+
+	}
+
+	// 관리자 회원 삭제
+	@ResponseBody
+	@RequestMapping(value ="/member/drop", method = RequestMethod.POST)
+	public int dropMember(@RequestParam(value="drop[]") List<String> list, HttpServletResponse response) {
+	
+		//System.out.println(list); 
 		
-		return "admin/member_admin.tiles";
+		int dropUser = memberService.dropMember(list);
+		
+		//System.out.println(dropUser);
+		
+		return dropUser;
+
 	}
 	
 }

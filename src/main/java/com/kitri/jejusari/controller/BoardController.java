@@ -171,9 +171,38 @@ public class BoardController {
 	}
 	
 	// 신고 관리자
-	@RequestMapping(value="/report/admin")
-	public String reportAdmin() {
-		
-		return "admin/report_admin.tiles";
-	}
+		@RequestMapping(value="/report/admin")
+		public ModelAndView reportAdmin() {
+			   ModelAndView mav = new ModelAndView();
+				
+				boardService.getReportList(mav);
+				
+				return mav;
+		}
+			
+			
+		// 신고 및 매물 삭제
+		@RequestMapping(value = "/report/delete") /* method = RequestMethod.GET */ 
+		public ModelAndView deleteReport(HttpServletRequest request, HttpServletResponse response) {
+			   ModelAndView mav = new ModelAndView();
+				  
+			   mav.addObject("request", request);
+				  
+			   boardService.AdDelete(mav); 
+				  
+			   return mav;
+		}
+			  
+			 
+		// 신고 상세 확인
+		@RequestMapping(value="/report/detail", method = RequestMethod.GET)
+		public ModelAndView reportDetail(HttpServletRequest request, HttpServletResponse response) {
+			   ModelAndView mav = new ModelAndView();
+					
+			   mav.addObject("request", request);
+					
+			   boardService.ReportDetail(mav);
+					
+			   return mav;
+		}
 }
