@@ -4,12 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kitri.jejusari.mapper.SalesMapper">
-
-	<resultMap type="com.kitri.jejusari.dto.SalesDto" id="SalesDto"/>
 	
 	<!-- 상세페이지 -->
 	<select id="sales_detail_select" parameterType="int" resultType="com.kitri.jejusari.dto.SalesDto">
 		select * from sales where sales_number = #{sales_number}
+	</select>
+	<select id="sales_broker_select" parameterType="String" resultType="com.kitri.jejusari.dto.MemberDto">
+		select * from member where member_id=#{member_id} 
+	</select>
+	<select id="sales_scrap_check" parameterType="java.util.Map" resultType="int">
+		select count(*) from scrap where sales_number=#{sales_number} and member_id=#{member_id}
+	</select>
+	<insert id="sales_scrap" parameterType="java.util.Map">
+		insert into scrap values(#{member_id},seq_scrap_number.nextval,#{sales_number})
+	</insert>
+	<select id="sales_scrap_count" parameterType="int" resultType="int">
+		select count(*) from scrap where sales_number=#{sales_number}
 	</select>
 
 	<!--  -->
@@ -17,10 +27,27 @@
 		select nvl(count(*),0) from sales
 	</select>
 	
-	<select id="sales_list" parameterType="java.util.HashMap" resultMap="SalesDto">
+	<select id="sales_list" parameterType="java.util.HashMap" resultType="com.kitri.jejusari.dto.SalesDto">
 		<![CDATA[
-			select b.* From (select rownum rnum, a.* From (select * from sales order by sales_number) a) b where b.rnum>=#{startRow} and b.rnum<=#{endRow}
+			select b.* From (select rownum rnum, a.* From (select * from sales order by sales_number desc) a) b where b.rnum>=#{startRow} and b.rnum<=#{endRow}
 		]]>
 	</select>
+	
+	<insert id="sales_write" parameterType="com.kitri.jejusari.dto.SalesDto">
+		<!-- <selectKey keyColumn="member_id" keyProperty="member_id">
+        	select member_id from member where member_id=#{member_id}
+    	</selectKey> -->
+		insert into sales (sales_number, member_id, sales_date, sales_title, sales_content, sales_category_type, sales_category_rent, sales_deposit, sales_cost, sales_area, sales_address, sales_option, sales_build_year, sales_floor) 
+		values (seq_sales_number.nextval, #{member_id}, sysdate, #{sales_title}, #{sales_content}, #{sales_category_type}, #{sales_category_rent}, #{sales_deposit}, #{sales_cost}, #{sales_area}, #{sales_address}, #{sales_option}, #{sales_build_year}, #{sales_floor} )
+	</insert>
+	
+	
+	<delete id="sales_delete" parameterType="com.kitri.jejusari.dto.SalesDto">
+		delete from sales where sales_number = #{sales_number}
+	</delete>
+	
+	<select id="get_member_id" resultType="String">
+		select member_id from sales where sales_number = #{sales_number}
+	</select> 
 	
 </mapper>

@@ -5,25 +5,62 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- css -->
 <link rel="stylesheet" href="${root}/css/sales_board/sales_details.css"/>
+
 <!-- 지도 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2992107a6cdd4a70cae5c448140c5fd1"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2992107a6cdd4a70cae5c448140c5fd1&libraries=services"></script> 
+
 <script type="text/javascript">
 	$(document).ready(function() {    
 		//스크랩 클릭시
 		$("input:button[name=scrap_btn]").one("click",function(){
-			alert("ok");
-			$("input:button[name=scrap_btn]").css("color","#212529");
-			$("input:button[name=scrap_btn]").css("background-color","#ffc107");
-			$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+			$.ajax({
+		      	url:"${root}/sales/scrap?sales_number=${salesDto.sales_number}",
+		     	type:"get",
+		      	dataType:"text",
+		      	success:function(data){
+		      		var check=$.parseJSON(data);
+		      		
+		      		if(check==1){
+		      			$("input:button[name=scrap_btn]").css("color","#212529");
+						$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+						$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+						$(".scrap_star").attr("src","${root}/img/star2.png");
+						$(".scrap_count").text(${scrap_count }+1);
+						
+						alert("스크랩이 완료되었습니다."); 
+		      		}else{
+		      			alert("이미 스크랩하셨습니다.");
+		      		}
+		      		
+		      	}
+		   	});		
 		})
 		
 		//신고하기 클릭시
 		$("input:button[name=report_btn]").click(function(){
 			var check=confirm("이 매물을 신고하시겠습니까?");
 			if(check==true){
-				window.open('${root}/report/write', '', 'width = 600, height = 600');
+				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
 			}
 		})
+		
+		//옵션 이미지 변경
+		if(${salesDto.sales_full!=1}){
+			$(".opt_full").css("filter","invert(80%)");
+			$(".opt_full_msg").css("filter","invert(80%)");
+		}
+		if(${salesDto.sales_parking!=1}){
+			$(".opt_parking").css("filter","invert(80%)");
+			$(".opt_parking_msg").css("filter","invert(80%)");
+		}
+		if(${salesDto.sales_cctv!=1}){
+			$(".opt_cctv").css("filter","invert(80%)");
+			$(".opt_cctv_msg").css("filter","invert(80%)");
+		}
+		if(${salesDto.sales_ele!=1}){
+			$(".opt_ele").css("filter","invert(80%)");
+			$(".opt_ele_msg").css("filter","invert(80%)");
+		}
 		
 		//이미지 더 보기 클릭시
 		$(".img_more").click(function(){
@@ -43,12 +80,12 @@
 		
 		//중개인 더보기 클릭시
 		$("input:button[name=member_info]").click(function(){
-			window.open('${root}/sales/broker', '', 'width = 300, height = 250');
+			window.open('${root}/sales/broker?member_id=${salesDto.member_id }', '', 'width = 300, height = 250');
 		})
 		
 		//매물 더보기 클릭시
 		$("input:button[name=more_sales]").click(function(){
-			alert("ok");
+			location.href="${root }/sales?pageNumber=${pageNumber}";
 		})
 		
 		//수정 클릭시
@@ -67,11 +104,11 @@
 			}
 		})
 		
-		//삭제 클릭시
+	//신고하기 클릭시
 		$("input:button[name=sales_delete]").click(function(){
-			var check=confirm("매물 정보 게시글을 삭제하시겠습니까?");
+			var check=confirm("이 매물을 삭제하시겠습니까?");
 			if(check==true){
-				alert("ok");
+				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 600');
 			}
 		})
 	});		
@@ -93,6 +130,7 @@
 		</c:if>	
 		<span>만원</span>		
 		<div>${salesDto.sales_address }</div>
+		
 	</div>
 
 	<!-- 신고처리(문의 문구) -->
@@ -107,12 +145,17 @@
 	<div id="info">
 		<div class="borker">
 			<img src="${root}/img/중개인.png" width="25px" height="25px"/>		
-			<span>${salesDto.member_id }</span>	<!-- 이름으로 뽑아와야함 -->
+			<span>${memberDto.member_name } ( ${salesDto.member_id } )</span>
 		</div>
 
 		<div class="scrap_report">
-			<img src="${root}/img/star.png" width="20px" height="20px"/>
-			<span>14</span>		<!-- 스크랩수 -->
+			<c:if test="${scrap_count==0 }">
+				<img class="scrap_star" src="${root}/img/star.png" width="20px" height="20px"/>
+			</c:if>
+			<c:if test="${scrap_count>0 }">
+				<img class="scrap_star" src="${root}/img/star2.png" width="20px" height="20px"/>
+			</c:if>
+			<span class="scrap_count">${scrap_count }</span>
 			<input type="button" name="scrap_btn" value="스크랩" class="btn btn-outline-warning btn-sm scrap_btn"/>
 			<input type="button" name="report_btn" value="신고하기" class="btn btn-outline-danger btn-sm report_btn"/>
 		</div>
@@ -120,7 +163,7 @@
 	
 	<!-- 주소, 매물요약 -->
 	<div id="map_plus_sales" class="row justify-content-between">
-			<div class="col mr-3 mt-3" id="map" style="width:50%;height:250px;margin-top:10px;"></div>
+			<div class="col mr-3 mt-3" id="map_detail" style="width:50%;height:250px;margin-top:10px;"></div>
 			<div class="col ml-2">	
 				<div class="input-group input-group  mt-3">
 					<div class="input-group-prepend">
@@ -156,47 +199,69 @@
 			</div>
 		</div>
 		<script>
-			var container = document.getElementById('map');
+			var container = document.getElementById('map_detail');
 			var options = {	
 				center: new kakao.maps.LatLng(33.450701, 126.570667),
 				level: 3
 			};
-		
 			var map = new kakao.maps.Map(container, options);
+			
+			//컨트롤러
+			var mapTypeControl = new kakao.maps.MapTypeControl();
+			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+			var zoomControl = new kakao.maps.ZoomControl();
+			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+			
+			//주소에 맞는 위치 표시하기_마커표시
+ 	 		var geocoder = new kakao.maps.services.Geocoder();
+			geocoder.addressSearch('${salesDto.sales_address }', function(result, status) {
+			     if (status === kakao.maps.services.Status.OK) {
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			        var marker = new kakao.maps.Marker({
+			            map: map,
+			            position: coords
+			        });
+			        var infowindow = new kakao.maps.InfoWindow({
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;">매물 위치</div>'
+			        });
+			        infowindow.open(map, marker);
+			        map.setCenter(coords);
+			    } 
+			}); 
 		</script>
 	
-	<!-- 매물요약 -->
+	<!-- 매물요약  -->
 	<div id="sales_sum">
 		<div>매물요약</div>
-		<div class="all_opt">		<!-- 있으면 그 자리에 아이콘 나오기 -->
+		<div class="all_opt">
 			<div class="opt">
 				<ul>
-					<li><img src="${root}/img/armchair.png" width="60px" height="60px"/></li>
-					<li>풀옵션</li>
+					<li><img class="opt_full" src="${root}/img/armchair.png" width="60px" height="60px"/></li>
+					<li  class="opt_full_msg">풀옵션</li>
 				</ul>
 			</div>
 			<div class="opt">
 				<ul>
-					<li><img src="${root}/img/parking.png" width="60px" height="60px"/></li>
-					<li>주차장</li>
+					<li><img class="opt_parking" src="${root}/img/parking.png" width="60px" height="60px"/></li>
+					<li class="opt_parking_msg">주차장</li>
 				</ul>
 			</div>
 			<div class="opt">
 				<ul>
-					<li><img src="${root}/img/camera.png" width="60px" height="60px"/></li>
-					<li>CCTV</li>
+					<li><img class="opt_cctv" src="${root}/img/camera.png" width="60px" height="60px"/></li>
+					<li class="opt_cctv_msg">CCTV</li>
 				</ul>
 			</div>
 			<div class="opt">
 				<ul>
-					<li><img src="${root}/img/elevator.png" width="60px" height="60px"/></li>
-					<li>엘리베이터</li>
+					<li><img class="opt_ele" src="${root}/img/elevator.png" width="60px" height="60px"/></li>
+					<li class="opt_ele_msg">엘리베이터</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-	<!-- 지수정보 -->
+	<!-- 지수정보 ;;나중...-->
 	<div id="sales_index">
 		<div>지수 정보</div>
 		<div class="all_index">
@@ -246,8 +311,8 @@
 	</div>
 
 	<!-- 매물 소개-중개인 작성 내용 -->
-	<div id="form-group">
-		 <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" readOnly="readOnly">${salesDto.sales_content}</textarea>
+	<div id="about_sales">
+		 <div class="sales_contents">${salesDto.sales_content}</div>
 	</div>
 
 	<!-- 매물 이미지 -->
@@ -274,10 +339,20 @@
 		<input type="button" name="more_sales" value="매물 더보기" class="btn btn-secondary btn-sm"/>
 	</div>
 
-	<!-- 수정/신고, 삭제 -->
-	<div id="plus_btn">
-		<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>		<!-- 혹은 신고처리 - dark-->
-		<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
-	</div>
+	<!-- 중개인; 수정, 삭제 -->
+	<c:if test="${session_member_id==memberDto.member_id }">
+		<div id="plus_btn">
+			<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>	
+			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
+		</div>
+	</c:if>
+	
+	<!-- 관리자; 신고, 삭제 -->
+	<c:if test="${member_level=='admin' }">
+		<div id="plus_btn">
+			<input type="button" name="sales_report_handle" value="신고처리" class="btn btn-light btn-sm"/>		<!-- dark? -->
+			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
+		</div>
+	</c:if>
 </div>
 

@@ -85,8 +85,11 @@ public class MemberController {
 		
 		// 임시코드, 세션을 부여해주고 메인으로 리다이렉트
 		String name = request.getParameter("nickname");
+		String member_level=request.getParameter("member_level");
+
 		System.out.println(name);
 		session.setAttribute("user", name);
+		session.setAttribute("member_level", member_level);
 		
 		return "redirect:/";
 	}

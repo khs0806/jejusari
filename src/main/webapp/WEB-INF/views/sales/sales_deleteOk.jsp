@@ -11,14 +11,14 @@
 	<c:set var="root" value="${pageContext.request.contextPath}"/>
 	<c:if test="${check>0}">
 		<script type="text/javascript">
-			alert("신고작성 완료");
+			alert("게시글 삭제 완료");
 			self.close();
 		</script>
 	</c:if>
 	<c:if test="${check==0}">
 		<script type="text/javascript">
-			alert("신고작성 실패");
-			location.href="${root}/report/report_write";
+			alert("게시글 삭제 실패");
+			location.href="${root}/sales/sales_delete";
 		</script>
 	</c:if>
 </body>
