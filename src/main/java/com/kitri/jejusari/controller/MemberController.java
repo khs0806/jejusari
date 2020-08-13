@@ -1,5 +1,6 @@
 package com.kitri.jejusari.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.common.KakaoLoginAPI;
+import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.service.MemberService;
 
 @Controller
@@ -92,7 +96,9 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping(value="/member/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("user");
+		session.removeAttribute("access_Token");
+		session.removeAttribute("member_id");
+		session.removeAttribute("member_name");
 		return "redirect:/";
 	}
 	
@@ -115,6 +121,73 @@ public class MemberController {
 	public String admin() {
 		
 		return "admin/member_admin.tiles";
+	}
+	
+	@RequestMapping("/test/join")
+	public ModelAndView kakaoLogin(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		// 카카오의 인증과정
+		String authorize_code = request.getParameter("code");
+		String access_Token = KakaoLoginAPI.kakaoAccessToken(authorize_code);
+		
+		// access_token으로 사용자의 카카오 로그인 정보를 가져온다.
+		HashMap<String, Object> userInfo = KakaoLoginAPI.getUserInfo(access_Token);
+		
+		String member_id = (String)userInfo.get("id");
+		String member_name = (String)userInfo.get("nickname");
+		String member_email = (String)userInfo.get("email");
+		
+		// 이미 가입되어있는 회원인지 확인
+		int id_check = memberService.member_id_check(member_id);
+		if (id_check > 0) {
+			// 이미 가입된 회원일 경우 바로 로그인
+			HttpSession session = request.getSession();
+			if (userInfo.get("id") != null) {
+				session.setAttribute("member_id", member_id);
+				session.setAttribute("member_name", member_name);
+				session.setAttribute("access_Token", access_Token);
+			}
+			mav.setViewName("main/main.tiles");
+			return mav;
+		}
+		
+		mav.addObject("member_id", member_id);
+		mav.addObject("member_name", member_name);
+		mav.addObject("member_email", member_email);
+		mav.setViewName("member/member_signup.tiles");
+		
+		return mav;
+	}
+	
+	// 회원가입
+	@RequestMapping("/member/joinOk")
+	public ModelAndView memberJoin(HttpServletRequest request, MemberDto memberDto) {
+		ModelAndView mav = new ModelAndView();
+		
+		String member_phone = request.getParameter("no1") + "-" + request.getParameter("no2") + "-" + request.getParameter("no3");
+		String email = memberDto.getMember_email() + "@" + request.getParameter("email");
+		
+		System.out.println("length : " + request.getParameter("no2").length());
+		
+		memberDto.setMember_email(email);
+		
+		// 회원가입자가 일반회원인 경우, 핸드폰 번호를 입력 안했을때
+		if (request.getParameter("no2").length() == 0 || request.getParameter("no3").length() == 0) {
+			memberDto.setMember_phone(null);
+		} else {
+		// 중개업자인 경우
+			memberDto.setMember_phone(member_phone);
+		}
+		
+		System.out.println(memberDto.toString());
+		
+		int check = memberService.memberJoin(memberDto);
+		mav.addObject("check", check);
+		mav.setViewName("member/member_signupOk.tiles");
+		
+		return	mav;
 	}
 	
 }
