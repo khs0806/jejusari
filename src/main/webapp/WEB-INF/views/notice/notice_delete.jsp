@@ -13,13 +13,12 @@
 	<div align = "center" style = "margin-top: 100px;">
 		<form method = "post" action = "${root}/notice/deleteOk">
 			<input type = "hidden" value = "${notice_number}" name = "notice_number"/>
-			
-			<script type="text/javascript">
-			confirm("[관리자 페이지]게시물을 삭제합니다.");
-			</script>
+
 			<div>
+				<h3>[관리자 페이지]삭제 하시겠습니까?</h3>
+				</br>
 				<input type = "submit" value = "글삭제"/>
-				<input type = "button" value = "목록보기" onclick = "location.href = ${root}/notice/list"/>
+				<input type = "button" value = "취소" onclick = "location.href = '${root}/notice'"/>
 			</div>
 		</form>
 	</div>
