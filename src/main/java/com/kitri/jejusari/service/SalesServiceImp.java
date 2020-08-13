@@ -84,7 +84,6 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpSession session=request.getSession();
 		
-		//수정필요
 		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
 		String member_id=(String) session.getAttribute("member_id");
 		System.out.println(sales_number+" , "+member_id);
