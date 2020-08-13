@@ -6,9 +6,6 @@ import com.kitri.jejusari.dto.MemberDto;
 
 public interface MemberDao {
 	
-	// DB 테스트
-	public List<String> testDB();
-	
 	// 회원가입
 	public int memberJoin(MemberDto memberDto);
 	

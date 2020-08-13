@@ -14,7 +14,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class KakaoLoginAPI {
-
+	//카카오 API 앱 키값
+	private static final String APPKEY = "47d269828391ebdbbd9ef43e5d60962c";
+	
 	public static String kakaoAccessToken(String authorize_code) {
 		System.out.println("authorize_code : " + authorize_code);
 		
@@ -34,7 +36,7 @@ public class KakaoLoginAPI {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-            sb.append("&client_id=47d269828391ebdbbd9ef43e5d60962c");
+            sb.append("&client_id=" + APPKEY);
             sb.append("&redirect_uri=http://localhost:8282/jeju/test/join");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());

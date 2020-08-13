@@ -15,11 +15,6 @@ public class MemberDaoImp implements MemberDao{
 	SqlSessionTemplate session;
 	
 	@Override
-	public List<String> testDB() {
-		return session.selectList("member_id_check");
-	}
-	
-	@Override
 	public int memberJoin(MemberDto memberDto) {
 		return session.insert("member_join", memberDto);
 	}

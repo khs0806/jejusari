@@ -12,10 +12,12 @@ import java.util.Map;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class KakaoLocalAPI {
+	//카카오 API 앱 키값
+	private static final String APPKEY = "47d269828391ebdbbd9ef43e5d60962c";
 	
 	@SuppressWarnings("unchecked")
 	public static List<String> kakaoAPI(String place){
-		String apikey = "8c08273a21863da84621e6bb6aca71ee";	//카카오 API 앱 키값
+		
 //		String place = "제주특별자치도 제주시 화북이동 177";
 		List<String> factor = null;
 		
@@ -28,7 +30,7 @@ public class KakaoLocalAPI {
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("GET");
 			
-			String userCredentials = "KakaoAK " + apikey;
+			String userCredentials = "KakaoAK " + APPKEY;
 			
 			// 카카오 앱키를 요청헤더 Authorization에 담아 전송
 			con.setRequestProperty("Authorization", userCredentials); 
@@ -71,13 +73,12 @@ public class KakaoLocalAPI {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return factor;
 	}
 
 	@SuppressWarnings("unchecked")
 	public static List<String> kakaoGetFactor(List<Map<String, Object>> addressList) {
 		
-		String apikey = "8c08273a21863da84621e6bb6aca71ee";//애플리케이션 클라이언트 아이디값
 		List<Map<String,Object>> apiList = null;
 		
 		// 검색할 카테고리 5개, 순서대로 OL7(주유소), MT1(대형마트), PO3(공공기관), HP8(병원), AT4(관광지)
@@ -97,7 +98,7 @@ public class KakaoLocalAPI {
 				HttpURLConnection con = (HttpURLConnection)url.openConnection();
 				con.setRequestMethod("GET");
 				
-				String userCredentials = "KakaoAK " + apikey;
+				String userCredentials = "KakaoAK " + APPKEY;
 				
 				con.setRequestProperty("Authorization", userCredentials); 
 				con.setUseCaches(false);

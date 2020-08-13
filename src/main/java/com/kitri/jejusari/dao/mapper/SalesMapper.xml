@@ -10,7 +10,7 @@
 		select * from sales where sales_number = #{sales_number}
 	</select>
 	<select id="sales_broker_select" parameterType="String" resultType="com.kitri.jejusari.dto.MemberDto">
-		select * from member where member_id=#{member_id} 
+		select * from member where member_id = #{member_id} 
 	</select>
 	<select id="sales_scrap_check" parameterType="java.util.Map" resultType="int">
 		select count(*) from scrap where sales_number=#{sales_number} and member_id=#{member_id}
@@ -34,9 +34,6 @@
 	</select>
 	
 	<insert id="sales_write" parameterType="com.kitri.jejusari.dto.SalesDto">
-		<!-- <selectKey keyColumn="member_id" keyProperty="member_id">
-        	select member_id from member where member_id=#{member_id}
-    	</selectKey> -->
 		insert into sales (sales_number, member_id, sales_date, sales_title, sales_content, sales_category_type, sales_category_rent, sales_deposit, sales_cost, sales_area, sales_address, sales_option, sales_build_year, sales_floor) 
 		values (seq_sales_number.nextval, #{member_id}, sysdate, #{sales_title}, #{sales_content}, #{sales_category_type}, #{sales_category_rent}, #{sales_deposit}, #{sales_cost}, #{sales_area}, #{sales_address}, #{sales_option}, #{sales_build_year}, #{sales_floor} )
 	</insert>
@@ -48,6 +45,26 @@
 	
 	<select id="get_member_id" resultType="String">
 		select member_id from sales where sales_number = #{sales_number}
+	</select>
+
+	<select id="get_address" resultType="String">
+		select sales_address from sales where sales_number = #{sales_number}
 	</select> 
+	
+	<insert id="insert_factor">
+		insert into factor values (
+			#{sales_number}, 
+			#{factor_total}, 
+			#{factor_gas}, 
+			#{factor_hospital}, 
+			#{factor_tour}, 
+			#{factor_public},
+			#{factor_mart}
+		)
+	</insert>
+	
+	<select id="get_factor" resultType="com.kitri.jejusari.common.LowerKeyMap">
+		select * from factor where sales_number = #{sales_number}
+	</select>
 	
 </mapper>

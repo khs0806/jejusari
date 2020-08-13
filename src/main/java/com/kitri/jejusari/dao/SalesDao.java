@@ -22,4 +22,11 @@ public interface SalesDao {
 	public int salesWriteOk(SalesDto salesDto);
 	public int salesDelete(SalesDto salesDto);
 	public String salesIdCheck(int sales_number);
+	public String getAddress(int sales_number);
+	
+	// 상세매물의 지수5개 가져오기
+	public Map<String, Object> getFactor(int sales_number);
+	// 상세매물의 지수5개 인서트하기
+	public void insertFactor(Map<String,Object> factorMap);
+	
 }
