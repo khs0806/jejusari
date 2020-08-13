@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dao.BoardDao;
+import com.kitri.jejusari.dto.ReportDto;
 
 @Service
 public class BoardServiceImp implements BoardService{
@@ -201,4 +202,17 @@ public class BoardServiceImp implements BoardService{
         }
     }
 	
+	public void reportWriteOk(ModelAndView mav) {
+		// TODO Auto-generated method stub
+		
+		Map<String, Object> map=mav.getModelMap();
+		ReportDto reportDto=(ReportDto) map.get("reportDto");
+		
+
+		int check=boardDao.reportInsert(reportDto);
+		System.out.println("check : " + check);
+		
+		mav.addObject("check", check);
+		mav.setViewName("report/report_writeOk");
+	}
 }

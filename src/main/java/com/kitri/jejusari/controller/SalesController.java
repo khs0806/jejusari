@@ -38,24 +38,22 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		mav.addObject(request);
+		
+		//session으로 아이디 가져오고 나선 없어질 코드
+		salesDto.setMember_id("kke");
 		System.out.println(salesDto);
 		
 		return "sales/sales_write.tiles";
 	}
 	
 	@RequestMapping(value="/sales/detail")
-	public String salesDetail(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView salesDetail(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
-		
+
 		salesService.salesDetail(mav);
 		
-//		ModelAndView mav = new ModelAndView();
-//		String id = "khs";
-//		mav.addObject("id", id);
-//		salesService.salesDetail(mav);
-		
-		return "sales/sales_details.tiles";
+		return mav;
 	}
 	
 	@RequestMapping(value="/sales/broker")
@@ -63,6 +61,5 @@ public class SalesController {
 		
 		return "sales/sales_broker.empty";
 	}
-	
-	
+
 }

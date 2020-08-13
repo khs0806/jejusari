@@ -16,7 +16,7 @@
 	<h3>신고 글쓰기</h3>
 	<br />
 
-	<form>
+	<form name="createForm1" action="${root}/report/write" method="post" onsubmit="return createForm(this)">>
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md">
 
