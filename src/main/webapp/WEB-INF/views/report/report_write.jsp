@@ -18,7 +18,7 @@
 
 		 if (confirm("작성된 신고글을 등록하시겠습니까?\n신고내용이 명백히 거짓인 경우 책임을 물어야합니다.") == true){    //확인
 
-		     document.removefrm.submit();
+		     document.form.submit();
 
 		 }else{   //취소
 

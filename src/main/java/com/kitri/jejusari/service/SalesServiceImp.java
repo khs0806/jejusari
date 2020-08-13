@@ -79,9 +79,26 @@ public class SalesServiceImp implements SalesService {
 	
 	
 	@Override
-	public void salesDelete(ModelAndView mav) {
+	public void salesDeleteOk(ModelAndView mav) {
 		// TODO Auto-generated method stub
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		System.out.println(request.getParameter("sales_number"));
+		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
+		SalesDto salesDto = new SalesDto();
+		salesDto.setSales_number(sales_number);
 		
+		int check = salesDao.salesDelete(salesDto);
+		System.out.println("check : " + check);
+		
+		
+		mav.addObject("check", check);
+		
+	}
+	
+	@Override
+	public String salesIdCheck(int sales_number) {
+		return salesDao.salesIdCheck(sales_number);
 	}
 	
 }

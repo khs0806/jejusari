@@ -67,11 +67,11 @@
 			}
 		})
 		
-		//삭제 클릭시
+	//신고하기 클릭시
 		$("input:button[name=sales_delete]").click(function(){
-			var check=confirm("매물 정보 게시글을 삭제하시겠습니까?");
+			var check=confirm("이 매물을 삭제하시겠습니까?");
 			if(check==true){
-				alert("삭제가 완료되었습니다.");
+				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 600');
 			}
 		})
 	});		
@@ -277,7 +277,7 @@
 
 	<!-- 수정/신고, 삭제 -->
 	<div id="plus_btn">
-		<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm" />		<!-- 혹은 신고처리 - dark-->
+		<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>		<!-- 혹은 신고처리 - dark-->
 		<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
 	</div>
 </div>
