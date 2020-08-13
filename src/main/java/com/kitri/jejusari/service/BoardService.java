@@ -11,5 +11,7 @@ public interface BoardService {
 	
 	// DB테스트
 	public List<String> testDB();
+
+	public void newsList(ModelAndView mav);
 	
 }
