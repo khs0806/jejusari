@@ -65,6 +65,7 @@ public class SalesController {
 	public ModelAndView salesDetail(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
+		
 
 		salesService.salesDetail(mav);
 		

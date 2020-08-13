@@ -74,4 +74,19 @@ public class SalesDaoImp implements SalesDao {
 		return session.selectOne("get_member_id", sales_number);
 	}
 	
+	@Override
+	public String getAddress(int sales_number) {
+		return session.selectOne("get_address", sales_number);
+	}
+	
+	@Override
+	public void insertFactor(Map<String, Object> factorMap) {
+		session.insert("insert_factor", factorMap);
+	}
+	
+	@Override
+	public Map<String, Object> getFactor(int sales_number) {
+		return session.selectOne("get_factor", sales_number);
+	}
+	
 }

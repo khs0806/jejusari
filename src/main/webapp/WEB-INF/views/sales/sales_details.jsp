@@ -269,42 +269,42 @@
 				<ul>
 					<li><img src="${root}/img/gas.png" width="50px" height="50px"/></li>
 					<li>주유소</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_gas}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
 					<li><img src="${root }/img/market.png" width="50px" height="50px"/></li>
 					<li>대형마트</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_mart}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
 					<li><img src="${root}/img/hall.png" width="50px" height="50px"/></li>
 					<li>공공기관</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_public}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
 					<li><img src="${root}/img/hospital.png" width="50px" height="50px"/></li>
 					<li>병원</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_hospital}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
 					<li><img src="${root}/img/entertainment.png" width="50px" height="50px"/></li>
 					<li>관광</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_tour}</li>
 				</ul>
 			</div>
 			<div class="index_sum">
 				<ul>
 					<li><img src="${root}/img/fruit.png" width="50px" height="50px"/></li>
 					<li>총 귤 점수</li>
-					<li>${salesDto.sales_factor_total}</li>
+					<li>${factorMap.factor_total}</li>
 				</ul>
 			</div>
 		</div>

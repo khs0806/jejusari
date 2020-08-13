@@ -1,5 +1,8 @@
 package com.kitri.jejusari.service;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.common.KakaoLocalAPI;
 import com.kitri.jejusari.dao.SalesDao;
 import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.dto.SalesDto;
@@ -21,22 +25,41 @@ public class SalesServiceImp implements SalesService {
 	SalesDao salesDao;
 	
 	@Override
-	public List<String> testDB() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
 	public void salesDetail(ModelAndView mav) {
 		Map<String,Object> map = mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		HttpSession session=request.getSession();
+//====================================================================================
+		// by.gustn
+		// 더미 매물DB를 이용하여 지수테이블에 인서트하는 코드 <필독>
+		// 매물게시물 읽을 때 지수 테이블에 해당 게시물의 지수5개가 입력되게 한다.
+		// 이런식으로 더미 매물DB의 지수를 전부 지수테이블에 인서트한다.
+		
+//		String address = getAddress(sales_number);
+//		System.out.println("address : " + address);
+//		List<String> factors = KakaoLocalAPI.kakaoAPI(address);
+//		System.out.println(factors.toString());
+//		Map<String, Object> factorMap = new HashMap<String, Object>();
+//		factorMap.put("factor_gas", factors.get(0));
+//		factorMap.put("factor_mart", factors.get(1));
+//		factorMap.put("factor_public", factors.get(2));
+//		factorMap.put("factor_hospital", factors.get(3));
+//		factorMap.put("factor_tour", factors.get(4));
+//		int sum = 0;
+//		for(int i=0; i<factors.size(); i++) {
+//			sum += Integer.parseInt(factors.get(i));
+//		}
+//		factorMap.put("factor_total", sum);
+//		factorMap.put("sales_number", sales_number);
+//		System.out.println(factorMap.toString());
+//		salesDao.insertFactor(factorMap);
+//===================================================================================
 		
 		//수정필요
 		String session_member_id=(String) session.getAttribute("user");
-		mav.addObject("session_member_id",session_member_id);
+		mav.addObject("session_member_id", session_member_id);
 		
 		SalesDto salesDto=salesDao.salesDetail(sales_number);
 		String[] sales_option=salesDto.getSales_option().split(",");
@@ -52,10 +75,16 @@ public class SalesServiceImp implements SalesService {
 		
 		int scrap_count=salesDao.salesScrapCount(sales_number);
 		
+		// by.gustn
+		// 해당 매물의 지수 정보 가져오기
+		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
+		System.out.println(factorMap.toString());
+		
 		mav.addObject("scrap_count",scrap_count);
 		mav.addObject("pageNumber",pageNumber);
 		mav.addObject("memberDto",memberDto);
 		mav.addObject("salesDto",salesDto);
+		mav.addObject("factorMap",factorMap);
 		mav.setViewName("sales/sales_details.tiles");
 	}
 	
@@ -155,6 +184,11 @@ public class SalesServiceImp implements SalesService {
 	@Override
 	public String salesIdCheck(int sales_number) {
 		return salesDao.salesIdCheck(sales_number);
+	}
+	
+	@Override
+	public String getAddress(int sales_number) {
+		return salesDao.getAddress(sales_number);
 	}
 	
 }
