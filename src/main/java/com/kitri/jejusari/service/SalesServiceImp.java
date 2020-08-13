@@ -67,5 +67,14 @@ public class SalesServiceImp implements SalesService {
 		mav.addObject("count", count);
 		mav.setViewName("sales/sales_list.tiles");
 	}
+
+	@Override
+	public void salesWriteOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		SalesDto salesDto=(SalesDto)map.get("salesDto");
+		
+		int check = salesDao.salesWriteOk(salesDto);
+		
+	}
 	
 }

@@ -36,5 +36,10 @@ public class SalesDaoImp implements SalesDao {
 		return session.selectList("sales_list", hmap);
 	}
 	
+	@Override
+	public int salesWriteOk(SalesDto salesDto) {
+		
+		return session.insert("sales_write", salesDto);
+	}
 	
 }

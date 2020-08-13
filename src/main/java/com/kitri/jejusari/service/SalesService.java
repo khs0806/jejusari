@@ -17,5 +17,7 @@ public interface SalesService {
 	//
 	public void salesList(ModelAndView mav);
 
+	public void salesWriteOk(ModelAndView mav);
+
 	
 }

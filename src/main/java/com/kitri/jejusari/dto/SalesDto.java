@@ -11,7 +11,7 @@ public class SalesDto {
 	private int sales_deposit;				// 보증금
 	private int sales_cost;					// 매매가 or 전월세
 	private int sales_factor_total;			// 귤지수
-	private float sales_area;					// 면적(m^2)
+	private float sales_area;				// 면적(m^2)
 	private String sales_address;			// 주소
 	private int sales_check_blind;			// 신고처리시 블라인드 처리 유무
 	private int sales_count;				//조회수

@@ -41,8 +41,10 @@ public class SalesController {
 		
 		//session으로 아이디 가져오고 나선 없어질 코드
 		salesDto.setMember_id("kke");
-		System.out.println(salesDto);
+		//System.out.println(salesDto);
 		
+		mav.addObject("salesDto", salesDto);
+		salesService.salesWriteOk(mav);
 		return "sales/sales_write.tiles";
 	}
 	

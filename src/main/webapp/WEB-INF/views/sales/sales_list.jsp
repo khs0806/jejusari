@@ -159,15 +159,15 @@
 			 
 			 <!-- 매매업자에게만 보이는 글쓰기 버튼 -->
 			 <div class="p-2 flex-shrink-1 bd-highlight">
-			  	<input type="button" value="매물올리기" class="btn btn-warning btn-sales" src='${root}/sales/write'>
+			  	<input type="button" value="매물올리기" class="btn btn-warning btn-sales">
 			 </div>
 		</div>
 		<script>
-		/* 	$(function(){
+		$(function(){
 				$(".btn-sales").click(function(){
 					location.href='${root}/sales/write';
 				});
-			}); */
+		});
 		</script>
 		
 		<br>
