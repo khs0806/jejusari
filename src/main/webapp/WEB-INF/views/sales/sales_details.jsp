@@ -31,7 +31,7 @@
 		$("input:button[name=report_btn]").click(function(){
 			var check=confirm("이 매물을 신고하시겠습니까?");
 			if(check==true){
-				window.open('${root}/report/write', '', 'width = 600, height = 600');
+				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
 			}
 		})
 		
@@ -121,6 +121,7 @@
 		</c:if>	
 		<span>만원</span>		
 		<div>${salesDto.sales_address }</div>
+		
 	</div>
 
 	<!-- 신고처리(문의 문구) -->

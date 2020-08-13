@@ -3,10 +3,12 @@ package com.kitri.jejusari.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dto.ReportDto;
@@ -27,9 +29,13 @@ public class BoardController {
 	
 	// 뉴스리스트
 	@RequestMapping(value="/news")
-	public String news() {
+	public ModelAndView news() {
+		ModelAndView mav=new ModelAndView();
 		
-		return "news/news_list.tiles";
+		boardService.newsList(mav);
+//		System.out.println(mav);
+		
+		return mav;
 	}
 	
 	// 공지사항 목록
@@ -92,13 +98,21 @@ public class BoardController {
 	@RequestMapping(value="/report/write", method = RequestMethod.GET)
 	public ModelAndView report(HttpServletRequest request, HttpServletResponse response) {
 		
-		return new ModelAndView("report/report_write.empty");
+		ModelAndView mav = new ModelAndView();
+		String sales_number = request.getParameter("sales_number");
+		String sales_title = request.getParameter("sales_title");
+		mav.addObject("sales_number", sales_number);
+		mav.addObject("sales_title", sales_title);
+		mav.setViewName("report/report_write.empty");
+		
+		return mav;
 	}
 	
 	// 신고작성 ok
 	@RequestMapping(value="/report/write", method=RequestMethod.POST)
 	public ModelAndView memberRegisterOk(HttpServletRequest request, HttpServletResponse response, ReportDto reportDto) {
-		System.out.println( "memberDto : " + reportDto.toString());			// 넘어오는지 확인
+		System.out.println( "reportDto : " + reportDto.toString());			// 넘어오는지 확인
+		
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("reportDto", reportDto);

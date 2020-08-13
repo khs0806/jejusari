@@ -11,11 +11,11 @@ public class SalesDto {
 	private int sales_deposit;				// 보증금
 	private int sales_cost;					// 매매가 or 전월세
 	private int sales_factor_total;			// 귤지수
-	private int sales_area;					// 면적(m^2)
+	private float sales_area;				// 면적(m^2)
 	private String sales_address;			// 주소
 	private int sales_check_blind;			// 신고처리시 블라인드 처리 유무
 	private int sales_count;				//조회수
-	private String sales_option;					// 옵션
+	private String sales_option;			// 옵션
 	private int sales_build_year;			//준공년도
 	private String sales_floor;				//층수
 	
@@ -136,11 +136,11 @@ public class SalesDto {
 		this.sales_factor_total = sales_factor_total;
 	}
 
-	public int getSales_area() {
+	public float getSales_area() {
 		return sales_area;
 	}
 
-	public void setSales_area(int sales_area) {
+	public void setSales_area(float sales_area) {
 		this.sales_area = sales_area;
 	}
 
@@ -175,6 +175,7 @@ public class SalesDto {
 	public void setSales_option(String sales_option) {
 		this.sales_option = sales_option;
 	}
+
 
 	public int getSales_build_year() {
 		return sales_build_year;
@@ -236,5 +237,7 @@ public class SalesDto {
 				+ sales_build_year + ", sales_floor=" + sales_floor + ", sales_full=" + sales_full
 				+ ", sales_parking=" + sales_parking + ", sales_cctv=" + sales_cctv + ", sales_ele=" + sales_ele + "]";
 	}
+
+
 	
 }
