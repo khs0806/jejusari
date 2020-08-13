@@ -24,19 +24,19 @@
 		<form>
 			<div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="APT" id="APT">아파트
+						<input type="checkbox" name="room_type" value="아파트" id="APT">아파트
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="ONE" id="ONE">원룸
+						<input type="checkbox" name="room_type" value="원룸" id="ONE">원룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="TWO" id="TWO">투룸
+						<input type="checkbox" name="room_type" value="투룸" id="TWO">투룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="THREE" id="THREE">쓰리룸
+						<input type="checkbox" name="room_type" value="쓰리룸" id="THREE">쓰리룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="OFFICE" id="OFFICE">오피스텔
+						<input type="checkbox" name="room_type" value="오피스텔" id="OFFICE">오피스텔
 					</label>
 				</div>
 			<input type="hidden" value="위에 li값 가져오기" name="sales_type">
