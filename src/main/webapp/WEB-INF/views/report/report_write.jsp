@@ -22,7 +22,7 @@
 
 				<div class="input-group mb-4">
 					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">제목</span>
+						<span class="input-group-text" id="inputGroup-sizing-sm" name="report_title">제목</span>
 					</div>
 					<input type="text" class="form-control" placeholder="제목을 입력하세요."
 						aria-label="제목을 입력하세요.">
@@ -43,7 +43,7 @@
 
 		<div class="input-group">
 			<div class="input-group-prepend">
-				<span class="input-group-text">내 용</span>
+				<span class="input-group-text" name="report_content">내 용</span>
 			</div>
 			<textarea class="form-control" aria-label="With textarea" rows="14"
 				placeholder="내용을 입력하세요." aria-label="내용을 입력하세요."></textarea>
