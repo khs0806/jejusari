@@ -24,4 +24,10 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.member_id_check(member_id);
 	}
 	
+	@Override
+	public int member_delete(String member_id) {
+		
+		return memberDao.member_delete(member_id);
+	}
+	
 }

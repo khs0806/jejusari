@@ -15,7 +15,7 @@
 		<div id="first">
 			<p>제주살이</p>
 			<p>
-				<span>### &nbsp; 님</span>
+				<span>${member_name} 님</span>
 				<a href="${root}/member/update">⚙ 회원정보 수정</a>
 			</p>
 		</div>

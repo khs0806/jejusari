@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,17 +37,7 @@ public class MemberController {
 	@RequestMapping(value="/main")
 	public String main() {
 		
-		
 		return "main/main.tiles";
-	}
-	
-	// 회원가입
-	@RequestMapping(value="/member/signup")
-	public String signUp() {
-		
-		
-		
-		return "member/member_signup.tiles";
 	}
 	
 	// 회원 탈퇴
@@ -57,9 +48,15 @@ public class MemberController {
 	}
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw2")
-	public String withdrawOk() {
+	public String withdrawOk(HttpServletRequest request, Model model) {
 		
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
 		
+		int check = memberService.member_delete(member_id);
+		model.addAttribute("check", check);
+		
+		session.invalidate();
 		
 		return "member/member_withdraw2.tiles";
 	}
@@ -83,7 +80,7 @@ public class MemberController {
 
 		// access_token으로 사용자의 카카오 로그인 정보를 가져온다.
 		HashMap<String, Object> userInfo = KakaoLoginAPI.getUserInfo(access_Token);
-
+		
 		String member_id = (String)userInfo.get("id");
 		String member_name = (String)userInfo.get("nickname");
 		String member_email = (String)userInfo.get("email");

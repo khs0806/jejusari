@@ -11,5 +11,6 @@ public interface MemberService {
 	public int memberJoin(MemberDto memberDto);
 	// 아이디 중복체크
 	public int member_id_check(String member_id);
-	
+	// 회원탈퇴
+	public int member_delete(String member_id);
 }

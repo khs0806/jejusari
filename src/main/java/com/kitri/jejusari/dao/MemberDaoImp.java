@@ -25,4 +25,10 @@ public class MemberDaoImp implements MemberDao{
 		return session.selectOne("member_id_check",member_id);
 	}
 	
+	@Override
+	public int member_delete(String member_id) {
+		// TODO Auto-generated method stub
+		return session.delete("member_delete", member_id);
+	}
+	
 }

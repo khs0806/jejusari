@@ -26,4 +26,9 @@
 		select count(*) from member where member_id = #{member_id}
 	</select>
 	
+	<!-- 회원탈퇴 -->
+	<delete id="member_delete">
+		delete from member where member_id = #{member_id}
+	</delete>
+	
 </mapper>
