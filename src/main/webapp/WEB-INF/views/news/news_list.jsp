@@ -23,11 +23,11 @@
 				<div class="col-md-1"><strong>날짜</strong></div>
 			</div>
 			
-			<c:forEach begin="0" end="10">	
-				<a href="http://www.busan.com/view/busan/view.php?code=2020081016015263823">
+			<c:forEach items="${newsList}" var="news">
+				<a href="${news.link}">
 					<div class="row border-bottom" id="table_td">
-						<div class="col-md-8"><strong>'태풍 온다는데…' 제주서 서핑 즐긴 레저객 6명 해경 적발</strong></div>
-						<div class="col-md-1">2020.08.11</div>
+						<div class="col-md-8"><strong>${news.title}</strong></div>
+						<div class="col-md-3" id="newsDate">${news.date}</div>
 					</div>
 				</a>
 			</c:forEach>
