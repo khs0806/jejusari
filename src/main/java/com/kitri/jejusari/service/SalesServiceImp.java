@@ -57,9 +57,9 @@ public class SalesServiceImp implements SalesService {
 //		salesDao.insertFactor(factorMap);
 //===================================================================================
 		
-		//수정필요
-		String session_member_id=(String) session.getAttribute("user");
-		mav.addObject("session_member_id", session_member_id);
+		String session_member_id=(String) session.getAttribute("member_id");
+		mav.addObject("session_member_id",session_member_id);
+		System.out.println(session_member_id);
 		
 		SalesDto salesDto=salesDao.salesDetail(sales_number);
 		String[] sales_option=salesDto.getSales_option().split(",");
@@ -68,6 +68,13 @@ public class SalesServiceImp implements SalesService {
 			if(sales_option[i].equals("주차장")) salesDto.setSales_parking(1);;
 			if(sales_option[i].equals("CCTV")) salesDto.setSales_cctv(1);
 			if(sales_option[i].equals("엘리베이터")) salesDto.setSales_ele(1);
+		}
+		
+		if(session_member_id!=null) {
+			map.put("member_id",session_member_id);
+			map.put("sales_number",salesDto.getSales_number());
+			int scrap_check=salesDao.salesScrapCheck(map);
+			mav.addObject("scrap_check",scrap_check);
 		}
 		
 		String member_id=salesDto.getMember_id();
@@ -106,12 +113,11 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpSession session=request.getSession();
 		
-		//수정필요
 		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
-		String member_name=(String) session.getAttribute("user");
-		System.out.println(sales_number+" , "+member_name);
+		String member_id=(String) session.getAttribute("member_id");
+		System.out.println(sales_number+" , "+member_id);
 		map.put("sales_number",sales_number);
-		map.put("member_id", member_name);
+		map.put("member_id", member_id);
 		
 		int check=0;
 		int scrap_check=salesDao.salesScrapCheck(map);

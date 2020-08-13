@@ -11,6 +11,12 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {    
+		//게스트 막아주기?
+		if(${session_member_id==null}){
+			alert("매물정보를 확인하시려면 로그인해주십시오.");
+			location.href="${root}/member/login";
+		}
+		
 		//스크랩 클릭시
 		$("input:button[name=scrap_btn]").one("click",function(){
 			$.ajax({
@@ -149,10 +155,10 @@
 		</div>
 
 		<div class="scrap_report">
-			<c:if test="${scrap_count==0 }">
-				<img class="scrap_star" src="${root}/img/star.png" width="20px" height="20px"/>
+			<c:if test="${scrap_check==0 }">
+				<img class="scrap_star" src="${root}/img/star1.png" width="20px" height="20px"/>
 			</c:if>
-			<c:if test="${scrap_count>0 }">
+			<c:if test="${scrap_check>0 }">
 				<img class="scrap_star" src="${root}/img/star2.png" width="20px" height="20px"/>
 			</c:if>
 			<span class="scrap_count">${scrap_count }</span>

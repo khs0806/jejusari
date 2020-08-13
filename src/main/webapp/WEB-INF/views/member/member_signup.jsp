@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	$(function(){
 	    $("input:radio[name=member_level]").click(function(){  	 
-	        if($("input[name=member_level]:checked").val() == "br"){
+	        if($("input[name=member_level]:checked").val() == "BR"){
 	 			$("#if_broker").show();
 	        }else{
 	        	$("#if_broker").hide();
