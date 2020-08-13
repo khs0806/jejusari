@@ -1,9 +1,15 @@
 package com.kitri.jejusari.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.service.BoardService;
 
@@ -22,9 +28,13 @@ public class BoardController {
 	
 	// 뉴스리스트
 	@RequestMapping(value="/news")
-	public String news() {
+	public ModelAndView news() {
+		ModelAndView mav=new ModelAndView();
 		
-		return "news/news_list.tiles";
+		boardService.newsList(mav);
+//		System.out.println(mav);
+		
+		return mav;
 	}
 	
 	// 공지사항 목록
