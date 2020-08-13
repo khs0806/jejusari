@@ -32,6 +32,11 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		HttpSession session=request.getSession();
+		
+		//수정필요
+		String session_member_id=(String) session.getAttribute("user");
+		mav.addObject("session_member_id",session_member_id);
 		
 		SalesDto salesDto=salesDao.salesDetail(sales_number);
 		String[] sales_option=salesDto.getSales_option().split(",");
@@ -67,7 +72,7 @@ public class SalesServiceImp implements SalesService {
 	}
 	
 	@Override
-	public void salesScrap(ModelAndView mav) {
+	public int salesScrap(ModelAndView mav) {
 		Map<String,Object> map = mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpSession session=request.getSession();
@@ -79,13 +84,13 @@ public class SalesServiceImp implements SalesService {
 		map.put("sales_number",sales_number);
 		map.put("member_id", member_name);
 		
-//		int check=0;
-//		int scrap_check=salesDao.salesScrapCheck(map);
-//		if(scrap_check==0) {
-//			check=salesDao.salesScrap(map);
-//		}
-//		
-//		mav.addObject("check",check);
+		int check=0;
+		int scrap_check=salesDao.salesScrapCheck(map);
+		if(scrap_check==0) {
+			check=salesDao.salesScrap(map);
+		}
+		
+		return check;
 	}
 
 	@Override
@@ -126,6 +131,30 @@ public class SalesServiceImp implements SalesService {
 		
 		int check = salesDao.salesWriteOk(salesDto);
 		
+	}
+	
+	
+	@Override
+	public void salesDeleteOk(ModelAndView mav) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		System.out.println(request.getParameter("sales_number"));
+		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
+		SalesDto salesDto = new SalesDto();
+		salesDto.setSales_number(sales_number);
+		
+		int check = salesDao.salesDelete(salesDto);
+		System.out.println("check : " + check);
+		
+		
+		mav.addObject("check", check);
+		
+	}
+	
+	@Override
+	public String salesIdCheck(int sales_number) {
+		return salesDao.salesIdCheck(sales_number);
 	}
 	
 }

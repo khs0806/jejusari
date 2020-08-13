@@ -17,12 +17,21 @@
 		      	url:"${root}/sales/scrap?sales_number=${salesDto.sales_number}",
 		     	type:"get",
 		      	dataType:"text",
-		      	success:function(){
-		      		$("input:button[name=scrap_btn]").css("color","#212529");
-					$("input:button[name=scrap_btn]").css("background-color","#ffc107");
-					$("input:button[name=scrap_btn]").css("background-color","#ffc107");
-					
-					alert("스크랩이 완료되었습니다.");
+		      	success:function(data){
+		      		var check=$.parseJSON(data);
+		      		
+		      		if(check==1){
+		      			$("input:button[name=scrap_btn]").css("color","#212529");
+						$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+						$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+						$(".scrap_star").attr("src","${root}/img/star2.png");
+						$(".scrap_count").text(${scrap_count }+1);
+						
+						alert("스크랩이 완료되었습니다."); 
+		      		}else{
+		      			alert("이미 스크랩하셨습니다.");
+		      		}
+		      		
 		      	}
 		   	});		
 		})
@@ -95,11 +104,11 @@
 			}
 		})
 		
-		//삭제 클릭시
+	//신고하기 클릭시
 		$("input:button[name=sales_delete]").click(function(){
-			var check=confirm("매물 정보 게시글을 삭제하시겠습니까?");
+			var check=confirm("이 매물을 삭제하시겠습니까?");
 			if(check==true){
-				alert("ok");
+				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 600');
 			}
 		})
 	});		
@@ -141,12 +150,12 @@
 
 		<div class="scrap_report">
 			<c:if test="${scrap_count==0 }">
-				<img src="${root}/img/star.png" width="20px" height="20px"/>
+				<img class="scrap_star" src="${root}/img/star.png" width="20px" height="20px"/>
 			</c:if>
 			<c:if test="${scrap_count>0 }">
-				<img src="${root}/img/star2.png" width="20px" height="20px"/>
+				<img class="scrap_star" src="${root}/img/star2.png" width="20px" height="20px"/>
 			</c:if>
-			<span>${scrap_count }</span>
+			<span class="scrap_count">${scrap_count }</span>
 			<input type="button" name="scrap_btn" value="스크랩" class="btn btn-outline-warning btn-sm scrap_btn"/>
 			<input type="button" name="report_btn" value="신고하기" class="btn btn-outline-danger btn-sm report_btn"/>
 		</div>
@@ -302,8 +311,8 @@
 	</div>
 
 	<!-- 매물 소개-중개인 작성 내용 -->
-	<div id="form-group">
-		 <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" readOnly="readOnly">${salesDto.sales_content}</textarea>
+	<div id="about_sales">
+		 <div class="sales_contents">${salesDto.sales_content}</div>
 	</div>
 
 	<!-- 매물 이미지 -->
@@ -331,7 +340,7 @@
 	</div>
 
 	<!-- 중개인; 수정, 삭제 -->
-	<c:if test="${member_level=='BR' }">
+	<c:if test="${session_member_id==memberDto.member_id }">
 		<div id="plus_btn">
 			<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>	
 			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>

@@ -63,4 +63,15 @@ public class SalesDaoImp implements SalesDao {
 		return session.insert("sales_write", salesDto);
 	}
 	
+	@Override
+	public int salesDelete(SalesDto salesDto) {
+		// TODO Auto-generated method stub
+		return session.delete("sales_delete", salesDto);
+	}
+	
+	@Override
+	public String salesIdCheck(int sales_number) {
+		return session.selectOne("get_member_id", sales_number);
+	}
+	
 }
