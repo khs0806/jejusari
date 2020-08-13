@@ -5,8 +5,25 @@
   
 <mapper namespace="com.kitri.jejusari.mapper.MemberMapper">
 	
-	<select id="member_id_check" resultType="String">
+	<select id="member_id" resultType="String">
 		select * from member
+	</select>
+	
+	
+	<insert id="member_join">
+		insert into member values (
+			#{member_id}, 
+			seq_member_number.nextval, 
+			#{member_name}, 
+			#{member_email},
+			#{member_phone, jdbcType=VARCHAR},
+			#{member_level},
+			sysdate
+		)
+	</insert>
+	
+	<select id="member_id_check" resultType="int">
+		select count(*) from member where member_id = #{member_id}
 	</select>
 	
 </mapper>

@@ -22,4 +22,5 @@
 			select b.* From (select rownum rnum, a.* From (select * from sales order by sales_number) a) b where b.rnum>=#{startRow} and b.rnum<=#{endRow}
 		]]>
 	</select>
+	
 </mapper>
