@@ -1,12 +1,12 @@
 package com.kitri.jejusari.controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -69,13 +69,13 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/scrap")
-	public void salesScrap(HttpServletRequest request, HttpServletResponse response) {
+	public void salesScrap(HttpServletRequest request, HttpServletResponse response) throws Throwable{
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
 
-		salesService.salesScrap(mav);
-
-//		return mav;
+		int check=salesService.salesScrap(mav);
+		PrintWriter out=response.getWriter();
+		out.print(check);
 	}
 
 }
