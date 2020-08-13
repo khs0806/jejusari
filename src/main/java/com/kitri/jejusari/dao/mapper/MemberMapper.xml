@@ -9,4 +9,25 @@
 		select * from member
 	</select>
 	
+	<select id="getScrapSalesNumber" parameterType="String" resultType="String">
+		select sales_number from scrap where member_id=#{member_id}
+	</select>
+	
+	<select id="getSalesSalesNumber" parameterType="String" resultType="String">
+		select sales_number from sales where member_id=#{member_id}
+	</select>
+	
+	<select id="getImg" parameterType="list" resultType="String">
+		select image_url
+		from sales_img
+		where sales_number in 
+		<foreach collection="list" item="item" separator="," open="(" close=")">
+			(
+				#{item}
+			)
+		</foreach>
+		and image_index=1
+		order by sales_number
+	</select>
+	
 </mapper>

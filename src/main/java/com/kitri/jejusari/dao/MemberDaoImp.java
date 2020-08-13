@@ -16,4 +16,16 @@ public class MemberDaoImp implements MemberDao{
 	public List<String> testDB() {
 		return session.selectList("member_id_check");
 	}
+	
+	@Override
+	public List<String> getScrapImg(String member_id) {
+//		System.out.println(session.selectList("getScrapSalesNumber", member_id));
+		return session.selectList("getImg", session.selectList("getScrapSalesNumber", member_id));
+	}
+	
+	@Override
+	public List<String> getSalesImg(String member_id) {
+		return session.selectList("getImg", session.selectList("getSalesSalesNumber", member_id));
+	}
+	
 }

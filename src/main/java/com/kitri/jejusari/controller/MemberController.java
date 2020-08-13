@@ -3,13 +3,16 @@ package com.kitri.jejusari.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.service.BoardService;
 import com.kitri.jejusari.service.MemberService;
 
 @Controller
@@ -81,8 +84,13 @@ public class MemberController {
 		
 		// 임시코드, 세션을 부여해주고 메인으로 리다이렉트
 		String name = request.getParameter("nickname");
-		System.out.println(name);
+		String member_type = request.getParameter("member_type");
+		String member_id = "lsh";
+		
+		System.out.println(name + ", " + member_type);
 		session.setAttribute("user", name);
+		session.setAttribute("member_type", member_type);
+		session.setAttribute("member_id", member_id);
 		
 		return "redirect:/";
 	}
@@ -95,10 +103,26 @@ public class MemberController {
 	
 	// 마이페이지
 	@RequestMapping(value="/member/mypage")
-	public String myPage() {
+	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
 		
-		return "member/member_mypage.tiles";
+		mav.addObject("request", request);
+		
+		memberService.myPage(mav);
+		
+		return mav;
 	}
+	
+//	@RequestMapping(value="/member/mypage/scrap")
+//	public ModelAndView deleteScrap(HttpServletRequest request) {
+//		ModelAndView mav=new ModelAndView();
+//		
+//		mav.addObject("request", request);
+//		
+//		memberService.deleteScrap(mav);
+//		
+//		return mav;
+//	}
 	
 	// 회원수정
 	@RequestMapping(value="/member/update")

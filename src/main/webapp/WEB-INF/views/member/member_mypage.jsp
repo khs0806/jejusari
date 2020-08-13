@@ -9,13 +9,43 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/css/member/member_mypage.css">
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="${root}/javascript/xhr/xhr.js"></script>
+<script type="text/javascript" src="${root}/javascript/member/member_mypage.js"></script>
+<script type="text/javascript">
+	$(function() {
+		// 중개업자만 매물 등록 섹션 보이기
+		if(${member_type == "BR"}){
+ 			$("#sales_cards").show();
+        } else {
+        	$("#sales_cards").hide();
+        }
+		
+		$("input:button[name=delBtn]").one("click", function(){
+			var check=confirm("정말 삭제하시겠습니까?");
+			
+			var id=$("#id").val();
+			var password=$("#password").val();
+			var sendData="id=" + id + "&password=" + password; 
+			
+			if(check) {
+				$.ajax {
+					url: "${root}/sales/scrap?sales_number=${salesDto.sales_number}",
+					type: "post",
+					success: function(){
+						
+					}
+				}
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<div id="wrap">
 		<div id="first">
 			<p>제주살이</p>
 			<p>
-				<span>### &nbsp; 님</span>
+				<span>${user} &nbsp; 님</span>
 				<a href="${root}/member/update">⚙ 회원정보 수정</a>
 			</p>
 		</div>
@@ -24,11 +54,11 @@
 			<p style="">나의 스크랩</p>
 			
 			<div class="scrap-cards">
-				<c:forEach begin="0" end="4">
+				<c:forEach items="${scrapImgList}" var="scrap">
 					<div class="card border-warning card-sh" style="max-width: 20rem;">
 						<div class="card-body">
-							<img alt="test" src="https://s3.ap-northeast-2.amazonaws.com/img.kormedi.com/news/article/__icsFiles/artimage/2013/11/17/c_km601/402573_570.jpg" width="100%" height="100%">
-							<input type="button" class="btn btn-warning" value="삭제">
+							<img alt="test" src="${root}${scrap}" width="100%" height="100%">
+							<input name="delBtn" type="button" class="btn btn-warning" value="삭제">
 						</div>
 					</div>
 				</c:forEach>
@@ -36,18 +66,20 @@
 		</div>
 		
 		<!-- 중개업자만 보임 -->
-		<div id="third">
-			<p>내가 올린 매물</p>
-			
-			<div class="scrap-cards">
-				<c:forEach begin="0" end="4">
-					<div class="card border-warning card-sh" style="max-width: 20rem;">
-						<div class="card-body">
-							<img alt="test" src="https://storage.googleapis.com/cr-resource/image/6a831c14cc96e33da3abd5763c97a62d/wooahanplace/1920/b312885c14aee7a7e209fb4f6d2d5551.JPG" width="100%" height="100%">
-							<input type="button" class="btn btn-warning" value="삭제">
+		<div id="sales_cards">
+			<div id="third">
+				<p>내가 올린 매물</p>
+				
+				<div class="scrap-cards">
+					<c:forEach items="${salesImgList}" var="sales">
+						<div class="card border-warning card-sh" style="max-width: 20rem;">
+							<div class="card-body">
+								<img alt="test" src="${root}${sales}" width="100%" height="100%">
+								<input name="delBtn" type="button" class="btn btn-warning" value="삭제">
+							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>

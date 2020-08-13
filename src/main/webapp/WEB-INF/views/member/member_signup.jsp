@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	$(function(){
 	    $("input:radio[name=member_type]").click(function(){  	 
-	        if($("input[name=member_type]:checked").val() == "broker"){
+	        if($("input[name=member_type]:checked").val() == "BR"){
 	 			$("#if_broker").show();
 	        }else{
 	        	$("#if_broker").hide();
@@ -54,9 +54,9 @@
 		
 		<div class="member_type">
 			<div class="label">가입 유형</div>
-			<input type="radio" name="member_type" value="general"/>
+			<input type="radio" name="member_type" value="GE"/>
 			일반회원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
-			<input type="radio" name="member_type" value="broker"/>
+			<input type="radio" name="member_type" value="BR"/>
 			중개업자
 		</div>
 		
