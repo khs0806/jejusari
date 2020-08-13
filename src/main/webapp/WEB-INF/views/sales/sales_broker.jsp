@@ -59,8 +59,8 @@
 			    	<img src="${root }/img/중개인.png" width="100px" height="100px"/> 
 			   </div>
 		   <div class="broker_info"> 
-			    <div>홍길동</div>
-			    <div>010-1234-1234</div>
+			    <div>${memberDto.member_name }</div>
+			    <div>${memberDto.member_phone}</div>
 		   </div>
 		  </div>
 		  <div id="close_btn">

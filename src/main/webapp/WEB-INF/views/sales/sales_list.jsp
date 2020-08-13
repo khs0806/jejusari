@@ -103,7 +103,7 @@
 				<div class="col-md-1"><strong>구분</strong></div>
 				<div class="col-md-2"><strong>가격</strong></div>
 			</div>
-		<c:forEach var="salesList" items="${salesList }">	
+		<c:forEach var="salesList" items="${salesList }">
 		<script type="text/javascript">
 			$(function(){	
 			// 보증금가 1억이상일때 표현을 몇 억 000만원 으로 표시되게
@@ -138,7 +138,7 @@
 				}
 			});
 		</script>
-			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }">
+			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }&pageNumber=${currentPage}">
 			<div class="row border-bottom" id="table_td">
 				<div class="col-md-6"><strong>${salesList.sales_title }</strong><p>${salesList.sales_address }</p></div>
 				<div class="col-md-1">${salesList.sales_category_type }</div>

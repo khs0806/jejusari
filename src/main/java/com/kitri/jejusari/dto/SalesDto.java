@@ -19,13 +19,19 @@ public class SalesDto {
 	private int sales_build_year;			//준공년도
 	private String sales_floor;				//층수
 	
+	private int sales_full;				//풀옵션 유무
+	private int sales_parking;				//주차장 유무
+	private int sales_cctv;				//CCTV 유무
+	private int sales_ele;				//엘베 유무
+	
 	public SalesDto() {
 	}
 
 	public SalesDto(int sales_number, String member_id, String sales_date, String sales_title, String sales_content,
-			String sales_category_type, String sales_category_rent, int sales_deposit, int sales_cost, int sales_factor_total,
-			float sales_area, String sales_address, int sales_check_blind, int sales_count, String sales_option,
-			int sales_build_year, String sales_floor) {
+			String sales_category_type, String sales_category_rent, int sales_deposit, int sales_cost,
+			int sales_factor_total, int sales_area, String sales_address, int sales_check_blind, int sales_count,
+			String sales_option, int sales_build_year, String sales_floor, int sales_full, int sales_parking,
+			int sales_cctv, int sales_ele) {
 		super();
 		this.sales_number = sales_number;
 		this.member_id = member_id;
@@ -44,6 +50,10 @@ public class SalesDto {
 		this.sales_option = sales_option;
 		this.sales_build_year = sales_build_year;
 		this.sales_floor = sales_floor;
+		this.sales_option = sales_option;
+		this.sales_parking = sales_parking;
+		this.sales_cctv = sales_cctv;
+		this.sales_ele = sales_ele;
 	}
 
 	public int getSales_number() {
@@ -161,7 +171,7 @@ public class SalesDto {
 	public String getSales_option() {
 		return sales_option;
 	}
-	
+
 	public void setSales_option(String sales_option) {
 		this.sales_option = sales_option;
 	}
@@ -182,6 +192,39 @@ public class SalesDto {
 	public void setSales_floor(String sales_floor) {
 		this.sales_floor = sales_floor;
 	}
+	
+
+	public int getSales_full() {
+		return sales_full;
+	}
+
+	public void setSales_full(int sales_full) {
+		this.sales_full = sales_full;
+	}
+
+	public int getSales_parking() {
+		return sales_parking;
+	}
+
+	public void setSales_parking(int sales_parking) {
+		this.sales_parking = sales_parking;
+	}
+
+	public int getSales_cctv() {
+		return sales_cctv;
+	}
+
+	public void setSales_cctv(int sales_cctv) {
+		this.sales_cctv = sales_cctv;
+	}
+
+	public int getSales_ele() {
+		return sales_ele;
+	}
+
+	public void setSales_ele(int sales_ele) {
+		this.sales_ele = sales_ele;
+	}
 
 	@Override
 	public String toString() {
@@ -190,8 +233,9 @@ public class SalesDto {
 				+ sales_category_type + ", sales_category_rent=" + sales_category_rent + ", sales_deposit="
 				+ sales_deposit + ", sales_cost=" + sales_cost + ", sales_factor_total=" + sales_factor_total
 				+ ", sales_area=" + sales_area + ", sales_address=" + sales_address + ", sales_check_blind="
-				+ sales_check_blind + ", sales_count=" + sales_count + ", sales_option=" + sales_option
-				+ ", sales_build_year=" + sales_build_year + ", sales_floor=" + sales_floor + "]";
+				+ sales_check_blind + ", sales_count=" + sales_count + ", sales_option=" + sales_option + ", sales_build_year="
+				+ sales_build_year + ", sales_floor=" + sales_floor + ", sales_full=" + sales_full
+				+ ", sales_parking=" + sales_parking + ", sales_cctv=" + sales_cctv + ", sales_ele=" + sales_ele + "]";
 	}
 
 

@@ -13,6 +13,8 @@ public interface SalesService {
 	
 	//상세페이지
 	public void salesDetail(ModelAndView mav); 
+	public void salesBroker(ModelAndView mav);
+	public void salesScrap(ModelAndView mav);
 
 	//
 	public void salesList(ModelAndView mav);
