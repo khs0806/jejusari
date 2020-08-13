@@ -20,4 +20,6 @@ public interface SalesService {
 	public void salesWriteOk(ModelAndView mav);
 
 	
+	public void salesDelete(ModelAndView mav);
+	
 }

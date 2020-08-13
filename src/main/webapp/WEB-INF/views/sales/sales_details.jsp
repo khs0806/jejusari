@@ -71,7 +71,7 @@
 		$("input:button[name=sales_delete]").click(function(){
 			var check=confirm("매물 정보 게시글을 삭제하시겠습니까?");
 			if(check==true){
-				alert("ok");
+				alert("삭제가 완료되었습니다.");
 			}
 		})
 	});		
@@ -277,7 +277,7 @@
 
 	<!-- 수정/신고, 삭제 -->
 	<div id="plus_btn">
-		<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>		<!-- 혹은 신고처리 - dark-->
+		<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm" />		<!-- 혹은 신고처리 - dark-->
 		<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
 	</div>
 </div>

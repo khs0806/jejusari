@@ -77,4 +77,11 @@ public class SalesServiceImp implements SalesService {
 		
 	}
 	
+	
+	@Override
+	public void salesDelete(ModelAndView mav) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

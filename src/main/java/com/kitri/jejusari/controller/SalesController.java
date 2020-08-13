@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dto.SalesDto;
@@ -62,6 +62,16 @@ public class SalesController {
 	public String salesBroker(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "sales/sales_broker.empty";
+	}
+	
+	@RequestMapping(value="/sales/delete", method=RequestMethod.GET)
+	public ModelAndView salesDelete(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		
+		salesService.salesDelete(mav);
+		
+		return mav; 
 	}
 
 }
