@@ -139,4 +139,9 @@ public class SalesDaoImp implements SalesDao {
 		return session.selectOne("factor_total_all");
 	}
 	
+	@Override
+	public int getSalesNumber(String member_id) {
+		return session.selectOne("get_sales_number", member_id);
+	}
+	
 }

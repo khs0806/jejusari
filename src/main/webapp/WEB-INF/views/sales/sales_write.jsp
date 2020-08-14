@@ -120,7 +120,7 @@
 					<div class="input-group-prepend">
 				    	<span class="input-group-text">가격 (만원)</span>
 					</div>
-					<input name="sales_cost" type="text" class="form-control" placeholder="보증금"  aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_deposit" type="text" class="form-control" placeholder="보증금"  aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2" id="sales_cost">
 					<div class="input-group-prepend">

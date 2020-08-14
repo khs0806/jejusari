@@ -36,6 +36,8 @@ public interface SalesDao {
 	public void insertFactor(Map<String,Object> factorMap);
 	// 매물디비 업데이트
 	public int updateSalesDB(Map<String,Object> factorMap_update);
+	// 등록한 매물의 번호 가져오기
+	public int getSalesNumber(String member_id);
 	
 	
 }
