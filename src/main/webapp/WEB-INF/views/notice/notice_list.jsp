@@ -32,6 +32,7 @@
 <form>
 	<c:if test = "${member_id eq null}">
 		<script type="text/javascript">
+			alert("회원이 아닙니다! 로그인 또는 회원가입을 해주세요.");
 			location.href = "${root}/member/login";
 		</script>
 	</c:if>
