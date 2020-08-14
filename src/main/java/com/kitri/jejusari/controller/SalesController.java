@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.dto.PageMaker;
 import com.kitri.jejusari.dto.SalesDto;
 import com.kitri.jejusari.service.SalesService;
 
@@ -30,6 +31,7 @@ public class SalesController {
 	
 	@Autowired
 	private SalesService salesService;
+	
 	
 	@RequestMapping(value="/sales")
 	public ModelAndView salesList(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {

@@ -139,7 +139,8 @@
 			<div class="row border-bottom" id="table_td">
 				<div class="col-md-6"><strong>${salesList.sales_title }</strong><p>${salesList.sales_address }</p></div>
 				<div class="col-md-1">${salesList.sales_category_type }</div>
-				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3) }" type="number" pattern="0.0"/>평/${salesList.sales_area }m<sup>2</sup>/${salesList.sales_floor }층</div>
+				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3) }" type="number" pattern="0.0"/>평/
+						<fmt:formatNumber value="${salesList.sales_area }" type="number" pattern="0.0"/>m<sup>2</sup>/${salesList.sales_floor }층</div>
 				<div class="col-md-1">${salesList.sales_category_rent }</div>
 				<div class="col-md-2"><span id="sales_deposit${salesList.sales_number }"></span><span id="slash${salesList.sales_number }"></span><span id="sales_cost${salesList.sales_number }"></span></div>
 			<!-- 	<div class="col-md-2"></div> -->
@@ -149,68 +150,28 @@
 		</div>
 		
 		<!-- 페이징 -->
-		<fmt:parseNumber var="pageCount" value="${count/boardSize + (count%boardSize==0?0:1)}" integerOnly="true"/>
-		<c:set var="pageBlock" value="${5}"/>		<%-- 페이징 넘버 표시할 갯수 --%>
-		<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
-		<c:set var="startPage" value="${result*pageBlock +1}"/>
-		<c:set var="endPage" value="${startPage+pageBlock-1}"/>
-		<c:if test="${endPage > pageCount }">
-			<c:set var="endPage" value="${pageCount }"/>
-		</c:if>
-
-	<c:if test="${startPage > pageBlock }">
-		<script type="text/javascript">
-			$(function(){
-				$('#previous').removeClass('disabled');
-			})
-		</script>
-	</c:if>
-	<c:if test="${endPage < pageCount }">
-		<script type="text/javascript">
-			$(function(){
-				$('#next').removeClass('disabled');
-			})
-		</script>
-	</c:if>
-		<!-- 페이징 -->  
-        <div>
-           <ul class="pagination" style="justify-content: center;">
-           <li class="page-item"><a class="page-link"
-                 href="list${pageMaker.makeSearch(1)}">처음</a></li>
-           <c:if test="${pageMaker.prev}">
-              <li class="page-item"><a class="page-link"
-                 href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-           </c:if>
-
-           <c:forEach begin="${pageMaker.startPage}"
-              end="${pageMaker.endPage}" var="idx">
-              <li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
-           </c:forEach>
-
-           <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-              <li class="page-item"><a class="page-link"
-                 href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-           </c:if>
-           </ul>
-        </div>
 		
 		<div class="d-flex bd-highlight">
-			 <div class="p-2 w-100 bd-highlight">
-				<nav aria-label="Page navigation">
-				  <ul class="pagination justify-content-center">
-				    <li id="previous" class="page-item disabled">
-				      <a class="page-link" href="${root }/sales?pageNumber=${startPage-pageBlock}" tabindex="-1" aria-disabled="true">Previous</a>
-				    </li>
-				  <c:forEach var="i" begin="${startPage }" end="${endPage }">
-				    <li class="page-item"><a class="page-link" href="${root }/sales?pageNumber=${i}">${i }</a></li>
-				  </c:forEach>
-				    <li id="next" class="page-item disabled">
-				      <a class="page-link" href="${root }/sales?pageNumber=${startPage+pageBlock}">Next</a>
-				    </li>
-				  </ul>
-				  
-				</nav>
-			 </div>
+          <div class="p-2 w-100 bd-highlight">
+            <nav aria-label="Page navigation">
+              <ul class="pagination justify-content-center">
+              <c:if test="${pageMaker.prev}">
+                <li id="previous" class="page-item">
+                  <a class="page-link" href="${root}/sales${pageMaker.makeSearch(pageMaker.startPage - 1)}">Previous</a>
+                </li>
+               </c:if>
+              <c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                <li class="page-item"><a class="page-link" href="${root}/sales${pageMaker.makeSearch(idx)}">${idx}</a></li>
+              </c:forEach>
+                 <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+                <li id="next" class="page-item">
+                  <a class="page-link" href="${root}/sales${pageMaker.makeSearch(pageMaker.endPage + 1)}">Next</a>
+                </li>
+                </c:if>
+              </ul>
+              
+            </nav>
+          </div>
 			 
 			 <!-- 매매업자에게만 보이는 글쓰기 버튼 -->
 			 <div class="p-2 flex-shrink-1 bd-highlight">
