@@ -20,9 +20,13 @@ public interface SalesDao {
 
 	//
 	public int salesCount();
-	public List<SalesDto> salesList(int startRow, int endRow);
+	public List<SalesDto> salesList(int startRow, int endRow, SalesDto salesDto);
 	public int salesWriteOk(SalesDto salesDto);
-	public int salesDelete(SalesDto salesDto);
+	public int salesDelete1(SalesDto salesDto);
+	public int salesDelete2(SalesDto salesDto);
+	public int salesDelete3(SalesDto salesDto);
+	public int salesDelete4(SalesDto salesDto);
+	public int salesDelete5(SalesDto salesDto);
 	public String salesIdCheck(int sales_number);
 	public String getAddress(int sales_number);
 	

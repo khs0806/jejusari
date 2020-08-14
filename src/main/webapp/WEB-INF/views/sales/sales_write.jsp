@@ -29,7 +29,7 @@
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form action="${root }/sales/writeOk.do">
+		<form action="${root }/sales/writeOk" method="post">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			
@@ -206,11 +206,11 @@
 				  placeholder: '최대 2048자까지 작성할 수 있습니다.'
 			
 			// 이미지 첨부 부분
-				  callbacks:{
+/*  				  callbacks:{
 					  onImageUpload : function(files){
 						  uploadSummernoteImageFile(files[0], this);
 					  }
-				  }
+				  } */
 			// 이미지 첨부 부분 끝
 				});
 				
@@ -226,7 +226,7 @@
 				    resize: false
 				});
 				$('.note-statusbar').hide()
-			function uploadSummernoteImageFile(file, editor){
+	/* 		function uploadSummernoteImageFile(file, editor){
 					data = new FormData();
 					data.append("file", file);
 					$.ajax({
@@ -240,7 +240,7 @@
 							$(editor).summernote('insertImange', data.url);
 						}
 					});
-				}
+				} */
     	</script>
 		
 		<!-- 파일업로드 -->

@@ -14,18 +14,18 @@ function funcCancel(){
 	self.close();
 }
 
-function button_event(){
+function button_event() {
 
-	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+	 if (confirm("게시글 삭제가 진행됩니다.") == true){    //확인
 
-	    document.form.submit();
+	     document.form.submit();
 
-	}else{   //취소
+	 }else{   //취소
 
-	    return;
+		 self.close();
 
-	}
-	}
+	 }
+}
 </script>
 <!DOCTYPE html>
 <html>
@@ -38,7 +38,11 @@ function button_event(){
 		<form action="${root}/sales/delete" method="post" onsubmit="return createForm(this)">
 			<input type="hidden" name = "sales_number" value="${sales_number}">
 			
-			<div>삭제하시겠습니까</div>
+			<div>정말 삭제하시겠습니까?</div>
+			<div>게시글과 관련된 모든 정보 및 기능은 즉시 삭제처리가 이루어지며,</div>
+			<div>삭제하신 게시글은 복원 및 복구가 절대로 되지 않습니다.</div>
+			<div>신중하게 처리하시기 바랍니다.</div>
+			<br/>
 			<!-- <div>
 				<input type="password" name="password">
 			</div> -->

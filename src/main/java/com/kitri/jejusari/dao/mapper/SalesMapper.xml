@@ -32,7 +32,20 @@
 	
 	<select id="sales_list" parameterType="java.util.HashMap" resultType="com.kitri.jejusari.dto.SalesDto">
 		<![CDATA[
-			select b.* From (select rownum rnum, a.* From (select * from sales order by sales_number desc) a) b where b.rnum>=#{startRow} and b.rnum<=#{endRow}
+			select b.* From (
+				select rownum rnum, a.* From (
+					select * from sales where (sales_check_blind is null or sales_check_blind=0) ]]>
+    					<if test="sales_category_type_list!=null">
+							and sales_category_type IN
+							<foreach collection="sales_category_type_list" item="item" index="index"  open="(" separator="," close=")">
+							       #{item}
+							</foreach>
+						</if>
+		<![CDATA[	
+					order by sales_number desc		
+				) a
+			) b 
+			where b.rnum>=#{startRow} and b.rnum<=#{endRow}
 		]]>
 	</select>
 	
@@ -41,10 +54,28 @@
 		values (seq_sales_number.nextval, #{member_id}, sysdate, #{sales_title}, #{sales_content}, #{sales_category_type}, #{sales_category_rent}, #{sales_deposit}, #{sales_cost}, #{sales_area}, #{sales_address}, #{sales_option}, #{sales_build_year}, #{sales_floor} )
 	</insert>
 	
-	
-	<delete id="sales_delete" parameterType="com.kitri.jejusari.dto.SalesDto">
-		delete from sales where sales_number = #{sales_number}
+	<delete id="sales_delete1" parameterType="com.kitri.jejusari.dto.SalesDto">
+		delete from sales_img where sales_number = #{sales_number}
 	</delete>
+	
+	<delete id="sales_delete2" parameterType="com.kitri.jejusari.dto.SalesDto">
+	delete from scrap where sales_number = #{sales_number}
+	</delete>
+	
+		<delete id="sales_delete3" parameterType="com.kitri.jejusari.dto.SalesDto">
+		delete from factor where sales_number = #{sales_number}
+	</delete>
+	
+		<delete id="sales_delete4" parameterType="com.kitri.jejusari.dto.SalesDto">
+		delete from report where sales_number = #{sales_number}
+	</delete>
+	
+		<delete id="sales_delete5" parameterType="com.kitri.jejusari.dto.SalesDto">
+			delete from sales where sales_number = #{sales_number}
+	</delete>
+	
+
+	
 	
 	<select id="get_member_id" resultType="String">
 		select member_id from sales where sales_number = #{sales_number}
