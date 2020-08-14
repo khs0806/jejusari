@@ -42,19 +42,15 @@
 		//매물 삭제	
 		$("input:button[name=delSalesBtn]").on("click",function(){
 			var sales_number=$(this).next().val();
-			alert(sales_number);
+// 			alert(sales_number);
 			
 			$.ajax({
 		      	url:"${root}/sales/delete?sales_number=" + sales_number,
 		     	type:"get",
 		      	dataType:"text",
-		      	success:function(data){
-		      		var check=$.parseJSON(data);
-// 	      			alert(check);
-		      		if(check==-1){
-						alert("스크랩이 취소되었습니다."); 
-						location.href="${root}/member/mypage";
-		      		}
+		      	success:function(){
+					alert("매물이 삭제되었습니다."); 
+					location.href="${root}/member/mypage";
 		      	}
 			});
 		});

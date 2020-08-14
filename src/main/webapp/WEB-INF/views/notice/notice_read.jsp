@@ -18,6 +18,14 @@ function changeFun(root, notice_number){
 	var url = root + "/notice/update?notice_number=" + notice_number;
 	location.href = url;
 }
+
+$(function(){
+	$("#adminbutton").hide();
+});
+
+$(function(){
+	$("#memberbutton").hide();
+});
 </script>
 <!-- <script>
 	$(function(){
@@ -29,17 +37,34 @@ function changeFun(root, notice_number){
 	<div class = "container" id = "board">
 				<div id = "box">
 					<h3 class="text-secondary">[공지사항]</h3>
-					<span class="badge badge-secondary">관리자</span>
-					<div class = "text" style = "text-align: right;">
-						<!-- <input type = "button" value = "목록"/>
-						
-						<input type = "button" value = "수정"/>
-						
-						<input type = "button" value = "삭제"/> -->
-						
+					<span class="badge badge-secondary">${member_level}</span>
+					
+					<!-- 관리자에게만 보이는 버튼 -->
+					<c:if test = "${member_level eq 'admin'}">
+					 	<script type="text/javascript">
+						 	$(function(){
+								$("#adminbutton").show();
+							});
+					 	</script>
+					 </c:if>
+					 
+					<div class = "text" style = "text-align: right;" id = "adminbutton">
 						<button class="btn btn-secondary" type="button" onclick = "location.href = '${root}/notice'">목록</button>
 						<button class="btn btn-secondary update-btn" type="button" onclick = "changeFun('${root}', '${noticeDto.notice_number}')">수정</button>
 						<button class="btn btn-secondary delete-btn" type="button" onclick = "delFun('${root}', '${noticeDto.notice_number}')">삭제</button>
+					</div>
+					
+					<!-- 회원에게만 보이는 버튼 -->
+					<c:if test = "${member_level != 'admin'}">
+					 	<script type="text/javascript">
+						 	$(function(){
+								$("#memberbutton").show();
+							});
+					 	</script>
+					 </c:if>
+					 
+					<div class = "text" style = "text-align: right;" id = "memberbutton">
+						<button class="btn btn-secondary" type="button" onclick = "location.href = '${root}/notice'">목록</button>
 					</div>
 					
 					<div class="input-group mb-3">

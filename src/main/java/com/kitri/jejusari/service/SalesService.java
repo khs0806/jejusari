@@ -1,10 +1,7 @@
 package com.kitri.jejusari.service;
 
-import java.util.List;
-
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kitri.jejusari.dto.SalesDto;
 
 public interface SalesService {
 	
@@ -17,7 +14,9 @@ public interface SalesService {
 	public void salesList(ModelAndView mav);
 
 	public void salesWriteOk(ModelAndView mav);
-
+	
+	public void salesUpdate(ModelAndView mav);
+	public void salesUpdateOk(ModelAndView mav);
 	
 	public void salesDeleteOk(ModelAndView mav);
 	

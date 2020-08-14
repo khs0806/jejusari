@@ -16,6 +16,10 @@
 			location.href='${root}/notice/write';
 		});
 	});
+	
+	$(function(){
+		$("#adminbutton").hide();
+	});
 </script>
 
 <style type="text/css">
@@ -26,9 +30,16 @@
 </head>
 <body>
 <form>
+	<c:if test = "${member_id eq null}">
+		<script type="text/javascript">
+			alert("회원이 아닙니다! 로그인 또는 회원가입을 해주세요.");
+			location.href = "${root}/member/login";
+		</script>
+	</c:if>
+	<c:if test = "${member_id != null}">
 	<div class = "container" id="admin_container">
 		<h3 class="text-secondary">[공지사항]</h3>
-		<span class="badge badge-secondary">관리자</span>
+		<span class="badge badge-secondary">${member_level}</span>
 		<br/>
 		
 		<div class="table active">
@@ -44,7 +55,7 @@
 				<div class="col-md-1">${noticeList.notice_number}</div>
 				<div class="col-md-8"><p><strong>${noticeList.notice_title}</strong></p></div>
 				<div class="col-md-1">${noticeList.notice_count}</div>
-				<div class="col-md-2">${noticeList.notice_date}</div>
+				<div class="col-md-2"><fmt:formatDate value = "${noticeList.notice_date}" pattern = "yyyy-MM-dd HH:mm:ss"/></div>
 			<!-- 	<div class="col-md-2"></div> -->
 			</div>
 			</a>
@@ -93,12 +104,21 @@
 				</nav>
 			 </div>
 			 
+			 <c:if test = "${member_level eq 'admin'}">
+			 	<script type="text/javascript">
+				 	$(function(){
+						$("#adminbutton").show();
+					});
+			 	</script>
+			 </c:if>
+			 
 			 <!-- 관리자에게만 보이는 글쓰기 버튼 -->
-			 <div class = "p-2 flex-shrink-1 bd-highlight">
+			 <div class = "p-2 flex-shrink-1 bd-highlight" id = "adminbutton">
 			  	<input type = "button" value = "글작성" class = "btn btn-secondary write-btn">
 			 </div>
 		</div>
 	</div>
+	</c:if>
 </form>
 </body>
 </html>
