@@ -121,12 +121,9 @@ public class SalesController {
 		String member_id = (String) session.getAttribute("user");
 		String db_id = salesService.salesIdCheck(sales_number);
 		
-		if(member_id.equals(db_id)) {
-			salesService.salesDeleteOk(mav);
-		} else {
-			mav.addObject("check5", "0");
-		}
-		
+	
+		salesService.salesDeleteOk(mav);
+
 		
 		return mav;
 	}

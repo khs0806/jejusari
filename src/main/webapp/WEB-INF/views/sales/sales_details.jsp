@@ -122,34 +122,23 @@
 		})
 		
 		//신고처리 클릭시
-		$("input:button[name=report_update]").click(function(){
+		$("input:button[name=report_btn]").click(function(){
 			var check=confirm("매물 정보를 신고처리하시겠습니까?");
 			if(check==true){
 				alert("ok");
+				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
 			}
 		})
 		
-	//신고하기 클릭시
+	//삭제하기 클릭시
 		$("input:button[name=sales_delete]").click(function(){
-<<<<<<< HEAD
 
 				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 400');
-			})
-	});		
-=======
-			var check=confirm("이 매물을 삭제하시겠습니까?");
-			if(check==true){
-				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 600');
-			}
-		});
 		
-	});	
-	
-	function del(root,sales_number){
-		 var url= root+"/report/delete?sales_number="+sales_number;
-		 location.href=url;
-	 }
->>>>>>> 65f87660ddfeb47400b3a64d517e0a565d36cb78
+	})
+	})
+
+
 </script>
 
 <div class="container" id="sales_detail">
@@ -384,7 +373,7 @@
 	<c:if test="${member_level=='admin' }">
 		<div id="plus_btn">
 			<input type="button" name="sales_report_handle" value="신고처리" class="btn btn-light btn-sm"/>		<!-- dark? -->
-			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm" onclick="del('${root}','${salesDto.sales_number}')"/>
+			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
 		</div>
 	</c:if>
 </div>
