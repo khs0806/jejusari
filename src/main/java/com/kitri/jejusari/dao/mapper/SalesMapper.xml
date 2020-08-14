@@ -52,7 +52,6 @@
 								sales_option like '%'||#{item}||'%'
 							</foreach>
 						</if>
-						
 		<![CDATA[	
 					order by sales_number desc		
 				) a

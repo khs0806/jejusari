@@ -36,8 +36,6 @@ public class SalesController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		
-		
-		System.out.println("Sales_category_type : "+salesDto.getSales_category_type());
 		mav.addObject("salesDto", salesDto);
 		salesService.salesList(mav);
 		return mav;
