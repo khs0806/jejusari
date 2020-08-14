@@ -225,7 +225,7 @@ public class BoardServiceImp implements BoardService{
 		
 		
 		mav.addObject("check", check);
-		mav.setViewName("report/report_writeOk");
+		mav.setViewName("report/report_writeOk.tiles");
 	}
 	
 	

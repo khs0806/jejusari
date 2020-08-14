@@ -115,10 +115,9 @@ public class SalesController {
 		if(member_id.equals(db_id)) {
 			salesService.salesDeleteOk(mav);
 		} else {
-			mav.addObject("check", "0");
+			mav.addObject("check5", "0");
 		}
 		
-		mav.setViewName("sales/sales_deleteOk");
 		
 		return mav;
 	}

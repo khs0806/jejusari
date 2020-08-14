@@ -106,11 +106,9 @@
 		
 	//신고하기 클릭시
 		$("input:button[name=sales_delete]").click(function(){
-			var check=confirm("이 매물을 삭제하시겠습니까?");
-			if(check==true){
-				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 600');
-			}
-		})
+
+				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 400');
+			})
 	});		
 </script>
 
