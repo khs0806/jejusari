@@ -2,6 +2,7 @@ package com.kitri.jejusari.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,6 +175,7 @@ public class BoardController {
 		@RequestMapping(value="/report/admin")
 		public ModelAndView reportAdmin(HttpServletRequest request, HttpServletResponse response) {
 			  ModelAndView mav = new ModelAndView();
+
 			   mav.addObject("request", request);
 			   
 				boardService.getReportList(mav);
@@ -205,5 +207,16 @@ public class BoardController {
 			   boardService.ReportDetail(mav);
 					
 			   return mav;
+		}
+		
+		@RequestMapping(value="/report/update",method=RequestMethod.GET)
+		public ModelAndView reportUpdate(HttpServletRequest request, HttpServletResponse response, ReportDto reportDto) {
+			ModelAndView mav=new ModelAndView();
+			mav.addObject("request", request);
+		
+			int check = boardService.reportUpdate(mav);
+			
+			System.out.println("controller:"+check);
+			return mav;
 		}
 }

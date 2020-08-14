@@ -117,7 +117,7 @@
 		$("input:button[name=sales_update]").click(function(){
 			var check=confirm("매물 정보를 수정하시겠습니까?");
 			if(check==true){
-				alert("ok");
+				//alert("ok");
 			}
 		})
 		
@@ -125,7 +125,7 @@
 		$("input:button[name=report_btn]").click(function(){
 			var check=confirm("매물 정보를 신고처리하시겠습니까?");
 			if(check==true){
-				alert("ok");
+				//alert("ok");
 				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
 			}
 		})
@@ -136,9 +136,17 @@
 				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 400');
 		
 	})
-	})
+	});
 
-
+		function del(root,sales_number){
+			var url = root+"/report/delete?sales_number="+sales_number;
+			location.href=url;
+		}
+		
+		function update(root,sales_number){
+			 var url= root+"/report/update?sales_number="+sales_number;
+			 location.href=url;
+		 }
 </script>
 
 <div class="container" id="sales_detail">
@@ -370,10 +378,10 @@
 	</c:if>
 	
 	<!-- 관리자; 신고, 삭제 -->
-	<c:if test="${member_level=='admin' }">
+	<c:if test="${member_level=='admin'}">
 		<div id="plus_btn">
-			<input type="button" name="sales_report_handle" value="신고처리" class="btn btn-light btn-sm"/>		<!-- dark? -->
-			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
+			<input type="button" name="sales_update" value="신고처리" class="btn btn-light btn-sm" onclick="update('${root}','${salesDto.sales_number}')"/>			<!-- dark? -->
+			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm" onclick="del('${root}','${salesDto.sales_number}')"/>
 		</div>
 	</c:if>
 </div>

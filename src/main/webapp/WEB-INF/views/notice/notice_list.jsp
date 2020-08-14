@@ -16,6 +16,22 @@
 			location.href='${root}/notice/write';
 		});
 	});
+	
+	$(document).ready(function(){
+		$("#memberAdmin").click(function(){
+			//alert("member");
+			location.href="${root}/member/admin";
+		});
+		$("#noticeAdmin").click(function(){
+			//alert("notice");
+			location.href="${root}/notice";
+		});
+		$("#reportAdmin").click(function(){
+			//alert("report");
+			location.href="${root}/report/admin";
+		});
+	});
+
 </script>
 
 <style type="text/css">
@@ -27,6 +43,11 @@
 <body>
 <form>
 	<div class = "container" id="admin_container">
+		<div class="btn-group">
+		    <button type="button" class="btn btn-secondary" id="memberAdmin">회원 관리</button>
+		    <button type="button" class="btn btn-secondary" id="noticeAdmin">공지사항 관리</button>
+		    <button type="button" class="btn btn-secondary" id="reportAdmin">신고 관리</button>
+  		</div>
 		<h3 class="text-secondary">[공지사항]</h3>
 		<span class="badge badge-secondary">관리자</span>
 		<br/>

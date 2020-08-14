@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,10 @@ public class MemberServiceImp implements MemberService{
 	public void getMemberList(ModelAndView mav) {
 		Map<String, Object> map= mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpSession session = request.getSession();
+		String member_level = (String) session.getAttribute("member_level");
+		
+		session.getAttribute("member_level");
 		//페이징
 				String pageNumber=request.getParameter("pageNumber");
 				System.out.println("pageNumber"+pageNumber);
@@ -62,6 +67,7 @@ public class MemberServiceImp implements MemberService{
 		mav.addObject("MemberList", memberList);
 		System.out.println(memberList);
 		
+		mav.addObject("member_level",member_level);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("count", count);
@@ -71,7 +77,7 @@ public class MemberServiceImp implements MemberService{
 
 	@Override
 	public int dropMember(List<String> list) {
-	    	     
+	    
 	    return memberDao.dropMember(list);
 		
 	}

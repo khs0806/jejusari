@@ -7,60 +7,81 @@
 <head>
 <meta charset="UTF-8">
 <title>회원관리</title>
-<%-- <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
+<%-- 
 <link rel="stylesheet" href="${root}/css/admin/member_admin.css">
 <link rel="stylesheet" href="${root}/css/admin/notice_list.css"> --%>
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-/* function memberDrop(obj){ */
 	
 	$("#btnDrop").click(function(){
 		
-	
-	var drop=[];
-	
-	$("input[name=drop]:checked").each(function(){
-		drop.push($(this).val());
+		var drop=[];
+		
+		$("input[name=drop]:checked").each(function(){
+			drop.push($(this).val());
+		});
+		
+		
+		if(drop.length==0){
+			alert("삭제할 항목을 선택해주세요.")
+		}else{
+			if(confirm("정말 삭제하시겠습니까?") == true){
+				$.ajax({
+					type:"POST",
+					url:"${root}/member/drop",
+					data:{"drop":drop},
+					async:false,
+					success:function pageReload(){
+						alert("삭제되었습니다.");
+						location.href="${root}/member/admin";
+					},
+					error:function(){
+						alert("삭제가 실패되었습니다.");
+					}
+				});
+				
+				drop = new Array();
+				id="";
+			}
+			else{
+				location.reload(true);
+			}
+			
+		}
+
 	});
 	
-	
-	if(drop.length==0){
-		alert("삭제할 항목을 선택해주세요.")
-	}else{
-		if(confirm("정말 삭제하시겠습니까?") == true){
-			$.ajax({
-				type:"POST",
-				url:"${root}/member/drop",
-				data:{"drop":drop},
-				async:false,
-				success:function pageReload(){
-					alert("삭제되었습니다.");
-					location.href="${root}/member/admin";
-				},
-				error:function(){
-					alert("삭제가 실패되었습니다.");
-				}
-			});
-			
-			drop = new Array();
-			id="";
-		}
-		else{
-			location.reload(true);
-		}
-		
-	}
-
-	
-/* } */
+	$("#memberAdmin").click(function(){
+		//alert("member");
+		location.href="${root}/member/admin";
+	});
+	$("#noticeAdmin").click(function(){
+		//alert("notice");
+		location.href="${root}/notice";
+	});
+	$("#reportAdmin").click(function(){
+		//alert("report");
+		location.href="${root}/report/admin";
 	});
 });
 </script>
 </head>
 <body>
 <!-- <form action="#" method="POST" onsubmit="return memberDrop(this)"> -->
+<c:if test="${member_level != 'admin'}">
+	<script type="text/javascript">
+		alert("접근할 수 있는 권한이 없는 페이지 입니다.");
+		location.href="${root}/main";
+	</script>
+</c:if>
 	<div class = "container" id="admin_container">
+		<div class="btn-group">
+		    <button type="button" class="btn btn-secondary" id="memberAdmin">회원 관리</button>
+		    <button type="button" class="btn btn-secondary" id="noticeAdmin">공지사항 관리</button>
+		    <button type="button" class="btn btn-secondary" id="reportAdmin">신고 관리</button>
+  		</div>
 		<div id="title" class="text-secondary"><h3>&#91;회원관리&#93;</h3></div>
 		<span  style="margin-top:0px;" class="badge badge-secondary">관리자</span>
 		

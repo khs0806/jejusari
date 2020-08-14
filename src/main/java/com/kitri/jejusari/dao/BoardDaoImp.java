@@ -104,5 +104,11 @@ public class BoardDaoImp implements BoardDao{
 			
 			return session.selectList("detailSelect",report_number);
 		}
+
+		@Override
+		public int reportUpdate(int sales_number) {
+			session.update("updateReportAdmin", sales_number);
+			return session.update("checkUpdate", sales_number);
+		}
 		
 }

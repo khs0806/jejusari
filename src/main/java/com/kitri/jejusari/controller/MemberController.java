@@ -239,12 +239,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value ="/member/drop", method = RequestMethod.POST)
 	public int dropMember(@RequestParam(value="drop[]") List<String> list, HttpServletResponse response) {
-	
-		//System.out.println(list); 
 		
 		int dropUser = memberService.dropMember(list);
-		
-		//System.out.println(dropUser);
 		
 		return dropUser;
 
