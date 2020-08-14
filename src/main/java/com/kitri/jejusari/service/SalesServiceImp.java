@@ -107,6 +107,36 @@ public class SalesServiceImp implements SalesService {
 	}
 	
 	@Override
+	public void salesUpdate(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+
+		SalesDto salesDto=salesDao.salesDetail(sales_number);
+		String[] sales_option=salesDto.getSales_option().split(",");
+		for(int i=0;i<sales_option.length;i++) {
+			if(sales_option[i].equals("풀옵션")) salesDto.setSales_full(1);
+			if(sales_option[i].equals("주차장")) salesDto.setSales_parking(1);;
+			if(sales_option[i].equals("CCTV")) salesDto.setSales_cctv(1);
+			if(sales_option[i].equals("엘리베이터")) salesDto.setSales_ele(1);
+		}
+		
+		mav.addObject("pageNumber",pageNumber);
+		mav.addObject("salesDto",salesDto);
+		mav.setViewName("sales/sales_update.tiles");
+	}
+	
+	@Override
+	public void salesUpdateOk(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		SalesDto salesDto=(SalesDto) map.get("salesDto");
+		System.out.println(request+"\t"+salesDto);
+		
+	}
+	
+	@Override
 	public void salesBroker(ModelAndView mav) {
 		Map<String,Object> map = mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
