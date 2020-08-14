@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -207,22 +208,22 @@ public class BoardServiceImp implements BoardService{
 		// TODO Auto-generated method stub
 
 		Map<String, Object> map=mav.getModelMap();
-		/*
-		 * HttpServletRequest request=(HttpServletRequest)map.get("request");
-		 * HttpSession session=request.getSession();
-		 * 
-		 * session.getAttribute(name);
-		 */
+		
+		  HttpServletRequest request=(HttpServletRequest)map.get("request");
+		  HttpSession session=request.getSession();
+		  
+		  String member_id=(String) session.getAttribute("member_id");
+		 
 		ReportDto reportDto=(ReportDto) map.get("reportDto");
 
 		//session받아서 id넣어주기 : "kke"대신에 (String)session.getAttr~( );
-		reportDto.setMember_id("kke");
+		reportDto.setMember_id(member_id);
 
 		int check=boardDao.reportInsert(reportDto);
 		System.out.println("check : " + check);
 
 		mav.addObject("check", check);
-		mav.setViewName("report/report_writeOk");
+		mav.setViewName("report/report_writeOk.tiles");
 	}
 
 
@@ -234,12 +235,21 @@ public class BoardServiceImp implements BoardService{
 	public void noticeDetail(ModelAndView mav) {
 		Map<String,Object> map = mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		HttpSession session = request.getSession();
+		String member_level = (String) session.getAttribute("member_level");
+		String member_id = (String) session.getAttribute("member_id");
+		System.out.println(member_level);
+		System.out.println(member_id);
+		
 		int notice_number=Integer.parseInt(request.getParameter("notice_number"));	
 
 		boardDao.noticeCountPlus(notice_number);
 		NoticeDto noticeDto = boardDao.noticeDetail(notice_number);
 		System.out.println(noticeDto);
 		mav.addObject("noticeDto",noticeDto);
+		mav.addObject("member_level", member_level);
+		mav.addObject("member_id", member_id);
 		mav.setViewName("notice/notice_read.tiles");
 
 	}
@@ -249,6 +259,13 @@ public class BoardServiceImp implements BoardService{
 	public void noticeList(ModelAndView mav) {
 		Map<String, Object> map= mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		HttpSession session = request.getSession();
+		String member_level = (String) session.getAttribute("member_level");
+		String member_id = (String) session.getAttribute("member_id");
+		System.out.println(member_level);
+		System.out.println(member_id);
+		
 
 		//페이징
 		String pageNumber=request.getParameter("pageNumber");
@@ -273,6 +290,8 @@ public class BoardServiceImp implements BoardService{
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("count", count);
+		mav.addObject("member_level", member_level);
+		mav.addObject("member_id", member_id);
 		mav.setViewName("/notice/notice_list.tiles");
 
 	}
@@ -381,11 +400,34 @@ public class BoardServiceImp implements BoardService{
 	
 	@Override
 	public void getReportList(ModelAndView mav) {
+		Map<String, Object> map= mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
-		List<String> reportList = boardDao.reportList();
+		//페이징
+		String pageNumber=request.getParameter("pageNumber");
+		System.out.println("pageNumber"+pageNumber);
+		if(pageNumber == null) pageNumber = "1";
+		int currentPage = Integer.parseInt(pageNumber);	//요청한 페이지
+		int boardSize = 10;		// [1] start:1, end:10  [2] start:11, end:20
+
+		int startRow = (currentPage - 1) * boardSize + 1;	//1  11 21 31
+		int endRow = currentPage * boardSize;			//10 20 30 40
+
+		//count 사용해서 글이 아예 없는경우 페이징 사라지게
+		int count = boardDao.reportCount();
+		List<String> reportList = null;
+
+		if(count > 0) {
+			//startRow, endRow
+			 reportList = boardDao.reportList(startRow, endRow);
+		}
 		
 		mav.addObject("ReportList", reportList);
-		//System.out.println(reportList);
+		System.out.println(reportList);
+		
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("count", count);
 		
 		mav.setViewName("/admin/report_admin.tiles");
 	}
