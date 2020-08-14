@@ -89,8 +89,7 @@ public class SalesController {
 		int check=salesService.salesScrap(mav);
 		PrintWriter out=response.getWriter();
 		out.print(check);
-	}
-	
+	}	
 	
 	@RequestMapping(value="/sales/delete", method=RequestMethod.GET)
 	public ModelAndView salesDelete(HttpServletRequest request, HttpServletResponse response) {

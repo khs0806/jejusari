@@ -9,7 +9,6 @@
 		select * from member
 	</select>
 	
-	
 	<insert id="member_join">
 		insert into member values (
 			#{member_id}, 
@@ -21,6 +20,12 @@
 			sysdate
 		)
 	</insert>
+	
+	<!-- 로그인 -->
+	<select id="member_login" resultType="com.kitri.jejusari.dto.MemberDto">
+		select member_id, member_name, member_level
+		from member where member_id = #{member_id}
+	</select>
 	
 	<!-- 관리자 회원 -->
 	<!-- 회원 내역 리스트 -->

@@ -19,5 +19,6 @@ public interface MemberService {
 	public void getMemberList(ModelAndView mav);
 	// 회원삭제
 	public int dropMember(List<String> list);
-	
+	// 임시 로그인
+	public MemberDto tempLogin(MemberDto memberDto);
 }

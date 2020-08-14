@@ -67,9 +67,67 @@ public class MemberController {
 		
 	// 로그인 뷰
 	@RequestMapping(value="/member/login")
-	public String login(HttpSession session) {
+	public String loginView(HttpSession session) {
 		
 		return "member/member_login.tiles";
+	}
+	
+	// 임시 로그인 뷰
+	@RequestMapping(value="/member/templogin")
+	public String tempLoginView(HttpSession session) {
+		
+		return "member/member_tempLogin.tiles";
+	}
+	
+	// 임시 로그인 
+	@RequestMapping(value="/member/templogin", method=RequestMethod.POST)
+	public String temLogin(HttpServletRequest request, MemberDto memberDto, Model model) {
+		
+		logger.info("templogin");
+		System.out.println(memberDto.toString());
+		HttpSession session = request.getSession();
+		MemberDto member = memberService.tempLogin(memberDto);
+		
+		if (member == null) {
+			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
+			return "main/main.tiles";
+		}
+		
+		session.setAttribute("member_id", member.getMember_id());
+		session.setAttribute("member_name", member.getMember_name());
+		session.setAttribute("member_level", member.getMember_level());
+		model.addAttribute("msg", "로그인 되었습니다.");
+		
+		return "main/main.tiles";
+	}
+	
+	// 임시회원가입 뷰
+	@RequestMapping(value="/member/tempjoin", method=RequestMethod.GET)
+	public String temJoin(HttpSession session) {
+		
+		return "member/member_tempSignup.tiles";
+	}
+	
+	// 임시 회원가입
+	@RequestMapping(value="/member/tempjoin", method=RequestMethod.POST)
+	public ModelAndView temJoinDo(HttpServletRequest request, MemberDto memberDto) {
+		ModelAndView mav = new ModelAndView();
+		
+		String member_phone = request.getParameter("no1") 
+				  + "-" + request.getParameter("no2") 
+				  + "-" + request.getParameter("no3");
+		
+		String member_email = memberDto.getMember_email() + "@" + request.getParameter("email");
+		
+		logger.info(memberDto.toString());
+		memberDto.setMember_phone(member_phone);
+		memberDto.setMember_email(member_email);
+		int check = memberService.memberJoin(memberDto);
+		
+		mav.addObject("check", check);
+		mav.setViewName("member/member_signupOk.tiles");
+		
+		return mav;
 	}
 	
 	// 카카오로 로그인 or 회원가입
