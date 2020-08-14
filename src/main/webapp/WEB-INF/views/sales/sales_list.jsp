@@ -62,20 +62,20 @@
 			<br>
 			
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="foolOption" value="풀옵션">
-			  <label class="form-check-label" for="inlineCheckbox1">풀옵션</label>
+			  <input class="form-check-input" type="checkbox" name="sales_option" id="foolOption" value="풀옵션">
+			  <label class="form-check-label" for="foolOption">풀옵션</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="parking" value="주차장">
-			  <label class="form-check-label" for="inlineCheckbox2">주차장</label>
+			  <input class="form-check-input" type="checkbox" name="sales_option" id="parking" value="주차장">
+			  <label class="form-check-label" for="parking">주차장</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="cctv" value="CCTV">
-			  <label class="form-check-label" for="inlineCheckbox3">CCTV</label>
+			  <input class="form-check-input" type="checkbox" name="sales_option" id="cctv" value="CCTV">
+			  <label class="form-check-label" for="cctv">CCTV</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="elevator" value="엘레베이터">
-			  <label class="form-check-label" for="inlineCheckbox3">엘레베이터</label>
+			  <input class="form-check-input" type="checkbox" name="sales_option" id="elevator" value="엘리베이터">
+			  <label class="form-check-label" for="elevator">엘리베이터</label>
 			</div>
 			
 		</form>
