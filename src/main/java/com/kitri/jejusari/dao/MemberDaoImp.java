@@ -33,19 +33,12 @@ public class MemberDaoImp implements MemberDao{
 		return session.delete("member_delete", member_id);
 	}
 	
-<<<<<<< HEAD
-	/*
-	 * @Override public List<String> memberList() {
-	 * 
-	 * return session.selectList("memberList"); }
-	 */
-=======
+
 	@Override
 	public List<String> memberList() {
 		
 		return session.selectList("memberList");
 	}
->>>>>>> 9fcd101ef42a857ca27508b235dfc5d05cf0272e
 
 	@Override
 	public int dropMember(List<String> list) {
