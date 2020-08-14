@@ -56,8 +56,6 @@ public class SalesDaoImp implements SalesDao {
 	@Override
 	public List<SalesDto> salesList(int startRow, int endRow, SalesDto salesDto) {
 		Map<String, Object> hmap=new HashMap<String, Object>();
-		hmap.put("startRow", startRow);
-		hmap.put("endRow", endRow);
 		
 		// sales_category_type 의 String Type을 배열로 바꿔주는 작업
 		String[] sales_category_type_list=null;
@@ -68,6 +66,13 @@ public class SalesDaoImp implements SalesDao {
 				 //System.out.println(sales_category_type_list[i]);
 			 }
 		}
+		
+		
+		
+		
+		
+		hmap.put("startRow", startRow);
+		hmap.put("endRow", endRow);
 		hmap.put("sales_category_type_list", sales_category_type_list);
 		return session.selectList("sales_list", hmap);
 	}
