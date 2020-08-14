@@ -1,18 +1,27 @@
 package com.kitri.jejusari.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.UUID;
+
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kitri.jejusari.dto.ReportDto;
 import com.kitri.jejusari.dto.SalesDto;
 import com.kitri.jejusari.service.SalesService;
 
@@ -56,6 +65,7 @@ public class SalesController {
 	public ModelAndView salesDetail(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
+		
 
 		salesService.salesDetail(mav);
 		
@@ -79,8 +89,7 @@ public class SalesController {
 		int check=salesService.salesScrap(mav);
 		PrintWriter out=response.getWriter();
 		out.print(check);
-	}
-	
+	}	
 	
 	@RequestMapping(value="/sales/delete", method=RequestMethod.GET)
 	public ModelAndView salesDelete(HttpServletRequest request, HttpServletResponse response) {
@@ -121,5 +130,33 @@ public class SalesController {
 		
 		return mav;
 	}
-
+	
+	
+	/** 이미지 관련 controller 함수..! 작성중입니다.(kke) */
+	@RequestMapping(value="/uploadSummernoteImageFile", method=RequestMethod.POST)
+	@ResponseBody
+	public JSONObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+		JSONObject obj=new JSONObject();
+		
+		String fileRoot="C:\\jejusari\\summernote_img\\";		//저장될 외부 파일 경로
+		//없는 경로면 생성하는 코드 만들어야하지 않나??
+		String originalFileName=multipartFile.getOriginalFilename();	//오리지날 파일명
+		String extention = originalFileName.substring(originalFileName.lastIndexOf("."));	//확장자명
+		
+		String savedFileName=UUID.randomUUID()+extention;		//저장될 파일 명
+		File targetFile=new File(fileRoot+savedFileName);
+		
+		try {
+			InputStream fileStream=multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일저장
+			obj.put("url", "/jejusari/summernote_img/"+savedFileName);
+			obj.put("responseCode", "success");
+			
+		}catch(IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//실패시 저장된 파일 삭제
+			obj.put("responseCode", "error");
+			e.printStackTrace();
+		}
+		return obj;
+	}
 }

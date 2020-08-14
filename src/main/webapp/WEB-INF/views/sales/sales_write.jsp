@@ -199,11 +199,19 @@
 			});
 		
 			$('#summernote').summernote({
-				  height: 300,
-				  minHeight: null,
-				  maxHeight: null,
-				  focus: true,
+				  height: 300,				//에디터 높이
+				  minHeight: null,			//최소 높이
+				  maxHeight: null,			//최대 높이
+				  focus: true,				//에디터 로딩 후 포커스를 맞출지
 				  placeholder: '최대 2048자까지 작성할 수 있습니다.'
+			
+			// 이미지 첨부 부분
+				  callbacks:{
+					  onImageUpload : function(files){
+						  uploadSummernoteImageFile(files[0], this);
+					  }
+				  }
+			// 이미지 첨부 부분 끝
 				});
 				
 				$('.dropdown-toggle').dropdown();
@@ -218,7 +226,21 @@
 				    resize: false
 				});
 				$('.note-statusbar').hide()
-			
+			function uploadSummernoteImageFile(file, editor){
+					data = new FormData();
+					data.append("file", file);
+					$.ajax({
+						data : data,
+						type : "POST",
+						url : "/uploadSummernoteImageFile",
+						contentType : false,
+						processData : false,
+						success : function(data){
+							//항상 업로드된 파일의 url이 있어야한다.
+							$(editor).summernote('insertImange', data.url);
+						}
+					});
+				}
     	</script>
 		
 		<!-- 파일업로드 -->

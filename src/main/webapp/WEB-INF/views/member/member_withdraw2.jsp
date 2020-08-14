@@ -23,14 +23,24 @@
 			<div class="step">
 				<img alt="" src="${root}/img/step2.jpg">
 			</div>
-			
-			<div class="check">
-				<p>😥 탈퇴가 완료되었습니다.</p>
-				
-				<div class="p-2 flex-shrink-1 bd-highlight">
-					<input type="button" value="확인" class="btn btn-warning" onclick="location.href='${root}/'">
+			<c:if test="${check > 0}">
+				<div class="check">
+					<p>😥 탈퇴가 완료되었습니다.</p>
+					
+					<div class="p-2 flex-shrink-1 bd-highlight">
+						<input type="button" value="확인" class="btn btn-warning" onclick="location.href='${root}/'">
+					</div>
 				</div>
-			</div>
+			</c:if>
+			<c:if test="${check == 0}">
+				<div class="check">
+					<p>😥 탈퇴가 안되었습니다. 다시 확인해주세요.</p>
+					
+					<div class="p-2 flex-shrink-1 bd-highlight">
+						<input type="button" value="확인" class="btn btn-warning" onclick="location.href='${root}/'">
+					</div>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

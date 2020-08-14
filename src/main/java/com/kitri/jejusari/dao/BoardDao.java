@@ -31,4 +31,13 @@ public interface BoardDao {
 		
 		//공지사항 수정
 		public int noticeUpdate(NoticeDto noticeDto);
+		
+		//신고내역리스트
+		public List<String> reportList();
+		
+		//신고 및 매물 삭제
+		public int AdDelete(int sales_number);
+		
+		//신고 상세
+		public List<ReportDto> ReportDetail(int report_number);
 }

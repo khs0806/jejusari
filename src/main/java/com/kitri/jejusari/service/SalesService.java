@@ -8,9 +8,6 @@ import com.kitri.jejusari.dto.SalesDto;
 
 public interface SalesService {
 	
-	// DB테스트
-	public List<String> testDB();
-	
 	//상세페이지
 	public void salesDetail(ModelAndView mav); 
 	public void salesBroker(ModelAndView mav);
@@ -25,5 +22,5 @@ public interface SalesService {
 	public void salesDeleteOk(ModelAndView mav);
 	
 	public String salesIdCheck(int sales_number);
-	
+	public String getAddress(int sales_number);
 }

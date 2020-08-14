@@ -23,14 +23,18 @@
 </script>
 </head>
 <body>
-	<form id="plus_info" action="${root}/member/joinOk" method="post">
-		<div class="tit">추가 정보 입력</div>
-		
-		<input type="hidden" name="member_id" value="${member_id}">
+	<form id="plus_info" action="${root}/member/tempjoin" method="post">
+		<div class="tit">임시 회원가입</div>
 		
 		<div class="nickname">
-			<div class="label">닉네임</div>
-			<input type="text" name="member_name" class="col-sm-3 h-25 form-control" value="${member_name}"/>
+			<div class="label">아이디</div>
+			<input type="text" name="member_id" class="col-sm-3 h-25 form-control"/>
+			<button class="btn btn-outline-warning btn-sm" type="button" id="button-addon2" style="margin-top:2px;">중복 확인</button>
+		</div>
+		
+		<div class="nickname">
+			<div class="label">이름</div>
+			<input type="text" name="member_name" class="col-sm-3 h-25 form-control"/>
 			<button class="btn btn-outline-warning btn-sm" type="button" id="button-addon2" style="margin-top:2px;">중복 확인</button>
 		</div>
 		
@@ -60,6 +64,8 @@
 			일반회원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
 			<input type="radio" name="member_level" value="BR"/>
 			중개업자
+			<input type="radio" name="member_level" value="admin"/>
+			관리자
 		</div>
 		
 		<div id="if_broker" style="display:none;">

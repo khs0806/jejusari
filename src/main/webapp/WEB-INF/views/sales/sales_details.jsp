@@ -11,29 +11,54 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {    
+		//게스트 막아주기?
+		if(${session_member_id==null}){
+			alert("매물정보를 확인하시려면 로그인해주십시오.");
+			location.href="${root}/member/login";
+		}
+		
+		//스크랩 버튼색...
+		if(${scrap_check>0 }){
+			$("input:button[name=scrap_btn]").css("color","#212529");
+			$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+			$(".scrap_star").attr("src","${root}/img/star2.png");
+		}
+		
+		var opac_num=(${factorMap.factor_total}/${factor_total_all})*100
+		$(".factor_img").css("filter","opacity("+opac_num+")");
+		
 		//스크랩 클릭시
-		$("input:button[name=scrap_btn]").one("click",function(){
-			$.ajax({
-		      	url:"${root}/sales/scrap?sales_number=${salesDto.sales_number}",
-		     	type:"get",
-		      	dataType:"text",
-		      	success:function(data){
-		      		var check=$.parseJSON(data);
-		      		
-		      		if(check==1){
-		      			$("input:button[name=scrap_btn]").css("color","#212529");
-						$("input:button[name=scrap_btn]").css("background-color","#ffc107");
-						$("input:button[name=scrap_btn]").css("background-color","#ffc107");
-						$(".scrap_star").attr("src","${root}/img/star2.png");
-						$(".scrap_count").text(${scrap_count }+1);
-						
-						alert("스크랩이 완료되었습니다."); 
-		      		}else{
-		      			alert("이미 스크랩하셨습니다.");
-		      		}
-		      		
-		      	}
-		   	});		
+		var scount=${scrap_count };
+		$("input:button[name=scrap_btn]").on("click",function(){
+				$.ajax({
+			      	url:"${root}/sales/scrap?sales_number=${salesDto.sales_number}",
+			     	type:"get",
+			      	dataType:"text",
+			      	success:function(data){
+			      		var check=$.parseJSON(data);
+			      		
+			      		if(check==1){
+			      			$("input:button[name=scrap_btn]").css("color","#212529");
+							$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+							$(".scrap_star").attr("src","${root}/img/star2.png");
+							
+							scount=scount+1;
+							$(".scrap_count").text(scount);
+
+							alert("스크랩이 완료되었습니다."); 
+			      		}else if(check==-1){
+			      			$("input:button[name=scrap_btn]").css("color","#ffc107");
+							$("input:button[name=scrap_btn]").css("background-color","#ffffff");
+							$(".scrap_star").attr("src","${root}/img/star1.png");
+							
+							scount=scount-1;
+							$(".scrap_count").text(scount);
+
+							alert("스크랩이 취소되었습니다."); 
+			      		}
+			      		
+			      	}
+			   	});				
 		})
 		
 		//신고하기 클릭시
@@ -106,10 +131,25 @@
 		
 	//신고하기 클릭시
 		$("input:button[name=sales_delete]").click(function(){
+<<<<<<< HEAD
 
 				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 400');
 			})
 	});		
+=======
+			var check=confirm("이 매물을 삭제하시겠습니까?");
+			if(check==true){
+				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 600');
+			}
+		});
+		
+	});	
+	
+	function del(root,sales_number){
+		 var url= root+"/report/delete?sales_number="+sales_number;
+		 location.href=url;
+	 }
+>>>>>>> 65f87660ddfeb47400b3a64d517e0a565d36cb78
 </script>
 
 <div class="container" id="sales_detail">
@@ -147,12 +187,7 @@
 		</div>
 
 		<div class="scrap_report">
-			<c:if test="${scrap_count==0 }">
-				<img class="scrap_star" src="${root}/img/star.png" width="20px" height="20px"/>
-			</c:if>
-			<c:if test="${scrap_count>0 }">
-				<img class="scrap_star" src="${root}/img/star2.png" width="20px" height="20px"/>
-			</c:if>
+			<img class="scrap_star" src="${root}/img/star1.png" width="20px" height="20px"/>
 			<span class="scrap_count">${scrap_count }</span>
 			<input type="button" name="scrap_btn" value="스크랩" class="btn btn-outline-warning btn-sm scrap_btn"/>
 			<input type="button" name="report_btn" value="신고하기" class="btn btn-outline-danger btn-sm report_btn"/>
@@ -267,42 +302,42 @@
 				<ul>
 					<li><img src="${root}/img/gas.png" width="50px" height="50px"/></li>
 					<li>주유소</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_gas}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
 					<li><img src="${root }/img/market.png" width="50px" height="50px"/></li>
 					<li>대형마트</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_mart}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
 					<li><img src="${root}/img/hall.png" width="50px" height="50px"/></li>
 					<li>공공기관</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_public}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
 					<li><img src="${root}/img/hospital.png" width="50px" height="50px"/></li>
 					<li>병원</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_hospital}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
 					<li><img src="${root}/img/entertainment.png" width="50px" height="50px"/></li>
 					<li>관광</li>
-					<li>지수 값</li>
+					<li>${factorMap.factor_tour}</li>
 				</ul>
 			</div>
 			<div class="index_sum">
 				<ul>
-					<li><img src="${root}/img/fruit.png" width="50px" height="50px"/></li>
+					<li><img class="factor_img" src="${root}/img/fruit.png" width="50px" height="50px"/></li>
 					<li>총 귤 점수</li>
-					<li>${salesDto.sales_factor_total}</li>
+					<li>${factorMap.factor_total}</li>
 				</ul>
 			</div>
 		</div>
@@ -349,7 +384,7 @@
 	<c:if test="${member_level=='admin' }">
 		<div id="plus_btn">
 			<input type="button" name="sales_report_handle" value="신고처리" class="btn btn-light btn-sm"/>		<!-- dark? -->
-			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
+			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm" onclick="del('${root}','${salesDto.sales_number}')"/>
 		</div>
 	</c:if>
 </div>

@@ -37,5 +37,14 @@ public interface BoardService {
 		
 		//공지사항 수정 완료
 		public void noticeUpdateOk(ModelAndView mav);
+		
+		//신고내역리스트
+		public void getReportList(ModelAndView mav);
+		
+		//신고 및 매물 삭제
+		public void AdDelete(ModelAndView mav); 
+		
+		//신고 상세 보기
+		public void ReportDetail(ModelAndView mav);
 	
 }

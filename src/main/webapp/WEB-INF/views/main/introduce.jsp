@@ -20,7 +20,7 @@
 						<img src="${root}/img/fruit.png" width="20px" height="20px"/>
 						감귤 지수
 					</li>
-					<li>모든 지수의 총 합을 10점 만점으로 하여 산정합니다.</li>
+					<li>모든 지수의 총 합을 표현합니다.</li>
 				</ul>
 			</div>
 
@@ -29,35 +29,35 @@
 					<img src="${root}/img/gas.png" width="50px" height="50px"/>
 					<ul>
 						<li>주유소 지수</li>
-						<li>매물 주택에서 3km이내에 주유소가 있으면 귤점이 올라갑니다.</li>
+						<li>매물 주택에서 3km이내에 있는 주유소의 개수가 점수로 표현됩니다.</li>
 					</ul>
 				</div>
 				<div class="about">
 					<img src="${root}/img/market.png" width="50px" height="50px"/>
 					<ul>
 						<li>대형마트 지수</li>
-						<li>매물 주택에서 3km이내에 대형마트가 있으면 귤점이 올라갑니다.</li>
+						<li>매물 주택에서 3km이내에 있는 대형마트의 개수가 점수로 표현됩니다.</li>
 					</ul>
 				</div>
 				<div class="about">
 					<img src="${root}/img/hall.png" width="50px" height="50px"/>
 					<ul>
 						<li>공공기관 지수</li>
-						<li>매물 주택에서 3km이내에 공공기관이 있으면 귤점이 올라갑니다.</li>
+						<li>매물 주택에서 3km이내에 있는 공공기관의 개수가 점수로 표현됩니다.</li>
 					</ul>
 				</div>
 				<div class="about">
 					<img src="${root}/img/hospital.png" width="50px" height="50px"/>
 					<ul>
 						<li>병원 지수</li>
-						<li>매물 주택에서 3km이내에 병원이 있으면 귤점이 올라갑니다.</li>
+						<li>매물 주택에서 3km이내에 있는 병원의 개수가 점수로 표현됩니다..</li>
 					</ul>
 				</div>
 				<div class="about">
 					<img src="${root}/img/entertainment.png" width="50px" height="50px"/>
 					<ul>
 						<li>관광명소 지수</li>
-						<li>매물 주택에서 3km이내에 관광명소가 있으면 귤점이 올라갑니다.</li>
+						<li>매물 주택에서 3km이내에 있는 관광명소의 개수가 점수로 표현됩니다.</li>
 					</ul>
 				</div>
 			</div>

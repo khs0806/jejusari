@@ -18,7 +18,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script type="text/javascript">
 function noticeCheck(obj){
-	alert("[관리자]글쓰기에 성공하셨습니다.");
+	
+	//작성자 입력 유무 체크
+	if(obj.member_id.value == ""){
+		alert("작성자를 입력하세요.");
+		obj.member_id.focus();
+		return false;
+	}
+	
+	//내용 입력 유무 체크
+	if(obj.notice_content.value == ""){
+		alert("내용을 입력하세요.");
+		obj.notice_content.focus();
+		return false;
+	}
+	
+	//제목 입력 유무 체크
+	if(obj.notice_title.value == ""){
+		alert("제목을 입력하세요.");
+		obj.notice_title.focus();
+		return false;
+	}
 }
 </script>
 </head>
@@ -26,7 +46,7 @@ function noticeCheck(obj){
 	<div class = "container" id = "board">
 		<h3 class="text-secandary">[공지사항 작성]</h3>
 		<span class="badge badge-secondary">관리자</span>
-		<form action="${root}/notice/writeOk" method = "post" onsubmit = "return noticeCheck(this)">
+		<form action="${root}/notice/writeOk" method = "post" onsubmit = "return noticeCheck(this)" id = "noticeWrite">
 				<div id = "box">
 					<div class = "writer">
 						<label>작성자</label>
