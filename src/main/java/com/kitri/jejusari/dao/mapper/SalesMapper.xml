@@ -41,6 +41,10 @@
 							       #{item}
 							</foreach>
 						</if>
+						<if test="sales_category_rent!=null and !sales_category_rent.equals('')">
+							and sales_category_rent=#{sales_category_rent}
+						</if>
+						
 		<![CDATA[	
 					order by sales_number desc		
 				) a
