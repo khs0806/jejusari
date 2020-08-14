@@ -44,6 +44,9 @@
 						<if test="sales_category_rent!=null and !sales_category_rent.equals('')">
 							and sales_category_rent=#{sales_category_rent}
 						</if>
+						<if test="sales_address!=null and !sales_address.equals('')">
+							and ( (sales_address || sales_title) like '%' || #{sales_address} || '%') 
+						</if>
 						
 		<![CDATA[	
 					order by sales_number desc		
