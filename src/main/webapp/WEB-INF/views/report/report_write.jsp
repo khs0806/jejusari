@@ -22,7 +22,7 @@
 
 		 }else{   //취소
 
-		     return false;
+			 self.close();
 
 		 }
 	}

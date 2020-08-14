@@ -81,8 +81,12 @@ public class BoardDaoImp implements BoardDao{
 		}
 		
 		@Override
-		public List<String> reportList() {
-			return session.selectList("reportList");
+		public List<String> reportList(int startRow, int endRow) {
+			Map<String, Integer> hmap=new HashMap<String, Integer>();
+			hmap.put("startRow", startRow);
+			hmap.put("endRow", endRow);
+			
+			return session.selectList("reportadmin_list",hmap);
 		}
 
 		@Override
@@ -90,6 +94,11 @@ public class BoardDaoImp implements BoardDao{
 			return session.delete("reportDel", sales_number);
 		}
 
+		@Override
+		public int reportCount() {
+			return session.selectOne("reportadmin_count");
+		}
+		
 		@Override
 		public List<ReportDto> ReportDetail(int report_number) {
 			

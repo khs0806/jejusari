@@ -66,27 +66,48 @@ function pop(root,report_number){
 				</div>
 		</c:forEach>
 		</div>
-		<div class="col-md-2" id="textCut" id="ptitle"><a href="http://localhost:8181/jeju/sales/detail?sales_number=${ReportDto.report_number}">${ReportDto.report_title}</a></div>
-		<div class="col-md-2" id="textCut" id="pcontent"><a href="http://localhost:8181/jeju/sales/detail?sales_number=${ReportDto.report_number}" onclick="pop('${root}','${ReportDto.report_number}')">${ReportDto.report_content}</a></div> 
+		
 		<!-- 페이징 -->
+		<fmt:parseNumber var = "pageCount" value = "${count / boardSize + (count % boardSize == 0 ? 0 : 1)}" integerOnly = "true"/>
+		<c:set var = "pageBlock" value = "${5}"/>
+		<fmt:parseNumber var = "result" value = "${(currentPage - 1) / pageBlock}" integerOnly = "true"/>
+		<c:set var = "startPage" value = "${result * pageBlock + 1}"/>
+		<c:set var = "endPage" value ="${startPage + pageBlock - 1}"/>
+		<c:if test="${endPage > pageCount }">
+			<c:set var = "endPage" value = "${pageCount}"/>
+		</c:if>
+
+		<c:if test="${startPage > pageBlock }">
+			<script type="text/javascript">
+				$(function(){
+					$('#previous').removeClass('disabled');
+				})
+			</script>
+		</c:if>
+		<c:if test="${endPage < pageCount }">
+			<script type="text/javascript">
+				$(function(){
+					$('#next').removeClass('disabled');
+				})
+			</script>
+		</c:if>
 		<div class="d-flex bd-highlight">
 			 <div class="p-2 w-100 bd-highlight">
 				<nav aria-label="Page navigation">
 				  <ul class="pagination justify-content-center">
-				    <li class="page-item disabled">
-				      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+				    <li id = "previous" class="page-item disabled">
+				      <a class="page-link" href="${root}/report/admin?pageNumber=${startPage - pageBlock}" tabindex="-1" aria-disabled="true">이전</a>
 				    </li>
-				    <li class="page-item"><a class="page-link" href="#">1</a></li>
-				    <li class="page-item"><a class="page-link" href="#">2</a></li>
-				    <li class="page-item"><a class="page-link" href="#">3</a></li>
-				    <li class="page-item">
-				      <a class="page-link" href="#">Next</a>
+				    <c:forEach var = "i" begin = "${startPage}" end = "${endPage}">
+				    <li class = "page-item"><a class="page-link" href="${root}/report/admin?pageNumber=${i}">${i}</a></li>
+				  	</c:forEach>
+				    <li id = "next" class = "page-item disabled">
+				      <a class = "page-link" href = "${root}/report/admin?pageNumber=${startPage + pageBlock}">다음</a>
 				    </li>
 				  </ul>
 				  
 				</nav>
 			 </div>
-		</div>
 	</div>
 </body>
 </html>
