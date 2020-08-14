@@ -29,7 +29,7 @@
 		
 		//스크랩 클릭시
 		var scount=${scrap_count };
-		$("input:button[name=scrap_btn]").on("click",function(){
+			$("input:button[name=scrap_btn]").on("click",function(){
 				$.ajax({
 			      	url:"${root}/sales/scrap?sales_number=${salesDto.sales_number}",
 			     	type:"get",
@@ -117,7 +117,7 @@
 		$("input:button[name=sales_update]").click(function(){
 			var check=confirm("매물 정보를 수정하시겠습니까?");
 			if(check==true){
-				alert("ok");
+				location.href="${root }/sales/update?sales_number=${salesDto.sales_number }&pageNumber=${pageNumber}";
 			}
 		})
 		

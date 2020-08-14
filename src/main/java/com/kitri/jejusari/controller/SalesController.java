@@ -160,4 +160,23 @@ public class SalesController {
 		}
 		return obj;
 	}
+	
+	@RequestMapping(value="/sales/update")
+	public ModelAndView salesUpdate(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+
+		salesService.salesUpdate(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value="/sales/updateOk", method=RequestMethod.POST)
+	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		mav.addObject("salesDto",salesDto);
+		
+		salesService.salesUpdateOk(mav);
+		return mav;
+	}
 }

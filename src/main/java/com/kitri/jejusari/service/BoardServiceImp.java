@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -207,16 +208,16 @@ public class BoardServiceImp implements BoardService{
 		// TODO Auto-generated method stub
 
 		Map<String, Object> map=mav.getModelMap();
-		/*
-		 * HttpServletRequest request=(HttpServletRequest)map.get("request");
-		 * HttpSession session=request.getSession();
-		 * 
-		 * session.getAttribute(name);
-		 */
+		
+		  HttpServletRequest request=(HttpServletRequest)map.get("request");
+		  HttpSession session=request.getSession();
+		  
+		  String member_id=(String) session.getAttribute("member_id");
+		 
 		ReportDto reportDto=(ReportDto) map.get("reportDto");
 
 		//session받아서 id넣어주기 : "kke"대신에 (String)session.getAttr~( );
-		reportDto.setMember_id("kke");
+		reportDto.setMember_id(member_id);
 
 		int check=boardDao.reportInsert(reportDto);
 		System.out.println("check : " + check);
