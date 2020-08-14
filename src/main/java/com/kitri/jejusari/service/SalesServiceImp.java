@@ -87,6 +87,17 @@ public class SalesServiceImp implements SalesService {
 		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
 		System.out.println(factorMap.toString());
 		
+		//매물더미데이터 업데이트_한번 돌리면 될듯?합니다?
+/*		for(int i=1;i<=123;i++) {
+			if(i==57) continue;
+			if(i==113) continue;
+			Map<String, Object> factorMap_update = salesDao.getFactor(i);		
+			int check=salesDao.updateSalesDB(factorMap_update);
+		}
+*/		
+		int factor_total_all=salesDao.totalAll();
+		mav.addObject("factor_total_all",factor_total_all);
+		
 		mav.addObject("scrap_count",scrap_count);
 		mav.addObject("pageNumber",pageNumber);
 		mav.addObject("memberDto",memberDto);
@@ -121,10 +132,13 @@ public class SalesServiceImp implements SalesService {
 		
 		int check=0;
 		int scrap_check=salesDao.salesScrapCheck(map);
-		if(scrap_check==0) {
-			check=salesDao.salesScrap(map);
+		if(scrap_check==0) {		//스크랩추가
+			int ok=salesDao.salesScrapDo(map);
+			if(ok>0) check=1;
+		}else {				//스크랩삭제
+			int ok=salesDao.salesScrapDelete(map);
+			if(ok>0) check=-1;
 		}
-		
 		return check;
 	}
 
