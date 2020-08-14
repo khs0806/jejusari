@@ -6,7 +6,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="${root}/css/admin/report_admin.css">
 <meta charset="UTF-8">
 <title>신고관리</title>
 <style type="text/css">
@@ -34,6 +33,7 @@ function pop(root,report_number){
 	var url="${root}/report/detail?report_number="+report_number;
 	window.open(url, "", "width=600, height=600, resizable = no, scrollbars = no" );
 }
+
 $(document).ready(function(){
 		$("#memberAdmin").click(function(){
 			//alert("member");
@@ -133,5 +133,6 @@ $(document).ready(function(){
 				</nav>
 			 </div>
 	</div>
+</div>
 </body>
 </html>

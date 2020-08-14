@@ -76,7 +76,7 @@ $(document).ready(function(){
 		location.href="${root}/main";
 	</script>
 </c:if>
-	<div class = "container" id="admin_container">
+	<div class = "container">
 		<div class="btn-group">
 		    <button type="button" class="btn btn-secondary" id="memberAdmin">회원 관리</button>
 		    <button type="button" class="btn btn-secondary" id="noticeAdmin">공지사항 관리</button>

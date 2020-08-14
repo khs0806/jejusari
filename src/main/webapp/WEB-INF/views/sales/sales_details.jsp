@@ -140,17 +140,6 @@
 	})
 	});
 
-
-
-		function del(root,sales_number){
-			var url = root+"/report/delete?sales_number="+sales_number;
-			location.href=url;
-		}
-		
-		function update(root,sales_number){
-			 var url= root+"/report/update?sales_number="+sales_number;
-			 location.href=url;
-		 }
 </script>
 
 <div class="container" id="sales_detail">
@@ -383,9 +372,20 @@
 	
 	<!-- 관리자; 신고, 삭제 -->
 	<c:if test="${member_level=='admin'}">
+		<script type="text/javascript">
+			function del(root,sales_number){
+				var url = root+"/report/delete?sales_number="+sales_number;
+				location.href=url;
+			}
+			
+			function update(root,sales_number){
+				 var url= root+"/report/update?sales_number="+sales_number;
+				 location.href=url;
+			 }
+		</script>
 		<div id="plus_btn">
-			<input type="button" name="sales_update" value="신고처리" class="btn btn-light btn-sm" onclick="update('${root}','${salesDto.sales_number}')"/>			<!-- dark? -->
-			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm" onclick="del('${root}','${salesDto.sales_number}')"/>
+			<input type="button" name="update" value="신고처리" class="btn btn-light btn-sm" onclick="update('${root}','${salesDto.sales_number}')"/>			<!-- dark? -->
+			<input type="button" name="delete" value="삭제" class="btn btn-light btn-sm" onclick="del('${root}','${salesDto.sales_number}')"/>
 		</div>
 	</c:if>
 </div>
