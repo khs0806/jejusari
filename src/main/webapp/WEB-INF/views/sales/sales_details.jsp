@@ -135,8 +135,14 @@
 			if(check==true){
 				window.open('${root}/sales/delete?sales_number=${salesDto.sales_number}', '', 'width = 600, height = 600');
 			}
-		})
-	});		
+		});
+		
+	});	
+	
+	function del(root,sales_number){
+		 var url= root+"/report/delete?sales_number="+sales_number;
+		 location.href=url;
+	 }
 </script>
 
 <div class="container" id="sales_detail">
@@ -371,7 +377,7 @@
 	<c:if test="${member_level=='admin' }">
 		<div id="plus_btn">
 			<input type="button" name="sales_report_handle" value="신고처리" class="btn btn-light btn-sm"/>		<!-- dark? -->
-			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
+			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm" onclick="del('${root}','${salesDto.sales_number}')"/>
 		</div>
 	</c:if>
 </div>
