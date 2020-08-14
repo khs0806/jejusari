@@ -17,29 +17,48 @@
 			location.href="${root}/member/login";
 		}
 		
+		//스크랩 버튼색...
+		if(${scrap_check>0 }){
+			$("input:button[name=scrap_btn]").css("color","#212529");
+			$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+			$(".scrap_star").attr("src","${root}/img/star2.png");
+		}
+		
+		var opac_num=(${factorMap.factor_total}/${factor_total_all})*100
+		$(".factor_img").css("filter","opacity("+opac_num+")");
+		
 		//스크랩 클릭시
-		$("input:button[name=scrap_btn]").one("click",function(){
-			$.ajax({
-		      	url:"${root}/sales/scrap?sales_number=${salesDto.sales_number}",
-		     	type:"get",
-		      	dataType:"text",
-		      	success:function(data){
-		      		var check=$.parseJSON(data);
-		      		
-		      		if(check==1){
-		      			$("input:button[name=scrap_btn]").css("color","#212529");
-						$("input:button[name=scrap_btn]").css("background-color","#ffc107");
-						$("input:button[name=scrap_btn]").css("background-color","#ffc107");
-						$(".scrap_star").attr("src","${root}/img/star2.png");
-						$(".scrap_count").text(${scrap_count }+1);
-						
-						alert("스크랩이 완료되었습니다."); 
-		      		}else{
-		      			alert("이미 스크랩하셨습니다.");
-		      		}
-		      		
-		      	}
-		   	});		
+		var scount=${scrap_count };
+		$("input:button[name=scrap_btn]").on("click",function(){
+				$.ajax({
+			      	url:"${root}/sales/scrap?sales_number=${salesDto.sales_number}",
+			     	type:"get",
+			      	dataType:"text",
+			      	success:function(data){
+			      		var check=$.parseJSON(data);
+			      		
+			      		if(check==1){
+			      			$("input:button[name=scrap_btn]").css("color","#212529");
+							$("input:button[name=scrap_btn]").css("background-color","#ffc107");
+							$(".scrap_star").attr("src","${root}/img/star2.png");
+							
+							scount=scount+1;
+							$(".scrap_count").text(scount);
+
+							alert("스크랩이 완료되었습니다."); 
+			      		}else if(check==-1){
+			      			$("input:button[name=scrap_btn]").css("color","#ffc107");
+							$("input:button[name=scrap_btn]").css("background-color","#ffffff");
+							$(".scrap_star").attr("src","${root}/img/star1.png");
+							
+							scount=scount-1;
+							$(".scrap_count").text(scount);
+
+							alert("스크랩이 취소되었습니다."); 
+			      		}
+			      		
+			      	}
+			   	});				
 		})
 		
 		//신고하기 클릭시
@@ -155,12 +174,7 @@
 		</div>
 
 		<div class="scrap_report">
-			<c:if test="${scrap_check==0 }">
-				<img class="scrap_star" src="${root}/img/star1.png" width="20px" height="20px"/>
-			</c:if>
-			<c:if test="${scrap_check>0 }">
-				<img class="scrap_star" src="${root}/img/star2.png" width="20px" height="20px"/>
-			</c:if>
+			<img class="scrap_star" src="${root}/img/star1.png" width="20px" height="20px"/>
 			<span class="scrap_count">${scrap_count }</span>
 			<input type="button" name="scrap_btn" value="스크랩" class="btn btn-outline-warning btn-sm scrap_btn"/>
 			<input type="button" name="report_btn" value="신고하기" class="btn btn-outline-danger btn-sm report_btn"/>
@@ -308,7 +322,7 @@
 			</div>
 			<div class="index_sum">
 				<ul>
-					<li><img src="${root}/img/fruit.png" width="50px" height="50px"/></li>
+					<li><img class="factor_img" src="${root}/img/fruit.png" width="50px" height="50px"/></li>
 					<li>총 귤 점수</li>
 					<li>${factorMap.factor_total}</li>
 				</ul>
