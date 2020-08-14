@@ -381,11 +381,34 @@ public class BoardServiceImp implements BoardService{
 	
 	@Override
 	public void getReportList(ModelAndView mav) {
+		Map<String, Object> map= mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
-		List<String> reportList = boardDao.reportList();
+		//페이징
+		String pageNumber=request.getParameter("pageNumber");
+		System.out.println("pageNumber"+pageNumber);
+		if(pageNumber == null) pageNumber = "1";
+		int currentPage = Integer.parseInt(pageNumber);	//요청한 페이지
+		int boardSize = 10;		// [1] start:1, end:10  [2] start:11, end:20
+
+		int startRow = (currentPage - 1) * boardSize + 1;	//1  11 21 31
+		int endRow = currentPage * boardSize;			//10 20 30 40
+
+		//count 사용해서 글이 아예 없는경우 페이징 사라지게
+		int count = boardDao.reportCount();
+		List<String> reportList = null;
+
+		if(count > 0) {
+			//startRow, endRow
+			 reportList = boardDao.reportList(startRow, endRow);
+		}
 		
 		mav.addObject("ReportList", reportList);
-		//System.out.println(reportList);
+		System.out.println(reportList);
+		
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("count", count);
 		
 		mav.setViewName("/admin/report_admin.tiles");
 	}

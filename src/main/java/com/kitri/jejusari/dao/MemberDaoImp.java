@@ -1,6 +1,8 @@
 package com.kitri.jejusari.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +33,30 @@ public class MemberDaoImp implements MemberDao{
 		return session.delete("member_delete", member_id);
 	}
 	
-	@Override
-	public List<String> memberList() {
-		
-		return session.selectList("memberList");
-	}
-
+	/*
+	 * @Override public List<String> memberList() {
+	 * 
+	 * return session.selectList("memberList"); }
+	 */
 
 	@Override
 	public int dropMember(List<String> list) {
 
 		return session.delete("dropMember", list);
+	}
+
+	@Override
+	public int memberCount() {
+		return session.selectOne("memberadmin_count");
+	}
+
+	@Override
+	public List<String> memberList(int startRow, int endRow) {
+		Map<String, Integer> hmap=new HashMap<String, Integer>();
+		hmap.put("startRow", startRow);
+		hmap.put("endRow", endRow);
+		
+		return session.selectList("memberadmin_list", hmap);
 	}
 	
 }
