@@ -78,8 +78,8 @@
 				  <label class="form-check-label" for="inlineCheckbox3">CCTV</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input name="sales_option" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="엘레베이터">
-				  <label class="form-check-label" for="inlineCheckbox4">엘레베이터</label>
+				  <input name="sales_option" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="엘리베이터">
+				  <label class="form-check-label" for="inlineCheckbox4">엘리베이터</label>
 				</div>
 				<!-- 주소찾기 검색창 -->
 				<div class="input-group input-group-sm mb-3">

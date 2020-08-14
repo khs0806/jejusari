@@ -62,12 +62,19 @@ public class SalesDaoImp implements SalesDao {
 		if(salesDto.getSales_category_type()!=null) {
 			 sales_category_type_list = salesDto.getSales_category_type().split(",");
 		}
+		String[] sales_option_list=null;
+		if(salesDto.getSales_option()!=null) {
+			sales_option_list=salesDto.getSales_option().split(",");
+			for(int i=0; i<sales_option_list.length; i++) {
+				System.out.println(sales_option_list[i]);
+			}
+		}
 
-		
 		hmap.put("startRow", startRow);
 		hmap.put("endRow", endRow);
 		hmap.put("sales_category_rent", salesDto.getSales_category_rent());
 		hmap.put("sales_category_type_list", sales_category_type_list);
+		hmap.put("sales_option_list", sales_option_list);
 		hmap.put("sales_address", salesDto.getSales_address());	//검색키워드
 		return session.selectList("sales_list", hmap);
 	}
