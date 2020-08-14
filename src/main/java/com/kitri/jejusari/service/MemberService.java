@@ -21,4 +21,6 @@ public interface MemberService {
 	public int dropMember(List<String> list);
 	// 임시 로그인
 	public MemberDto tempLogin(MemberDto memberDto);
+	// 회원수정
+	public int memberUpdate(MemberDto memberDto);
 }

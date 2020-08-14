@@ -66,4 +66,9 @@ public class MemberDaoImp implements MemberDao{
 		return member;
 	}
 	
+	@Override
+	public int memberUpdate(MemberDto memberDto) {
+		return session.update("member_update", memberDto);
+	}
+	
 }

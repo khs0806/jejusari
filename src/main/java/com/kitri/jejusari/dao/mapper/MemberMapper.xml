@@ -61,4 +61,12 @@
 		]]>
 	</select>
 	
+	<update id="member_update">
+		update member set 
+			member_name = #{member_name},
+			member_phone = #{member_phone, jdbcType=VARCHAR},
+			member_email = #{member_email}
+		where member_id = #{member_id}
+	</update>
+	
 </mapper>

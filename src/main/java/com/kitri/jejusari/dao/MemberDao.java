@@ -26,4 +26,7 @@ public interface MemberDao {
 	
 	// 임시 로그인
 	public MemberDto tempLogin(MemberDto memberDto);
+	
+	// 회원 수정
+	public int memberUpdate(MemberDto memberDto);
 }

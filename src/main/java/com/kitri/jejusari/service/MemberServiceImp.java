@@ -81,4 +81,9 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.tempLogin(memberDto);
 	}
 	
+	@Override
+	public int memberUpdate(MemberDto memberDto) {
+		return memberDao.memberUpdate(memberDto);
+	}
+	
 }

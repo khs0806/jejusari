@@ -43,7 +43,6 @@ public class MemberController {
 		return "main/main.tiles";
 	}
 	
-	
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw1")
 	public String withdraw() {
@@ -133,20 +132,20 @@ public class MemberController {
 	// 카카오로 로그인 or 회원가입
 	@RequestMapping("/test/join")
 	public ModelAndView kakaoLogin(HttpServletRequest request) {
-
+		
 		ModelAndView mav = new ModelAndView();
-
+		
 		// 카카오의 인증과정
 		String authorize_code = request.getParameter("code");
 		String access_Token = KakaoLoginAPI.kakaoAccessToken(authorize_code);
-
+		
 		// access_token으로 사용자의 카카오 로그인 정보를 가져온다.
 		HashMap<String, Object> userInfo = KakaoLoginAPI.getUserInfo(access_Token);
 		
 		String member_id = (String)userInfo.get("id");
 		String member_name = (String)userInfo.get("nickname");
 		String member_email = (String)userInfo.get("email");
-
+		
 		// 이미 가입되어있는 회원인지 확인한다.
 		int id_check = memberService.member_id_check(member_id);
 		if (id_check > 0) {
@@ -216,11 +215,43 @@ public class MemberController {
 		return "member/member_mypage.tiles";
 	}
 	
-	// 회원수정
+	// 회원수정 화면
 	@RequestMapping(value="/member/update")
-	public String update() {
+	public String updateView() {
 		
 		return "member/member_update.tiles";
+	}
+	
+	// 회원수정
+	@RequestMapping(value="/member/update", method=RequestMethod.POST)
+	public ModelAndView updateOk(HttpServletRequest request, MemberDto memberDto) {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		
+		String member_id = (String) session.getAttribute("member_id");
+		String member_phone = request.getParameter("no1") 
+					  + "-" + request.getParameter("no2") 
+					  + "-" + request.getParameter("no3");
+		String email = memberDto.getMember_email() + "@" + request.getParameter("email");
+		
+		memberDto.setMember_id(member_id);
+		memberDto.setMember_email(email);
+		
+		// 회원가입자가 일반회원인 경우, 핸드폰 번호를 입력 안했을때
+		if (request.getParameter("no2").length() == 0 || request.getParameter("no3").length() == 0) {
+			memberDto.setMember_phone(null);
+		} else {
+		// 중개업자인 경우
+			memberDto.setMember_phone(member_phone);
+		}
+		
+		System.out.println(memberDto.toString());
+		
+		int check = memberService.memberUpdate(memberDto);
+		mav.addObject("check", check);
+		mav.setViewName("member/member_updateOk.tiles");
+		
+		return mav;
 	}
 	
 	// 회원 관리
