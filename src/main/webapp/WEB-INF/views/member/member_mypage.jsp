@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -18,23 +19,46 @@
         	$("#sales_cards").hide();
         }
 		
-// 		$("input:button[name=delBtn]").one("click", function(){
-// 			var check=confirm("정말 삭제하시겠습니까?");
+		//스크랩 삭제	
+		$("input:button[name=delScrapBtn]").on("click",function(){
+			var sales_number=$(this).next().val();
+// 			alert(sales_number);
 			
-// 			var id=$("#id").val();
-// 			var password=$("#password").val();
-// 			var sendData="id=" + id + "&password=" + password; 
+			$.ajax({
+		      	url:"${root}/sales/scrap?sales_number=" + sales_number,
+		     	type:"get",
+		      	dataType:"text",
+		      	success:function(data){
+		      		var check=$.parseJSON(data);
+// 	      			alert(check);
+		      		if(check==-1){
+						alert("스크랩이 취소되었습니다."); 
+						location.href="${root}/member/mypage";
+		      		}
+		      	}
+			});
+		});
+		
+		//매물 삭제	
+		$("input:button[name=delSalesBtn]").on("click",function(){
+			var sales_number=$(this).next().val();
+			alert(sales_number);
 			
-// 			if(check) {
-// 				$.ajax {
-// 					url: "${root}/sales/scrap?sales_number=${salesDto.sales_number}",
-// 					type: "post",
-// 					success: function(){
-						
-// 					}
-// 				}
-// 			}
-// 		});
+			$.ajax({
+		      	url:"${root}/sales/delete?sales_number=" + sales_number,
+		     	type:"get",
+		      	dataType:"text",
+		      	success:function(data){
+		      		var check=$.parseJSON(data);
+// 	      			alert(check);
+		      		if(check==-1){
+						alert("스크랩이 취소되었습니다."); 
+						location.href="${root}/member/mypage";
+		      		}
+		      	}
+			});
+		});
+	
 	});
 </script>
 </head>
@@ -52,11 +76,14 @@
 			<p style="">나의 스크랩</p>
 			
 			<div class="scrap-cards">
-				<c:forEach items="${scrapImgList}" var="scrap">
-					<div class="card border-warning card-sh" style="max-width: 20rem;">
+				<c:forEach items="${scrapList}" var="scrap">
+					<div id="myscrap" class="card border-warning card-sh" style="max-width: 20rem;">
 						<div class="card-body">
-							<img alt="test" src="${root}${scrap}" width="100%" height="100%">
-							<input name="delBtn" type="button" class="btn btn-warning" value="삭제">
+							<a href="${root}/sales/detail?sales_number=${scrap.sales_number}&pageNumber=1"><img alt="test" src="${root}${scrap.image_url}" width="280px" height="250px"></a>
+							<c:set var="title" value="${scrap.sales_title}"/>
+							${fn:substring(title, 0, 10)}...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input name="delScrapBtn" type="button" class="btn btn-warning" value="삭제">
+							<input type="hidden" value="${scrap.sales_number}"/>
 						</div>
 					</div>
 				</c:forEach>
@@ -69,11 +96,14 @@
 				<p>내가 올린 매물</p>
 				
 				<div class="scrap-cards">
-					<c:forEach items="${salesImgList}" var="sales">
+					<c:forEach items="${salesList}" var="sales">
 						<div class="card border-warning card-sh" style="max-width: 20rem;">
-							<div class="card-body">
-								<img alt="test" src="${root}${sales}" width="100%" height="100%">
-								<input name="delBtn" type="button" class="btn btn-warning" value="삭제">
+							<div class="card-body" >
+								<a href="${root}/sales/detail?sales_number=${sales.sales_number}&pageNumber=1"><img alt="test" src="${root}${sales.image_url}" width="280px" height="250px"></a>
+								<c:set var="title" value="${sales.sales_title}"/>
+								${fn:substring(title, 0, 10)}...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input name="delSalesBtn" type="button" class="btn btn-warning" value="삭제">
+								<input type="hidden" value="${sales.sales_number}"/>
 							</div>
 						</div>
 					</c:forEach>

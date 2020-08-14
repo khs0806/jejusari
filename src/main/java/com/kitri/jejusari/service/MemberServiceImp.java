@@ -1,5 +1,6 @@
 package com.kitri.jejusari.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dao.MemberDao;
 import com.kitri.jejusari.dto.MemberDto;
+import com.kitri.jejusari.dto.SalesDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 @Service
 public class MemberServiceImp implements MemberService {
@@ -42,7 +45,7 @@ public class MemberServiceImp implements MemberService {
 		mav.addObject("MemberList", memberList);
 		//System.out.println(memberList);
 		
-		mav.setViewName("/admin/member_admin.tiles");
+		mav.setViewName("admin/member_admin.tiles");
 	}
 
 	@Override
@@ -53,19 +56,24 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public void myPage(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
+		
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
-		HttpSession session=request.getSession();
+		
+		HttpSession session =(HttpSession) map.get("session");
 		
 		String member_id=(String) session.getAttribute("member_id");
+		System.out.println("서비스-아이디 : " + member_id);
 		
-		List<String> scrapImgList=memberDao.getScrapImg(member_id);
-		System.out.println(scrapImgList);
+		List<SalesImgDto> scrapList=memberDao.getScrap(member_id);
+		System.out.println("서비스-스크랩리스트 : " + scrapList);
 		
-		List<String> salesImgList=memberDao.getSalesImg(member_id);
-		System.out.println(salesImgList);
+		List<SalesImgDto> salesList=memberDao.getSales(member_id);
+		System.out.println("서비스-세일즈리스트 : " + salesList);
 		
-		mav.addObject("scrapImgList", scrapImgList);
-		mav.addObject("salesImgList", salesImgList);
+//		SalesDto salesDto=memberDao.
+		
+		mav.addObject("scrapList", scrapList);
+		mav.addObject("salesList", salesList);
 		mav.setViewName("member/member_mypage.tiles");
 	}
 	
@@ -74,17 +82,13 @@ public class MemberServiceImp implements MemberService {
 		return memberDao.tempLogin(memberDto);
 	}
 	
-//	@Override
-//	public void deleteScrap(ModelAndView mav) {
-//		Map<String, Object> map=mav.getModelMap();
-//		HttpServletRequest request=(HttpServletRequest) map.get("request");
-//		HttpSession session=request.getSession();
-//  
-//		String member_id=(String) session.getAttribute("member_id");
-//		String sales_number=(String) request.getAttribute("sales_number");
-//	  
-//		memberDao.deleteScrap(member_id, sales_number);
-//  
-//	}
+	@Override
+	public void deleteScrap(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpSession session=request.getSession();
+  
+  
+	}
 	 
 }

@@ -102,7 +102,7 @@ public class SalesController {
 		
 		mav.setViewName("sales/sales_delete");
 		
-		return mav; 
+		return mav;
 		
 	}
 	

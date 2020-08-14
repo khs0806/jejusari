@@ -26,7 +26,7 @@ public interface MemberService {
 	public void myPage(ModelAndView mav);
 	
 	// 스크랩 카드 삭제
-//	public void deleteScrap(ModelAndView mav);
+	public void deleteScrap(ModelAndView mav);
 	
 	// 임시 로그인
 	public MemberDto tempLogin(MemberDto memberDto);

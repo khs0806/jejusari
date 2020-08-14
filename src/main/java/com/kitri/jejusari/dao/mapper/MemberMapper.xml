@@ -46,19 +46,14 @@
 		select count(*) from member where member_id = #{member_id}
 	</select>
 	
-	<!-- 매물번호 from 스크랩 게시판 -->
-	<select id="getScrapSalesNumber" parameterType="String" resultType="String">
-		select sales_number from scrap where member_id=#{member_id}
-	</select>
+	<!-- 회원탈퇴 -->
+	<delete id="member_delete">
+		delete from member where member_id = #{member_id}
+	</delete>
 	
-	<!-- 매물번호 from 매물 게시판 -->
-	<select id="getSalesSalesNumber" parameterType="String" resultType="String">
-		select sales_number from sales where member_id=#{member_id}
-	</select>
-	
-	<!-- 이미지 가져오기 -->
-	<select id="getImg" parameterType="list" resultType="String">
-		select image_url
+	<!-- 내 스크랩 가져오기 -->
+	<select id="getScrap" parameterType="String" resultType="com.kitri.jejusari.dto.SalesImgDto">
+		<!-- select image_url
 		from sales_img
 		where sales_number in 
 		<foreach collection="list" item="item" separator="," open="(" close=")">
@@ -67,12 +62,40 @@
 			)
 		</foreach>
 		and image_index=1
-		order by sales_number
+		order by sales_number -->
+		
+		select image_url, s.sales_number, l.sales_title
+		from sales_img s, sales l
+		where s.sales_number in (
+            select sales_number
+            from scrap
+            where member_id = #{member_id}
+        )
+        and s.sales_number=l.sales_number
+		and image_index=1
 	</select>
 	
-	<!-- 회원탈퇴 -->
-	<delete id="member_delete">
-		delete from member where member_id = #{member_id}
-	</delete>
+	<!-- 내 매물 가져오기 -->
+	<select id="getSales" parameterType="String" resultType="com.kitri.jejusari.dto.SalesImgDto">
+		select image_url, s.sales_number, l.sales_title
+		from sales_img s, sales l
+		where s.sales_number in (
+            select sales_number
+            from sales
+            where member_id = #{member_id}
+        )
+        and s.sales_number=l.sales_number
+		and image_index=1
+	</select>
+	
+	<!-- 매물번호 from 스크랩 게시판 -->
+	<!-- <select id="getScrapSalesNumber" parameterType="String" resultType="String">
+		select sales_number from scrap where member_id=#{member_id} order by scarp_number
+	</select> -->
+	
+	<!-- 매물번호 from 매물 게시판 -->
+	<!-- <select id="getSalesSalesNumber" parameterType="String" resultType="String">
+		select sales_number from sales where member_id=#{member_id}
+	</select> -->
 	
 </mapper>

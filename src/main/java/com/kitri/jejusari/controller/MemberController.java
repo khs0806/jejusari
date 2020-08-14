@@ -86,7 +86,6 @@ public class MemberController {
 	public String temLogin(HttpServletRequest request, MemberDto memberDto, Model model) {
 		
 		logger.info("templogin");
-		System.out.println(memberDto.toString());
 		HttpSession session = request.getSession();
 		MemberDto member = memberService.tempLogin(memberDto);
 		
@@ -94,6 +93,7 @@ public class MemberController {
 			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
 			return "main/main.tiles";
 		}
+		System.out.println(member.toString());
 		
 		session.setAttribute("member_id", member.getMember_id());
 		session.setAttribute("member_name", member.getMember_name());
@@ -213,11 +213,16 @@ public class MemberController {
 	
 	// 마이페이지
 	@RequestMapping(value="/member/mypage")
-	public ModelAndView myPage(HttpServletRequest request, HttpSession session) {
+	public ModelAndView myPage(HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
+		
+		HttpSession session = request.getSession();
 		
 		String member_name=(String) session.getAttribute("member_name");
 		String member_level=(String) session.getAttribute("member_level");
+		System.out.println(member_level);
+		
+		mav.addObject("session", session);
 		
 		mav.addObject("member_name", member_name);
 		mav.addObject("member_level", member_level);
@@ -234,7 +239,7 @@ public class MemberController {
 		
 		mav.addObject("request", request);
 		
-//		memberService.deleteScrap(mav);
+		memberService.deleteScrap(mav);
 		
 		return mav;
 	}
