@@ -16,7 +16,7 @@ public class Criteria {
 		return pageNumber;
 	}
 
-	public void setPage(int pageNumber) { // 페이지 번호 set
+	public void setPageNumber(int pageNumber) { // 페이지 번호 set
 		if (pageNumber <= 0) {
 			this.pageNumber = 1;
 		}
