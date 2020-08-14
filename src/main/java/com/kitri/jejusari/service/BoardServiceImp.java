@@ -438,7 +438,9 @@ public class BoardServiceImp implements BoardService{
 	  int check=0;
 	  Map<String, Object> map=mav.getModelMap();
 	  HttpServletRequest request=(HttpServletRequest)map.get("request");
+	  HttpSession session =request.getSession();
 	  
+	  String member_level = (String)session.getAttribute("member_level");
 	  int sales_number = Integer.parseInt(request.getParameter("sales_number"));
 	 
 	  check = boardDao.AdDelete(sales_number); 
@@ -448,6 +450,7 @@ public class BoardServiceImp implements BoardService{
 	  //System.out.println("BoardService:"+sales_number+"\t"+check);
 	  
 	  mav.addObject("check", check); 
+	  mav.addObject("member_level",member_level);
 	  mav.addObject("sales_number",sales_number);
 	  
 	  }
@@ -460,8 +463,6 @@ public class BoardServiceImp implements BoardService{
 		
 		int report_number = Integer.parseInt(request.getParameter("report_number"));
 		
-	
-		
 		List<ReportDto> list = boardDao.ReportDetail(report_number);
 		
 		mav.addObject("list", list);
@@ -472,5 +473,23 @@ public class BoardServiceImp implements BoardService{
 	
 		mav.setViewName("/report/report_detail");
 		
+	}
+
+	@Override
+	public int reportUpdate(ModelAndView mav) {
+		 Map<String, Object> map=mav.getModelMap();
+	     HttpServletRequest request=(HttpServletRequest)map.get("request");
+	     int sales_number = Integer.parseInt(request.getParameter("sales_number"));
+	     
+	     System.out.println("sales_number"+sales_number);
+	     
+	     int check = boardDao.reportUpdate(sales_number);
+	
+	     System.out.println(check);
+	     
+	     mav.addObject("check", check);	
+	     mav.addObject("sales_number", sales_number);	
+	     
+	     return check;
 	}
 }

@@ -247,7 +247,6 @@ public class SalesServiceImp implements SalesService {
 			List<String> factors = KakaoLocalAPI.kakaoAPI(address);
 			System.out.println(factors.toString());
 			Map<String, Object> factorMap = new HashMap<String, Object>();
-			
 			// 지수map에 데이터 담기
 			factorMap.put("factor_gas", factors.get(0));
 			factorMap.put("factor_mart", factors.get(1));
@@ -255,7 +254,7 @@ public class SalesServiceImp implements SalesService {
 			factorMap.put("factor_hospital", factors.get(3));
 			factorMap.put("factor_tour", factors.get(4));
 			
-			// 지수 토탈점수 구하기
+			 //지수 토탈점수 구하기
 			int sum = 0;
 			for(int i=0; i<factors.size(); i++) {
 				sum += Integer.parseInt(factors.get(i));

@@ -118,6 +118,7 @@
 						});
 					});
 			</script>
+
 			<!-- 여기에 c:if써서 월세면 보증금도 추가, 전세면 보증금만 나오게, 매매는 가격만 나오게 -->
 				<div class="input-group input-group-sm mb-2" id="sales_deposit">
 					<div class="input-group-prepend">

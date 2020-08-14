@@ -54,9 +54,9 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		mav.addObject(request);
-		
+		HttpSession session = request.getSession();
 		//session으로 아이디 가져오고 나선 없어질 코드
-		salesDto.setMember_id("kke");
+		salesDto.setMember_id((String)session.getAttribute("member_id"));
 		//System.out.println(salesDto);
 		
 		mav.addObject("salesDto", salesDto);
