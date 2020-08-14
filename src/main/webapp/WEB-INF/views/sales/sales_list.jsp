@@ -55,12 +55,12 @@
 			</div>
 
 			<!-- range -->
-			<input type="range" min="0" max="20" step="0.1" onchange="updateCostInput(this.value);"> <label>가격</label>
+			<!-- <input type="range" min="0" max="20" step="0.1" onchange="updateCostInput(this.value);"> <label>가격</label>
 			<input type="text" style="text-align:center;"size="1" id="costInput" value=""><span>억</span>
 			<input type="range"  onchange="updateAreaInput(this.value);"> <label>면적</label>
 			<input type="text" style="text-align:center;"size="1" id="areaInput" value=""><span>평</span>
 			<br>
-			
+			 -->
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="checkbox" name="sales_option" id="foolOption" value="풀옵션">
 			  <label class="form-check-label" for="foolOption">풀옵션</label>

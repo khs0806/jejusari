@@ -93,7 +93,6 @@ public class PageMaker {
 	            .queryParam("sales_address", ((SalesDto)cri).getSales_address())
 	            .replaceQueryParam("sales_option", ((SalesDto)cri).getSales_option())
 	            .build(); 
-	 System.out.println(uriComponents.getQuery());
 	    return uriComponents.toUriString();  
 	}
 

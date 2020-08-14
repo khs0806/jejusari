@@ -190,29 +190,28 @@ public class SalesServiceImp implements SalesService {
 		if(salesDto.getSales_category_type()!=null) {
 			String[] sales_category_type_list = salesDto.getSales_category_type().split(",");
 			 hmap.put("sales_category_type_list", sales_category_type_list);
-			 System.out.println("salesDto.getSales_category_type():"+salesDto.getSales_category_type().toString());
+//			 System.out.println("salesDto.getSales_category_type():"+salesDto.getSales_category_type().toString());
 		}
 		
 		//String[] sales_option_list=null;
 		if(salesDto.getSales_option()!=null) {
 			String[] sales_option_list=salesDto.getSales_option().split(",");
-			System.out.println("sales_option_list.toString()"+sales_option_list.toString());
+//			System.out.println("sales_option_list.toString()"+sales_option_list.toString());
 			hmap.put("sales_option_list", sales_option_list);
 			
 		}
-		
-		if(salesDto.getSales_category_rent()=="") {
-			System.out.println("공간있어요");
-		}
+//		
+//		if(salesDto.getSales_category_rent()=="") {
+//			System.out.println("공간있어요");
+//		}
 		hmap.put("sales_category_type",salesDto.getSales_category_type());
 		hmap.put("sales_option",salesDto.getSales_option());
 		hmap.put("sales_category_rent", salesDto.getSales_category_rent());
 		hmap.put("sales_address", salesDto.getSales_address());	//검색키워드
-		System.out.println(hmap.toString());
 		
 		//count 사용해서 글이 아예 없는경우 페이징 사라지게
 		int count=salesDao.salesCount(hmap);
-		System.out.println(count);
+//		System.out.println(count);
 		List<SalesDto> salesList=null;
 		
 		pageMaker.setCri(salesDto);
