@@ -15,8 +15,6 @@
 			<%-- <a href="${root}/member/signup"> --%>
 				<img alt="카카오톡로그인" src="${root}/img/kakao_login_medium_wide.png">
 			</a>
-			<a href=""><span>임시 로그인</span></a>
-			<a href="#"><span>임시 회원가입</span></a>
 		</div>
 		<div class="foot">
 			<div>다른 방법으로 시작하기</div>

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -207,16 +208,16 @@ public class BoardServiceImp implements BoardService{
 		// TODO Auto-generated method stub
 
 		Map<String, Object> map=mav.getModelMap();
-		/*
-		 * HttpServletRequest request=(HttpServletRequest)map.get("request");
-		 * HttpSession session=request.getSession();
-		 * 
-		 * session.getAttribute(name);
-		 */
+
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+	 	HttpSession session=request.getSession();
+	  
+	 	String member_id=(String) session.getAttribute("member_id");
+
 		ReportDto reportDto=(ReportDto) map.get("reportDto");
 
 		//session받아서 id넣어주기 : "kke"대신에 (String)session.getAttr~( );
-		reportDto.setMember_id("kke");
+		reportDto.setMember_id(member_id);
 
 		int check=boardDao.reportInsert(reportDto);
 		System.out.println("check : " + check);
@@ -234,12 +235,21 @@ public class BoardServiceImp implements BoardService{
 	public void noticeDetail(ModelAndView mav) {
 		Map<String,Object> map = mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		HttpSession session = request.getSession();
+		String member_level = (String) session.getAttribute("member_level");
+		String member_id = (String) session.getAttribute("member_id");
+		System.out.println(member_level);
+		System.out.println(member_id);
+		
 		int notice_number=Integer.parseInt(request.getParameter("notice_number"));	
 
 		boardDao.noticeCountPlus(notice_number);
 		NoticeDto noticeDto = boardDao.noticeDetail(notice_number);
 		System.out.println(noticeDto);
 		mav.addObject("noticeDto",noticeDto);
+		mav.addObject("member_level", member_level);
+		mav.addObject("member_id", member_id);
 		mav.setViewName("notice/notice_read.tiles");
 
 	}
@@ -249,6 +259,13 @@ public class BoardServiceImp implements BoardService{
 	public void noticeList(ModelAndView mav) {
 		Map<String, Object> map= mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		HttpSession session = request.getSession();
+		String member_level = (String) session.getAttribute("member_level");
+		String member_id = (String) session.getAttribute("member_id");
+		System.out.println(member_level);
+		System.out.println(member_id);
+		
 
 		//페이징
 		String pageNumber=request.getParameter("pageNumber");
@@ -273,6 +290,8 @@ public class BoardServiceImp implements BoardService{
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("count", count);
+		mav.addObject("member_level", member_level);
+		mav.addObject("member_id", member_id);
 		mav.setViewName("/notice/notice_list.tiles");
 
 	}

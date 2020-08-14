@@ -20,7 +20,7 @@ public interface SalesDao {
 
 	//
 	public int salesCount();
-	public List<SalesDto> salesList(int startRow, int endRow);
+	public List<SalesDto> salesList(int startRow, int endRow, SalesDto salesDto);
 	public int salesWriteOk(SalesDto salesDto);
 	public int salesDelete1(SalesDto salesDto);
 	public int salesDelete2(SalesDto salesDto);
@@ -36,6 +36,8 @@ public interface SalesDao {
 	public void insertFactor(Map<String,Object> factorMap);
 	// 매물디비 업데이트
 	public int updateSalesDB(Map<String,Object> factorMap_update);
+	// 등록한 매물의 번호 가져오기
+	public int getSalesNumber(String member_id);
 	
 	
 }

@@ -17,7 +17,9 @@ public interface SalesService {
 	public void salesList(ModelAndView mav);
 
 	public void salesWriteOk(ModelAndView mav);
-
+	
+	public void salesUpdate(ModelAndView mav);
+	public void salesUpdateOk(ModelAndView mav);
 	
 	public void salesDeleteOk(ModelAndView mav);
 	

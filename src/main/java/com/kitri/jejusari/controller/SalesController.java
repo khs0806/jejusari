@@ -32,10 +32,13 @@ public class SalesController {
 	private SalesService salesService;
 	
 	@RequestMapping(value="/sales")
-	public ModelAndView salesList(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView salesList(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		
+		
+		System.out.println("Sales_category_type : "+salesDto.getSales_category_type());
+		mav.addObject("salesDto", salesDto);
 		salesService.salesList(mav);
 		return mav;
 	}
@@ -46,7 +49,7 @@ public class SalesController {
 		return "sales/sales_write.tiles";
 	}
 	
-	@RequestMapping(value="/sales/writeOk")
+	@RequestMapping(value="/sales/writeOk", method=RequestMethod.POST)
 	public String salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
 		
 		ModelAndView mav= new ModelAndView();
@@ -134,6 +137,7 @@ public class SalesController {
 		JSONObject obj=new JSONObject();
 		
 		String fileRoot="C:\\jejusari\\summernote_img\\";		//저장될 외부 파일 경로
+		
 		//없는 경로면 생성하는 코드 만들어야하지 않나??
 		String originalFileName=multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extention = originalFileName.substring(originalFileName.lastIndexOf("."));	//확장자명
@@ -154,4 +158,24 @@ public class SalesController {
 		}
 		return obj;
 	}
+	
+	@RequestMapping(value="/sales/update")
+	public ModelAndView salesUpdate(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+
+		salesService.salesUpdate(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value="/sales/updateOk", method=RequestMethod.POST)
+	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		mav.addObject("salesDto",salesDto);
+		
+		salesService.salesUpdateOk(mav);
+		return mav;
+	}
+
 }
