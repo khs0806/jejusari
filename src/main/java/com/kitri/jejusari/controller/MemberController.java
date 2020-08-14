@@ -97,6 +97,7 @@ public class MemberController {
 		
 		session.setAttribute("member_id", member.getMember_id());
 		session.setAttribute("member_name", member.getMember_name());
+		session.setAttribute("member_level", member.getMember_level());
 		model.addAttribute("msg", "로그인 되었습니다.");
 		
 		return "main/main.tiles";

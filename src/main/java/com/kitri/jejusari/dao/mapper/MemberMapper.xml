@@ -23,7 +23,7 @@
 	
 	<!-- 로그인 -->
 	<select id="member_login" resultType="com.kitri.jejusari.dto.MemberDto">
-		select member_id, member_name
+		select member_id, member_name, member_level
 		from member where member_id = #{member_id}
 	</select>
 	
