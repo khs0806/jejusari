@@ -15,7 +15,7 @@
 	    $("input:radio[name=member_level]").click(function(){  	 
 	        if($("input[name=member_level]:checked").val() == "BR"){
 	 			$("#if_broker").show();
-	        }else{
+	        } else {
 	        	$("#if_broker").hide();
 	        }
 	    });

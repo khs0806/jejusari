@@ -44,6 +44,14 @@
 						<if test="sales_category_rent!=null and !sales_category_rent.equals('')">
 							and sales_category_rent=#{sales_category_rent}
 						</if>
+						<if test="sales_address!=null and !sales_address.equals('')">
+							and ( (sales_address || sales_title) like '%' || #{sales_address} || '%') 
+						</if>
+						<if test="sales_option_list!=null">
+							<foreach collection="sales_option_list" item="item" index="index"  open="and" separator="and">
+								sales_option like '%'||#{item}||'%'
+							</foreach>
+						</if>
 						
 		<![CDATA[	
 					order by sales_number desc		

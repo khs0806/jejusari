@@ -105,7 +105,7 @@ public class SalesController {
 		
 		mav.setViewName("sales/sales_delete");
 		
-		return mav; 
+		return mav;
 		
 	}
 	
@@ -121,8 +121,6 @@ public class SalesController {
 		System.out.println(sales_number);
 		HttpSession session = request.getSession();
 		
-		String member_id = (String) session.getAttribute("user");
-		String db_id = salesService.salesIdCheck(sales_number);
 		
 	
 		salesService.salesDeleteOk(mav);

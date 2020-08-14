@@ -15,9 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.common.KakaoLoginAPI;
 import com.kitri.jejusari.dto.MemberDto;
@@ -26,6 +27,7 @@ import com.kitri.jejusari.service.MemberService;
 @Controller
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
 	@Autowired
 	MemberService memberService;
 	
@@ -83,7 +85,6 @@ public class MemberController {
 	public String temLogin(HttpServletRequest request, MemberDto memberDto, Model model) {
 		
 		logger.info("templogin");
-		System.out.println(memberDto.toString());
 		HttpSession session = request.getSession();
 		MemberDto member = memberService.tempLogin(memberDto);
 		
@@ -91,6 +92,7 @@ public class MemberController {
 			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
 			return "main/main.tiles";
 		}
+		System.out.println(member.toString());
 		
 		session.setAttribute("member_id", member.getMember_id());
 		session.setAttribute("member_name", member.getMember_name());
@@ -210,9 +212,35 @@ public class MemberController {
 	
 	// 마이페이지
 	@RequestMapping(value="/member/mypage")
-	public String myPage() {
+	public ModelAndView myPage(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
 		
-		return "member/member_mypage.tiles";
+		HttpSession session = request.getSession();
+		
+		String member_name=(String) session.getAttribute("member_name");
+		String member_level=(String) session.getAttribute("member_level");
+		System.out.println(member_level);
+		
+		mav.addObject("session", session);
+		
+		mav.addObject("member_name", member_name);
+		mav.addObject("member_level", member_level);
+		mav.addObject("request", request);
+		
+		memberService.myPage(mav);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/member/mypage/scrap")
+	public ModelAndView deleteScrap(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request", request);
+		
+		memberService.deleteScrap(mav);
+		
+		return mav;
 	}
 	
 	// 회원수정 화면

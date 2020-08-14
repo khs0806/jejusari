@@ -1,10 +1,7 @@
 package com.kitri.jejusari.service;
 
-import java.util.List;
-
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kitri.jejusari.dto.SalesDto;
 
 public interface SalesService {
 	
