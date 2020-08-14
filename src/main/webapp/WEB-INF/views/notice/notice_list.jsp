@@ -44,7 +44,7 @@
 				<div class="col-md-1">${noticeList.notice_number}</div>
 				<div class="col-md-8"><p><strong>${noticeList.notice_title}</strong></p></div>
 				<div class="col-md-1">${noticeList.notice_count}</div>
-				<div class="col-md-2">${noticeList.notice_date}</div>
+				<div class="col-md-2"><fmt:formatDate value = "${noticeList.notice_date}" pattern = "yyyy-MM-dd HH:mm:ss"/></div>
 			<!-- 	<div class="col-md-2"></div> -->
 			</div>
 			</a>
