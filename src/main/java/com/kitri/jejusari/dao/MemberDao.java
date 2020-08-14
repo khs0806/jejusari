@@ -3,7 +3,7 @@ package com.kitri.jejusari.dao;
 import java.util.List;
 
 import com.kitri.jejusari.dto.MemberDto;
-import com.kitri.jejusari.dto.NoticeDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 public interface MemberDao {
 	
@@ -19,7 +19,14 @@ public interface MemberDao {
 	// 회원 삭제
 	public int dropMember(List<String> list);
 
+	// 스크랩 이미지
+	public List<SalesImgDto> getScrap(String member_id);
+	
+	// 매물 이미지
+	public List<SalesImgDto> getSales(String member_id);
 
+	// 마이페이지 카드 삭제 - 매물 번호
+	public List<String> getSalesNumber(String member_id);
 
 	public int memberCount();
 	
@@ -30,8 +37,9 @@ public interface MemberDao {
 	
 	// 임시 로그인
 	public MemberDto tempLogin(MemberDto memberDto);
-
-
+	
+	// 회원 수정
+	public int memberUpdate(MemberDto memberDto);
 	
 
 }

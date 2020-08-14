@@ -197,7 +197,6 @@ public class SalesServiceImp implements SalesService {
 			//System.out.println("saleslist : " + salesList.toString());
 		}
 		
-		
 		mav.addObject("salesList", salesList);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
@@ -226,6 +225,7 @@ public class SalesServiceImp implements SalesService {
 			factorMap.put("factor_public", factors.get(2));
 			factorMap.put("factor_hospital", factors.get(3));
 			factorMap.put("factor_tour", factors.get(4));
+			
 			// 지수 토탈점수 구하기
 			int sum = 0;
 			for(int i=0; i<factors.size(); i++) {
