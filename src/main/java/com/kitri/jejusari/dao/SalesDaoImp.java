@@ -81,7 +81,7 @@ public class SalesDaoImp implements SalesDao {
 	
 	@Override
 	public int salesWriteOk(SalesDto salesDto) {
-		
+		System.out.println(salesDto.toString());
 		return session.insert("sales_write", salesDto);
 	}
 	

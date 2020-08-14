@@ -8,8 +8,8 @@ public class SalesDto extends Criteria{
 	private String sales_content;			// 글 내용
 	private String sales_category_type;		// 아파트/원룸/오피스텔 구분
 	private String sales_category_rent;		// 전월세 구분
-	private int sales_deposit;				// 보증금
-	private int sales_cost;					// 매매가 or 전월세
+	private Integer sales_deposit;				// 보증금
+	private Integer sales_cost;					// 매매가 or 전월세
 	private int sales_factor_total;			// 귤지수
 	private float sales_area;				// 면적(m^2)
 	private String sales_address;			// 주소

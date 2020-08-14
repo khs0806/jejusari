@@ -210,34 +210,34 @@ public class SalesServiceImp implements SalesService {
 		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		System.out.println(salesDto.toString());
 		int check = salesDao.salesWriteOk(salesDto);
-		if (check > 0) {
-			int sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
-			
-			String address = getAddress(sales_number);
-			System.out.println("address : " + address);
-			List<String> factors = KakaoLocalAPI.kakaoAPI(address);
-			System.out.println(factors.toString());
-			Map<String, Object> factorMap = new HashMap<String, Object>();
+//		if (check > 0) {
+//			int sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
+//			
+//			String address = getAddress(sales_number);
+//			System.out.println("address : " + address);
+//			List<String> factors = KakaoLocalAPI.kakaoAPI(address);
+//			System.out.println(factors.toString());
+//			Map<String, Object> factorMap = new HashMap<String, Object>();
 			
 			// 지수map에 데이터 담기
-			factorMap.put("factor_gas", factors.get(0));
-			factorMap.put("factor_mart", factors.get(1));
-			factorMap.put("factor_public", factors.get(2));
-			factorMap.put("factor_hospital", factors.get(3));
-			factorMap.put("factor_tour", factors.get(4));
-			
+//			factorMap.put("factor_gas", factors.get(0));
+//			factorMap.put("factor_mart", factors.get(1));
+//			factorMap.put("factor_public", factors.get(2));
+//			factorMap.put("factor_hospital", factors.get(3));
+//			factorMap.put("factor_tour", factors.get(4));
+//			
 			// 지수 토탈점수 구하기
-			int sum = 0;
-			for(int i=0; i<factors.size(); i++) {
-				sum += Integer.parseInt(factors.get(i));
-			}
-			factorMap.put("factor_total", sum);
-			factorMap.put("sales_number", sales_number);
-			System.out.println(factorMap.toString());
+//			int sum = 0;
+//			for(int i=0; i<factors.size(); i++) {
+//				sum += Integer.parseInt(factors.get(i));
+//			}
+//			factorMap.put("factor_total", sum);
+//			factorMap.put("sales_number", sales_number);
+//			System.out.println(factorMap.toString());
 			
 			// DB에 전달
-			salesDao.insertFactor(factorMap);
-		}
+//			salesDao.insertFactor(factorMap);
+//		}
 	}
 	
 	@Override

@@ -97,24 +97,27 @@
 			<!-- 우측상단 3개 입력정보 -->
 			<div class="col-md-3">
 			<script type="text/javascript">
-					$(function(){	//매매, 전세, 월세 선택에 따라 보증금, 매매가(월세) 입력란 드러나고 감춰지게
-						$("select[name='sales_category_rent']").click(function(){
-							//console.log($("#sales_category_rent option:selected").val());
-							if($("#sales_category_rent option:selected").val()=='전세'){
-								$("#sales_cost").hide();
-								$("#sales_deposit").show();
-							}
-							if($("#sales_category_rent option:selected").val()=='월세'){
-								$("#sales_cost").show();
-								$("#sales_deposit").show();
-							}
-							if($("#sales_category_rent option:selected").val()=='매매'){
-								$("#sales_cost").show();
-								$("#sales_deposit").hide();
-							}
-						});
-					});
-			</script>
+               $(function(){   //매매, 전세, 월세 선택에 따라 보증금, 매매가(월세) 입력란 드러나고 감춰지게
+                  $("select[name='sales_category_rent']").click(function(){
+                     //console.log($("#sales_category_rent option:selected").val());
+                     if($("#sales_category_rent option:selected").val()=='전세'){
+                        $("#sales_cost").hide();
+                        $("input[name='sales_cost']").val('0');
+                        console.log($("input[name='sales_cost']").val());
+                        $("#sales_deposit").show();
+                     }
+                     if($("#sales_category_rent option:selected").val()=='월세'){
+                        $("#sales_cost").show();
+                        $("#sales_deposit").show();
+                     }
+                     if($("#sales_category_rent option:selected").val()=='매매'){
+                        $("#sales_cost").show();
+                        $("#sales_deposit").hide();
+                        $("input[name='sales_deposit']").val('0');
+                     }
+                  });
+               });
+         </script>
 			<!-- 여기에 c:if써서 월세면 보증금도 추가, 전세면 보증금만 나오게, 매매는 가격만 나오게 -->
 				<div class="input-group input-group-sm mb-2" id="sales_deposit">
 					<div class="input-group-prepend">
