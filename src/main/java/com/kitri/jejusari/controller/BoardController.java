@@ -2,6 +2,7 @@ package com.kitri.jejusari.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,10 @@ public class BoardController {
 		@RequestMapping(value="/notice")
 		public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) {
 			
+			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("request", request);
+			
 			
 			boardService.noticeList(mav);
 			return mav;

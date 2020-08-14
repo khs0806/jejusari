@@ -16,6 +16,10 @@
 			location.href='${root}/notice/write';
 		});
 	});
+	
+	$(function(){
+		$("#adminbutton").hide();
+	});
 </script>
 
 <style type="text/css">
@@ -26,9 +30,15 @@
 </head>
 <body>
 <form>
+	<c:if test = "${member_id eq null}">
+		<script type="text/javascript">
+			location.href = "${root}/member/login";
+		</script>
+	</c:if>
+	<c:if test = "${member_id != null}">
 	<div class = "container" id="admin_container">
 		<h3 class="text-secondary">[공지사항]</h3>
-		<span class="badge badge-secondary">관리자</span>
+		<span class="badge badge-secondary">${member_level}</span>
 		<br/>
 		
 		<div class="table active">
@@ -93,12 +103,21 @@
 				</nav>
 			 </div>
 			 
+			 <c:if test = "${member_level eq 'admin'}">
+			 	<script type="text/javascript">
+				 	$(function(){
+						$("#adminbutton").show();
+					});
+			 	</script>
+			 </c:if>
+			 
 			 <!-- 관리자에게만 보이는 글쓰기 버튼 -->
-			 <div class = "p-2 flex-shrink-1 bd-highlight">
+			 <div class = "p-2 flex-shrink-1 bd-highlight" id = "adminbutton">
 			  	<input type = "button" value = "글작성" class = "btn btn-secondary write-btn">
 			 </div>
 		</div>
 	</div>
+	</c:if>
 </form>
 </body>
 </html>
