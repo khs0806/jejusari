@@ -208,12 +208,12 @@ public class BoardServiceImp implements BoardService{
 		// TODO Auto-generated method stub
 
 		Map<String, Object> map=mav.getModelMap();
-		
-		  HttpServletRequest request=(HttpServletRequest)map.get("request");
-		  HttpSession session=request.getSession();
-		  
-		  String member_id=(String) session.getAttribute("member_id");
-		 
+
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+	 	HttpSession session=request.getSession();
+	  
+	 	String member_id=(String) session.getAttribute("member_id");
+
 		ReportDto reportDto=(ReportDto) map.get("reportDto");
 
 		//session받아서 id넣어주기 : "kke"대신에 (String)session.getAttr~( );
