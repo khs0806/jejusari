@@ -216,8 +216,6 @@ public class MemberController {
 		ModelAndView mav=new ModelAndView();
 		
 		String member_name=(String) session.getAttribute("member_name");
-		
-		// member_level이 session에 set 돼있나?
 		String member_level=(String) session.getAttribute("member_level");
 		
 		mav.addObject("member_name", member_name);
