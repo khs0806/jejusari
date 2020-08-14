@@ -1,9 +1,11 @@
 package com.kitri.jejusari.dto;
 
+import java.util.Date;
+
 public class NoticeDto {
 	private int notice_number;
 	private String notice_title;
-	private String notice_date;
+	private Date notice_date;
 	private String notice_content;
 	private int notice_count;
 	private String member_id;
@@ -11,7 +13,7 @@ public class NoticeDto {
 	public NoticeDto() {
 	}
 
-	public NoticeDto(int notice_number, String notice_title, String notice_date, String notice_content,
+	public NoticeDto(int notice_number, String notice_title, Date notice_date, String notice_content,
 			int notice_count, String member_id) {
 		super();
 		this.notice_number = notice_number;
@@ -38,11 +40,11 @@ public class NoticeDto {
 		this.notice_title = notice_title;
 	}
 
-	public String getNotice_date() {
+	public Date getNotice_date() {
 		return notice_date;
 	}
 
-	public void setNotice_date(String notice_date) {
+	public void setNotice_date(Date notice_date) {
 		this.notice_date = notice_date;
 	}
 

@@ -161,6 +161,22 @@ img{
  padding:0px;
 }
 
+#about_sales{
+	width:95%;
+	border:0px solid red;
+	margin: 30px auto;
+	overflow: hidden;
+}
+
+#about_sales .sales_contents{
+	border:solid 2px #9b9b9b;
+	border-radius:10px;
+	height:300px;
+	overflow:auto;
+	padding:20px;
+	background-color:#e9ecef;
+}
+
 #sales_img{
  width:100%;
  border:solid 0px blue;

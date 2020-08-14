@@ -11,18 +11,37 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dao.MemberDao;
-import com.kitri.jejusari.dto.SalesDto;
+import com.kitri.jejusari.dto.MemberDto;
 
 @Service
-public class MemberServiceImp implements MemberService{
+public class MemberServiceImp implements MemberService {
 
 	@Autowired
 	MemberDao memberDao;
 	
 	@Override
-	public List<String> testDB() {
-		// TODO Auto-generated method stub
-		return memberDao.testDB();
+	public int memberJoin(MemberDto memberDto) {
+		return memberDao.memberJoin(memberDto);
+	}
+	
+	@Override
+	public int member_id_check(String member_id) {
+		return memberDao.member_id_check(member_id);
+	}
+	
+	@Override
+	public void getMemberList(ModelAndView mav) {
+		List<String> memberList = memberDao.memberList();
+
+		mav.addObject("MemberList", memberList);
+		//System.out.println(memberList);
+		
+		mav.setViewName("/admin/member_admin.tiles");
+	}
+
+	@Override
+	public int dropMember(List<String> list) {
+	    return memberDao.dropMember(list);
 	}
 	
 	@Override
@@ -44,12 +63,18 @@ public class MemberServiceImp implements MemberService{
 		mav.setViewName("member/member_mypage.tiles");
 	}
 	
-	/*
-	 * @Override public void deleteScrap(ModelAndView mav) { Map<String, Object>
-	 * map=mav.getModelMap(); HttpServletRequest request=(HttpServletRequest)
-	 * map.get("request");
-	 * 
-	 * memberDao.deleteScrap }
-	 */
 	
+	  @Override
+	  public void deleteScrap(ModelAndView mav) {
+		  Map<String, Object> map=mav.getModelMap();
+		  HttpServletRequest request=(HttpServletRequest) map.get("request");
+		  HttpSession session=request.getSession();
+		  
+		  String member_id=(String) session.getAttribute("member_id");
+		  String sales_number=(String) request.getAttribute("sales_number");
+		  
+		  memberDao.deleteScrap(member_id, sales_number);
+	  
+	  }
+	 
 }

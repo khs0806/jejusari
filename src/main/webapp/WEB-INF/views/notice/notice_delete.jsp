@@ -11,18 +11,14 @@
 <body>
 
 	<div align = "center" style = "margin-top: 100px;">
-		<form method = "post" action = "${root}/notice/delete">
-			<input type = "hidden" value = "${boardNumber}" name = "boardNumber"/>
-			<input type = "hidden" value = "${pageNumber}" name = "pageNumber"/>
-			
-			<div>[관리자 페이지]게시물을 삭제합니다. 삭제하시려면 비밀번호를 입력해주세요.</div>
+		<form method = "post" action = "${root}/notice/deleteOk">
+			<input type = "hidden" value = "${notice_number}" name = "notice_number"/>
+
 			<div>
-				<input type = "password" name = "password"/>
-			</div>
-			<br/><br/>
-			<div>
+				<h3>[관리자 페이지]삭제 하시겠습니까?</h3>
+				</br>
 				<input type = "submit" value = "글삭제"/>
-				<input type = "button" value = "목록보기" onclick = "location.href = ${root}/notice/list"/>
+				<input type = "button" value = "취소" onclick = "location.href = '${root}/notice'"/>
 			</div>
 		</form>
 	</div>

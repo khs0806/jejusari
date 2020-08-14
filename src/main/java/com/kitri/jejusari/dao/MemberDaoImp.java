@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kitri.jejusari.dto.MemberDto;
+
 @Repository
 public class MemberDaoImp implements MemberDao{
 	
@@ -13,8 +15,18 @@ public class MemberDaoImp implements MemberDao{
 	SqlSessionTemplate session;
 	
 	@Override
-	public List<String> testDB() {
-		return session.selectList("member_id_check");
+	public int memberJoin(MemberDto memberDto) {
+		return session.insert("member_join", memberDto);
+	}
+	
+	@Override
+	public int member_id_check(String member_id) {
+		return session.selectOne("member_id_check",member_id);
+	}
+	
+	@Override
+	public List<String> memberList() {
+		return session.selectList("memberList");
 	}
 	
 	@Override
@@ -26,6 +38,11 @@ public class MemberDaoImp implements MemberDao{
 	@Override
 	public List<String> getSalesImg(String member_id) {
 		return session.selectList("getImg", session.selectList("getSalesSalesNumber", member_id));
+	}
+
+	@Override
+	public int dropMember(List<String> list) {
+		return session.delete("dropMember", list);
 	}
 	
 }

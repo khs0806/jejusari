@@ -12,10 +12,10 @@
 <script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(function(){
-	    $("input:radio[name=member_type]").click(function(){  	 
-	        if($("input[name=member_type]:checked").val() == "BR"){
+	    $("input:radio[name=member_level]").click(function(){  	 
+	        if($("input[name=member_level]:checked").val() == "BR"){
 	 			$("#if_broker").show();
-	        }else{
+	        } else {
 	        	$("#if_broker").hide();
 	        }
 	    });
@@ -23,40 +23,42 @@
 </script>
 </head>
 <body>
-	<form id="plus_info" action="${root}/member/login" method="post">
+	<form id="plus_info" action="${root}/member/joinOk" method="post">
 		<div class="tit">추가 정보 입력</div>
+		
+		<input type="hidden" name="member_id" value="${member_id}">
 		
 		<div class="nickname">
 			<div class="label">닉네임</div>
-			<input type="text" name="nickname" class="col-sm-3 h-25 form-control"/>
+			<input type="text" name="member_name" class="col-sm-3 h-25 form-control" value="${member_name}"/>
 			<button class="btn btn-outline-warning btn-sm" type="button" id="button-addon2" style="margin-top:2px;">중복 확인</button>
 		</div>
 		
 		<div class="email">
 			<div class="label">이메일</div>
-			<input type="text" name="email_id" class="col-sm-3 h-25 form-control"/>
-			@
-			<select class="col-sm-3 h-25 custom-select" id="inputGroupSelect01">
+			<input type="text" name="member_email" class="col-sm-3 h-25 form-control"/>
+			
+			<select class="col-sm-3 h-25 custom-select" id="inputGroupSelect01" name="email">
 			    <option selected>선택하세요.</option>
-			    <option value="1">hanmail.net</option>
-			    <option value="2">naver.com</option>
-			    <option value="3">yahoo.co.kr</option>
-			    <option value="4">hotmail.com</option>
-			    <option value="5">paran.com</option>
-			    <option value="6">nate.com</option>
-			    <option value="7">google.com</option>
-			    <option value="8">gmail.com</option>
-			    <option value="9">empal.com</option>
-			    <option value="10">korea.com</option>
-			    <option value="11">freechal.com</option>
+			    <option value="hanmail.net">hanmail.net</option>
+			    <option value="naver.com">naver.com</option>
+			    <option value="yahoo.co.kr">yahoo.co.kr</option>
+			    <option value="hotmail.com">hotmail.com</option>
+			    <option value="paran.com">paran.com</option>
+			    <option value="nate.com">nate.com</option>
+			    <option value="google.com">google.com</option>
+			    <option value="gmail.com">gmail.com</option>
+			    <option value="empal.com">empal.com</option>
+			    <option value="korea.com">korea.com</option>
+			    <option value="freechal.com">freechal.com</option>
 			  </select>
 		</div>
 		
-		<div class="member_type">
+		<div class="member_level">
 			<div class="label">가입 유형</div>
-			<input type="radio" name="member_type" value="GE"/>
+			<input type="radio" name="member_level" value="GE"/>
 			일반회원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
-			<input type="radio" name="member_type" value="BR"/>
+			<input type="radio" name="member_level" value="BR"/>
 			중개업자
 		</div>
 		
@@ -64,15 +66,15 @@
 			<div class="msg">국가공간정보포털의 부동산중개업 정보에 등록된<br/>대표 공인중개사만 회원가입이 가능합니다.</div>
 			<div class="phone_num">
 				<div class="label2">대표공인중개사<br/>휴대폰 번호</div>
-				<select class="col-sm-2 h-25 custom-select">
+				<select class="col-sm-2 h-25 custom-select" name="no1">
 					<option selected>010</option>
 					<option value="1">011</option>
 					<option value="2">016</option>
 				</select>
 				<div style="color:black;">-</div>
-				<input type="text" class="col-sm-2 h-25 form-control">
+				<input type="text" class="col-sm-2 h-25 form-control" name="no2">
 				<div style="color:black;">-</div>
-				<input type="text" class="col-sm-2 h-25 form-control">
+				<input type="text" class="col-sm-2 h-25 form-control" name="no3">
 			</div>	
 		</div>
 		
