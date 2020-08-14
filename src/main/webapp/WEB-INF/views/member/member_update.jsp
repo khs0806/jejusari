@@ -20,7 +20,7 @@
 		
 		<br>
 		
-		<form action="#" method="post">
+		<form action="${root}/member/update" method="post">
 			<div class="form-group row">
 				<label for="staticEmail" class="col-sm-2 col-form-label">아이디</label>
 				<div class="col-sm-10">
@@ -30,46 +30,41 @@
 			
 			<div class="form-group row">
 				<label for="staticEmail" class="col-sm-2 col-form-label">이름</label>
-				<div class="col-sm-10">
-					<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="${member_name}">
+				<div class="col-sm-3">
+					<input type="text" name="member_name" class="form-control mb-2" id="staticEmail" value="${member_name}">
 				</div>
 			</div>
 			
 			<div class="form-group row">
-				<label for="staticEmail" class="col-sm-2 col-form-label">닉네임</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control mb-2" id="input-sm">
-					<input type="button" class="btn btn-warning" value="중복확인">
+				<label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+				<div class="col-sm-3">
+					<input type="text" name="member_email" class="form-control mb-2" id="staticEmail" > 
 				</div>
-			</div>
-			
-			<div class="form-group row">
-				<label for="staticEmail" class="col-sm-2 col-form-label">직업</label>
-				<div class="col-sm-10">
-					<select class="custom-select" style="width: 150px;">
-						<option selected>선택하세요</option>
-						<option value="student">학생</option>
-						<option value="teacher">교사</option>
-						<option value="public">공무원</option>
-						<option value="military ">군인</option>
-						<option value="homemaker">주부</option>
-						<option value="self">자영업</option>
-						<option value="health">보건</option>
-						<option value="normal">일반사무</option>
-						<option value="sales">영업</option>
-						<option value="etc">기타</option>
-					</select>
-				</div>
+				@
+			<select class="col-sm-3 h-25 custom-select" id="inputGroupSelect01" name="email">
+			    <option selected>선택하세요.</option>
+			    <option value="hanmail.net">hanmail.net</option>
+			    <option value="naver.com">naver.com</option>
+			    <option value="yahoo.co.kr">yahoo.co.kr</option>
+			    <option value="hotmail.com">hotmail.com</option>
+			    <option value="paran.com">paran.com</option>
+			    <option value="nate.com">nate.com</option>
+			    <option value="google.com">google.com</option>
+			    <option value="gmail.com">gmail.com</option>
+			    <option value="empal.com">empal.com</option>
+			    <option value="korea.com">korea.com</option>
+			    <option value="freechal.com">freechal.com</option>
+			  </select>
 			</div>
 			
 			<div class="form-group row">
 				<label for="staticEmail" class="col-sm-2 col-form-label">전화번호</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_first">
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="no1">
 					-
-					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_second">
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="no2">
 					-
-					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="number_third">
+					<input type="text" class="form-control mb-2" style="width: 150px; display: inline-block;" name="no3">
 					
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input" id="customCheck1">

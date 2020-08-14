@@ -32,7 +32,31 @@
 	
 	<select id="sales_list" parameterType="java.util.HashMap" resultType="com.kitri.jejusari.dto.SalesDto">
 		<![CDATA[
-			select b.* From (select rownum rnum, a.* From (select * from sales order by sales_number desc) a) b where b.rnum>=#{startRow} and b.rnum<=#{endRow}
+			select b.* From (
+				select rownum rnum, a.* From (
+					select * from sales where (sales_check_blind is null or sales_check_blind=0) ]]>
+    					<if test="sales_category_type_list!=null">
+							and sales_category_type IN
+							<foreach collection="sales_category_type_list" item="item" index="index"  open="(" separator="," close=")">
+							       #{item}
+							</foreach>
+						</if>
+						<if test="sales_category_rent!=null and !sales_category_rent.equals('')">
+							and sales_category_rent=#{sales_category_rent}
+						</if>
+						<if test="sales_address!=null and !sales_address.equals('')">
+							and ( (sales_address || sales_title) like '%' || #{sales_address} || '%') 
+						</if>
+						<if test="sales_option_list!=null">
+							<foreach collection="sales_option_list" item="item" index="index"  open="and" separator="and">
+								sales_option like '%'||#{item}||'%'
+							</foreach>
+						</if>
+		<![CDATA[	
+					order by sales_number desc		
+				) a
+			) b 
+			where b.rnum>=#{startRow} and b.rnum<=#{endRow}
 		]]>
 	</select>
 	
@@ -95,6 +119,18 @@
 	
 	<select id="factor_total_all" resultType="int">
 		select sum(factor_total) from factor
+	</select>
+	
+	<!--  등록한 매물의 sales_number 가져오기-->
+	<select id="get_sales_number" resultType="int">
+		select *
+		from (
+		    select sales_number
+		    from sales
+		    where member_id = #{member_id}
+		    order by sales_number desc
+		    )
+		where rownum = 1
 	</select>
 	
 </mapper>

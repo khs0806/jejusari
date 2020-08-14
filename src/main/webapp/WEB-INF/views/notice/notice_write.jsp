@@ -51,7 +51,7 @@ function noticeCheck(obj){
 					<div class = "writer">
 						<label>작성자</label>
 						<!-- <input type = "text" value = "관리자"> -->
-						<input name="member_id" type="text" class="form-control" value = "admin">
+						<input name="member_id" type="text" class="form-control" value = "${member_id}" readonly>
 					</div>
 					
 					<div class = "title">

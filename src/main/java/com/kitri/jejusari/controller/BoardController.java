@@ -44,8 +44,10 @@ public class BoardController {
 		@RequestMapping(value="/notice")
 		public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) {
 			
+			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("request", request);
+			
 			
 			boardService.noticeList(mav);
 			return mav;
@@ -147,8 +149,11 @@ public class BoardController {
 	public ModelAndView report(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView();
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		String sales_number = request.getParameter("sales_number");
 		String sales_title = request.getParameter("sales_title");
+		
+		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("sales_number", sales_number);
 		mav.addObject("sales_title", sales_title);
 		mav.setViewName("report/report_write.empty");
@@ -163,11 +168,14 @@ public class BoardController {
 		
 		
 		ModelAndView mav=new ModelAndView();
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("reportDto", reportDto);
+		mav.addObject("request",request);
+		boardService.reportWriteOk(mav);   // controller의 함수명과 같게 하는게 좋다.
+		
 		mav.setViewName("report/report_writeOk");
 		
-	   boardService.reportWriteOk(mav);		// controller의 함수명과 같게 하는게 좋다.
-	   
 	    return mav;
 	}
 	

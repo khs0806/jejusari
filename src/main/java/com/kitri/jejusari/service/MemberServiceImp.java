@@ -1,6 +1,5 @@
 package com.kitri.jejusari.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,10 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dao.MemberDao;
 import com.kitri.jejusari.dto.MemberDto;
-import com.kitri.jejusari.dto.NoticeDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 @Service
-public class MemberServiceImp implements MemberService{
+public class MemberServiceImp implements MemberService {
 
 	@Autowired
 	MemberDao memberDao;
@@ -72,14 +71,37 @@ public class MemberServiceImp implements MemberService{
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("count", count);
 		
-		mav.setViewName("/admin/member_admin.tiles");
+		mav.setViewName("admin/member_admin.tiles");
 	}
 
 	@Override
 	public int dropMember(List<String> list) {
-	    
+
 	    return memberDao.dropMember(list);
+	}
+	
+	@Override
+	public void myPage(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
 		
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		HttpSession session =(HttpSession) map.get("session");
+		
+		String member_id=(String) session.getAttribute("member_id");
+		System.out.println("서비스-아이디 : " + member_id);
+		
+		List<SalesImgDto> scrapList=memberDao.getScrap(member_id);
+		System.out.println("서비스-스크랩리스트 : " + scrapList);
+		
+		List<SalesImgDto> salesList=memberDao.getSales(member_id);
+		System.out.println("서비스-세일즈리스트 : " + salesList);
+		
+//		SalesDto salesDto=memberDao.
+		
+		mav.addObject("scrapList", scrapList);
+		mav.addObject("salesList", salesList);
+		mav.setViewName("member/member_mypage.tiles");
 	}
 	
 	@Override
@@ -87,4 +109,16 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.tempLogin(memberDto);
 	}
 	
+	@Override
+	public int memberUpdate(MemberDto memberDto) {
+		return memberDao.memberUpdate(memberDto);
+	}
+	
+	@Override
+	public void deleteScrap(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpSession session=request.getSession();
+	}
+	 
 }

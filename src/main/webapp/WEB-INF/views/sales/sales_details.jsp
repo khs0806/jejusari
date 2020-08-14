@@ -29,7 +29,7 @@
 		
 		//스크랩 클릭시
 		var scount=${scrap_count };
-		$("input:button[name=scrap_btn]").on("click",function(){
+			$("input:button[name=scrap_btn]").on("click",function(){
 				$.ajax({
 			      	url:"${root}/sales/scrap?sales_number=${salesDto.sales_number}",
 			     	type:"get",
@@ -61,14 +61,7 @@
 			   	});				
 		})
 		
-		//신고하기 클릭시
-		$("input:button[name=report_btn]").click(function(){
-			var check=confirm("이 매물을 신고하시겠습니까?");
-			if(check==true){
-				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
-			}
-		})
-		
+
 		//옵션 이미지 변경
 		if(${salesDto.sales_full!=1}){
 			$(".opt_full").css("filter","invert(80%)");
@@ -117,16 +110,25 @@
 		$("input:button[name=sales_update]").click(function(){
 			var check=confirm("매물 정보를 수정하시겠습니까?");
 			if(check==true){
+
 				//alert("ok");
+
+				location.href="${root }/sales/update?sales_number=${salesDto.sales_number }&pageNumber=${pageNumber}";
+
 			}
 		})
 		
 		//신고처리 클릭시
 		$("input:button[name=report_btn]").click(function(){
 			var check=confirm("매물 정보를 신고처리하시겠습니까?");
+		
 			if(check==true){
+
 				//alert("ok");
 				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
+
+				window.open('${root}/report/write?pageNumber=${pageNumber}&sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
+
 			}
 		})
 		
@@ -137,6 +139,8 @@
 		
 	})
 	});
+
+
 
 		function del(root,sales_number){
 			var url = root+"/report/delete?sales_number="+sales_number;

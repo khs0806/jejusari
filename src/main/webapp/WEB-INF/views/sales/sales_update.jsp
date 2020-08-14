@@ -22,14 +22,44 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18514d37ace0e69349e647543ecf89f8&libraries=services"></script>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-
+<script type="text/javascript">
+	$(function(){
+		
+		if(${salesDto.sales_category_type=='아파트'}){
+			$("#APT").attr("checked",true);
+		}
+		if(${salesDto.sales_category_type=='원룸'}){
+			$("#ONE").attr("checked",true);
+		}
+		if(${salesDto.sales_category_type=='투룸' }){
+			$("#TWO").attr("checked",true);
+		}
+		if(${salesDto.sales_category_type=='쓰리룸'}){
+			$("#THREE").attr("checked",true);
+		}
+		if(${salesDto.sales_category_type=='오피스텔'}){
+			$("#OFFICE").attr("checked",true);
+		}
+		
+		if(${salesDto.sales_full!=1}){
+			$("#inlineCheckbox1").prop("checked", true);
+		}
+		if(${salesDto.sales_parking!=1}){
+			$("#inlineCheckbox2").prop("checked", true);
+		}
+		if(${salesDto.sales_cctv!=1}){
+			$("#inlineCheckbox3").prop("checked", true);
+		}
+		if(${salesDto.sales_ele!=1}){
+			$("#inlineCheckbox4").prop("checked", true);
+		}
+	})
 </script>
 </head>
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form action="${root }/sales/writeOk" method="post">
+		<form action="${root }/sales/updateOk" method="post">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			
@@ -51,17 +81,18 @@
 						<input type="radio" name="sales_category_type" value="오피스텔" id="OFFICE">오피스텔
 					</label>
 				</div>
+				
 				<!-- 전월세/매매 선택 셀렉트 박스 -->
 				<div class="input-group mb-3 align-items-center">
 					<select id="sales_category_rent" name="sales_category_rent" class="custom-select col-md-2">
-						<option value="">옵션</option>
+						<option value="${salesDto.sales_category_rent }">${salesDto.sales_category_rent }</option>
 						<option value="매매">매매</option>
 						<option value="전세">전세</option>
 						<option value="월세">월세</option>
 					</select>
 					
 					
-				  <input name="sales_title" type="text" class="form-control" placeholder="제목을 입력하세요." aria-label="제목을 입력하세요.">
+				  <input name="sales_title" type="text" class="form-control" placeholder="${salesDto.sales_title }" aria-label="제목을 입력하세요.">
 				</div>
 				
 				<!-- 옵션 선택 태그 -->
@@ -78,15 +109,16 @@
 				  <label class="form-check-label" for="inlineCheckbox3">CCTV</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input name="sales_option" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="엘리베이터">
-				  <label class="form-check-label" for="inlineCheckbox4">엘리베이터</label>
+				  <input name="sales_option" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="엘레베이터">
+				  <label class="form-check-label" for="inlineCheckbox4">엘레베이터</label>
 				</div>
+				
 				<!-- 주소찾기 검색창 -->
 				<div class="input-group input-group-sm mb-3">
 				  <div class="input-group-prepend">
 				    <span class="input-group-text" id="inputGroup-sizing-sm">주소찾기</span>
 				  </div>
-				  <input type="text" name="sales_address" id="sample5_address" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+				  <input type="text" name="sales_address" id="sample5_address" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="${salesDto.sales_address }" value="${salesDto.sales_address }">
 				  <div class="input-group-append">
 				    <button class="btn btn-outline-secondary" type="button" id="button-addon2" aria-describedby="inputGroup-sizing-sm" onclick="sample4_execDaumPostcode()">Button</button>
 				  </div>
@@ -120,35 +152,36 @@
 					<div class="input-group-prepend">
 				    	<span class="input-group-text">가격 (만원)</span>
 					</div>
-					<input name="sales_deposit" type="text" class="form-control" placeholder="보증금"  aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_cost" type="text" class="form-control" placeholder="${salesDto.sales_deposit }" value="${salesDto.sales_deposit }"  aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2" id="sales_cost">
 					<div class="input-group-prepend">
 				    	<span class="input-group-text">가격 (만원)</span>
 					</div>
-					<input name="sales_cost" type="text" class="form-control" placeholder="매매가(혹은 월세)" aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_cost" type="text" class="form-control" placeholder="${salesDto.sales_cost }" value="${salesDto.sales_cost }" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2">
 					<div class="input-group-prepend">
 				    	<span class="input-group-text" id="sales_area">면적(m<sup>2</sup>)</span>
 					</div>
-					<input name="sales_area" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_area" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="${salesDto.sales_area }" value="${salesDto.sales_area }">
 				</div>
 				<div class="input-group input-group-sm mb-2">
 					<div class="input-group-prepend">
 				    	<span class="input-group-text" id="sales_build_year">준공년도</span>
 					</div>
-					<input name="sales_build_year" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_build_year" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="${salesDto.sales_build_year }" value="${salesDto.sales_build_year }">
 				</div>
 				<div class="input-group input-group-sm mb-2">
 					<div class="input-group-prepend">
 				    	<span class="input-group-text" id="sales_floor">&nbsp;&nbsp;층&nbsp;&nbsp;수&nbsp;&nbsp;</span>
 					</div>
-					<input name="sales_floor" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_floor" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="${salesDto.sales_floor }" value="${salesDto.sales_floor }">
 				</div>
 			</div>
 			
 		</div>
+
 		<!-- 주소 검색시 생겨날 창 -->
 		<div id="addr_result" class="row">
 			<div id="addr_detail" class="col">
@@ -190,7 +223,7 @@
 		<!-- 본문 -->
 		<div class="form-group">
 		    <label for="exampleFormControlTextarea1">내용</label>
-		    <textarea name="sales_content" class="form-control" id="summernote" rows="14"></textarea>
+		    <textarea name="sales_content" class="form-control" id="summernote" rows="14">${salesDto.sales_content }</textarea>
 		</div>
 		
 		<script>
@@ -206,11 +239,11 @@
 				  placeholder: '최대 2048자까지 작성할 수 있습니다.'
 			
 			// 이미지 첨부 부분
-/*  				  callbacks:{
+				  callbacks:{
 					  onImageUpload : function(files){
 						  uploadSummernoteImageFile(files[0], this);
 					  }
-				  } */
+				  }
 			// 이미지 첨부 부분 끝
 				});
 				
@@ -226,7 +259,7 @@
 				    resize: false
 				});
 				$('.note-statusbar').hide()
-	/* 		function uploadSummernoteImageFile(file, editor){
+			function uploadSummernoteImageFile(file, editor){
 					data = new FormData();
 					data.append("file", file);
 					$.ajax({
@@ -240,7 +273,7 @@
 							$(editor).summernote('insertImange', data.url);
 						}
 					});
-				} */
+				}
     	</script>
 		
 		<!-- 파일업로드 -->
@@ -256,9 +289,17 @@
 		
 		<!-- 작성버튼 -->
 		<div class="d-flex justify-content-end mb-5">
-			<button type="submit" class="btn btn-warning mr-3">작성</button>
-			<button type="button" class="btn btn-light">취소</button>
+			<button type="submit" class="btn btn-warning mr-3">수정</button>
+			<button type="button" name="sales_no_update" class="btn btn-light">취소</button>
 		</div>
+		<script type="text/javascript">
+			$("input:button[name=sales_no_update]").click(function(){
+				var check=confirm("매물 정보 수정을 취소하시겠습니까?");
+				if(check==true){
+					location.href="${root }/sales/detail?sales_number=${salesDto.sales_number }&pageNumber=${pageNumber}";
+				}
+			})
+		</script>
 		</form>
 	</div>	
 

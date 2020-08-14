@@ -1,6 +1,6 @@
 package com.kitri.jejusari.dto;
 
-public class SalesDto {
+public class SalesDto extends Criteria{
 	private int sales_number;				//게시글 번호
 	private String member_id;				// 작성자
 	private String sales_date;				// 작성일자

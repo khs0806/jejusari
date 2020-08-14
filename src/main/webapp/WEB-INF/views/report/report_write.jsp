@@ -14,12 +14,13 @@
 		self.close();
 	}
 	
-	function button_event() {
+	function button_event(root,pageNumber) {
 
 		 if (confirm("작성된 신고글을 등록하시겠습니까?\n신고내용이 명백히 거짓인 경우 책임을 물어야합니다.") == true){    //확인
-
+			
 		     document.form.submit();
-
+		     var url = root+"/admin/report_admin?pageNumber="+pageNumber;
+	         location.href=url;
 		 }else{   //취소
 
 			 self.close();
@@ -37,6 +38,7 @@
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md">
 				<input type="hidden" name = "sales_number" value="${sales_number}">
+				<input type="hidden" name = "pageNumber" value="${pageNumber}">
 				<div class="input-group mb-4">
 					<div class="input-group-prepend">
 						<span class="input-group-text" id="inputGroup-sizing-sm">제목</span>
@@ -69,7 +71,7 @@
 		<br />
 
 		<div class="float-right">
-			<button type="submit" class="btn btn-warning" onclick="button_event()">작성</button>
+			<button type="submit" class="btn btn-warning" onclick="button_event('${root}','${salesDto.sales_number}')">작성</button>
 			<button type="button" class="btn btn-light" onclick="funcCancel()">취소</button>
 		</div>
 	</form>

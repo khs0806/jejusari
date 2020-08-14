@@ -23,41 +23,38 @@
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물게시판</h3>
-		<form>
+		<form action="">
 			<div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="아파트" id="APT">아파트
+						<input type="checkbox" name="sales_category_type" value="아파트" id="APT">아파트
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="원룸" id="ONE">원룸
+						<input type="checkbox" name="sales_category_type" value="원룸" id="ONE">원룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="투룸" id="TWO">투룸
+						<input type="checkbox" name="sales_category_type" value="투룸" id="TWO">투룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="쓰리룸" id="THREE">쓰리룸
+						<input type="checkbox" name="sales_category_type" value="쓰리룸" id="THREE">쓰리룸
 					</label>
 					<label class="btn btn-outline-warning">
-						<input type="checkbox" name="room_type" value="오피스텔" id="OFFICE">오피스텔
+						<input type="checkbox" name="sales_category_type" value="오피스텔" id="OFFICE">오피스텔
 					</label>
 				</div>
-			<input type="hidden" value="위에 li값 가져오기" name="sales_type">
-
 			<div class="input-group mb-3">
-				<select class="custom-select col-md-1">
+				<select name="sales_category_rent" class="custom-select col-md-1">
 					<option value="">옵션</option>
-					<option value="sales">매매</option>
-					<option value="rent_year">전세</option>
-					<option value="rent_month">월세</option>
+					<option value="매매">매매</option>
+					<option value="전세">전세</option>
+					<option value="월세">월세</option>
 				</select>
-			  <input type="text" class="form-control col-md-4" placeholder="지역명을 입력하세요." aria-label="지역명을 입력하세요." aria-describedby="button-addon2">
+			  <input type="text" class="form-control col-md-4" placeholder="지역명을 입력하세요." name="sales_address" aria-describedby="button-addon2">
 			  <div class="input-group-append">
 			    <button class="btn btn-outline-warning" type="submit" id="button-addon2"><strong>검색</strong></button>
 			  </div>
 			</div>
 
 			<!-- range -->
-
 			<input type="range" min="0" max="20" step="0.1" onchange="updateCostInput(this.value);"> <label>가격</label>
 			<input type="text" style="text-align:center;"size="1" id="costInput" value=""><span>억</span>
 			<input type="range"  onchange="updateAreaInput(this.value);"> <label>면적</label>
@@ -65,20 +62,20 @@
 			<br>
 			
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="foolOption" value="풀옵션">
-			  <label class="form-check-label" for="inlineCheckbox1">풀옵션</label>
+			  <input class="form-check-input" type="checkbox" name="sales_option" id="foolOption" value="풀옵션">
+			  <label class="form-check-label" for="foolOption">풀옵션</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="parking" value="주차장">
-			  <label class="form-check-label" for="inlineCheckbox2">주차장</label>
+			  <input class="form-check-input" type="checkbox" name="sales_option" id="parking" value="주차장">
+			  <label class="form-check-label" for="parking">주차장</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="cctv" value="CCTV">
-			  <label class="form-check-label" for="inlineCheckbox3">CCTV</label>
+			  <input class="form-check-input" type="checkbox" name="sales_option" id="cctv" value="CCTV">
+			  <label class="form-check-label" for="cctv">CCTV</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="checkbox" id="elevator" value="엘레베이터">
-			  <label class="form-check-label" for="inlineCheckbox3">엘레베이터</label>
+			  <input class="form-check-input" type="checkbox" name="sales_option" id="elevator" value="엘리베이터">
+			  <label class="form-check-label" for="elevator">엘리베이터</label>
 			</div>
 			
 		</form>
@@ -175,7 +172,27 @@
 			})
 		</script>
 	</c:if>
-		
+		<!-- 페이징 -->  
+        <div>
+           <ul class="pagination" style="justify-content: center;">
+           <li class="page-item"><a class="page-link"
+                 href="list${pageMaker.makeSearch(1)}">처음</a></li>
+           <c:if test="${pageMaker.prev}">
+              <li class="page-item"><a class="page-link"
+                 href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+           </c:if>
+
+           <c:forEach begin="${pageMaker.startPage}"
+              end="${pageMaker.endPage}" var="idx">
+              <li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+           </c:forEach>
+
+           <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+              <li class="page-item"><a class="page-link"
+                 href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+           </c:if>
+           </ul>
+        </div>
 		
 		<div class="d-flex bd-highlight">
 			 <div class="p-2 w-100 bd-highlight">
