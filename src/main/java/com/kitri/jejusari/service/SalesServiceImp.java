@@ -132,6 +132,7 @@ public class SalesServiceImp implements SalesService {
 	public void salesList(ModelAndView mav) {
 		Map<String, Object> map= mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		
 		//페이징
 		String pageNumber=request.getParameter("pageNumber");
@@ -148,7 +149,8 @@ public class SalesServiceImp implements SalesService {
 		
 		if(count>0) {
 			//startRow, endRow
-			salesList=salesDao.salesList(startRow, endRow);
+			salesList=salesDao.salesList(startRow, endRow, salesDto);
+			//System.out.println("saleslist : " + salesList.toString());
 		}
 		
 		
