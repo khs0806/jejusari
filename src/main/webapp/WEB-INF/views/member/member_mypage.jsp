@@ -32,7 +32,6 @@
 		      		var check=$.parseJSON(data);
 // 	      			alert(check);
 		      		if(check==-1){
-						alert("스크랩이 취소되었습니다."); 
 						location.href="${root}/member/mypage";
 		      		}
 		      	}
@@ -45,11 +44,11 @@
 // 			alert(sales_number);
 			
 			$.ajax({
-		      	url:"${root}/sales/delete?sales_number=" + sales_number,
-		     	type:"get",
+		      	url:"${root}/sales/delete",
+		     	type:"post",
 		      	dataType:"text",
+		      	data:{sales_number: sales_number},
 		      	success:function(){
-					alert("매물이 삭제되었습니다."); 
 					location.href="${root}/member/mypage";
 		      	}
 			});
