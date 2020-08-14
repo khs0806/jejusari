@@ -12,6 +12,9 @@ public interface MemberDao {
 	// 아이디 중복 체크
 	public int member_id_check(String member_id);
 	
+	// 회원탈퇴
+	public int member_delete(String member_id);
+	
 	// 회원 리스트
 	public List<String> memberList();
 	
@@ -23,4 +26,7 @@ public interface MemberDao {
 	
 	// 매물 이미지
 	public List<String> getSalesImg(String member_id);
+	
+	// 임시 로그인
+	public MemberDto tempLogin(MemberDto memberDto);
 }

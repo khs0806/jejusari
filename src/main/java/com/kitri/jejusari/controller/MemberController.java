@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,18 +42,9 @@ public class MemberController {
 	@RequestMapping(value="/main")
 	public String main() {
 		
-		
 		return "main/main.tiles";
 	}
 	
-	// 회원가입
-	@RequestMapping(value="/member/signup")
-	public String signUp() {
-		
-		
-		
-		return "member/member_signup.tiles";
-	}
 	
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw1")
@@ -62,18 +54,81 @@ public class MemberController {
 	}
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw2")
-	public String withdrawOk() {
+	public String withdrawOk(HttpServletRequest request, Model model) {
 		
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
 		
+		int check = memberService.member_delete(member_id);
+		model.addAttribute("check", check);
+		
+		session.invalidate();
 		
 		return "member/member_withdraw2.tiles";
 	}
 		
 	// 로그인 뷰
 	@RequestMapping(value="/member/login")
-	public String login(HttpSession session) {
+	public String loginView(HttpSession session) {
 		
 		return "member/member_login.tiles";
+	}
+	
+	// 임시 로그인 뷰
+	@RequestMapping(value="/member/templogin")
+	public String tempLoginView(HttpSession session) {
+		
+		return "member/member_tempLogin.tiles";
+	}
+	
+	// 임시 로그인 
+	@RequestMapping(value="/member/templogin", method=RequestMethod.POST)
+	public String temLogin(HttpServletRequest request, MemberDto memberDto, Model model) {
+		
+		logger.info("templogin");
+		System.out.println(memberDto.toString());
+		HttpSession session = request.getSession();
+		MemberDto member = memberService.tempLogin(memberDto);
+		
+		if (member == null) {
+			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
+			return "main/main.tiles";
+		}
+		
+		session.setAttribute("member_id", member.getMember_id());
+		session.setAttribute("member_name", member.getMember_name());
+		model.addAttribute("msg", "로그인 되었습니다.");
+		
+		return "main/main.tiles";
+	}
+	
+	// 임시회원가입 뷰
+	@RequestMapping(value="/member/tempjoin", method=RequestMethod.GET)
+	public String temJoin(HttpSession session) {
+		
+		return "member/member_tempSignup.tiles";
+	}
+	
+	// 임시 회원가입
+	@RequestMapping(value="/member/tempjoin", method=RequestMethod.POST)
+	public ModelAndView temJoinDo(HttpServletRequest request, MemberDto memberDto) {
+		ModelAndView mav = new ModelAndView();
+		
+		String member_phone = request.getParameter("no1") 
+				  + "-" + request.getParameter("no2") 
+				  + "-" + request.getParameter("no3");
+		
+		String member_email = memberDto.getMember_email() + "@" + request.getParameter("email");
+		
+		logger.info(memberDto.toString());
+		memberDto.setMember_phone(member_phone);
+		memberDto.setMember_email(member_email);
+		int check = memberService.memberJoin(memberDto);
+		
+		mav.addObject("check", check);
+		mav.setViewName("member/member_signupOk.tiles");
+		
+		return mav;
 	}
 	
 	// 카카오로 로그인 or 회원가입
@@ -88,7 +143,7 @@ public class MemberController {
 
 		// access_token으로 사용자의 카카오 로그인 정보를 가져온다.
 		HashMap<String, Object> userInfo = KakaoLoginAPI.getUserInfo(access_Token);
-
+		
 		String member_id = (String)userInfo.get("id");
 		String member_name = (String)userInfo.get("nickname");
 		String member_email = (String)userInfo.get("email");
@@ -99,6 +154,7 @@ public class MemberController {
 			// 이미 가입된 회원일 경우 바로 로그인
 			HttpSession session = request.getSession();
 			if (userInfo.get("id") != null) {
+				
 				session.setAttribute("member_id", member_id);
 				session.setAttribute("member_name", member_name);
 				session.setAttribute("access_Token", access_Token);
@@ -159,12 +215,10 @@ public class MemberController {
 	public ModelAndView myPage(HttpServletRequest request, HttpSession session) {
 		ModelAndView mav=new ModelAndView();
 		
-//		String member_name=(String) session.getAttribute("member_name");
-		String member_name="lshBR";
+		String member_name=(String) session.getAttribute("member_name");
 		
 		// member_level이 session에 set 돼있나?
-//		String member_level=(String) session.getAttribute("member_level");
-		String member_level="GE";
+		String member_level=(String) session.getAttribute("member_level");
 		
 		mav.addObject("member_name", member_name);
 		mav.addObject("member_level", member_level);
@@ -181,7 +235,7 @@ public class MemberController {
 		
 		mav.addObject("request", request);
 		
-		memberService.deleteScrap(mav);
+//		memberService.deleteScrap(mav);
 		
 		return mav;
 	}

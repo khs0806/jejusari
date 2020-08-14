@@ -37,18 +37,18 @@ public class KakaoLoginAPI {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
             sb.append("&client_id=" + APPKEY);
-            sb.append("&redirect_uri=http://localhost:8282/jeju/test/join");
+            sb.append("&redirect_uri=http://localhost:8181/jeju/test/join");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
 			
 			// 결과 코드가 200이라면 성공
 			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
+//			System.out.println("responseCode : " + responseCode);
 			
 			// 응답 메시지
 			String responseMessage = conn.getResponseMessage();
-			System.out.println("responseMessage : " + responseMessage);
+//			System.out.println("responseMessage : " + responseMessage);
 			
 			//    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -58,7 +58,7 @@ public class KakaoLoginAPI {
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("response body : " + result);
+//			System.out.println("response body : " + result);
 
 			//    Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
 			JsonParser parser = new JsonParser();
@@ -105,7 +105,7 @@ public class KakaoLoginAPI {
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("response body : " + result);
+//			System.out.println("response body : " + result);
 
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);

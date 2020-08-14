@@ -21,6 +21,12 @@
 		)
 	</insert>
 	
+	<!-- 로그인 -->
+	<select id="member_login" resultType="com.kitri.jejusari.dto.MemberDto">
+		select member_id, member_name
+		from member where member_id = #{member_id}
+	</select>
+	
 	<!-- 관리자 회원 -->
 	<!-- 회원 내역 리스트 -->
 	<select id="memberList" parameterType="java.lang.String" resultType="com.kitri.jejusari.dto.MemberDto">
@@ -63,5 +69,10 @@
 		and image_index=1
 		order by sales_number
 	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="member_delete">
+		delete from member where member_id = #{member_id}
+	</delete>
 	
 </mapper>

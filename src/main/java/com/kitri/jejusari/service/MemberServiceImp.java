@@ -30,6 +30,12 @@ public class MemberServiceImp implements MemberService {
 	}
 	
 	@Override
+	public int member_delete(String member_id) {
+		
+		return memberDao.member_delete(member_id);
+	}
+	
+	@Override
 	public void getMemberList(ModelAndView mav) {
 		List<String> memberList = memberDao.memberList();
 
@@ -63,18 +69,22 @@ public class MemberServiceImp implements MemberService {
 		mav.setViewName("member/member_mypage.tiles");
 	}
 	
+	@Override
+	public MemberDto tempLogin(MemberDto memberDto) {
+		return memberDao.tempLogin(memberDto);
+	}
 	
-	  @Override
-	  public void deleteScrap(ModelAndView mav) {
-		  Map<String, Object> map=mav.getModelMap();
-		  HttpServletRequest request=(HttpServletRequest) map.get("request");
-		  HttpSession session=request.getSession();
-		  
-		  String member_id=(String) session.getAttribute("member_id");
-		  String sales_number=(String) request.getAttribute("sales_number");
-		  
-		  memberDao.deleteScrap(member_id, sales_number);
-	  
-	  }
+//	@Override
+//	public void deleteScrap(ModelAndView mav) {
+//		Map<String, Object> map=mav.getModelMap();
+//		HttpServletRequest request=(HttpServletRequest) map.get("request");
+//		HttpSession session=request.getSession();
+//  
+//		String member_id=(String) session.getAttribute("member_id");
+//		String sales_number=(String) request.getAttribute("sales_number");
+//	  
+//		memberDao.deleteScrap(member_id, sales_number);
+//  
+//	}
 	 
 }

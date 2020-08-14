@@ -25,6 +25,12 @@ public class MemberDaoImp implements MemberDao{
 	}
 	
 	@Override
+	public int member_delete(String member_id) {
+		// TODO Auto-generated method stub
+		return session.delete("member_delete", member_id);
+	}
+	
+	@Override
 	public List<String> memberList() {
 		return session.selectList("memberList");
 	}
@@ -43,6 +49,12 @@ public class MemberDaoImp implements MemberDao{
 	@Override
 	public int dropMember(List<String> list) {
 		return session.delete("dropMember", list);
+	}
+	
+	@Override
+	public MemberDto tempLogin(MemberDto memberDto) {
+		MemberDto member = session.selectOne("member_login", memberDto);
+		return member;
 	}
 	
 }

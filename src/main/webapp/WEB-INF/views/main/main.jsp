@@ -11,6 +11,15 @@
 	#main_page .card-img-overlay{padding:15rem; text-align: center;}
 </style>
  <c:set var="root" value="${pageContext.request.contextPath }"/>
+ 
+ <script>
+ 	$(function(){
+ 		if (${msg ne null}){
+ 			alert('${msg}');
+ 		}
+ 	});
+ </script>
+ 
  <div id="main_page">
 	 <div class="card bg-dark text-white">
 	  <img src="${root}/img/cozy-seopji-1833560_1920.jpg" class="card-img" alt="...">
