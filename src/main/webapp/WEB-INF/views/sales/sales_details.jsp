@@ -61,14 +61,7 @@
 			   	});				
 		})
 		
-		//신고하기 클릭시
-		$("input:button[name=report_btn]").click(function(){
-			var check=confirm("이 매물을 신고하시겠습니까?");
-			if(check==true){
-				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
-			}
-		})
-		
+
 		//옵션 이미지 변경
 		if(${salesDto.sales_full!=1}){
 			$(".opt_full").css("filter","invert(80%)");
