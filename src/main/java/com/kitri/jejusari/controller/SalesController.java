@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dto.PageMaker;
@@ -133,15 +134,19 @@ public class SalesController {
 	/** 이미지 관련 controller 함수..! 작성중입니다.(kke) */
 	@RequestMapping(value="/uploadSummernoteImageFile", method=RequestMethod.POST)
 	@ResponseBody
-	public JSONObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+	public JSONObject uploadSummernoteImageFile(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile multipartFile) {
+		//여기로 넘어오질 못하네...400 error
+		MultipartFile upFile=request.getFile("file");
+		System.out.println(upFile.getName());
+		System.out.println("넘어왔어용");
 		JSONObject obj=new JSONObject();
-		
 		String fileRoot="C:\\jejusari\\summernote_img\\";		//저장될 외부 파일 경로
 		
 		//없는 경로면 생성하는 코드 만들어야하지 않나??
 		String originalFileName=multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extention = originalFileName.substring(originalFileName.lastIndexOf("."));	//확장자명
 		
+		System.out.println(originalFileName);
 		String savedFileName=UUID.randomUUID()+extention;		//저장될 파일 명
 		File targetFile=new File(fileRoot+savedFileName);
 		
@@ -149,6 +154,7 @@ public class SalesController {
 			InputStream fileStream=multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일저장
 			obj.put("url", "/jejusari/summernote_img/"+savedFileName);
+			obj.put("filename", originalFileName);
 			obj.put("responseCode", "success");
 			
 		}catch(IOException e) {
