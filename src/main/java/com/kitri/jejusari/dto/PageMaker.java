@@ -81,18 +81,19 @@ public class PageMaker {
 		return uriComponents.toUriString();
 	}
 	
-	public String makeSearch(int page)
+	public String makeSearch(int pageNumber)
 	{
 	  
 	 UriComponents uriComponents =
 	            UriComponentsBuilder.newInstance()
-	            .queryParam("page", page)
-	            .queryParam("perPageNum", cri.getBoardSize())
+	            .queryParam("pageNumber", pageNumber)
+	            .queryParam("boardSize", cri.getBoardSize())
 	            .queryParam("sales_category_type", ((SalesDto)cri).getSales_category_type())
 	            .queryParam("sales_category_rent", ((SalesDto)cri).getSales_category_rent())
 	            .queryParam("sales_address", ((SalesDto)cri).getSales_address())
 	            .queryParam("sales_option", ((SalesDto)cri).getSales_option())
 	            .build(); 
+	 
 	    return uriComponents.toUriString();  
 	}
 

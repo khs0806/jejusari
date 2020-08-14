@@ -42,4 +42,6 @@ public interface BoardDao {
 		public List<ReportDto> ReportDetail(int report_number);
 		
 		public int reportCount();
+		
+		public int reportUpdate(int sales_number);
 }
