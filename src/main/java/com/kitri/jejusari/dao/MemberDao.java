@@ -20,4 +20,7 @@ public interface MemberDao {
 	
 	// 회원 삭제
 	public int dropMember(List<String> list);
+	
+	// 임시 로그인
+	public MemberDto tempLogin(MemberDto memberDto);
 }
