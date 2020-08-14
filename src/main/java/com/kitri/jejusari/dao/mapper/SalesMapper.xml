@@ -28,20 +28,22 @@
 	<!--  -->
 	<select id="sales_getCount" parameterType="java.util.HashMap" resultType="int">
 		select nvl(count(*), 0) from (
-			select * from sales where (sales_check_blind is null or sales_check_blind=0)
-				<if test="sales_category_type_list!=null">
+			select sales_number from sales where (sales_check_blind is null or sales_check_blind=0)
+				<if test="sales_category_type!=null and !sales_category_type.equals('')">
 				and sales_category_type IN
 				<foreach collection="sales_category_type_list" item="item" index="index"  open="(" separator="," close=")">
 				       #{item}
 				</foreach>
 				</if>
-				<if test="sales_category_rent!=null and !sales_category_rent.equals('')">
-					and sales_category_rent=#{sales_category_rent}
+				<if test="sales_category_rent!=null">
+					<if test="!sales_category_rent.equals('')">
+						and sales_category_rent=#{sales_category_rent}
+					</if>
 				</if>
 				<if test="sales_address!=null and !sales_address.equals('')">
 					and ( (sales_address || sales_title) like '%' || #{sales_address} || '%') 
 				</if>
-				<if test="sales_option_list!=null">
+				<if test="sales_option!=null and !sales_option.equals('')">
 					<foreach collection="sales_option_list" item="item" index="index"  open="and" separator="and">
 						sales_option like '%'||#{item}||'%'
 					</foreach>
@@ -54,19 +56,21 @@
 			select b.* From (
 				select rownum rnum, a.* From (
 					select * from sales where (sales_check_blind is null or sales_check_blind=0) ]]>
-    					<if test="sales_category_type_list!=null">
-							and sales_category_type IN
-							<foreach collection="sales_category_type_list" item="item" index="index"  open="(" separator="," close=")">
-							       #{item}
-							</foreach>
+    					<if test="sales_category_type!=null and !sales_category_type.equals('')">
+						and sales_category_type IN
+						<foreach collection="sales_category_type_list" item="item" index="index"  open="(" separator="," close=")">
+						       #{item}
+						</foreach>
 						</if>
-						<if test="sales_category_rent!=null and !sales_category_rent.equals('')">
-							and sales_category_rent=#{sales_category_rent}
+						<if test="sales_category_rent!=null">
+							<if test="!sales_category_rent.equals('')">
+								and sales_category_rent=#{sales_category_rent}
+							</if>
 						</if>
 						<if test="sales_address!=null and !sales_address.equals('')">
 							and ( (sales_address || sales_title) like '%' || #{sales_address} || '%') 
 						</if>
-						<if test="sales_option_list!=null">
+						<if test="sales_option!=null and !sales_option.equals('')">
 							<foreach collection="sales_option_list" item="item" index="index"  open="and" separator="and">
 								sales_option like '%'||#{item}||'%'
 							</foreach>

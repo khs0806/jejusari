@@ -182,36 +182,37 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		
-		//페이징
-//		String pageNumber=request.getParameter("pageNumber");
-//		if(pageNumber==null) pageNumber="1";
-//		int currentPage=Integer.parseInt(pageNumber);	//요청한 페이지
-//		int boardSize=10;		// [1] start:1, end:10  [2] start:11, end:20
-//		
-//		int startRow=(currentPage-1)*boardSize+1;	//1  11 21 31
-//		int endRow=currentPage*boardSize;			//10 20 30 40
-		
-		
+
 		
 		// dao에 있던 기능 정리
 		Map<String, Object> hmap=new HashMap<String, Object>();
-		String[] sales_category_type_list=null;
+		//String[] sales_category_type_list=null;
 		if(salesDto.getSales_category_type()!=null) {
-			 sales_category_type_list = salesDto.getSales_category_type().split(",");
-		}
-		String[] sales_option_list=null;
-		if(salesDto.getSales_option()!=null) {
-			sales_option_list=salesDto.getSales_option().split(",");
+			String[] sales_category_type_list = salesDto.getSales_category_type().split(",");
+			 hmap.put("sales_category_type_list", sales_category_type_list);
+			 System.out.println("salesDto.getSales_category_type():"+salesDto.getSales_category_type().toString());
 		}
 		
-	
+		//String[] sales_option_list=null;
+		if(salesDto.getSales_option()!=null) {
+			String[] sales_option_list=salesDto.getSales_option().split(",");
+			System.out.println("sales_option_list.toString()"+sales_option_list.toString());
+			hmap.put("sales_option_list", sales_option_list);
+			
+		}
+		
+		if(salesDto.getSales_category_rent()=="") {
+			System.out.println("공간있어요");
+		}
+		hmap.put("sales_category_type",salesDto.getSales_category_type());
+		hmap.put("sales_option",salesDto.getSales_option());
 		hmap.put("sales_category_rent", salesDto.getSales_category_rent());
-		hmap.put("sales_category_type_list", sales_category_type_list);
-		hmap.put("sales_option_list", sales_option_list);
 		hmap.put("sales_address", salesDto.getSales_address());	//검색키워드
+		System.out.println(hmap.toString());
 		
 		//count 사용해서 글이 아예 없는경우 페이징 사라지게
 		int count=salesDao.salesCount(hmap);
+		System.out.println(count);
 		List<SalesDto> salesList=null;
 		
 		pageMaker.setCri(salesDto);
@@ -237,6 +238,7 @@ public class SalesServiceImp implements SalesService {
 		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		System.out.println(salesDto.toString());
 		int check = salesDao.salesWriteOk(salesDto);
+		
 		if (check > 0) {
 			int sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
 			
@@ -265,6 +267,7 @@ public class SalesServiceImp implements SalesService {
 			// DB에 전달
 			salesDao.insertFactor(factorMap);
 		}
+		System.out.println(check);
 	}
 	
 	@Override

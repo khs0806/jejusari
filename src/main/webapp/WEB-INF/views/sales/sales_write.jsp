@@ -102,6 +102,8 @@
 							//console.log($("#sales_category_rent option:selected").val());
 							if($("#sales_category_rent option:selected").val()=='전세'){
 								$("#sales_cost").hide();
+								$("input[name='sales_cost']").val('0');
+								console.log($("input[name='sales_cost']").val());
 								$("#sales_deposit").show();
 							}
 							if($("#sales_category_rent option:selected").val()=='월세'){
@@ -111,6 +113,7 @@
 							if($("#sales_category_rent option:selected").val()=='매매'){
 								$("#sales_cost").show();
 								$("#sales_deposit").hide();
+								$("input[name='sales_deposit']").val('0');
 							}
 						});
 					});

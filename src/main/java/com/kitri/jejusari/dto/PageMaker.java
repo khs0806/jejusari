@@ -91,9 +91,9 @@ public class PageMaker {
 	            .queryParam("sales_category_type", ((SalesDto)cri).getSales_category_type())
 	            .queryParam("sales_category_rent", ((SalesDto)cri).getSales_category_rent())
 	            .queryParam("sales_address", ((SalesDto)cri).getSales_address())
-	            .queryParam("sales_option", ((SalesDto)cri).getSales_option())
+	            .replaceQueryParam("sales_option", ((SalesDto)cri).getSales_option())
 	            .build(); 
-	 
+	 System.out.println(uriComponents.getQuery());
 	    return uriComponents.toUriString();  
 	}
 
