@@ -225,9 +225,10 @@ public class MemberController {
 	
 	// 회원 관리
 	@RequestMapping(value = "/member/admin")
-	public ModelAndView adminMemberList() {
+	public ModelAndView adminMemberList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-
+		mav.addObject("request", request);
+		
 		memberService.getMemberList(mav);
 
 		return mav;
