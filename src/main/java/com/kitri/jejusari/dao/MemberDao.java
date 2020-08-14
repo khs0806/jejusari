@@ -33,7 +33,5 @@ public interface MemberDao {
 
 
 	
-	// 임시 로그인
-	public MemberDto tempLogin(MemberDto memberDto);
->>>>>>> f738c5051f6f319558d95fd6a68b1b37b2ba1d49
+
 }
