@@ -79,4 +79,16 @@
 		select sum(factor_total) from factor
 	</select>
 	
+	<!--  등록한 매물의 sales_number 가져오기-->
+	<select id="get_sales_number" resultType="int">
+		select *
+		from (
+		    select sales_number
+		    from sales
+		    where member_id = #{member_id}
+		    order by sales_number desc
+		    )
+		where rownum = 1
+	</select>
+	
 </mapper>

@@ -46,7 +46,7 @@ public class SalesController {
 		return "sales/sales_write.tiles";
 	}
 	
-	@RequestMapping(value="/sales/writeOk")
+	@RequestMapping(value="/sales/writeOk", method=RequestMethod.POST)
 	public String salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
 		
 		ModelAndView mav= new ModelAndView();

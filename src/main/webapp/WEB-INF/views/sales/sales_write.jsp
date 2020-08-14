@@ -29,7 +29,7 @@
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form action="${root }/sales/writeOk.do">
+		<form action="${root }/sales/writeOk" method="post">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			
@@ -120,7 +120,7 @@
 					<div class="input-group-prepend">
 				    	<span class="input-group-text">가격 (만원)</span>
 					</div>
-					<input name="sales_cost" type="text" class="form-control" placeholder="보증금"  aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_deposit" type="text" class="form-control" placeholder="보증금"  aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2" id="sales_cost">
 					<div class="input-group-prepend">
