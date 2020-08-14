@@ -11,13 +11,13 @@
 	<c:set var="root" value="${pageContext.request.contextPath}"/>
 	<c:if test="${check>0}">
 		<script type="text/javascript">
-			alert("신고작성 완료");
+			alert("신고작성이 완료되었습니다.");
 			self.close();
 		</script>
 	</c:if>
 	<c:if test="${check==0}">
 		<script type="text/javascript">
-			alert("신고작성 실패");
+			alert("신고작성이 실패했스빈다. 다시 시도해주세요.");
 			location.href="${root}/report/report_write";
 		</script>
 	</c:if>

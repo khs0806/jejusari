@@ -92,8 +92,7 @@ public class SalesController {
 		int check=salesService.salesScrap(mav);
 		PrintWriter out=response.getWriter();
 		out.print(check);
-	}
-	
+	}	
 	
 	@RequestMapping(value="/sales/delete", method=RequestMethod.GET)
 	public ModelAndView salesDelete(HttpServletRequest request, HttpServletResponse response) {
@@ -125,13 +124,9 @@ public class SalesController {
 		String member_id = (String) session.getAttribute("user");
 		String db_id = salesService.salesIdCheck(sales_number);
 		
-		if(member_id.equals(db_id)) {
-			salesService.salesDeleteOk(mav);
-		} else {
-			mav.addObject("check", "0");
-		}
-		
-		mav.setViewName("sales/sales_deleteOk");
+	
+		salesService.salesDeleteOk(mav);
+
 		
 		return mav;
 	}

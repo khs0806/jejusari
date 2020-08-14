@@ -172,9 +172,10 @@ public class BoardController {
 	
 	// 신고 관리자
 		@RequestMapping(value="/report/admin")
-		public ModelAndView reportAdmin() {
-			   ModelAndView mav = new ModelAndView();
-				
+		public ModelAndView reportAdmin(HttpServletRequest request, HttpServletResponse response) {
+			  ModelAndView mav = new ModelAndView();
+			   mav.addObject("request", request);
+			   
 				boardService.getReportList(mav);
 				
 				return mav;

@@ -87,6 +87,17 @@ public class SalesServiceImp implements SalesService {
 		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
 		System.out.println(factorMap.toString());
 		
+		//매물더미데이터 업데이트_한번 돌리면 될듯?합니다?
+/*		for(int i=1;i<=123;i++) {
+			if(i==57) continue;
+			if(i==113) continue;
+			Map<String, Object> factorMap_update = salesDao.getFactor(i);		
+			int check=salesDao.updateSalesDB(factorMap_update);
+		}
+*/		
+		int factor_total_all=salesDao.totalAll();
+		mav.addObject("factor_total_all",factor_total_all);
+		
 		mav.addObject("scrap_count",scrap_count);
 		mav.addObject("pageNumber",pageNumber);
 		mav.addObject("memberDto",memberDto);
@@ -121,10 +132,13 @@ public class SalesServiceImp implements SalesService {
 		
 		int check=0;
 		int scrap_check=salesDao.salesScrapCheck(map);
-		if(scrap_check==0) {
-			check=salesDao.salesScrap(map);
+		if(scrap_check==0) {		//스크랩추가
+			int ok=salesDao.salesScrapDo(map);
+			if(ok>0) check=1;
+		}else {				//스크랩삭제
+			int ok=salesDao.salesScrapDelete(map);
+			if(ok>0) check=-1;
 		}
-		
 		return check;
 	}
 
@@ -181,11 +195,22 @@ public class SalesServiceImp implements SalesService {
 		SalesDto salesDto = new SalesDto();
 		salesDto.setSales_number(sales_number);
 		
-		int check = salesDao.salesDelete(salesDto);
-		System.out.println("check : " + check);
+		
+		int check1 = salesDao.salesDelete1(salesDto);
+		int check2 = salesDao.salesDelete2(salesDto);
+		int check3 = salesDao.salesDelete3(salesDto);
+		int check4 = salesDao.salesDelete4(salesDto);
+		int check5 = salesDao.salesDelete5(salesDto);
+		
+		System.out.println("check : " + check1 + check2+check3+check4+check5);
 		
 		
-		mav.addObject("check", check);
+		mav.addObject("check1", check1);
+		mav.addObject("check2", check2);
+		mav.addObject("check3", check3);
+		mav.addObject("check4", check4);
+		mav.addObject("check5", check5);
+		mav.setViewName("sales/sales_deleteOk.tiles");
 		
 	}
 	

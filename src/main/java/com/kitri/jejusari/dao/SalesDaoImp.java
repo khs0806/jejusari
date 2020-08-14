@@ -33,10 +33,15 @@ public class SalesDaoImp implements SalesDao {
 	}
 	
 	@Override
-	public int salesScrap(Map<String, Object> map) {
-		return session.insert("sales_scrap", map);
+	public int salesScrapDo(Map<String, Object> map) {
+		return session.insert("sales_scrap_do", map);
 	}
 	
+	@Override
+	public int salesScrapDelete(Map<String, Object> map) {
+		return session.delete("sales_scrap_delete",map);
+	}
+
 	@Override
 	public int salesScrapCount(int sales_number) {
 		return session.selectOne("sales_scrap_count",sales_number);
@@ -74,10 +79,34 @@ public class SalesDaoImp implements SalesDao {
 	}
 	
 	@Override
-	public int salesDelete(SalesDto salesDto) {
+	public int salesDelete1(SalesDto salesDto) {
 		// TODO Auto-generated method stub
-		return session.delete("sales_delete", salesDto);
+		return session.delete("sales_delete1", salesDto);
 	}
+	
+	@Override
+	public int salesDelete2(SalesDto salesDto) {
+		// TODO Auto-generated method stub
+		return session.delete("sales_delete2", salesDto);
+	}
+	@Override
+	public int salesDelete3(SalesDto salesDto) {
+		// TODO Auto-generated method stub
+		return session.delete("sales_delete3", salesDto);
+	}
+	
+	@Override
+	public int salesDelete4(SalesDto salesDto) {
+		// TODO Auto-generated method stub
+		return session.delete("sales_delete4", salesDto);
+	}
+	
+	@Override
+	public int salesDelete5(SalesDto salesDto) {
+		// TODO Auto-generated method stub
+		return session.delete("sales_delete5", salesDto);
+	}
+	
 	
 	@Override
 	public String salesIdCheck(int sales_number) {
@@ -89,6 +118,7 @@ public class SalesDaoImp implements SalesDao {
 		return session.selectOne("get_address", sales_number);
 	}
 	
+	//
 	@Override
 	public void insertFactor(Map<String, Object> factorMap) {
 		session.insert("insert_factor", factorMap);
@@ -97,6 +127,16 @@ public class SalesDaoImp implements SalesDao {
 	@Override
 	public Map<String, Object> getFactor(int sales_number) {
 		return session.selectOne("get_factor", sales_number);
+	}
+	
+	@Override
+	public int updateSalesDB(Map<String, Object> factorMap_update) {
+		return session.update("db_sales_update",factorMap_update);
+	}
+	
+	@Override
+	public int totalAll() {
+		return session.selectOne("factor_total_all");
 	}
 	
 }
