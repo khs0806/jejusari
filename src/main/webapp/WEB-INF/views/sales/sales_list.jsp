@@ -15,8 +15,6 @@
 		function updateAreaInput(val) {
           document.getElementById('areaInput').value=val; 
         }
-		
-		
 		</script>
 <title>Insert title here</title>
 </head>
@@ -135,14 +133,14 @@
 				}
 			});
 		</script>
-			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }&pageNumber=${currentPage}">
+			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }&pageNumber=${pageMaker.cri.pageNumber}">
 			<div class="row border-bottom" id="table_td">
-				<div class="col-md-6"><strong>${salesList.sales_title }</strong><p>${salesList.sales_address }</p></div>
-				<div class="col-md-1">${salesList.sales_category_type }</div>
-				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3) }" type="number" pattern="0.0"/>평/
-						<fmt:formatNumber value="${salesList.sales_area }" type="number" pattern="0.0"/>m<sup>2</sup>/${salesList.sales_floor }층</div>
-				<div class="col-md-1">${salesList.sales_category_rent }</div>
-				<div class="col-md-2"><span id="sales_deposit${salesList.sales_number }"></span><span id="slash${salesList.sales_number }"></span><span id="sales_cost${salesList.sales_number }"></span></div>
+				<div class="col-md-6"><strong>${salesList.sales_title}</strong><p>${salesList.sales_address}</p></div>
+				<div class="col-md-1">${salesList.sales_category_type}</div>
+				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3)}" type="number" pattern="0.0"/>평/
+						<fmt:formatNumber value="${salesList.sales_area}" type="number" pattern="0.0"/>m<sup>2</sup>/${salesList.sales_floor}층</div>
+				<div class="col-md-1">${salesList.sales_category_rent}</div>
+				<div class="col-md-2"><span id="sales_deposit${salesList.sales_number}"></span><span id="slash${salesList.sales_number}"></span><span id="sales_cost${salesList.sales_number }"></span></div>
 			<!-- 	<div class="col-md-2"></div> -->
 			</div>
 			</a>

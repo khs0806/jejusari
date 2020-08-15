@@ -24,6 +24,9 @@
 	<select id="sales_scrap_count" parameterType="int" resultType="int">
 		select count(*) from scrap where sales_number=#{sales_number}
 	</select>
+	<select id="sales_select_img" parameterType="int" resultType="com.kitri.jejusari.dto.SalesImgDto">
+		select * from sales_img where sales_number=#{sales_number} order by image_index
+	</select>
 
 	<!--  -->
 	<select id="sales_getCount" parameterType="java.util.HashMap" resultType="int">
@@ -109,7 +112,14 @@
 			delete from sales where sales_number = #{sales_number}
 	</delete>
 	
-
+	<update id="sales_update" parameterType="java.util.Map">
+		update sales set sales_title=#{salesDto.sales_title},sales_content=#{salesDto.sales_content},
+				sales_category_type=#{salesDto.sales_category_type},sales_category_rent=#{salesDto.sales_category_rent},
+				sales_deposit=#{salesDto.sales_deposit}, sales_cost=#{salesDto.sales_cost}, sales_area=#{salesDto.sales_area}, 
+				sales_address=#{salesDto.sales_address}, sales_option=#{salesDto.sales_option}, sales_build_year=#{salesDto.sales_build_year},
+				sales_floor=#{salesDto.sales_floor}
+		 where sales_number=#{sales_number}
+	</update>
 	
 	
 	<select id="get_member_id" resultType="String">
@@ -141,9 +151,10 @@
 		update sales set sales_factor_total=#{factor_total} where sales_number=#{sales_number}
 	</update>
 	
-	<select id="factor_total_all" resultType="int">
-		select sum(factor_total) from factor
+	<select id="factor_all_avg" resultType="float">
+		select avg(factor_total) from factor
 	</select>
+	
 	
 	<!--  등록한 매물의 sales_number 가져오기-->
 	<select id="get_sales_number" resultType="int">
@@ -157,4 +168,7 @@
 		where rownum = 1
 	</select>
 	
+	<insert id = "salesImg_insert" parameterType = "com.kitri.jejusari.dto.SalesImgDto">
+      insert into sales_img(image_index,sales_number,image_url) values(1,#{sales_number},#{image_url})
+   </insert>
 </mapper>

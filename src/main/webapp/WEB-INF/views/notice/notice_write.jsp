@@ -47,72 +47,97 @@ function noticeCheck(obj){
 		<h3 class="text-secandary">[공지사항 작성]</h3>
 		<span class="badge badge-secondary">관리자</span>
 		<form action="${root}/notice/writeOk" method = "post" onsubmit = "return noticeCheck(this)" id = "noticeWrite">
-				<div id = "box">
-					<div class = "writer">
-						<label>작성자</label>
-						<!-- <input type = "text" value = "관리자"> -->
-						<input name="member_id" type="text" class="form-control" value = "${member_id}" readonly>
-					</div>
-					
-					<div class = "title">
-						<label>제목</label>
-						<!-- <input type = "text" name = "subject"> -->
-						<input name="notice_title" type="text" class="form-control" placeholder="제목을 입력하세요.">
-					</div>
-					
+			<div id = "box">
+				<div class = "writer">
+					<label>작성자</label>
+					<!-- <input type = "text" value = "관리자"> -->
+					<input name="member_id" type="text" class="form-control" value = "${member_id}" readonly>
+				</div>
+				
+				<div class = "title">
+					<label>제목</label>
+					<!-- <input type = "text" name = "subject"> -->
+					<input name="notice_title" type="text" class="form-control" placeholder="제목을 입력하세요.">
+				</div>
+				
 <!-- 					파일 업로드
 					<div class = "file">
 						<label>첨부파일</label>
 						<input type = "file" size = "40" name = "file">
 					</div> -->
-					
-					<!-- <div class="file">
-				      <label for="exampleInputFile">첨부파일</label>
-				      <input class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" type="file">
-				      <small class="form-text text-muted" id="fileHelp">첨부파일을 선택해주세요.</small>
-    				</div> -->
-					
-					<!-- <div class = "category">
-						<textarea rows="13" cols="93" name = "content"></textarea>
-					</div> -->
-					
-					<div class="category">
-				      <textarea name = "notice_content" class="form-control" id="summernote" rows="3" style = "height: 100px;"></textarea>
-    				</div>
-    				
-    				<script>
-    					$('#summernote').summernote({
-    					  height: 300,
-    					  minHeight: null,
-    					  maxHeight: null,
-    					  focus: true,
-    					  placeholder: '최대 2048자까지 작성할 수 있습니다.'
-    					});
-    					
-    					$('.dropdown-toggle').dropdown();
-    					
-    					$("#summernote").summernote({
-    					    toolbar: [
-    					        ['para', ['ul']]
-    					    ],
-    					    focus: true,
-    					    disableResize: true,
-    					    disableResizeEditor: true,
-    					    resize: false
-    					});
-    					$('.note-statusbar').hide()
-    				</script>
-					
-					
-					<div class = "text" style = "text-align: right;">
-						<button class="btn btn-secondary" type="button" onclick = "location.href = '${root}/notice'">목록</button>
-						<button class="btn btn-secondary" type="reset">취소</button>
-						<button class="btn btn-secondary" type="submit">작성</button>
-						<%-- <input type = "button" value = "목록" onclick = "location.href = '${root}/notice/notice_list.do'"/> --%>
-						<!-- <input type = "reset" value = "취소"> -->
-						<!-- <input type = "submit" value = "작성"> -->
+				
+				<!-- <div class="file">
+			      <label for="exampleInputFile">첨부파일</label>
+			      <input class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" type="file">
+			      <small class="form-text text-muted" id="fileHelp">첨부파일을 선택해주세요.</small>
+   				</div> -->
+				
+				<!-- <div class = "category">
+					<textarea rows="13" cols="93" name = "content"></textarea>
+				</div> -->
+				
+				<div class="category">
+					<textarea name = "notice_content" class="form-control" id="summernote" rows="3" style = "height: 100px;"></textarea>
+   				</div>
+   				
+   				<script>
+   					$('#summernote').summernote({
+   						height: 300,
+   						minHeight: null,
+   						maxHeight: null,
+						focus: true,
+  						placeholder: '최대 2048자까지 작성할 수 있습니다.',
+  						callbacks: {
+  							onImageUpload : function(files) {
+  								uploadSummernoteImageFile(files[0], this);
+  							}
+  						}
+					});
+   					
+   					function uploadSummernoteImageFile(file, editor) {
+   						var data = new FormData();
+   						data.append("file", file);
+   						$.ajax({
+   							data : data,
+   							type : "POST",
+   							url : "/notice/imgUpload",
+   							contentType : false,
+   							processData : false,
+   							success : function(data) {
+   				            	            //항상 업로드된 파일의 url이 있어야 한다.
+   				            	            $(editor).summernote('insertImage', data.url);
+   				            	                alert("Success");
+   							 }
+   							,error:function(request,status,error, data){
+   				            	            alert("Error");
+   				         	        }
+   						});
+   					}
 
-					</div>
+   					$('.dropdown-toggle').dropdown();
+   					
+   					$("#summernote").summernote({
+   					    toolbar: [
+   					        ['para', ['ul']]
+   					    ],
+   					    focus: true,
+   					    disableResize: true,
+   					    disableResizeEditor: true,
+   					    resize: false
+   					});
+   					$('.note-statusbar').hide()
+   				</script>
+				
+				
+				<div class = "text" style = "text-align: right;">
+					<button class="btn btn-secondary" type="button" onclick = "location.href = '${root}/notice'">목록</button>
+					<button class="btn btn-secondary" type="reset">취소</button>
+					<button class="btn btn-secondary" type="submit">작성</button>
+					<%-- <input type = "button" value = "목록" onclick = "location.href = '${root}/notice/notice_list.do'"/> --%>
+					<!-- <input type = "reset" value = "취소"> -->
+					<!-- <input type = "submit" value = "작성"> -->
+
+				</div>
 			</div>
 		</form>
 	</div>

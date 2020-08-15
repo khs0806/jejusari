@@ -31,20 +31,6 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	// 메인 리다이렉트
-	@RequestMapping(value="/")
-	public String home() {
-		
-		return "redirect:main";
-	}
-	
-	// 메인
-	@RequestMapping(value="/main")
-	public String main() {
-		
-		return "main/main.tiles";
-	}
-	
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw1")
 	public String withdraw() {
@@ -57,7 +43,7 @@ public class MemberController {
 		
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
-		
+		System.out.println(member_id);
 		int check = memberService.member_delete(member_id);
 		model.addAttribute("check", check);
 		
@@ -90,7 +76,7 @@ public class MemberController {
 		
 		if (member == null) {
 			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
-			return "main/main.tiles";
+			return "redirect:/main";
 		}
 		System.out.println(member.toString());
 		
@@ -99,7 +85,7 @@ public class MemberController {
 		session.setAttribute("member_level", member.getMember_level());
 		model.addAttribute("msg", "로그인 되었습니다.");
 		
-		return "main/main.tiles";
+		return "redirect:/main";
 	}
 	
 	// 임시회원가입 뷰
@@ -133,9 +119,7 @@ public class MemberController {
 	
 	// 카카오로 로그인 or 회원가입
 	@RequestMapping("/test/join")
-	public ModelAndView kakaoLogin(HttpServletRequest request) {
-		
-		ModelAndView mav = new ModelAndView();
+	public String kakaoLogin(HttpServletRequest request, Model model) {
 		
 		// 카카오의 인증과정
 		String authorize_code = request.getParameter("code");
@@ -159,16 +143,14 @@ public class MemberController {
 				session.setAttribute("member_name", member_name);
 				session.setAttribute("access_Token", access_Token);
 			}
-			mav.setViewName("main/main.tiles");
-			return mav;
+			return "redirect:/main";
 		}
 
-		mav.addObject("member_id", member_id);
-		mav.addObject("member_name", member_name);
-		mav.addObject("member_email", member_email);
-		mav.setViewName("member/member_signup.tiles");
+		model.addAttribute("member_id", member_id);
+		model.addAttribute("member_name", member_name);
+		model.addAttribute("member_email", member_email);
 
-		return mav;
+		return "member/member_signup.tiles";
 	}
 	
 	// 회원가입
@@ -298,8 +280,12 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value ="/member/drop", method = RequestMethod.POST)
 	public int dropMember(@RequestParam(value="drop[]") List<String> list, HttpServletResponse response) {
+	
+		//System.out.println(list); 
 		
 		int dropUser = memberService.dropMember(list);
+		
+		//System.out.println(dropUser);
 		
 		return dropUser;
 

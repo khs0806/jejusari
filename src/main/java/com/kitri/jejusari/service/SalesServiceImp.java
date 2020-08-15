@@ -18,6 +18,7 @@ import com.kitri.jejusari.dao.SalesDao;
 import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.dto.PageMaker;
 import com.kitri.jejusari.dto.SalesDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 @Service
 public class SalesServiceImp implements SalesService {
@@ -86,6 +87,9 @@ public class SalesServiceImp implements SalesService {
 		
 		int scrap_count=salesDao.salesScrapCount(sales_number);
 		
+		List<SalesImgDto> salesImgDtoList=salesDao.selectSalesImg(sales_number);
+		mav.addObject("salesImgDtoList",salesImgDtoList);
+		
 		// by.gustn
 		// 해당 매물의 지수 정보 가져오기
 		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
@@ -99,8 +103,8 @@ public class SalesServiceImp implements SalesService {
 			int check=salesDao.updateSalesDB(factorMap_update);
 		}
 */		
-		int factor_total_all=salesDao.totalAll();
-		mav.addObject("factor_total_all",factor_total_all);
+		float factor_all_avg=salesDao.totalAvg();
+		mav.addObject("factor_all_avg",factor_all_avg);
 		
 		mav.addObject("scrap_count",scrap_count);
 		mav.addObject("pageNumber",pageNumber);
@@ -137,7 +141,19 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		SalesDto salesDto=(SalesDto) map.get("salesDto");
 		System.out.println(request+"\t"+salesDto);
+		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		
+		map.put("sales_number", sales_number);
+		map.put("salesDto",salesDto);
+		
+		int check=salesDao.salesUpdate(map);
+		System.out.println("updateOk:"+check);
+		
+		mav.addObject("pageNumber",pageNumber);
+		mav.addObject("sales_number",sales_number);
+		mav.addObject("check",check);
+		mav.setViewName("sales/sales_updateOk.tiles");
 	}
 	
 	@Override
@@ -234,12 +250,26 @@ public class SalesServiceImp implements SalesService {
 	@Override
 	public void salesWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		String safeFile = (String) map.get("safeFile");
+		// /jejusari/src/main/webapp/WEB-INF/psd/1597477771364KakaoTalk_20200723_185750052_01.jpg
+		System.out.println(safeFile);
+		
+		///jejusari/src/main/webapp/WEB-INF
+		safeFile = safeFile.substring(safeFile.indexOf("psd") - 1,safeFile.length());
+		// /psd/1597477771364KakaoTalk_20200723_185750052_01.jpg
+
+		System.out.println(safeFile);
+		
 		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		System.out.println(salesDto.toString());
 		int check = salesDao.salesWriteOk(salesDto);
+		SalesImgDto salesImgDto = new SalesImgDto();
+		salesImgDto.setImage_url(safeFile);
+		int sales_number = 0;
 		
 		if (check > 0) {
-			int sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
+			sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
 			
 			String address = getAddress(sales_number);
 			System.out.println("address : " + address);
@@ -264,8 +294,15 @@ public class SalesServiceImp implements SalesService {
 			
 			// DB에 전달
 			salesDao.insertFactor(factorMap);
+			
+			// Sales_Img DB에 전달
+			salesImgDto.setSales_number(sales_number);
+			salesDao.insertSalesImg(salesImgDto);
 		}
 		System.out.println(check);
+		salesImgDto.setImage_url(safeFile);
+		salesImgDto.setSales_number(sales_number);
+
 	}
 	
 	@Override

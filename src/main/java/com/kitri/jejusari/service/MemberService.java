@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
 import com.kitri.jejusari.dto.MemberDto;
+import com.kitri.jejusari.dto.NoticeDto;
 
 public interface MemberService {
 	
