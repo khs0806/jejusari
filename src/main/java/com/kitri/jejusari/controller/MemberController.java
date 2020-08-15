@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.common.KakaoLoginAPI;
 import com.kitri.jejusari.dto.MemberDto;
+import com.kitri.jejusari.dto.NoticeDto;
 import com.kitri.jejusari.service.MemberService;
 
 @Controller
@@ -34,13 +35,6 @@ public class MemberController {
 	public String home() {
 		
 		return "redirect:main";
-	}
-	
-	// 메인
-	@RequestMapping(value="/main")
-	public String main() {
-		
-		return "main/main.tiles";
 	}
 	
 	

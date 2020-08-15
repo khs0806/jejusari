@@ -1,5 +1,7 @@
 package com.kitri.jejusari.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,18 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	// 메인
+	@RequestMapping(value="/main")
+	public ModelAndView main(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		request.setAttribute("pageNumber", 1);
+		mav.addObject("request", request);
+		boardService.noticeList(mav);
+		boardService.newsList(mav);
+		mav.setViewName("main/main.tiles");
+		return mav;
+	}
 	
 	// 사이트소개
 	@RequestMapping(value="/introduce")

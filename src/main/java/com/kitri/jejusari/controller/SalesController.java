@@ -69,7 +69,6 @@ public class SalesController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
 		
-
 		salesService.salesDetail(mav);
 		
 		return mav;
@@ -173,6 +172,7 @@ public class SalesController {
 	@RequestMapping(value="/sales/updateOk", method=RequestMethod.POST)
 	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto) {
 		ModelAndView mav=new ModelAndView();
+		System.out.println(request.getParameter("sales_number"));
 		mav.addObject("request",request);
 		mav.addObject("salesDto",salesDto);
 		

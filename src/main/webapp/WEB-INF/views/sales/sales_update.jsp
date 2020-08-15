@@ -92,7 +92,7 @@
 					</select>
 					
 					
-				  <input name="sales_title" type="text" class="form-control" placeholder="${salesDto.sales_title }" aria-label="제목을 입력하세요.">
+				  <input name="sales_title" type="text" class="form-control" placeholder="${salesDto.sales_title }" value="${salesDto.sales_title }" aria-label="제목을 입력하세요.">
 				</div>
 				
 				<!-- 옵션 선택 태그 -->
@@ -239,11 +239,11 @@
 				  placeholder: '최대 2048자까지 작성할 수 있습니다.'
 			
 			// 이미지 첨부 부분
-				  callbacks:{
+			/* 	  callbacks:{
 					  onImageUpload : function(files){
 						  uploadSummernoteImageFile(files[0], this);
 					  }
-				  }
+				  } */
 			// 이미지 첨부 부분 끝
 				});
 				
@@ -296,12 +296,15 @@
 			$("input:button[name=sales_no_update]").click(function(){
 				var check=confirm("매물 정보 수정을 취소하시겠습니까?");
 				if(check==true){
-					location.href="${root }/sales/detail?sales_number=${salesDto.sales_number }&pageNumber=${pageNumber}";
+					location.href="${root }/sales/detail?sales_number=${salesDto.sales_number}&pageNumber=${pageNumber}";
 				}
 			})
 		</script>
+			<input name="sales_number" type="hidden" value="${salesDto.sales_number}"/>
+			<input name="pageNumber" type="hidden" value="${pageNumber}"/>
 		</form>
 	</div>	
+	
 
 <script type="text/javascript" src="${root }/javascript/sales/sales_address.js"></script>
 </body>
