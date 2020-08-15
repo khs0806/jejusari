@@ -19,13 +19,16 @@
 		
 		<div class="table active">
 			<div class="row border-bottom" id="table_th">
+				<div class="col-md-1">&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div class="col-md-8"><strong>제목</strong></div>
 				<div class="col-md-1"><strong>날짜</strong></div>
 			</div>
 			
 			<c:forEach items="${newsList}" var="news">
+				<c:set var="i" value="${i+1}"/>
 				<a href="${news.link}">
 					<div class="row border-bottom" id="table_td">
+						<div class="col-md-1 pl-5"><strong>${i}</strong></div>
 						<div class="col-md-8"><strong>${news.title}</strong></div>
 						<div class="col-md-3" id="newsDate">${news.date}</div>
 					</div>

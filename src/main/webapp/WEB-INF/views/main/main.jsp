@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style type="text/css">
 	#main_page .card {height: 700px; overflow: hidden;display: flex;
             align-items: center;
@@ -51,7 +52,7 @@
 						<c:forEach begin="1" end="7" var="i" step="1">
 						<a href="#">
 							<div class="row table active ">
-								<div class="col-md-1 pl-5">${i} </div>
+<%-- 								<div class="col-md-1 pl-5">${i} </div> --%>
 								<div class="col-md-7">&#9786;공지사항</div>
 								<div class="col-md-3">2020-08-10 </div>
 							</div>
@@ -59,15 +60,18 @@
 						</c:forEach>
 				</div>
 				<div class="col px-md-5">
-						<div class="border-bottom mr-3 p-3" id="table_th_news"><strong>최신뉴스</strong></div>
-					<c:forEach begin="1" end="7" var="i" step="1">
-					<a href="#">
-						<div class="row table active">
-							<div class="col-md-1 pl-5">${i} </div>
-							<div class="col-md-7">&#9786;최신뉴스</div>
-							<div class="col-md-3">2020-08-10 </div>
-						</div>
-					</a>
+						<div class="border-bottom mr-3 p-3" id="table_th_news"><strong>제주 이슈</strong></div>
+					<c:forEach items="${newsList}" end="6" var="news">
+						<c:set var="i" value="${i+1}"/>
+						<a href="${news.link}">
+							<div class="row table active">
+								<div class="col-md-1 pl-5"><strong>${i}</strong></div>
+<%-- 								<div class="col-md-7"><strong>${news.title}</strong></div> --%>
+								<c:set var="title" value="${news.title}"/>
+								<div class="col-md-7"><strong>${fn:substring(title, 0, 20)}...</strong></div>
+								<div class="col-md-3"><strong>${news.date}</strong></div>
+							</div>
+						</a>
 					</c:forEach>
 				</div>
 			</div>
