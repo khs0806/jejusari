@@ -87,6 +87,9 @@ public class SalesServiceImp implements SalesService {
 		
 		int scrap_count=salesDao.salesScrapCount(sales_number);
 		
+		List<SalesImgDto> salesImgDtoList=salesDao.selectSalesImg(sales_number);
+		mav.addObject("salesImgDtoList",salesImgDtoList);
+		
 		// by.gustn
 		// 해당 매물의 지수 정보 가져오기
 		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
@@ -100,8 +103,8 @@ public class SalesServiceImp implements SalesService {
 			int check=salesDao.updateSalesDB(factorMap_update);
 		}
 */		
-		int factor_total_all=salesDao.totalAll();
-		mav.addObject("factor_total_all",factor_total_all);
+		float factor_all_avg=salesDao.totalAvg();
+		mav.addObject("factor_all_avg",factor_all_avg);
 		
 		mav.addObject("scrap_count",scrap_count);
 		mav.addObject("pageNumber",pageNumber);
@@ -138,7 +141,19 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		SalesDto salesDto=(SalesDto) map.get("salesDto");
 		System.out.println(request+"\t"+salesDto);
+		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		
+		map.put("sales_number", sales_number);
+		map.put("salesDto",salesDto);
+		
+		int check=salesDao.salesUpdate(map);
+		System.out.println("updateOk:"+check);
+		
+		mav.addObject("pageNumber",pageNumber);
+		mav.addObject("sales_number",sales_number);
+		mav.addObject("check",check);
+		mav.setViewName("sales/sales_updateOk.tiles");
 	}
 	
 	@Override

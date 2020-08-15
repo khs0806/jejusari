@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style type="text/css">
 	#main_page .card {height: 700px; overflow: hidden;display: flex;
             align-items: center;
@@ -46,30 +48,45 @@
 		<div class="main">
 			<div class="row mt-5 mb-5 mx-md-n5">
 				<div class="col px-md-5">
-						<div class="border-bottom mr-3 p-3" id="table_th_news"><strong>공지사항</strong></div>
-						
-						<c:forEach begin="1" end="7" var="i" step="1">
-						<a href="#">
-							<div class="row table active ">
-								<div class="col-md-1 pl-5">${i} </div>
-								<div class="col-md-7">&#9786;공지사항</div>
-								<div class="col-md-3">2020-08-10 </div>
+						<div class="border-bottom mr-3 p-3" id="table_th_news">
+							<strong>공지사항</strong>
+							<strong style="float:right;">
+								<a href="${root}/notice" style="color:#6c757d;font-size:14px;">> 더보기</a>
+							</strong>
+						</div>
+						<c:forEach var="noticeDto" items="${noticeList}" end="6" varStatus="status">
+						<a href="${root}/notice/detail?notice_number=${noticeDto.notice_number}">
+							<div class="row table active">
+								<div class="col-md-1 pl-5"><strong>${status.index+1}</strong></div>
+								<div class="col-md-7"><strong>&#9786;&nbsp;&nbsp;${noticeDto.notice_title }</strong></div>
+								<div class="col-md-3">
+									<strong><fmt:formatDate value = "${noticeDto.notice_date}" pattern = "yyyy-MM-dd"/></strong>
+								</div>
 							</div>
 						</a>
 						</c:forEach>
 				</div>
+				
 				<div class="col px-md-5">
-						<div class="border-bottom mr-3 p-3" id="table_th_news"><strong>최신뉴스</strong></div>
-					<c:forEach begin="1" end="7" var="i" step="1">
-					<a href="#">
-						<div class="row table active">
-							<div class="col-md-1 pl-5">${i} </div>
-							<div class="col-md-7">&#9786;최신뉴스</div>
-							<div class="col-md-3">2020-08-10 </div>
-						</div>
-					</a>
-					</c:forEach>
-				</div>
+                  <div class="border-bottom mr-3 p-3" id="table_th_news">
+                  	<strong>제주 이슈</strong>
+                  	<strong style="float:right;">
+							<a href="${root}/news" style="color:#6c757d;font-size:14px;">> 더보기</a>
+					</strong>
+                  </div>
+               <c:forEach items="${newsList}" end="6" var="news" varStatus="status">
+                  <a href="${news.link}">
+                     <div class="row table active">
+                        <div class="col-md-1 pl-5"><strong>${status.index+1}</strong></div>
+<%--                         <div class="col-md-7"><strong>${news.title}</strong></div> --%>
+                        <c:set var="title" value="${news.title}"/>
+                        <div class="col-md-7"><strong>${fn:substring(title, 0, 20)}...</strong></div>
+                        <div class="col-md-3"><strong>${news.date}</strong></div>
+                     </div>
+                  </a>
+               </c:forEach>
+            </div>
+            
 			</div>
 		</div>
 	</div>

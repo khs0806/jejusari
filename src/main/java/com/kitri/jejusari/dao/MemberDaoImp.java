@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.dto.SalesImgDto;
 
+
 @Repository
 public class MemberDaoImp implements MemberDao{
 	

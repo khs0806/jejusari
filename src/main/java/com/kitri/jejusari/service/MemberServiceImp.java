@@ -108,6 +108,9 @@ public class MemberServiceImp implements MemberService {
 	public MemberDto tempLogin(MemberDto memberDto) {
 		return memberDao.tempLogin(memberDto);
 	}
+<<<<<<< HEAD
+
+=======
 	
 	@Override
 	public int memberUpdate(MemberDto memberDto) {
@@ -121,4 +124,5 @@ public class MemberServiceImp implements MemberService {
 		HttpSession session=request.getSession();
 	}
 	 
+>>>>>>> 29e4db2660b8a47ce03e115f66f034894d31e855
 }

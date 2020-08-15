@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.dto.SalesDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 @Repository
 public class SalesDaoImp implements SalesDao {
@@ -47,10 +48,14 @@ public class SalesDaoImp implements SalesDao {
 		return session.selectOne("sales_scrap_count",sales_number);
 	}
 
-	//
 	@Override
 	public int salesCount(Map<String, Object> hmap) {
 		return session.selectOne("sales_getCount", hmap);
+	}
+	
+	@Override
+	public List<SalesImgDto> selectSalesImg(int sales_number) {
+		return session.selectList("sales_select_img",sales_number);
 	}
 
 	@Override
@@ -104,6 +109,11 @@ public class SalesDaoImp implements SalesDao {
 		return session.selectOne("get_address", sales_number);
 	}
 	
+	@Override
+	public int salesUpdate(Map<String, Object> map) {
+		return session.update("sales_update", map);
+	}
+	
 	//
 	@Override
 	public void insertFactor(Map<String, Object> factorMap) {
@@ -121,8 +131,8 @@ public class SalesDaoImp implements SalesDao {
 	}
 	
 	@Override
-	public int totalAll() {
-		return session.selectOne("factor_total_all");
+	public float totalAvg() {
+		return session.selectOne("factor_all_avg");
 	}
 	
 	@Override

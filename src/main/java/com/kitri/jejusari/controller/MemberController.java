@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kitri.jejusari.common.KakaoLoginAPI;
 import com.kitri.jejusari.dto.MemberDto;
+import com.kitri.jejusari.dto.NoticeDto;
 import com.kitri.jejusari.service.MemberService;
 
 @Controller
