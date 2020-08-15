@@ -90,9 +90,9 @@
 				  <div class="input-group-prepend">
 				    <span class="input-group-text" id="inputGroup-sizing-sm">주소찾기</span>
 				  </div>
-				  <input type="text" name="sales_address" id="sample5_address" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+				  <input type="text" name="sales_address" id="sample5_address" readonly placeholder="검색버튼을 눌러주세요." class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 				  <div class="input-group-append">
-				    <button class="btn btn-outline-secondary" type="button" id="button-addon2" aria-describedby="inputGroup-sizing-sm" onclick="sample4_execDaumPostcode()">Button</button>
+				    <button class="btn btn-outline-secondary" type="button" id="button-addon2" aria-describedby="inputGroup-sizing-sm" onclick="sample4_execDaumPostcode()">검색</button>
 				  </div>
 				</div>
 				

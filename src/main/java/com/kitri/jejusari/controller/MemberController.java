@@ -32,20 +32,6 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	// 메인 리다이렉트
-	@RequestMapping(value="/")
-	public String home() {
-		
-		return "redirect:main";
-	}
-	
-	// 메인
-	@RequestMapping(value="/main")
-	public String main() {
-		
-		return "main/main.tiles";
-	}
-	
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw1")
 	public String withdraw() {
@@ -58,7 +44,7 @@ public class MemberController {
 		
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
-		
+		System.out.println(member_id);
 		int check = memberService.member_delete(member_id);
 		model.addAttribute("check", check);
 		

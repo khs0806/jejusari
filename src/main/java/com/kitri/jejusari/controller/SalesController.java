@@ -56,8 +56,8 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		
-		String SAVE_PATH = "C:\\CHOIYJ\\git\\work\\jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
-
+		String SAVE_PATH = "C:\\lji\\git\\jungin\\jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
+		
 		String originalFileName = mf.getOriginalFilename();
 		long fileSize = mf.getSize();
 		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;

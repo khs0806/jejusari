@@ -253,9 +253,9 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		String safeFile = (String) map.get("safeFile");
 		// /jejusari/src/main/webapp/WEB-INF/psd/1597477771364KakaoTalk_20200723_185750052_01.jpg
+		System.out.println(safeFile);
 		
 		///jejusari/src/main/webapp/WEB-INF
-		
 		safeFile = safeFile.substring(safeFile.indexOf("psd") - 1,safeFile.length());
 		// /psd/1597477771364KakaoTalk_20200723_185750052_01.jpg
 
@@ -265,6 +265,7 @@ public class SalesServiceImp implements SalesService {
 		System.out.println(salesDto.toString());
 		int check = salesDao.salesWriteOk(salesDto);
 		SalesImgDto salesImgDto = new SalesImgDto();
+		salesImgDto.setImage_url(safeFile);
 		int sales_number = 0;
 		
 		if (check > 0) {
@@ -293,6 +294,10 @@ public class SalesServiceImp implements SalesService {
 			
 			// DB에 전달
 			salesDao.insertFactor(factorMap);
+			
+			// Sales_Img DB에 전달
+			salesImgDto.setSales_number(sales_number);
+			salesDao.insertSalesImg(salesImgDto);
 		}
 		System.out.println(check);
 		salesImgDto.setImage_url(safeFile);

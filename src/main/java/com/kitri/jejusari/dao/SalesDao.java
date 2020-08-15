@@ -44,5 +44,7 @@ public interface SalesDao {
 	// 등록한 매물의 번호 가져오기
 	public int getSalesNumber(String member_id);
 	
+	public int insertSalesImg(SalesImgDto salesImgDto);
+	
 	
 }

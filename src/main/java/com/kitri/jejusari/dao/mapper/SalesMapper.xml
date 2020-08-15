@@ -168,4 +168,7 @@
 		where rownum = 1
 	</select>
 	
+	<insert id = "salesImg_insert" parameterType = "com.kitri.jejusari.dto.SalesImgDto">
+      insert into sales_img(image_index,sales_number,image_url) values(1,#{sales_number},#{image_url})
+   </insert>
 </mapper>

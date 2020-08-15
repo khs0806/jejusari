@@ -24,6 +24,13 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
+	// 메인 리다이렉트
+	@RequestMapping(value="/")
+	public String home() {
+
+		return "redirect:main";
+	}
+	
 	// 메인
 	@RequestMapping(value="/main")
 	public ModelAndView main(HttpServletRequest request) {
