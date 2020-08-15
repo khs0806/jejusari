@@ -139,5 +139,12 @@ public class SalesDaoImp implements SalesDao {
 	public int getSalesNumber(String member_id) {
 		return session.selectOne("get_sales_number", member_id);
 	}
+	@Override
+	public int insertSalesImg(SalesImgDto salesImgDto) {
+		return session.insert("salesImg_insert", salesImgDto);
+		
+	}
+	
+	
 	
 }

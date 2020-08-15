@@ -43,7 +43,7 @@ public class MemberController {
 		
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
-		
+		System.out.println(member_id);
 		int check = memberService.member_delete(member_id);
 		model.addAttribute("check", check);
 		

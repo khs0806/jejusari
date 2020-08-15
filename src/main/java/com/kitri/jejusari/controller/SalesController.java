@@ -51,10 +51,30 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/writeOk", method=RequestMethod.POST)
-	public String salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
+	public String salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto,
+			@RequestParam(value="file", required = false) MultipartFile mf) {
 		
 		ModelAndView mav= new ModelAndView();
-		mav.addObject(request);
+		
+		String SAVE_PATH = "C:\\lji\\git\\jungin\\jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
+		
+		String originalFileName = mf.getOriginalFilename();
+		long fileSize = mf.getSize();
+		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
+
+		try {
+			mf.transferTo(new File(safeFile));
+
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		mav.addObject("safeFile", safeFile);
+		mav.addObject("request", request);
 		HttpSession session = request.getSession();
 		//session으로 아이디 가져오고 나선 없어질 코드
 		salesDto.setMember_id((String)session.getAttribute("member_id"));
@@ -63,8 +83,8 @@ public class SalesController {
 		mav.addObject("salesDto", salesDto);
 		salesService.salesWriteOk(mav);
 		return "sales/sales_write.tiles";
+
 	}
-	
 	@RequestMapping(value="/sales/detail")
 	public ModelAndView salesDetail(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
