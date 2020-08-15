@@ -4,26 +4,25 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
-
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kitri.jejusari.dto.PageMaker;
 import com.kitri.jejusari.dto.SalesDto;
 import com.kitri.jejusari.service.SalesService;
 
@@ -133,14 +132,18 @@ public class SalesController {
 	
 	/** 이미지 관련 controller 함수..! 작성중입니다.(kke) */
 	@RequestMapping(value="/uploadSummernoteImageFile", method=RequestMethod.POST)
-	@ResponseBody
-	public JSONObject uploadSummernoteImageFile(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile multipartFile) {
+	public ResponseEntity<JSONObject> uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
 		//여기로 넘어오질 못하네...400 error
-		MultipartFile upFile=request.getFile("file");
-		System.out.println(upFile.getName());
 		System.out.println("넘어왔어용");
+		System.out.println(multipartFile);
+		System.out.println(multipartFile.toString());
 		JSONObject obj=new JSONObject();
 		String fileRoot="C:\\jejusari\\summernote_img\\";		//저장될 외부 파일 경로
+		
+		
+		String configFile=Config.FMT_LOCALE;
+		System.out.println(configFile);
+		
 		
 		//없는 경로면 생성하는 코드 만들어야하지 않나??
 		String originalFileName=multipartFile.getOriginalFilename();	//오리지날 파일명
@@ -156,13 +159,15 @@ public class SalesController {
 			obj.put("url", "/jejusari/summernote_img/"+savedFileName);
 			obj.put("filename", originalFileName);
 			obj.put("responseCode", "success");
-			
 		}catch(IOException e) {
 			FileUtils.deleteQuietly(targetFile);	//실패시 저장된 파일 삭제
 			obj.put("responseCode", "error");
 			e.printStackTrace();
 		}
-		return obj;
+		System.out.println(obj.toJSONString());
+		System.out.println(new ResponseEntity<JSONObject>(obj, HttpStatus.OK).toString());
+		ResponseEntity<JSONObject> d=new ResponseEntity<JSONObject>(obj, HttpStatus.OK);
+		return d;
 	}
 	
 	@RequestMapping(value="/sales/update")

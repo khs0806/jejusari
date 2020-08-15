@@ -205,14 +205,12 @@
 		$(document).ready(function() {
 			  $('#summernote').summernote();
 			});
-			console.log("이건나오겠지");
 			$('#summernote').summernote({
 				  height: 300,				//에디터 높이
 				  minHeight: null,			//최소 높이
 				  maxHeight: null,			//최대 높이
 				  focus: true,				//에디터 로딩 후 포커스를 맞출지
 				  placeholder: '최대 2048자까지 작성할 수 있습니다.',
-			
 			// 이미지 첨부 부분
 	  				callbacks: {
 						onImageUpload: function(image) {
@@ -223,39 +221,47 @@
 					}
 			// 이미지 첨부 부분 끝
 				});
-				/* $('#summernote').summernote('insertImage', url, function ($image) {
-					  $image.css('width', $image.width() / 3);
-					  $image.attr('data-filename', 'retriever');
-					}); */
-				$('.dropdown-toggle').dropdown();
-				
-				$("#summernote").summernote({
-				    toolbar: [
-				        ['para', ['ul']]
-				    ],
-				    focus: true,
-				    disableResize: true,
-				    disableResizeEditor: true,
-				    resize: false
-				});
-				$('.note-statusbar').hide()
+			$('.dropdown-toggle').dropdown();
+			$("#summernote").summernote({
+			    toolbar: [
+			        ['para', ['ul']]
+			    ],
+			    focus: true,
+			    disableResize: true,
+			    disableResizeEditor: true,
+			    resize: false
+			});
+			$('.note-statusbar').hide()
 	 		function uploadImageContent(image) {
 				var data = new FormData();
-				data.append("file", image);
-				var url = '${root }/uploadSummernoteImageFile';
+				data.append("file", image[0]);
+			/* 	반복해서 받을경우 반복문돌리기
+				var f = new FormData();
+
+	            var files = e.target.files;
+
+	            for (var i = 0; i < files.length; i++) {
+	                f.append("files", files[i]);
+	            } */
+				console.log(image);
+				var url = '${root}/uploadSummernoteImageFile';
 				console.log(url);
 				$.ajax({
 					url: url,
 					cache: false,
 					contentType: false,
 					processData: false,
+					enctype: 'multipart/form-data',
 					data: data,
 					type: "POST",
-					success: function(url) {
+					success: function(d) {
 						console.log('들어갔슈');
-						var image = $('<img>').attr('src', url);
-						//$("#summernote").summernote("insertImage", image[0]);
+						console.log(d.url);
+						console.log(d.responseCode);
+						console.log(d.filename);
+						var image = $('<img>').attr('src', d.url);
 						$("#summernote").summernote("insertImage", image);
+						//$("#summernote").summernote("insertImage", image);
 					},
 					error: function(data) {
 						console.log('안들어갔슈');
