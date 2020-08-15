@@ -66,14 +66,7 @@
 			   	});				
 		})
 		
-		//신고하기 클릭시
-		$("input:button[name=report_btn]").click(function(){
-			var check=confirm("이 매물을 신고하시겠습니까?");
-			if(check==true){
-				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
-			}
-		})
-		
+
 		//옵션 이미지 변경
 		if(${salesDto.sales_full!=1}){
 			$(".opt_full").css("filter","invert(80%)");
@@ -122,7 +115,7 @@
 		$("input:button[name=sales_update]").click(function(){
 			var check=confirm("매물 정보를 수정하시겠습니까?");
 			if(check==true){
-				location.href="${root }/sales/update?sales_number=${salesDto.sales_number}&pageNumber=${pageNumber}";
+				location.href="${root }/sales/update?sales_number=${salesDto.sales_number }&pageNumber=${pageNumber}";
 			}
 		})
 		
@@ -131,7 +124,12 @@
 			var check=confirm("매물 정보를 신고처리하시겠습니까?");
 		
 			if(check==true){
+
+				//alert("ok");
+				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
+
 				window.open('${root}/report/write?pageNumber=${pageNumber}&sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
+
 			}
 		})
 		
@@ -142,7 +140,6 @@
 		
 	})
 	});
-
 
 </script>
 
@@ -374,10 +371,21 @@
 	</c:if>
 	
 	<!-- 관리자; 신고, 삭제 -->
-	<c:if test="${member_level=='admin' }">
+	<c:if test="${member_level=='admin'}">
+		<script type="text/javascript">
+			function del(root,sales_number){
+				var url = root+"/report/delete?sales_number="+sales_number;
+				location.href=url;
+			}
+			
+			function update(root,sales_number){
+				 var url= root+"/report/update?sales_number="+sales_number;
+				 location.href=url;
+			 }
+		</script>
 		<div id="plus_btn">
-			<input type="button" name="sales_report_handle" value="신고처리" class="btn btn-light btn-sm"/>		<!-- dark? -->
-			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
+			<input type="button" name="update" value="신고처리" class="btn btn-light btn-sm" onclick="update('${root}','${salesDto.sales_number}')"/>			<!-- dark? -->
+			<input type="button" name="delete" value="삭제" class="btn btn-light btn-sm" onclick="del('${root}','${salesDto.sales_number}')"/>
 		</div>
 	</c:if>
 </div>

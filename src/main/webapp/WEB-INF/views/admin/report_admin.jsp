@@ -6,7 +6,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="${root}/css/admin/report_admin.css">
 <meta charset="UTF-8">
 <title>신고관리</title>
 <style type="text/css">
@@ -35,13 +34,38 @@ function pop(root,report_number){
 	window.open(url, "", "width=600, height=600, resizable = no, scrollbars = no" );
 }
 
+$(document).ready(function(){
+		$("#memberAdmin").click(function(){
+			//alert("member");
+			location.href="${root}/member/admin";
+		});
+		$("#noticeAdmin").click(function(){
+			//alert("notice");
+			location.href="${root}/notice";
+		});
+		$("#reportAdmin").click(function(){
+			//alert("report");
+			location.href="${root}/report/admin";
+		});
+});
 
 </script>
 </head>
 <body>
+<c:if test="${member_level != 'admin'}">
+	<script type="text/javascript">
+		alert("접근할 수 있는 권한이 없는 페이지 입니다.");
+		location.href="${root}/main";
+	</script>
+</c:if>
 	<div class="container">
+		<div class="btn-group">
+		    <button type="button" class="btn btn-secondary" id="memberAdmin">회원 관리</button>
+		    <button type="button" class="btn btn-secondary" id="noticeAdmin">공지사항 관리</button>
+		    <button type="button" class="btn btn-secondary" id="reportAdmin">신고 관리</button>
+  		</div>
 		<div id="title" class="text-secondary"><h3>&#91;신고관리&#93;</h3></div>
-		<span  style="margin-top:0px;"class="badge badge-secondary">관리자</span>
+		<span  style="margin-top:0px;"class="badge badge-secondary">${member_level}</span>
 		<div class="table active">
 			<div class="row border-bottom" id="table_th">
 
@@ -61,7 +85,7 @@ function pop(root,report_number){
 					<div class="col-md-2" id="textCut"><strong>${ReportDto.report_date}</strong></div>
 					<div class="col-md-1" id="textCut">${ReportDto.sales_number}</div>
 					<div class="col-md-2" id="textCut"> <input type="button"  class="btn btn-secondary" value="상세보기" onclick="pop('${root}','${ReportDto.report_number}')" /></div>
-					<div class="col-md-2" id="textCut"> <a href="http://localhost:8181/jeju/sales/detail?sales_number=${ReportDto.sales_number}" >페이지로 이동</a> </div>
+					<div class="col-md-2" id="textCut"> <a href="http://localhost:8181/jeju/sales/detail?sales_number=${ReportDto.sales_number}&pageNumber=1" >페이지로 이동</a> </div>
 					<div class="col-md-2" id="textCut">${ReportDto.check_complete}</div>
 				</div>
 		</c:forEach>
@@ -109,5 +133,6 @@ function pop(root,report_number){
 				</nav>
 			 </div>
 	</div>
+</div>
 </body>
 </html>

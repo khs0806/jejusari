@@ -21,9 +21,11 @@ public interface SalesDao {
 	public List<SalesImgDto> selectSalesImg(int sales_number);
 
 	//
-	public int salesCount();
-	public List<SalesDto> salesList(int startRow, int endRow, SalesDto salesDto);
+	public int salesCount(Map<String, Object> hmap);
+	public List<SalesDto> salesList(Map<String, Object> hmap);
+	
 	public int salesWriteOk(SalesDto salesDto);
+	
 	public int salesDelete1(SalesDto salesDto);
 	public int salesDelete2(SalesDto salesDto);
 	public int salesDelete3(SalesDto salesDto);

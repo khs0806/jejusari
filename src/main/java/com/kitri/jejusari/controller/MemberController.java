@@ -15,9 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.common.KakaoLoginAPI;
 import com.kitri.jejusari.dto.MemberDto;
@@ -27,6 +28,7 @@ import com.kitri.jejusari.service.MemberService;
 @Controller
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
 	@Autowired
 	MemberService memberService;
 	
@@ -37,6 +39,12 @@ public class MemberController {
 		return "redirect:main";
 	}
 	
+	// 메인
+	@RequestMapping(value="/main")
+	public String main() {
+		
+		return "main/main.tiles";
+	}
 	
 	// 회원 탈퇴
 	@RequestMapping(value="/member/withdraw1")
@@ -78,7 +86,6 @@ public class MemberController {
 	public String temLogin(HttpServletRequest request, MemberDto memberDto, Model model) {
 		
 		logger.info("templogin");
-		System.out.println(memberDto.toString());
 		HttpSession session = request.getSession();
 		MemberDto member = memberService.tempLogin(memberDto);
 		
@@ -86,6 +93,7 @@ public class MemberController {
 			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
 			return "main/main.tiles";
 		}
+		System.out.println(member.toString());
 		
 		session.setAttribute("member_id", member.getMember_id());
 		session.setAttribute("member_name", member.getMember_name());
@@ -127,20 +135,20 @@ public class MemberController {
 	// 카카오로 로그인 or 회원가입
 	@RequestMapping("/test/join")
 	public ModelAndView kakaoLogin(HttpServletRequest request) {
-
+		
 		ModelAndView mav = new ModelAndView();
-
+		
 		// 카카오의 인증과정
 		String authorize_code = request.getParameter("code");
 		String access_Token = KakaoLoginAPI.kakaoAccessToken(authorize_code);
-
+		
 		// access_token으로 사용자의 카카오 로그인 정보를 가져온다.
 		HashMap<String, Object> userInfo = KakaoLoginAPI.getUserInfo(access_Token);
 		
 		String member_id = (String)userInfo.get("id");
 		String member_name = (String)userInfo.get("nickname");
 		String member_email = (String)userInfo.get("email");
-
+		
 		// 이미 가입되어있는 회원인지 확인한다.
 		int id_check = memberService.member_id_check(member_id);
 		if (id_check > 0) {
@@ -205,16 +213,74 @@ public class MemberController {
 	
 	// 마이페이지
 	@RequestMapping(value="/member/mypage")
-	public String myPage() {
+	public ModelAndView myPage(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
 		
-		return "member/member_mypage.tiles";
+		HttpSession session = request.getSession();
+		
+		String member_name=(String) session.getAttribute("member_name");
+		String member_level=(String) session.getAttribute("member_level");
+		System.out.println(member_level);
+		
+		mav.addObject("session", session);
+		
+		mav.addObject("member_name", member_name);
+		mav.addObject("member_level", member_level);
+		mav.addObject("request", request);
+		
+		memberService.myPage(mav);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/member/mypage/scrap")
+	public ModelAndView deleteScrap(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request", request);
+		
+		memberService.deleteScrap(mav);
+		
+		return mav;
+	}
+	
+	// 회원수정 화면
+	@RequestMapping(value="/member/update")
+	public String updateView() {
+		
+		return "member/member_update.tiles";
 	}
 	
 	// 회원수정
-	@RequestMapping(value="/member/update")
-	public String update() {
+	@RequestMapping(value="/member/update", method=RequestMethod.POST)
+	public ModelAndView updateOk(HttpServletRequest request, MemberDto memberDto) {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
 		
-		return "member/member_update.tiles";
+		String member_id = (String) session.getAttribute("member_id");
+		String member_phone = request.getParameter("no1") 
+					  + "-" + request.getParameter("no2") 
+					  + "-" + request.getParameter("no3");
+		String email = memberDto.getMember_email() + "@" + request.getParameter("email");
+		
+		memberDto.setMember_id(member_id);
+		memberDto.setMember_email(email);
+		
+		// 회원가입자가 일반회원인 경우, 핸드폰 번호를 입력 안했을때
+		if (request.getParameter("no2").length() == 0 || request.getParameter("no3").length() == 0) {
+			memberDto.setMember_phone(null);
+		} else {
+		// 중개업자인 경우
+			memberDto.setMember_phone(member_phone);
+		}
+		
+		System.out.println(memberDto.toString());
+		
+		int check = memberService.memberUpdate(memberDto);
+		mav.addObject("check", check);
+		mav.setViewName("member/member_updateOk.tiles");
+		
+		return mav;
 	}
 	
 	// 회원 관리
@@ -233,12 +299,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value ="/member/drop", method = RequestMethod.POST)
 	public int dropMember(@RequestParam(value="drop[]") List<String> list, HttpServletResponse response) {
-	
-		//System.out.println(list); 
 		
 		int dropUser = memberService.dropMember(list);
-		
-		//System.out.println(dropUser);
 		
 		return dropUser;
 

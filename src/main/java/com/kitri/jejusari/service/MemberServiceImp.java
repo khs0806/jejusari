@@ -1,10 +1,10 @@
 package com.kitri.jejusari.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.dao.MemberDao;
 import com.kitri.jejusari.dto.MemberDto;
-import com.kitri.jejusari.dto.NoticeDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 @Service
-public class MemberServiceImp implements MemberService{
+public class MemberServiceImp implements MemberService {
 
 	@Autowired
 	MemberDao memberDao;
@@ -40,6 +40,10 @@ public class MemberServiceImp implements MemberService{
 	public void getMemberList(ModelAndView mav) {
 		Map<String, Object> map= mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpSession session = request.getSession();
+		String member_level = (String) session.getAttribute("member_level");
+		
+		session.getAttribute("member_level");
 		//페이징
 				String pageNumber=request.getParameter("pageNumber");
 				System.out.println("pageNumber"+pageNumber);
@@ -62,23 +66,63 @@ public class MemberServiceImp implements MemberService{
 		mav.addObject("MemberList", memberList);
 		System.out.println(memberList);
 		
+		mav.addObject("member_level",member_level);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("count", count);
 		
-		mav.setViewName("/admin/member_admin.tiles");
+		mav.setViewName("admin/member_admin.tiles");
 	}
 
 	@Override
 	public int dropMember(List<String> list) {
-	    	     
+
 	    return memberDao.dropMember(list);
+	}
+	
+	@Override
+	public void myPage(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
 		
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		HttpSession session =(HttpSession) map.get("session");
+		
+		String member_id=(String) session.getAttribute("member_id");
+		System.out.println("서비스-아이디 : " + member_id);
+		
+		List<SalesImgDto> scrapList=memberDao.getScrap(member_id);
+		System.out.println("서비스-스크랩리스트 : " + scrapList);
+		
+		List<SalesImgDto> salesList=memberDao.getSales(member_id);
+		System.out.println("서비스-세일즈리스트 : " + salesList);
+		
+//		SalesDto salesDto=memberDao.
+		
+		mav.addObject("scrapList", scrapList);
+		mav.addObject("salesList", salesList);
+		mav.setViewName("member/member_mypage.tiles");
 	}
 	
 	@Override
 	public MemberDto tempLogin(MemberDto memberDto) {
 		return memberDao.tempLogin(memberDto);
 	}
+<<<<<<< HEAD
 
+=======
+	
+	@Override
+	public int memberUpdate(MemberDto memberDto) {
+		return memberDao.memberUpdate(memberDto);
+	}
+	
+	@Override
+	public void deleteScrap(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpSession session=request.getSession();
+	}
+	 
+>>>>>>> 29e4db2660b8a47ce03e115f66f034894d31e855
 }

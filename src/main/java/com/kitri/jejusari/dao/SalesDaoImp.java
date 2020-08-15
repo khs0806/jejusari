@@ -49,8 +49,8 @@ public class SalesDaoImp implements SalesDao {
 	}
 
 	@Override
-	public int salesCount() {
-		return session.selectOne("sales_getCount");
+	public int salesCount(Map<String, Object> hmap) {
+		return session.selectOne("sales_getCount", hmap);
 	}
 	
 	@Override
@@ -59,34 +59,13 @@ public class SalesDaoImp implements SalesDao {
 	}
 
 	@Override
-	public List<SalesDto> salesList(int startRow, int endRow, SalesDto salesDto) {
-		Map<String, Object> hmap=new HashMap<String, Object>();
-		
-		// sales_category_type 의 String Type을 배열로 바꿔주는 작업
-		String[] sales_category_type_list=null;
-		if(salesDto.getSales_category_type()!=null) {
-			 sales_category_type_list = salesDto.getSales_category_type().split(",");
-		}
-		String[] sales_option_list=null;
-		if(salesDto.getSales_option()!=null) {
-			sales_option_list=salesDto.getSales_option().split(",");
-			for(int i=0; i<sales_option_list.length; i++) {
-				System.out.println(sales_option_list[i]);
-			}
-		}
-
-		hmap.put("startRow", startRow);
-		hmap.put("endRow", endRow);
-		hmap.put("sales_category_rent", salesDto.getSales_category_rent());
-		hmap.put("sales_category_type_list", sales_category_type_list);
-		hmap.put("sales_option_list", sales_option_list);
-		hmap.put("sales_address", salesDto.getSales_address());	//검색키워드
+	public List<SalesDto> salesList(Map<String, Object> hmap) {
 		return session.selectList("sales_list", hmap);
 	}
 	
 	@Override
 	public int salesWriteOk(SalesDto salesDto) {
-		
+		System.out.println(salesDto.toString());
 		return session.insert("sales_write", salesDto);
 	}
 	

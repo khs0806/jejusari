@@ -5,14 +5,17 @@ public class SalesImgDto {
 	private String image_url;
 	private int sales_number;
 	
+	private String sales_title;
+	
 	public SalesImgDto() {
 	}
 
-	public SalesImgDto(int image_index, String image_url, int sales_number) {
+	public SalesImgDto(int image_index, String image_url, int sales_number, String sales_title) {
 		super();
 		this.image_index = image_index;
 		this.image_url = image_url;
 		this.sales_number = sales_number;
+		this.sales_title = sales_title;
 	}
 
 	public int getImage_index() {
@@ -39,10 +42,18 @@ public class SalesImgDto {
 		this.sales_number = sales_number;
 	}
 
+	public String getSales_title() {
+		return sales_title;
+	}
+
+	public void setSales_title(String sales_title) {
+		this.sales_title = sales_title;
+	}
+
 	@Override
 	public String toString() {
 		return "SalesImgDto [image_index=" + image_index + ", image_url=" + image_url + ", sales_number=" + sales_number
-				+ "]";
+				+ ", sales_title=" + sales_title + "]";
 	}
 	
 }
