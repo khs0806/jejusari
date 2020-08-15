@@ -33,7 +33,7 @@
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form action="${root }/sales/writeOk" method="POST">
+		<form action="${root }/sales/writeOk" method="POST" enctype = "multipart/form-data">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			
@@ -268,7 +268,7 @@
 		<!-- 파일업로드 -->
 		<div class="input-group mb-3">
 		  <div class="custom-file">
-		    <input type="file" class="custom-file-input" id="inputGroupFile02">
+		    <input type="file" class="custom-file-input" id="inputGroupFile02" name="file">
 		    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
 		  </div>
 		  <div class="input-group-append">

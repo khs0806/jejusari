@@ -18,6 +18,7 @@ import com.kitri.jejusari.dao.SalesDao;
 import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.dto.PageMaker;
 import com.kitri.jejusari.dto.SalesDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 @Service
 public class SalesServiceImp implements SalesService {
@@ -234,12 +235,25 @@ public class SalesServiceImp implements SalesService {
 	@Override
 	public void salesWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		String safeFile = (String) map.get("safeFile");
+		// /jejusari/src/main/webapp/WEB-INF/psd/1597477771364KakaoTalk_20200723_185750052_01.jpg
+		
+		///jejusari/src/main/webapp/WEB-INF
+		
+		safeFile = safeFile.substring(safeFile.indexOf("psd") - 1,safeFile.length());
+		// /psd/1597477771364KakaoTalk_20200723_185750052_01.jpg
+
+		System.out.println(safeFile);
+		
 		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		System.out.println(salesDto.toString());
 		int check = salesDao.salesWriteOk(salesDto);
+		SalesImgDto salesImgDto = new SalesImgDto();
+		int sales_number = 0;
 		
 		if (check > 0) {
-			int sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
+			sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
 			
 			String address = getAddress(sales_number);
 			System.out.println("address : " + address);
@@ -266,6 +280,9 @@ public class SalesServiceImp implements SalesService {
 			salesDao.insertFactor(factorMap);
 		}
 		System.out.println(check);
+		salesImgDto.setImage_url(safeFile);
+		salesImgDto.setSales_number(sales_number);
+
 	}
 	
 	@Override
