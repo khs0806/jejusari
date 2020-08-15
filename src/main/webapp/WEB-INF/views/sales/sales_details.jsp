@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- css -->
 <link rel="stylesheet" href="${root}/css/sales_board/sales_details.css"/>
@@ -24,8 +25,12 @@
 			$(".scrap_star").attr("src","${root}/img/star2.png");
 		}
 		
-		var opac_num=(${factorMap.factor_total}/${factor_total_all})*100
+		var opac_num=(${factorMap.factor_total}/${factor_all_avg})*100
 		$(".factor_img").css("filter","opacity("+opac_num+")");
+		
+		if(${factorMap.factor_total}<=${factor_all_avg}){
+			$(".factor_img").css("filter","opacity(0.5)");
+		}
 		
 		//스크랩 클릭시
 		var scount=${scrap_count };
@@ -61,14 +66,7 @@
 			   	});				
 		})
 		
-		//신고하기 클릭시
-		$("input:button[name=report_btn]").click(function(){
-			var check=confirm("이 매물을 신고하시겠습니까?");
-			if(check==true){
-				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
-			}
-		})
-		
+
 		//옵션 이미지 변경
 		if(${salesDto.sales_full!=1}){
 			$(".opt_full").css("filter","invert(80%)");
@@ -126,7 +124,12 @@
 			var check=confirm("매물 정보를 신고처리하시겠습니까?");
 		
 			if(check==true){
+
+				//alert("ok");
+				window.open('${root}/report/write?sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
+
 				window.open('${root}/report/write?pageNumber=${pageNumber}&sales_number=${salesDto.sales_number}&sales_title=${salesDto.sales_title}', '', 'width = 600, height = 600');
+
 			}
 		})
 		
@@ -137,7 +140,6 @@
 		
 	})
 	});
-
 
 </script>
 
@@ -341,17 +343,16 @@
 	  <!-- 매물 이미지 -->
 	  <div id="sales_img">
 		   <div class="img_all">
-		    <%-- <c:forEach ></c:forEach>  --%> 
-			    <div class="img"><img/></div>
-			    <div class="img"><img/></div>
-			    <div class="img"><img/></div>
-			    <!-- 3개 이상일 경우 -->
-			    <%-- <c:if test=""/> --%>
-			    <div class="img_more"><img src="${root }/img/next1.png" width="30px" height="30px"/></div> <!-- 꺽은 모양;3개 이상시 보임 -->
-			    <div class="imgs"><img/></div>  <!-- 3개이상시 클릭하면-->
-			    <div class="imgs"><img/></div> 
-			    <div class="imgs"><img/></div> 
-		    	<div class="img_small"><img src="${root }/img/next2.png" width="30px" height="30px"/></div>
+		   		<c:forEach var="salesImgDto" items="${salesImgDtoList}" end="2">
+		   			<div class="img"><img src="${root }${salesImgDto.image_url}" width="310px" height="350px"/></div>
+		   		</c:forEach>
+		   		<c:if test="${fn:length(salesImgDtoList)>3}">
+		   			<div class="img_more"><img src="${root }/img/next1.png" width="30px" height="30px"/></div>
+		   			<c:forEach var="salesImgDto" items="${salesImgDtoList}" begin="3">
+		   				<div class="imgs"><img src="${root }${salesImgDto.image_url}" width="310px" height="350px"/></div>
+		   			</c:forEach>
+			    	<div class="img_small"><img src="${root }/img/next2.png" width="30px" height="30px"/></div>
+		   		</c:if>
 		   </div>
 	  </div>
 
@@ -370,10 +371,21 @@
 	</c:if>
 	
 	<!-- 관리자; 신고, 삭제 -->
-	<c:if test="${member_level=='admin' }">
+	<c:if test="${member_level=='admin'}">
+		<script type="text/javascript">
+			function del(root,sales_number){
+				var url = root+"/report/delete?sales_number="+sales_number;
+				location.href=url;
+			}
+			
+			function update(root,sales_number){
+				 var url= root+"/report/update?sales_number="+sales_number;
+				 location.href=url;
+			 }
+		</script>
 		<div id="plus_btn">
-			<input type="button" name="sales_report_handle" value="신고처리" class="btn btn-light btn-sm"/>		<!-- dark? -->
-			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
+			<input type="button" name="update" value="신고처리" class="btn btn-light btn-sm" onclick="update('${root}','${salesDto.sales_number}')"/>			<!-- dark? -->
+			<input type="button" name="delete" value="삭제" class="btn btn-light btn-sm" onclick="del('${root}','${salesDto.sales_number}')"/>
 		</div>
 	</c:if>
 </div>

@@ -28,18 +28,22 @@ public interface MemberDao {
 	// 마이페이지 카드 삭제 - 매물 번호
 	public List<String> getSalesNumber(String member_id);
 
+
 	public int memberCount();
 	
 	// 회원 리스트
 	public List<String> memberList(int startRow, int endRow);
 
 
-	
 	// 임시 로그인
 	public MemberDto tempLogin(MemberDto memberDto);
+
+	
+	/*
+	 * // 임시 로그인 public MemberDto tempLogin(MemberDto memberDto);
+	 */
 	
 	// 회원 수정
 	public int memberUpdate(MemberDto memberDto);
-	
 
 }

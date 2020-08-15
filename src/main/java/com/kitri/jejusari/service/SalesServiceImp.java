@@ -16,13 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kitri.jejusari.common.KakaoLocalAPI;
 import com.kitri.jejusari.dao.SalesDao;
 import com.kitri.jejusari.dto.MemberDto;
+import com.kitri.jejusari.dto.PageMaker;
 import com.kitri.jejusari.dto.SalesDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 @Service
 public class SalesServiceImp implements SalesService {
 	
 	@Autowired
 	SalesDao salesDao;
+
+	@Autowired
+	private PageMaker pageMaker;
 	
 	@Override
 	public void salesDetail(ModelAndView mav) {
@@ -82,6 +87,9 @@ public class SalesServiceImp implements SalesService {
 		
 		int scrap_count=salesDao.salesScrapCount(sales_number);
 		
+		List<SalesImgDto> salesImgDtoList=salesDao.selectSalesImg(sales_number);
+		mav.addObject("salesImgDtoList",salesImgDtoList);
+		
 		// by.gustn
 		// 해당 매물의 지수 정보 가져오기
 		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
@@ -95,8 +103,8 @@ public class SalesServiceImp implements SalesService {
 			int check=salesDao.updateSalesDB(factorMap_update);
 		}
 */		
-		int factor_total_all=salesDao.totalAll();
-		mav.addObject("factor_total_all",factor_total_all);
+		float factor_all_avg=salesDao.totalAvg();
+		mav.addObject("factor_all_avg",factor_all_avg);
 		
 		mav.addObject("scrap_count",scrap_count);
 		mav.addObject("pageNumber",pageNumber);
@@ -133,7 +141,19 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		SalesDto salesDto=(SalesDto) map.get("salesDto");
 		System.out.println(request+"\t"+salesDto);
+		int sales_number=Integer.parseInt(request.getParameter("sales_number"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		
+		map.put("sales_number", sales_number);
+		map.put("salesDto",salesDto);
+		
+		int check=salesDao.salesUpdate(map);
+		System.out.println("updateOk:"+check);
+		
+		mav.addObject("pageNumber",pageNumber);
+		mav.addObject("sales_number",sales_number);
+		mav.addObject("check",check);
+		mav.setViewName("sales/sales_updateOk.tiles");
 	}
 	
 	@Override
@@ -178,29 +198,52 @@ public class SalesServiceImp implements SalesService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		
-		//페이징
-		String pageNumber=request.getParameter("pageNumber");
-		if(pageNumber==null) pageNumber="1";
-		int currentPage=Integer.parseInt(pageNumber);	//요청한 페이지
-		int boardSize=10;		// [1] start:1, end:10  [2] start:11, end:20
+
 		
-		int startRow=(currentPage-1)*boardSize+1;	//1  11 21 31
-		int endRow=currentPage*boardSize;			//10 20 30 40
+		// dao에 있던 기능 정리
+		Map<String, Object> hmap=new HashMap<String, Object>();
+		//String[] sales_category_type_list=null;
+		if(salesDto.getSales_category_type()!=null) {
+			String[] sales_category_type_list = salesDto.getSales_category_type().split(",");
+			 hmap.put("sales_category_type_list", sales_category_type_list);
+//			 System.out.println("salesDto.getSales_category_type():"+salesDto.getSales_category_type().toString());
+		}
+		
+		//String[] sales_option_list=null;
+		if(salesDto.getSales_option()!=null) {
+			String[] sales_option_list=salesDto.getSales_option().split(",");
+//			System.out.println("sales_option_list.toString()"+sales_option_list.toString());
+			hmap.put("sales_option_list", sales_option_list);
+			
+		}
+//		
+//		if(salesDto.getSales_category_rent()=="") {
+//			System.out.println("공간있어요");
+//		}
+		hmap.put("sales_category_type",salesDto.getSales_category_type());
+		hmap.put("sales_option",salesDto.getSales_option());
+		hmap.put("sales_category_rent", salesDto.getSales_category_rent());
+		hmap.put("sales_address", salesDto.getSales_address());	//검색키워드
 		
 		//count 사용해서 글이 아예 없는경우 페이징 사라지게
-		int count=salesDao.salesCount();
+		int count=salesDao.salesCount(hmap);
+//		System.out.println(count);
 		List<SalesDto> salesList=null;
+		
+		pageMaker.setCri(salesDto);
+		pageMaker.setTotalCount(count);
+		
+		hmap.put("startRow", salesDto.getStartRow());
+		hmap.put("endRow", salesDto.getEndRow());		
 		
 		if(count>0) {
 			//startRow, endRow
-			salesList=salesDao.salesList(startRow, endRow, salesDto);
+			salesList=salesDao.salesList(hmap);
 			//System.out.println("saleslist : " + salesList.toString());
 		}
 		
 		mav.addObject("salesList", salesList);
-		mav.addObject("boardSize", boardSize);
-		mav.addObject("currentPage", currentPage);
-		mav.addObject("count", count);
+		mav.addObject("pageMaker", pageMaker);
 		mav.setViewName("sales/sales_list.tiles");
 	}
 
@@ -210,6 +253,7 @@ public class SalesServiceImp implements SalesService {
 		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		System.out.println(salesDto.toString());
 		int check = salesDao.salesWriteOk(salesDto);
+		
 		if (check > 0) {
 			int sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
 			
@@ -218,7 +262,6 @@ public class SalesServiceImp implements SalesService {
 			List<String> factors = KakaoLocalAPI.kakaoAPI(address);
 			System.out.println(factors.toString());
 			Map<String, Object> factorMap = new HashMap<String, Object>();
-			
 			// 지수map에 데이터 담기
 			factorMap.put("factor_gas", factors.get(0));
 			factorMap.put("factor_mart", factors.get(1));
@@ -226,7 +269,7 @@ public class SalesServiceImp implements SalesService {
 			factorMap.put("factor_hospital", factors.get(3));
 			factorMap.put("factor_tour", factors.get(4));
 			
-			// 지수 토탈점수 구하기
+			 //지수 토탈점수 구하기
 			int sum = 0;
 			for(int i=0; i<factors.size(); i++) {
 				sum += Integer.parseInt(factors.get(i));
@@ -238,6 +281,7 @@ public class SalesServiceImp implements SalesService {
 			// DB에 전달
 			salesDao.insertFactor(factorMap);
 		}
+		System.out.println(check);
 	}
 	
 	@Override

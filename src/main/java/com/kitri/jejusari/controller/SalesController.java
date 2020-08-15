@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.dto.PageMaker;
 import com.kitri.jejusari.dto.SalesDto;
 import com.kitri.jejusari.service.SalesService;
 
@@ -31,13 +33,12 @@ public class SalesController {
 	@Autowired
 	private SalesService salesService;
 	
+	
 	@RequestMapping(value="/sales")
 	public ModelAndView salesList(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		
-		
-		System.out.println("Sales_category_type : "+salesDto.getSales_category_type());
 		mav.addObject("salesDto", salesDto);
 		salesService.salesList(mav);
 		return mav;
@@ -54,9 +55,9 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		mav.addObject(request);
-		
+		HttpSession session = request.getSession();
 		//session으로 아이디 가져오고 나선 없어질 코드
-		salesDto.setMember_id("kke");
+		salesDto.setMember_id((String)session.getAttribute("member_id"));
 		//System.out.println(salesDto);
 		
 		mav.addObject("salesDto", salesDto);
@@ -69,7 +70,6 @@ public class SalesController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
 		
-
 		salesService.salesDetail(mav);
 		
 		return mav;
@@ -133,15 +133,19 @@ public class SalesController {
 	/** 이미지 관련 controller 함수..! 작성중입니다.(kke) */
 	@RequestMapping(value="/uploadSummernoteImageFile", method=RequestMethod.POST)
 	@ResponseBody
-	public JSONObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+	public JSONObject uploadSummernoteImageFile(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile multipartFile) {
+		//여기로 넘어오질 못하네...400 error
+		MultipartFile upFile=request.getFile("file");
+		System.out.println(upFile.getName());
+		System.out.println("넘어왔어용");
 		JSONObject obj=new JSONObject();
-		
 		String fileRoot="C:\\jejusari\\summernote_img\\";		//저장될 외부 파일 경로
 		
 		//없는 경로면 생성하는 코드 만들어야하지 않나??
 		String originalFileName=multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extention = originalFileName.substring(originalFileName.lastIndexOf("."));	//확장자명
 		
+		System.out.println(originalFileName);
 		String savedFileName=UUID.randomUUID()+extention;		//저장될 파일 명
 		File targetFile=new File(fileRoot+savedFileName);
 		
@@ -149,6 +153,7 @@ public class SalesController {
 			InputStream fileStream=multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일저장
 			obj.put("url", "/jejusari/summernote_img/"+savedFileName);
+			obj.put("filename", originalFileName);
 			obj.put("responseCode", "success");
 			
 		}catch(IOException e) {
@@ -171,6 +176,7 @@ public class SalesController {
 	@RequestMapping(value="/sales/updateOk", method=RequestMethod.POST)
 	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto) {
 		ModelAndView mav=new ModelAndView();
+		System.out.println(request.getParameter("sales_number"));
 		mav.addObject("request",request);
 		mav.addObject("salesDto",salesDto);
 		

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.dto.SalesDto;
+import com.kitri.jejusari.dto.SalesImgDto;
 
 public interface SalesDao {
 
@@ -16,12 +17,15 @@ public interface SalesDao {
 	public int salesScrapDo(Map<String, Object> map);
 	public int salesScrapDelete(Map<String, Object> map);
 	public int salesScrapCount(int sales_number);
-	public int totalAll();
+	public float totalAvg();
+	public List<SalesImgDto> selectSalesImg(int sales_number);
 
 	//
-	public int salesCount();
-	public List<SalesDto> salesList(int startRow, int endRow, SalesDto salesDto);
+	public int salesCount(Map<String, Object> hmap);
+	public List<SalesDto> salesList(Map<String, Object> hmap);
+	
 	public int salesWriteOk(SalesDto salesDto);
+	
 	public int salesDelete1(SalesDto salesDto);
 	public int salesDelete2(SalesDto salesDto);
 	public int salesDelete3(SalesDto salesDto);
@@ -29,6 +33,7 @@ public interface SalesDao {
 	public int salesDelete5(SalesDto salesDto);
 	public String salesIdCheck(int sales_number);
 	public String getAddress(int sales_number);
+	public int salesUpdate(Map<String, Object> map);
 	
 	// 상세매물의 지수5개 가져오기
 	public Map<String, Object> getFactor(int sales_number);

@@ -40,13 +40,11 @@ public class BoardController {
 	@RequestMapping(value="/main")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
-		
+		request.setAttribute("pageNumber", 1);
 		mav.addObject("request", request);
 		boardService.noticeList(mav);
 		boardService.newsList(mav);
-		
 		mav.setViewName("main/main.tiles");
-		
 		return mav;
 	}
 	
@@ -210,6 +208,7 @@ public class BoardController {
 		@RequestMapping(value="/report/admin")
 		public ModelAndView reportAdmin(HttpServletRequest request, HttpServletResponse response) {
 			  ModelAndView mav = new ModelAndView();
+
 			   mav.addObject("request", request);
 			   
 				boardService.getReportList(mav);
@@ -234,12 +233,23 @@ public class BoardController {
 	// 신고 상세 확인
 	@RequestMapping(value="/report/detail", method = RequestMethod.GET)
 	public ModelAndView reportDetail(HttpServletRequest request, HttpServletResponse response) {
-		   ModelAndView mav = new ModelAndView();
-				
-		   mav.addObject("request", request);
-				
-		   boardService.ReportDetail(mav);
-				
-		   return mav;
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("request", request);
+
+		boardService.ReportDetail(mav);
+
+		return mav;
+	}
+
+	@RequestMapping(value="/report/update",method=RequestMethod.GET)
+	public ModelAndView reportUpdate(HttpServletRequest request, HttpServletResponse response, ReportDto reportDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+
+		int check = boardService.reportUpdate(mav);
+
+		System.out.println("controller:"+check);
+		return mav;
 	}
 }

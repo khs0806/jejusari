@@ -50,5 +50,8 @@ public interface BoardService {
 		
 		//신고 상세 보기
 		public void ReportDetail(ModelAndView mav);
+		
+		//신고처리 업데이트
+		public int reportUpdate(ModelAndView mav);
 	
 }

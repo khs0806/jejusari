@@ -121,7 +121,6 @@ public class MemberController {
 	@RequestMapping("/test/join")
 	public String kakaoLogin(HttpServletRequest request, Model model) {
 		
-		
 		// 카카오의 인증과정
 		String authorize_code = request.getParameter("code");
 		String access_Token = KakaoLoginAPI.kakaoAccessToken(authorize_code);

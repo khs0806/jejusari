@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style type="text/css">
 	#main_page .card {height: 700px; overflow: hidden;display: flex;
             align-items: center;
@@ -25,12 +26,14 @@
 	 <div class="card bg-dark text-white">
 	  <img src="${root}/img/cozy-seopji-1833560_1920.jpg" class="card-img" alt="...">
 	  <div class="card-img-overlay ">
+		<form action="${root}/sales" >
 		<div class="input-group mb-3">
-		  <input type="text" class="form-control" placeholder="지역명을 검색하세요" aria-label="Recipient's username" aria-describedby="button-addon2">
+		  <input type="text" class="form-control" name="sales_address" placeholder="지역명을 검색하세요" aria-label="Recipient's username" aria-describedby="button-addon2">
 		  <div class="input-group-append">
-		    <button class="btn btn-warning" type="button" id="button-addon2">매물찾기</button>
+		    <button class="btn btn-warning" type="submit" id="button-addon2">매물찾기</button>
 		  </div>
 		</div>
+		</form>
 	    <h5 class="card-title">제 주 살 이</h5>
 	    <p class="card-text">제주살이는 제주거주를 꿈꾸는 이들을 위한 부동산 매물 정보 제공 사이트입니다.</p>
 	    <p class="card-text">제주살이를 통해서 당신만의 특별한 제주살이를 실현하세요!</p>
@@ -47,33 +50,44 @@
 		<div class="main">
 			<div class="row mt-5 mb-5 mx-md-n5">
 				<div class="col px-md-5">
-						<div class="border-bottom mr-3 p-3" id="table_th_news"><strong>공지사항</strong></div>
-						
-						<c:forEach begin="1" end="7" var="i" step="1">
-						<a href="#">
-							<div class="row table active ">
-<%-- 								<div class="col-md-1 pl-5">${i} </div> --%>
-								<div class="col-md-7">&#9786;공지사항</div>
-								<div class="col-md-3">2020-08-10 </div>
+						<div class="border-bottom mr-3 p-3" id="table_th_news">
+							<strong>공지사항</strong>
+							<strong style="float:right;">
+								<a href="${root}/notice" style="color:#6c757d;font-size:14px;">> 더보기</a>
+							</strong>
+						</div>
+						<c:forEach var="noticeDto" items="${noticeList}" end="6" varStatus="status">
+						<a href="${root}/notice/detail?notice_number=${noticeDto.notice_number}">
+							<div class="row table active">
+								<div class="col-md-1 pl-5"><strong>${status.index+1}</strong></div>
+								<div class="col-md-7"><strong>&#9786;&nbsp;&nbsp;${noticeDto.notice_title }</strong></div>
+								<div class="col-md-3">
+									<strong><fmt:formatDate value = "${noticeDto.notice_date}" pattern = "yyyy-MM-dd"/></strong>
+								</div>
 							</div>
 						</a>
 						</c:forEach>
 				</div>
+				
 				<div class="col px-md-5">
-						<div class="border-bottom mr-3 p-3" id="table_th_news"><strong>제주 이슈</strong></div>
-					<c:forEach items="${newsList}" end="6" var="news">
-						<c:set var="i" value="${i+1}"/>
-						<a href="${news.link}">
-							<div class="row table active">
-								<div class="col-md-1 pl-5"><strong>${i}</strong></div>
-<%-- 								<div class="col-md-7"><strong>${news.title}</strong></div> --%>
-								<c:set var="title" value="${news.title}"/>
-								<div class="col-md-7"><strong>${fn:substring(title, 0, 20)}...</strong></div>
-								<div class="col-md-3"><strong>${news.date}</strong></div>
-							</div>
-						</a>
-					</c:forEach>
-				</div>
+                  <div class="border-bottom mr-3 p-3" id="table_th_news">
+                  	<strong>제주 이슈</strong>
+                  	<strong style="float:right;">
+							<a href="${root}/news" style="color:#6c757d;font-size:14px;">> 더보기</a>
+					</strong>
+                  </div>
+               <c:forEach items="${newsList}" end="6" var="news" varStatus="status">
+                  <a href="${news.link}">
+                     <div class="row table active">
+                        <div class="col-md-1 pl-5"><strong>${status.index+1}</strong></div>
+<%--                         <div class="col-md-7"><strong>${news.title}</strong></div> --%>
+                        <c:set var="title" value="${news.title}"/>
+                        <div class="col-md-7"><strong>${fn:substring(title, 0, 20)}...</strong></div>
+                        <div class="col-md-3"><strong>${news.date}</strong></div>
+                     </div>
+                  </a>
+               </c:forEach>
+            </div>
 			</div>
 		</div>
 	</div>

@@ -69,4 +69,15 @@
 			select b.* From (select rownum rnum, a.* From (select * from report order by report_number desc) a) b where b.rnum>=#{startRow} and b.rnum<=#{endRow}
 		]]>
 	</select>
+	
+	<!-- 신고 처리 업데이트 -->
+	<update id="checkUpdate" parameterType = "int">
+		update sales set SALES_CHECK_BLIND = 1
+				 where sales_number = #{sales_number} 
+	</update>
+	
+	<update id="updateReportAdmin" parameterType = "int">
+		update report set check_complete = 1
+		where sales_number = #{sales_number}
+	</update>
 </mapper>

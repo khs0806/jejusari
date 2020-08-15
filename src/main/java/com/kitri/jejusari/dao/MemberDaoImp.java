@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kitri.jejusari.dto.MemberDto;
 import com.kitri.jejusari.dto.SalesImgDto;
 
+
 @Repository
 public class MemberDaoImp implements MemberDao{
 	
@@ -33,11 +34,6 @@ public class MemberDaoImp implements MemberDao{
 		return session.delete("member_delete", member_id);
 	}
 	
-	/*
-	 * @Override public List<String> memberList() {
-	 * 
-	 * return session.selectList("memberList"); }
-	 */
 
 	@Override
 	public int dropMember(List<String> list) {

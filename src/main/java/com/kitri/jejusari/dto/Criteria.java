@@ -1,54 +1,55 @@
 package com.kitri.jejusari.dto;
 
 public class Criteria {
-	private int page; // 페이지 번호
-	private int perPageNum; // 페이지당 게시글 갯수
-	private int rowStart; // 페이지 한 행의 첫번째 게시물 rowNum
-	private int rowEnd; // 페이지 한 행의 마지막 게시물 rowNum
+	private int pageNumber; // 페이지 번호
+	private int boardSize; // 페이지당 게시글 갯수
+	private int startRow; // 페이지 한 행의 첫번째 게시물 rowNum
+	private int endRow; // 페이지 한 행의 마지막 게시물 rowNum
+	
 	
 	public Criteria() { //디폴트 생성자 
-		this.page = 1; // 페이지 1 로 초기화
-		this.perPageNum = 10; // 페이지당 게시글 10개
+		this.pageNumber = 1; // 페이지 1 로 초기화
+		this.boardSize = 10; // 페이지당 게시글 10개
 	}
 
-	public int getPage() {
-		return page;
+	public int getPageNumber() {
+		return pageNumber;
 	}
 
-	public void setPage(int page) { // 페이지 번호 set
-		if (page <= 0) {
-			this.page = 1;
+	public void setPageNumber(int pageNumber) { // 페이지 번호 set
+		if (pageNumber <= 0) {
+			this.pageNumber = 1;
 		}
-		this.page = page;
+		this.pageNumber = pageNumber;
 	}
 
-	public int getPerPageNum() {
-		return perPageNum;
+	public int getBoardSize() {
+		return boardSize;
 	}
 
-	public void setPerPageNum(int perPageNum) { // 페이지당 게시물 갯수 set
-		if (perPageNum <= 0 || perPageNum > 100)
-			this.perPageNum = 10;
-		this.perPageNum = perPageNum;
+	public void setBoardSize(int boardSize) { // 페이지당 게시물 갯수 set
+		if (boardSize <= 0 || boardSize > 100)
+			this.boardSize = 10;
+		this.boardSize = boardSize;
 	}
 	
 	public int getPageStart() { 
-		return (this.page - 1) * perPageNum;
+		return (this.pageNumber - 1) * boardSize;
 	}
 	
-	public int getRowStart() {
-		rowStart = ((page - 1) * perPageNum) + 1;
-		return rowStart;
+	public int getStartRow() {
+		startRow = ((pageNumber - 1) * boardSize) + 1;
+		return startRow;
 	}
 
-	public int getRowEnd() {
-		rowEnd = rowStart + perPageNum - 1;
-		return rowEnd;
+	public int getEndRow() {
+		endRow = startRow + boardSize - 1;
+		return endRow;
 	}
 	
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
+		return "Criteria [pageNumber=" + pageNumber + ", boardSize=" + boardSize + ", startRow=" + startRow + ", endRow=" + endRow
 				+ "]";
 	}
 	
