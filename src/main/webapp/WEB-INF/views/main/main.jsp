@@ -20,15 +20,16 @@
  			alert('${msg}');
  		}
  	});
+ 	
  </script>
  
  <div id="main_page">
 	 <div class="card bg-dark text-white">
 	  <img src="${root}/img/cozy-seopji-1833560_1920.jpg" class="card-img" alt="...">
 	  <div class="card-img-overlay ">
-		<form action="${root}/sales" >
+		<form action="${root}/sales?keyword=${keyword}" >
 		<div class="input-group mb-3">
-		  <input type="text" class="form-control" name="sales_address" placeholder="지역명을 검색하세요" aria-label="Recipient's username" aria-describedby="button-addon2">
+		  <input id="searchKeyword" type="text" class="form-control" name="sales_address" placeholder="지역명을 검색하세요" aria-label="Recipient's username" aria-describedby="button-addon2">
 		  <div class="input-group-append">
 		    <button class="btn btn-warning" type="submit" id="button-addon2">매물찾기</button>
 		  </div>
