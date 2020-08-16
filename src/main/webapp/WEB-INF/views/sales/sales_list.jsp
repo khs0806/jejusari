@@ -160,7 +160,13 @@
 		</div>
 		
 		<!-- 페이징 -->
-		
+		<c:if test="${pageMaker.pageNumber } != null">
+			<script type="text/javascript">
+				$(function(){
+
+					});
+			</script>
+		</c:if>
 		<div class="d-flex bd-highlight">
           <div class="p-2 w-100 bd-highlight">
             <nav aria-label="Page navigation">
