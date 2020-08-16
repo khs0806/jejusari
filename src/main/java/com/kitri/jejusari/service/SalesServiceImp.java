@@ -1,5 +1,6 @@
 package com.kitri.jejusari.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -131,13 +132,20 @@ public class SalesServiceImp implements SalesService {
 		}
 		List<SalesImgDto> salesImgDtoList=salesDao.selectSalesImg(sales_number);
 		
-		String[] urlname = new String[salesImgDtoList.size()];
-		urlname = salesImgDtoList.get(1).getImage_url().split("/");
-		System.out.println(urlname[urlname.length-1]);
+		System.out.println("urlname : " + salesImgDtoList.toString());
+		String[] urlname = null;
+		List<String> urlNameList = null;
+		urlNameList = new ArrayList<String>();
+		for (int i=0; i<salesImgDtoList.size(); i++) {
+			urlname = salesImgDtoList.get(i).getImage_url().split("/");
+			urlNameList.add(urlname[urlname.length-1]);
+		}
+		System.out.println(urlNameList.toString());
 		
-		mav.addObject("salesImgDtoList",salesImgDtoList);
-		mav.addObject("pageNumber",pageNumber);
-		mav.addObject("salesDto",salesDto);
+		mav.addObject("urlNameList", urlNameList);
+		mav.addObject("salesImgDtoList", salesImgDtoList);
+		mav.addObject("pageNumber", pageNumber);
+		mav.addObject("salesDto", salesDto);
 		mav.setViewName("sales/sales_update.tiles");
 	}
 	

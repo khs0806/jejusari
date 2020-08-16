@@ -277,6 +277,10 @@
     	</script>
 		
 		<!-- 파일업로드 -->
+		<span>현재 이미지 : </span>
+		<c:forEach var="urlname" items="${urlNameList}">
+			${urlname},
+		</c:forEach>
 		<div class="input-group mb-3">
 		  <div class="custom-file">
 		    <input type="file" class="custom-file-input" id="inputGroupFile02">
@@ -286,6 +290,7 @@
 		    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
 		  </div>
 		</div>
+		
 		
 		<!-- 작성버튼 -->
 		<div class="d-flex justify-content-end mb-5">
