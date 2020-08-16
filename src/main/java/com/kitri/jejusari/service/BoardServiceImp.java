@@ -284,9 +284,11 @@ public class BoardServiceImp implements BoardService{
 		//count 사용해서 글이 아예 없는경우 페이징 사라지게
 		int count = boardDao.noticeCount();
 		List<NoticeDto> noticeList = null;
-
+		System.out.println("count" + count);
 		if(count > 0) {
 			//startRow, endRow
+			System.out.println("currnetPage : " + currentPage);
+			System.out.println("pageNumber : " + pageNumber);
 			noticeList = boardDao.noticeList(startRow, endRow);
 		}
 
