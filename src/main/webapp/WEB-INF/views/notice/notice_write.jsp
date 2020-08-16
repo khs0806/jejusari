@@ -11,10 +11,10 @@
 <%-- <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css"> --%>
 <!-- 공지사항 작성 툴 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
@@ -85,73 +85,74 @@ function noticeCheck(obj){
    				</div>
    				
    				<script>
-   					$('#summernote').summernote({
-   						height: 300,
-   						minHeight: null,
-   						maxHeight: null,
-						focus: true,
-  						placeholder: '최대 2048자까지 작성할 수 있습니다.',
-  						// 이미지 첨부 부분
-  		  				callbacks: {
-  							onImageUpload: function(image) {
-  								//console.log("좀 찍혀봐;");	//여까진 찍힘
-  								uploadImageContent(image);
-  								//console.log("함수 넘어가?;");	//안돌아옴 -> script에 jquery.min.js 추가해주니까 넘어감!
-  							}
-  						}
-  						// 이미지 첨부 부분 끝
-					});
-   					
-   					
-
-   					$('.dropdown-toggle').dropdown();
-   					
-   					$("#summernote").summernote({
-   					    toolbar: [
-   					        ['para', ['ul']]
-   					    ],
-   					    focus: true,
-   					    disableResize: true,
-   					    disableResizeEditor: true,
-   					    resize: false
+   				$(document).ready(function() {
+   				  $('#summernote').summernote();
+   				});
+   				$('#summernote').summernote({
+   					  height: 300,				//에디터 높이
+   					  minHeight: null,			//최소 높이
+   					  maxHeight: null,			//최대 높이
+   					  focus: true,				//에디터 로딩 후 포커스를 맞출지
+   					  placeholder: '최대 2048자까지 작성할 수 있습니다.',
+   				// 이미지 첨부 부분
+   		  				callbacks: {
+   							onImageUpload: function(image) {
+   								//console.log("좀 찍혀봐;");	//여까진 찍힘
+   								uploadImageContent(image);
+   								//console.log("함수 넘어가?;");	//안돌아옴 -> script에 jquery.min.js 추가해주니까 넘어감!
+   							}
+   						}
+   				// 이미지 첨부 부분 끝
    					});
-   					$('.note-statusbar').hide()
-   					
-   					function uploadImageContent(image) {
-				var data = new FormData();
-				data.append("file", image[0]);
-				//data.append();
-			/* 	반복해서 받을경우 반복문돌리기
-				var f = new FormData();
+   				$('.dropdown-toggle').dropdown();
+   				$("#summernote").summernote({
+   				    toolbar: [
+   				        ['para', ['ul']]
+   				    ],
+   				    focus: true,
+   				    disableResize: true,
+   				    disableResizeEditor: true,
+   				    resize: false
+   				});
+   				$('.note-statusbar').hide()
+   		 		function uploadImageContent(image) {
+   					var data = new FormData();
+   					data.append("file", image[0]);
+   					//data.append();
+   				/* 	반복해서 받을경우 반복문돌리기
+   					var f = new FormData();
 
-	            var files = e.target.files;
+   		            var files = e.target.files;
 
-	            for (var i = 0; i < files.length; i++) {
-	                f.append("files", files[i]);
-	            } */
-				console.log(image);
-				var url = '${root}/uploadSummernoteImageFile';
-				console.log(url);
-				$.ajax({
-					url: url,
-					cache: false,
-					contentType: false,
-					processData: false,
-					enctype: 'multipart/form-data',
-					data: data,
-					type: "POST",
-					success: function(d) {
-						var srcUrl=d.url;
-						var image = $('<img>').attr('src', srcUrl);
-						$img = $('<img>').attr({ src: srcUrl })
-					   	$("#summernote").summernote('insertNode', $img[0]);
-					},
-					error: function(data) {
-						console.log('안들어갔슈');
-						console.log(data);
-					}
-				});
-			}
+   		            for (var i = 0; i < files.length; i++) {
+   		                f.append("files", files[i]);
+   		            } */
+   					console.log(image);
+   					var url = '${root}/uploadSummernoteImageFile';
+   					console.log(url);
+   					$.ajax({
+   						url: url,
+   						cache: false,
+   						contentType: false,
+   						processData: false,
+   						enctype: 'multipart/form-data',
+   						data: data,
+   						type: "POST",
+   						success: function(d) {
+   							var srcUrl=d.url;
+   							console.log(d.url);
+   							console.log(d.responseCode);
+   							console.log(d.filename);
+   							var image = $('<img>').attr('src', srcUrl);
+   							$img = $('<img>').attr({ src: srcUrl })
+   						   	$("#summernote").summernote('insertNode', $img[0]);
+   						},
+   						error: function(data) {
+   							console.log('안들어갔슈');
+   							console.log(data);
+   						}
+   					});
+   				}
    				</script>
 				
 				
