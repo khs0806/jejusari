@@ -6,7 +6,7 @@
 <%-- <link type = "text/css" rel = "stylesheet" href = "${root}/css/admin/notice_read.css"/>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css"> --%>
 <style type="text/css" >
-	.notice-content {height: inherit;}
+	.notice-content {height: inherit;width: inherit;overflow-x: scroll;}
 </style>
 <script type = "text/javascript">
 function delFun(root, notice_number){

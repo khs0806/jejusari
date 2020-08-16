@@ -18,7 +18,7 @@
     margin-bottom: 0.5rem;}
     #sales_list strong{margin-top: 0.5rem;}
 	#sales_list p{margin-bottom: 0.5rem;}
-	#sales_list #table_td .col-md-8+div, #sales_list #table_td .col-md-2{    line-height: 3rem}
+	#sales_list #table_td .col-md-1, #sales_list #table_td .col-md-2{    line-height: 3rem}
 </style>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>

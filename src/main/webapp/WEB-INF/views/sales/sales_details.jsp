@@ -6,7 +6,9 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- css -->
 <link rel="stylesheet" href="${root}/css/sales_board/sales_details.css"/>
-
+<style type="text/css" >
+	.sales-content {height: inherit; width: inherit;overflow-x: scroll;}
+</style>
 <!-- 지도 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2992107a6cdd4a70cae5c448140c5fd1&libraries=services"></script> 
 
@@ -336,12 +338,16 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="input-group mb-3">
+	  <div class="form-control text-justify sales-content" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+	  	${salesDto.sales_content}
+	  </div>
+	</div>
 	<!-- 매물 소개-중개인 작성 내용 -->
 	<div id="about_sales">
 		 <div class="sales_contents">${salesDto.sales_content}</div>
 	</div>
-
+	
 	<!-- 매물 이미지 -->
 	  <!-- 매물 이미지 -->
 	  <div id="sales_img">
