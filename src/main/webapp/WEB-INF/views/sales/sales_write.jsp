@@ -94,7 +94,7 @@ function salesCheck(obj){
 		alert("썸네일을 반드시 등록해주세요.");
 		obj.thumbnail.focus();
 	}
-
+	
 	if(obj.file.value == ""){
 		alert("사진을 등록해주세요.");
 		obj.file.focus();
