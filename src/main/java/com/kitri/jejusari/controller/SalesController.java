@@ -160,12 +160,12 @@ public class SalesController {
 		//String fileRoot="C:\\jejusari\\summernote_img\\";		//저장될 외부 파일 경로
 		String fileRoot="img\\summernote_img\\";		//저장될 외부 파일 경로
 		//경은path
-		//String realPath="C:\\apache-tomcat-9.0.37\\wtpwebapps\\Jejusari\\";
-		//String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
+		String realPath="C:\\apache-tomcat-9.0.37\\wtpwebapps\\Jejusari\\";
+		String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
 				
 		//윤정path
-		String realPath = "C:\\CHOIYJ\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
-		String workPath = "C:\\CHOIYJ\\git\\work\\jejusari\\src\\main\\webapp\\";
+		//String realPath = "C:\\CHOIYJ\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
+		//String workPath = "C:\\CHOIYJ\\git\\work\\jejusari\\src\\main\\webapp\\";
 				
 		//정인path
 		//String realPath = "C:\\lji\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
