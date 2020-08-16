@@ -26,7 +26,7 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18514d37ace0e69349e647543ecf89f8&libraries=services"></script>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+<script type="text/javascript">
 function salesCheck(obj){
 	
 	if(obj.sales_content.value == ""){
@@ -84,6 +84,7 @@ function salesCheck(obj){
 	}
 	if(checked_items == 0){
 		alert("건물 유형을 선택해주세요.");
+		obj.sales_category_type[0].focus();
 		return false;
 	}
 	
@@ -98,6 +99,7 @@ function salesCheck(obj){
 	if(obj.thumbnail.value == ""){
 		alert("썸네일을 반드시 등록해주세요.");
 		obj.thumbnail.focus();
+		return false;
 	}
 	
 	if(obj.file.value == ""){
