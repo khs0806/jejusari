@@ -65,7 +65,8 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		
-		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
+//		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
+		String SAVE_PATH = "C:/Users/김현수/Desktop/khsworkspace/한국정보연구기술원/프로젝트/git/projectworkspace/jejusari/src/main/webapp/psd/";
 		
 		String originalFileName = mf.getOriginalFilename();
 		
@@ -74,7 +75,7 @@ public class SalesController {
 		
 		try {
 			mf.transferTo(new File(safeFile));
-
+			
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

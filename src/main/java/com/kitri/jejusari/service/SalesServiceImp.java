@@ -132,8 +132,8 @@ public class SalesServiceImp implements SalesService {
 		List<SalesImgDto> salesImgDtoList=salesDao.selectSalesImg(sales_number);
 		
 		String[] urlname = new String[salesImgDtoList.size()];
-		urlname = salesImgDtoList.get(1).getImage_url().split("\\|/");
-		System.out.println(urlname[urlname.length]);
+		urlname = salesImgDtoList.get(1).getImage_url().split("/");
+		System.out.println(urlname[urlname.length-1]);
 		
 		mav.addObject("salesImgDtoList",salesImgDtoList);
 		mav.addObject("pageNumber",pageNumber);
@@ -203,8 +203,6 @@ public class SalesServiceImp implements SalesService {
 		Map<String, Object> map= mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		SalesDto salesDto=(SalesDto)map.get("salesDto");
-		
-
 		
 		// dao에 있던 기능 정리
 		Map<String, Object> hmap=new HashMap<String, Object>();
