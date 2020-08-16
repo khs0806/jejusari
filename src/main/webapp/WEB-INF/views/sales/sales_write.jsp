@@ -84,6 +84,7 @@ function salesCheck(obj){
 	}
 	if(checked_items == 0){
 		alert("건물 유형을 선택해주세요.");
+		obj.sales_category_type[0].focus();
 		return false;
 	}
 	
