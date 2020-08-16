@@ -214,9 +214,9 @@
 			// 이미지 첨부 부분
 	  				callbacks: {
 						onImageUpload: function(image) {
-							console.log("좀 찍혀봐;");	//여까진 찍힘
+							//console.log("좀 찍혀봐;");	//여까진 찍힘
 							uploadImageContent(image);
-							console.log("함수 넘어가?;");	//안돌아옴 -> script에 jquery.min.js 추가해주니까 넘어감!
+							//console.log("함수 넘어가?;");	//안돌아옴 -> script에 jquery.min.js 추가해주니까 넘어감!
 						}
 					}
 			// 이미지 첨부 부분 끝
@@ -256,14 +256,10 @@
 					data: data,
 					type: "POST",
 					success: function(d) {
-						console.log('들어갔슈');
-						console.log(d.url);
-						console.log(d.responseCode);
-						console.log(d.filename);
-						var image = $('<img>').attr('src', d.url);
-						console.log(image);
-						//$("#summernote").summernote("insertImage", d.filename);
-						//$("#summernote").summernote("insertImage", image);
+						var srcUrl=d.url;
+						var image = $('<img>').attr('src', srcUrl);
+						$img = $('<img>').attr({ src: srcUrl })
+					   	$("#summernote").summernote('insertNode', $img[0]);
 					},
 					error: function(data) {
 						console.log('안들어갔슈');
