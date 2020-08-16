@@ -1,15 +1,22 @@
 package com.kitri.jejusari.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -173,11 +180,9 @@ public class BoardController {
 	public ModelAndView report(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView();
-		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		String sales_number = request.getParameter("sales_number");
 		String sales_title = request.getParameter("sales_title");
 		
-		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("sales_number", sales_number);
 		mav.addObject("sales_title", sales_title);
 		mav.setViewName("report/report_write.empty");
@@ -192,8 +197,6 @@ public class BoardController {
 		
 		
 		ModelAndView mav=new ModelAndView();
-		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
-		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("reportDto", reportDto);
 		mav.addObject("request",request);
 		boardService.reportWriteOk(mav);   // controller의 함수명과 같게 하는게 좋다.

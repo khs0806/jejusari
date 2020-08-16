@@ -89,17 +89,6 @@
 			</div>
 			
 		</form>
-		<nav aria-label="정렬">
-		  <div class="pagination justify-content-end">
-		    <select>
-			<option value="">정렬	</option>
-			<option value="">가격내림차순</option>
-			<option value="">가격오름차순</option>
-			<option value="">지수오름순</option>
-			<option value="">지수내림순</option>
-		</select>
-		  </div>
-		</nav>
 		
 		<!-- 게시판 목록 -->
 		<div class="table active">
@@ -160,7 +149,13 @@
 		</div>
 		
 		<!-- 페이징 -->
-		
+		<%-- <c:if test="${pageMaker.pageNumber } != null">
+			<script type="text/javascript">
+				$(function(){
+					
+					});
+			</script>
+		</c:if> --%>
 		<div class="d-flex bd-highlight">
           <div class="p-2 w-100 bd-highlight">
             <nav aria-label="Page navigation">
