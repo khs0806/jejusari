@@ -314,22 +314,12 @@ public class SalesServiceImp implements SalesService {
 		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
 		SalesDto salesDto = new SalesDto();
 		salesDto.setSales_number(sales_number);
+
+		int check = salesDao.salesDelete(salesDto);
 		
+		System.out.println("check : " + check);
 		
-		int check1 = salesDao.salesDelete1(salesDto);
-		int check2 = salesDao.salesDelete2(salesDto);
-		int check3 = salesDao.salesDelete3(salesDto);
-		int check4 = salesDao.salesDelete4(salesDto);
-		int check5 = salesDao.salesDelete5(salesDto);
-		
-		System.out.println("check : " + check1 + check2+check3+check4+check5);
-		
-		
-		mav.addObject("check1", check1);
-		mav.addObject("check2", check2);
-		mav.addObject("check3", check3);
-		mav.addObject("check4", check4);
-		mav.addObject("check5", check5);
+		mav.addObject("check", check);
 		mav.setViewName("sales/sales_deleteOk.tiles");
 		
 	}
