@@ -89,17 +89,6 @@
 			</div>
 			
 		</form>
-		<nav aria-label="정렬">
-		  <div class="pagination justify-content-end">
-		    <select>
-			<option value="">정렬	</option>
-			<option value="">가격내림차순</option>
-			<option value="">가격오름차순</option>
-			<option value="">지수오름순</option>
-			<option value="">지수내림순</option>
-		</select>
-		  </div>
-		</nav>
 		
 		<!-- 게시판 목록 -->
 		<div class="table active">
@@ -160,13 +149,7 @@
 		</div>
 		
 		<!-- 페이징 -->
-		<%-- <c:if test="${pageMaker.pageNumber } != null">
-			<script type="text/javascript">
-				$(function(){
-					
-					});
-			</script>
-		</c:if> --%>
+		
 		<div class="d-flex bd-highlight">
           <div class="p-2 w-100 bd-highlight">
             <nav aria-label="Page navigation">
@@ -177,7 +160,9 @@
                 </li>
                </c:if>
               <c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                <li class="page-item"><a class="page-link" href="${root}/sales${pageMaker.makeSearch(idx)}">${idx}</a></li>
+                <li class="page-item" id="pageNumber${idx }"><a class="page-link" href="${root}/sales${pageMaker.makeSearch(idx)}">${idx}</a></li>
+
+
               </c:forEach>
                  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
                 <li id="next" class="page-item">
@@ -185,9 +170,9 @@
                 </li>
                 </c:if>
               </ul>
-              
             </nav>
           </div>
+          
 			 <c:if test = "${member_level eq 'BR'}">
 			 	<script type="text/javascript">
 				 	$(function(){
@@ -206,16 +191,21 @@
 					location.href='${root}/sales/write';
 				});
 		});
+		/*paging handler*/
+		$(function(){
+		    var url = window.location.href;  
+		    if((url.length-33)>0){
+			    var activePage = url.substring(url.lastIndexOf('pageNumber=')+11, url.indexOf('&'));
+			    console.log(activePage);
+			    $('#pageNumber'+activePage).addClass('active'); 
+		    }else{
+		    	$('#pageNumber1').addClass('active'); 
+			}
+		})
 		</script>
 		
 		<br>
 		<br>
 	</div>
-<!-- 	<script type="text/javascript">
-	$(function () {
-		  $('[data-toggle="tooltip"]').tooltip()
-		})
-	$('#example').tooltip(options)
-	</script> -->
 </body>
 </html>
