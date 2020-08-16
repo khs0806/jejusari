@@ -20,12 +20,20 @@
 			$("#BRbutton").hide();
 		});
 		</script>
+<script>
+	function updateCostInput(val) {
+		document.getElementById('costInput').value = val;
+	}
+	function updateAreaInput(val) {
+		document.getElementById('areaInput').value = val;
+	}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물게시판</h3>
-		<form action="">
+		<form action="${root}/sales?keyword=${keyword}">
 			<div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
 					<label class="btn btn-outline-warning">
 						<input type="checkbox" name="sales_category_type" value="아파트" id="APT">아파트
@@ -50,9 +58,9 @@
 					<option value="전세">전세</option>
 					<option value="월세">월세</option>
 				</select>
-			  <input type="text" class="form-control col-md-4" placeholder="지역명을 입력하세요." name="sales_address" aria-describedby="button-addon2">
+			  <input id="searchKeyword" type="text" class="form-control col-md-4" placeholder="지역명을 입력하세요." name="sales_address" aria-describedby="button-addon2" value="${salesDto.sales_address}">
 			  <div class="input-group-append">
-			    <button class="btn btn-outline-warning" type="submit" id="button-addon2"><strong>검색</strong></button>
+			    <button class="btn btn-outline-warning" type="submit" id="button-addon2"><strong>매물찾기</strong></button>
 			  </div>
 			</div>
 
