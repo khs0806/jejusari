@@ -99,6 +99,7 @@ function salesCheck(obj){
 	if(obj.thumbnail.value == ""){
 		alert("썸네일을 반드시 등록해주세요.");
 		obj.thumbnail.focus();
+		return false;
 	}
 	
 	if(obj.file.value == ""){
