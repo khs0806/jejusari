@@ -22,6 +22,12 @@
 	})
 	
 	function telCheck(obj){
+		if(obj.member_name.value == ""){
+			alert("닉네임을 입력하세요.");
+			obj.member_name.focus();
+			return false;
+		}
+		
 		if(obj.no1.value == ""){
 			alert("번호를 입력하세요.");
 			obj.no1.focus();
@@ -37,6 +43,12 @@
 		if(obj.no3.value == ""){
 			alert("번호를 입력하세요.");
 			obj.no3.focus();
+			return false;
+		}
+		
+		if(obj.member_level == "") {
+			alert("가입 유형을 선택해주세요.");
+			obj.member_level.focus();
 			return false;
 		}
 	}

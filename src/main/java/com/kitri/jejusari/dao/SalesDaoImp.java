@@ -69,32 +69,13 @@ public class SalesDaoImp implements SalesDao {
 		return session.insert("sales_write", salesDto);
 	}
 	
-	@Override
-	public int salesDelete1(SalesDto salesDto) {
-		// TODO Auto-generated method stub
-		return session.delete("sales_delete1", salesDto);
-	}
 	
 	@Override
-	public int salesDelete2(SalesDto salesDto) {
-		// TODO Auto-generated method stub
-		return session.delete("sales_delete2", salesDto);
-	}
-	@Override
-	public int salesDelete3(SalesDto salesDto) {
-		// TODO Auto-generated method stub
-		return session.delete("sales_delete3", salesDto);
-	}
-	
-	@Override
-	public int salesDelete4(SalesDto salesDto) {
-		// TODO Auto-generated method stub
-		return session.delete("sales_delete4", salesDto);
-	}
-	
-	@Override
-	public int salesDelete5(SalesDto salesDto) {
-		// TODO Auto-generated method stub
+	public int salesDelete(SalesDto salesDto) {
+		session.delete("sales_delete1", salesDto);
+		session.delete("sales_delete2", salesDto);
+		session.delete("sales_delete3", salesDto);
+		session.delete("sales_delete4", salesDto);
 		return session.delete("sales_delete5", salesDto);
 	}
 	
