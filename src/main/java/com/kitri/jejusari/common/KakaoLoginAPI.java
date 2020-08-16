@@ -115,8 +115,12 @@ public class KakaoLoginAPI {
 			
 			String id = element.getAsJsonObject().get("id").getAsString();
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-
+			
+			String email = "이메일 없음";
+			if (kakao_account.getAsJsonObject().get("email") != null) {
+				email = kakao_account.getAsJsonObject().get("email").getAsString();
+			}
+			
 			System.out.println("nickname : " + nickname);
 			System.out.println("email : " + email);
 			System.out.println("id : " + id);

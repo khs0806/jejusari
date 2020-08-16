@@ -20,10 +20,30 @@
 	        }
 	    });
 	})
+	
+	function telCheck(obj){
+		if(obj.no1.value == ""){
+			alert("번호를 입력하세요.");
+			obj.no1.focus();
+			return false;
+		}
+		
+		if(obj.no2.value == ""){
+			alert("번호를 입력하세요.");
+			obj.no2.focus();
+			return false;
+		}
+		
+		if(obj.no3.value == ""){
+			alert("번호를 입력하세요.");
+			obj.no3.focus();
+			return false;
+		}
+	}
 </script>
 </head>
 <body>
-	<form id="plus_info" action="${root}/member/joinOk" method="post">
+	<form id="plus_info" action="${root}/member/joinOk" method="post" onsubmit = "return telCheck(this)">
 		<div class="tit">추가 정보 입력</div>
 		
 		<input type="hidden" name="member_id" value="${member_id}">
