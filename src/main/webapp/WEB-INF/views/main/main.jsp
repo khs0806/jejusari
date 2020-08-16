@@ -12,7 +12,7 @@
 	}
 	#main_page .card-img-overlay{padding:15rem; text-align: center;}
 	
-	#newsTitle {
+	#newsTitle, #noticeTitle {
 		list-style-position:inside;
 		white-space:nowrap;
 		overflow:hidden;
@@ -61,14 +61,14 @@
 						<div class="border-bottom mr-3 p-3" id="table_th_news">
 							<strong>공지사항</strong>
 							<strong style="float:right;">
-								<a href="${root}/notice" style="color:#6c757d;font-size:14px;">> 더보기</a>
+								<a href="${root}/notice" style="color:#6c757d;font-size:12px;">> 더보기</a>
 							</strong>
 						</div>
 						<c:forEach var="noticeDto" items="${noticeList}" end="6" varStatus="status">
 						<a href="${root}/notice/detail?notice_number=${noticeDto.notice_number}">
 							<div class="row table active">
 								<div class="col-md-1 pl-5"><strong>${status.index+1}</strong></div>
-								<div class="col-md-7"><strong>&#9786;&nbsp;&nbsp;${noticeDto.notice_title }</strong></div>
+								<div class="col-md-7" id="noticeTitle"><strong>${noticeDto.notice_title }</strong></div>
 								<div class="col-md-3">
 									<strong><fmt:formatDate value = "${noticeDto.notice_date}" pattern = "yyyy-MM-dd"/></strong>
 								</div>
@@ -81,7 +81,7 @@
                   <div class="border-bottom mr-3 p-3" id="table_th_news">
                   	<strong>제주 이슈</strong>
                   	<strong style="float:right;">
-							<a href="${root}/news" style="color:#6c757d;font-size:14px;">> 더보기</a>
+							<a href="${root}/news" style="color:#6c757d;font-size:12px;">> 더보기</a>
 					</strong>
                   </div>
                <c:forEach items="${newsList}" end="6" var="news" varStatus="status">

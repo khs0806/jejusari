@@ -20,10 +20,34 @@
 	        }
 	    });
 	})
+	
+	function valCheck(obj) {
+		if(obj.member_name.value == "") {
+			alert("이름을 입력해주세요.");
+			obj.member_name.focus();
+			return false;
+		}
+		
+
+		var checked_items = 0;
+		for(i = 0; i < obj.elements.length; i++){
+			if((obj.elements[i].name == "member_level") && (obj.elements[i].checked)) checked_items++;
+		}
+		if(checked_items == 0){
+			alert("유형을 선택해주세요.");
+			obj.member_level[0].focus();
+			return false;
+		}
+		return true;
+	}
+	
+	
+	
+	
 </script>
 </head>
 <body>
-	<form id="plus_info" action="${root}/member/tempjoin" method="post">
+	<form id="plus_info" action="${root}/member/tempjoin" method="post" onsubmit = "return valCheck(this)">
 		<div class="tit">임시 회원가입</div>
 		
 		<div class="nickname">
@@ -60,11 +84,11 @@
 		
 		<div class="member_level">
 			<div class="label">가입 유형</div>
-			<input type="radio" name="member_level" value="GE"/>
+			<input type="radio" name="member_level" value="GE" id = "member_level"/>
 			일반회원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
-			<input type="radio" name="member_level" value="BR"/>
+			<input type="radio" name="member_level" value="BR" id = "member_level"/>
 			중개업자
-			<input type="radio" name="member_level" value="admin"/>
+			<input type="radio" name="member_level" value="admin" id = "member_level"/>
 			관리자
 		</div>
 		
