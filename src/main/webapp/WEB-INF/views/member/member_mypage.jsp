@@ -10,6 +10,16 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/css/member/member_mypage.css">
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.css">
+<style type="text/css">
+	#salesTitle, #scrapTitle {
+		list-style-position:inside;
+		white-space:nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		font-weight: bold;
+		display: inline-block;
+	}
+</style>
 <script type="text/javascript">
 	$(function() {
 		// 중개업자만 매물 등록 섹션 보이기
@@ -60,7 +70,6 @@
 <body>
 	<div id="wrap">
 		<div id="first">
-			<p>제주살이</p>
 			<p>
 				<span>${member_name} 님</span>
 				<a href="${root}/member/update">⚙ 회원정보 수정</a>
@@ -75,8 +84,9 @@
 					<div id="myscrap" class="card border-warning card-sh" style="max-width: 20rem;">
 						<div class="card-body">
 							<a href="${root}/sales/detail?sales_number=${scrap.sales_number}&pageNumber=1"><img alt="test" src="${root}${scrap.image_url}" width="280px" height="250px"></a>
-							<c:set var="title" value="${scrap.sales_title}"/>
-							${fn:substring(title, 0, 10)}...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%-- 							<c:set var="title" value="${scrap.sales_title}"/> --%>
+<%-- 							${fn:substring(title, 0, 10)}...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --%>
+							<div id="scrapTitle">${scrap.sales_title}</div>
 							<input name="delScrapBtn" type="button" class="btn btn-warning" value="삭제">
 							<input type="hidden" value="${scrap.sales_number}"/>
 						</div>
@@ -95,8 +105,9 @@
 						<div class="card border-warning card-sh" style="max-width: 20rem;">
 							<div class="card-body" >
 								<a href="${root}/sales/detail?sales_number=${sales.sales_number}&pageNumber=1"><img alt="test" src="${root}${sales.image_url}" width="280px" height="250px"></a>
-								<c:set var="title" value="${sales.sales_title}"/>
-								${fn:substring(title, 0, 10)}...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%-- 								<c:set var="title" value="${sales.sales_title}"/> --%>
+<%-- 								${fn:substring(title, 0, 10)}...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --%>
+								<div id="salesTitle">${sales.sales_title}</div>
 								<input name="delSalesBtn" type="button" class="btn btn-warning" value="삭제">
 								<input type="hidden" value="${sales.sales_number}"/>
 							</div>

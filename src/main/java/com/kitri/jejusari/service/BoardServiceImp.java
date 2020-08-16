@@ -53,7 +53,7 @@ public class BoardServiceImp implements BoardService{
 
 		String text = null;
 		try {
-			text = URLEncoder.encode("제주도", "UTF-8");
+			text = URLEncoder.encode("제주도 힐링", "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("검색어 인코딩 실패",e);
 		}
