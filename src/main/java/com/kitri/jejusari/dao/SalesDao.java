@@ -25,12 +25,8 @@ public interface SalesDao {
 	public List<SalesDto> salesList(Map<String, Object> hmap);
 	
 	public int salesWriteOk(SalesDto salesDto);
-	
-	public int salesDelete1(SalesDto salesDto);
-	public int salesDelete2(SalesDto salesDto);
-	public int salesDelete3(SalesDto salesDto);
-	public int salesDelete4(SalesDto salesDto);
-	public int salesDelete5(SalesDto salesDto);
+
+	public int salesDelete(SalesDto salesDto);
 	public String salesIdCheck(int sales_number);
 	public String getAddress(int sales_number);
 	public int salesUpdate(Map<String, Object> map);

@@ -22,23 +22,44 @@
 	})
 	
 	function telCheck(obj){
-		if(obj.no1.value == ""){
-			alert("번호를 입력하세요.");
-			obj.no1.focus();
+		if(obj.member_name.value == ""){
+			alert("닉네임을 입력하세요.");
+			obj.member_name.focus();
 			return false;
 		}
 		
-		if(obj.no2.value == ""){
-			alert("번호를 입력하세요.");
-			obj.no2.focus();
+		var checked_items = 0;
+		for(i = 0; i < obj.elements.length; i++){
+			if((obj.elements[i].name == "member_level") && (obj.elements[i].checked)) checked_items++;
+		}
+		if(checked_items == 0){
+			alert("유형을 선택해주세요.");
 			return false;
 		}
 		
-		if(obj.no3.value == ""){
-			alert("번호를 입력하세요.");
-			obj.no3.focus();
-			return false;
+		
+		if(obj.member_level.value == "BR"){
+			if(obj.no1.value == ""){
+				alert("번호를 입력하세요.");
+				obj.no1.focus();
+				return false;
+			}
+			
+			if(obj.no2.value == ""){
+				alert("번호를 입력하세요.");
+				obj.no2.focus();
+				return false;
+			}
+			
+			if(obj.no3.value == ""){
+				alert("번호를 입력하세요.");
+				obj.no3.focus();
+				return false;
+			}
 		}
+		
+		
+		
 	}
 </script>
 </head>

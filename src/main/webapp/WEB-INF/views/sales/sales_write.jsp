@@ -77,12 +77,17 @@ function salesCheck(obj){
 		return false;
 	}
 	
-	if(obj.sales_category_type.value == ""){
+	
+	var checked_items = 0;
+	for(i = 0; i < obj.elements.length; i++){
+		if((obj.elements[i].name == "sales_category_type") && (obj.elements[i].checked)) checked_items++;
+	}
+	if(checked_items == 0){
 		alert("건물 유형을 선택해주세요.");
-		obj.sales_category_type.focus();
 		return false;
 	}
 	
+	//
 	if(obj.sales_category_rent.value == ""){
 		alert("옵션을 선택해주세요.");
 		obj.sales_category_rent.focus();
@@ -93,7 +98,8 @@ function salesCheck(obj){
 	if(obj.thumbnail.value == ""){
 		alert("썸네일을 반드시 등록해주세요.");
 		obj.thumbnail.focus();
-
+	}
+	
 	if(obj.file.value == ""){
 		alert("사진을 등록해주세요.");
 		obj.file.focus();
