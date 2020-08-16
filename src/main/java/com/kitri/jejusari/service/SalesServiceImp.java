@@ -129,7 +129,13 @@ public class SalesServiceImp implements SalesService {
 			if(sales_option[i].equals("CCTV")) salesDto.setSales_cctv(1);
 			if(sales_option[i].equals("엘리베이터")) salesDto.setSales_ele(1);
 		}
+		List<SalesImgDto> salesImgDtoList=salesDao.selectSalesImg(sales_number);
 		
+		String[] urlname = new String[salesImgDtoList.size()];
+		urlname = salesImgDtoList.get(1).getImage_url().split("\\|/");
+		System.out.println(urlname[urlname.length]);
+		
+		mav.addObject("salesImgDtoList",salesImgDtoList);
 		mav.addObject("pageNumber",pageNumber);
 		mav.addObject("salesDto",salesDto);
 		mav.setViewName("sales/sales_update.tiles");

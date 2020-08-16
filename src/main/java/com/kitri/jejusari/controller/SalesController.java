@@ -57,12 +57,12 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		
-		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd";
+		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
 		
 		String originalFileName = mf.getOriginalFilename();
 		long fileSize = mf.getSize();
 		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
-
+		
 		try {
 			mf.transferTo(new File(safeFile));
 
