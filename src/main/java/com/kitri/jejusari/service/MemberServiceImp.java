@@ -42,35 +42,35 @@ public class MemberServiceImp implements MemberService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		HttpSession session = request.getSession();
 		String member_level = (String) session.getAttribute("member_level");
-		
+
 		session.getAttribute("member_level");
 		//페이징
-				String pageNumber=request.getParameter("pageNumber");
-				System.out.println("pageNumber"+pageNumber);
-				if(pageNumber == null) pageNumber = "1";
-				int currentPage = Integer.parseInt(pageNumber);	//요청한 페이지
-				int boardSize = 10;		// [1] start:1, end:10  [2] start:11, end:20
+		String pageNumber=request.getParameter("pageNumber");
+		System.out.println("pageNumber"+pageNumber);
+		if(pageNumber == null) pageNumber = "1";
+		int currentPage = Integer.parseInt(pageNumber);	//요청한 페이지
+		int boardSize = 10;		// [1] start:1, end:10  [2] start:11, end:20
 
-				int startRow = (currentPage - 1) * boardSize + 1;	//1  11 21 31
-				int endRow = currentPage * boardSize;			//10 20 30 40
+		int startRow = (currentPage - 1) * boardSize + 1;	//1  11 21 31
+		int endRow = currentPage * boardSize;			//10 20 30 40
 
-				//count 사용해서 글이 아예 없는경우 페이징 사라지게
-				int count = memberDao.memberCount();
-				List<String> memberList = null;
+		//count 사용해서 글이 아예 없는경우 페이징 사라지게
+		int count = memberDao.memberCount();
+		List<String> memberList = null;
 
-				if(count > 0) {
-					//startRow, endRow
-					memberList = memberDao.memberList(startRow, endRow);
-				}
-		
+		if(count > 0) {
+			//startRow, endRow
+			memberList = memberDao.memberList(startRow, endRow);
+		}
+
 		mav.addObject("MemberList", memberList);
 		System.out.println(memberList);
-		
+
 		mav.addObject("member_level",member_level);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("count", count);
-		
+
 		mav.setViewName("admin/member_admin.tiles");
 	}
 
