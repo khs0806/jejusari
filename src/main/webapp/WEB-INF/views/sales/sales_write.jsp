@@ -88,6 +88,12 @@ function salesCheck(obj){
 		obj.sales_category_rent.focus();
 		return false;
 	}
+	
+	if(obj.file.value == ""){
+		alert("사진을 등록해주세요.");
+		obj.file.focus();
+		return false;
+	}
 }
 </script>
 </head>
