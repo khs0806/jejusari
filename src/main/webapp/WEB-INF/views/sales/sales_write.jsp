@@ -27,13 +27,74 @@
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-
+function salesCheck(obj){
+	
+	if(obj.sales_content.value == ""){
+		alert("내용을 입력하세요.");
+		obj.sales_content.focus();
+		return false;
+	}
+	
+	if(obj.sales_deposit.value == ""){
+		alert("보증금을 입력하세요.");
+		obj.sales_deposit.focus();
+		return false;
+	}
+	
+	if(obj.sales_cost.value == ""){
+		alert("가격을 입력하세요.");
+		obj.sales_cost.focus();
+		return false;
+	}
+	
+	if(obj.sales_area.value == ""){
+		alert("면적을 입력하세요.");
+		obj.sales_area.focus();
+		return false;
+	}
+	
+	if(obj.sales_build_year.value == ""){
+		alert("준공년도를 입력하세요.");
+		obj.sales_build_year.focus();
+		return false;
+	}
+	
+	if(obj.sales_floor.value == ""){
+		alert("층수를 입력하세요.");
+		obj.sales_floor.focus();
+		return false;
+	}
+	
+	if(obj.sales_address.value == ""){
+		alert("주소를 입력하세요.");
+		obj.sales_address.focus();
+		return false;
+	}
+	
+	if(obj.sales_title.value == ""){
+		alert("제목을 입력하세요.");
+		obj.sales_title.focus();
+		return false;
+	}
+	
+	if(obj.sales_category_type.value == ""){
+		alert("건물 유형을 선택해주세요.");
+		obj.sales_category_type.focus();
+		return false;
+	}
+	
+	if(obj.sales_category_rent.value == ""){
+		alert("옵션을 선택해주세요.");
+		obj.sales_category_rent.focus();
+		return false;
+	}
+}
 </script>
 </head>
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form action="${root }/sales/writeOk" method="POST" enctype = "multipart/form-data">
+		<form action="${root }/sales/writeOk" method="POST" enctype = "multipart/form-data" onsubmit = "return salesCheck(this)">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			
