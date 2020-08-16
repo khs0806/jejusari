@@ -89,18 +89,30 @@ function salesCheck(obj){
 		return false;
 	}
 	
+
+	if(obj.thumbnail.value == ""){
+		alert("썸네일을 반드시 등록해주세요.");
+		obj.thumbnail.focus();
+
 	if(obj.file.value == ""){
 		alert("사진을 등록해주세요.");
 		obj.file.focus();
+
 		return false;
 	}
 }
+$(document).ready(function() {
+	$(".custom-file-input").on("change", function() {
+		  var fileName = $(this).val().split("\\").pop();
+		  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+});
 </script>
 </head>
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form action="${root }/sales/writeOk" method="POST" enctype = "multipart/form-data" onsubmit = "return salesCheck(this)">
+		<form action="${root}/sales/writeOk" method="POST" enctype = "multipart/form-data" onsubmit = "return salesCheck(this)">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			
@@ -334,19 +346,27 @@ function salesCheck(obj){
 					}
 				});
 			}
+			
     	</script>
 		
-		<!-- 파일업로드 -->
-		<div class="input-group mb-3">
+		<!-- 파일업로드 -->	
+		 <div class="input-group mb-3">	
+			<div class="custom-file">
+			    <input type="file" class="custom-file-input" id="customFile" name="thumbnail">
+			    <label class="custom-file-label" for="customFile">썸네일은 반드시 등록해주세요.</label>
+	  		</div>
+  		</div>
+  		
+<!-- 	  <div class="input-group mb-3">
 		  <div class="custom-file">
-		    <input type="file" class="custom-file-input" id="inputGroupFile02" name="file">
-		    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+		    <input type="file" class="custom-file-input" id="inputGroupFile02" name="file" data-show-preview="false">
+		    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">썸네일은 반드시 등록해주세요.</label>
 		  </div>
 		  <div class="input-group-append">
 		    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
 		  </div>
-		</div>
-		
+		</div> 
+		 -->
 		<!-- 작성버튼 -->
 		<div class="d-flex justify-content-end mb-5">
 			<button type="submit" class="btn btn-warning mr-3">작성</button>
