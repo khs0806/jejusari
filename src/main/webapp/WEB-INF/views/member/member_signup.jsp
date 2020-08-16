@@ -34,6 +34,7 @@
 		}
 		if(checked_items == 0){
 			alert("유형을 선택해주세요.");
+			obj.member_level[0].focus();
 			return false;
 		}
 		
