@@ -160,13 +160,7 @@
 		</div>
 		
 		<!-- 페이징 -->
-		<%-- <c:if test="${pageMaker.pageNumber } != null">
-			<script type="text/javascript">
-				$(function(){
-					
-					});
-			</script>
-		</c:if> --%>
+		
 		<div class="d-flex bd-highlight">
           <div class="p-2 w-100 bd-highlight">
             <nav aria-label="Page navigation">
@@ -177,13 +171,20 @@
                 </li>
                </c:if>
               <c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                <li class="page-item"><a class="page-link" href="${root}/sales${pageMaker.makeSearch(idx)}">${idx}</a></li>
+                <li class="page-item" id="pageNumber${idx }"><a class="page-link" href="${root}/sales${pageMaker.makeSearch(idx)}">${idx}</a></li>
               </c:forEach>
                  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
                 <li id="next" class="page-item">
                   <a class="page-link" href="${root}/sales${pageMaker.makeSearch(pageMaker.endPage + 1)}">Next</a>
                 </li>
                 </c:if>
+               <%-- <c:if test="${pageMaker.pageNumber } != null">
+					<script type="text/javascript">
+						$(function(){
+								$('#pageNumber${idx}').addClass("active");
+							});
+					</script>
+				</c:if> --%>
               </ul>
               
             </nav>
