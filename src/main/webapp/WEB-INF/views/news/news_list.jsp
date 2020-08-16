@@ -36,25 +36,25 @@
 			</c:forEach>
 		</div>
 		
-		<div class="d-flex bd-highlight">
-			<div class="p-2 w-100 bd-highlight">
-				<nav aria-label="Page navigation">
-					<ul class="pagination justify-content-center">
-						<li class="page-item disabled">
-							<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-						</li>
+<!-- 		<div class="d-flex bd-highlight"> -->
+<!-- 			<div class="p-2 w-100 bd-highlight"> -->
+<!-- 				<nav aria-label="Page navigation"> -->
+<!-- 					<ul class="pagination justify-content-center"> -->
+<!-- 						<li class="page-item disabled"> -->
+<!-- 							<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a> -->
+<!-- 						</li> -->
 						
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
+<!-- 						<li class="page-item"><a class="page-link" href="#">1</a></li> -->
+<!-- 						<li class="page-item"><a class="page-link" href="#">2</a></li> -->
+<!-- 						<li class="page-item"><a class="page-link" href="#">3</a></li> -->
 						
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
+<!-- 						<li class="page-item"> -->
+<!-- 							<a class="page-link" href="#">Next</a> -->
+<!-- 						</li> -->
+<!-- 					</ul> -->
+<!-- 				</nav> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 	</div>
 </body>
 </html>
