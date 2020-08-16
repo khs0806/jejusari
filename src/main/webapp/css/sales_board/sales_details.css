@@ -192,7 +192,7 @@ img{
 #sales_img .img,#sales_img .imgs{
  width:310px;
  height:350px;
- border:solid 1px grey;
+ border:solid 0px grey;
  float:left;
  margin: 10px;
 }

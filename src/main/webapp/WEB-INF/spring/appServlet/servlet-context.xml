@@ -18,16 +18,17 @@
 	<!-- 정작파일(css,js) 경로 -->
 	<resources mapping="/img/**" location="/img/" />
 	<resources mapping="/img_house/**" location="/img_house/" />
+	<resources mapping="/psd/**" location="/psd/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/javascript/**" location="/javascript/" />
-
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 		<beans:property name="order" value="2"/>
 	</beans:bean> 
-
+	
 	<!-- Tiles2 -->
    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
       <beans:property name="definitions">
