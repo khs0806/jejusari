@@ -235,6 +235,7 @@
 	 		function uploadImageContent(image) {
 				var data = new FormData();
 				data.append("file", image[0]);
+				//data.append();
 			/* 	반복해서 받을경우 반복문돌리기
 				var f = new FormData();
 
@@ -260,7 +261,8 @@
 						console.log(d.responseCode);
 						console.log(d.filename);
 						var image = $('<img>').attr('src', d.url);
-						$("#summernote").summernote("insertImage", image);
+						console.log(image);
+						//$("#summernote").summernote("insertImage", d.filename);
 						//$("#summernote").summernote("insertImage", image);
 					},
 					error: function(data) {
