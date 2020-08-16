@@ -19,10 +19,11 @@
 		}
 		
 		//스크랩 버튼색...
-		if(${scrap_check>0 }){
+		if(${scrap_check>0}){
 			$("input:button[name=scrap_btn]").css("color","#212529");
 			$("input:button[name=scrap_btn]").css("background-color","#ffc107");
 			$(".scrap_star").attr("src","${root}/img/star2.png");
+			$("input:button[name=scrap_btn]").val("스크랩취소");
 		}
 		
 		var opac_num=(${factorMap.factor_total}/${factor_all_avg})*100
@@ -49,6 +50,7 @@
 							
 							scount=scount+1;
 							$(".scrap_count").text(scount);
+							$("input:button[name=scrap_btn]").val("스크랩취소");
 
 							alert("스크랩이 완료되었습니다."); 
 			      		}else if(check==-1){
@@ -58,7 +60,8 @@
 							
 							scount=scount-1;
 							$(".scrap_count").text(scount);
-
+							$("input:button[name=scrap_btn]").val("스크랩");
+							
 							alert("스크랩이 취소되었습니다."); 
 			      		}
 			      		
