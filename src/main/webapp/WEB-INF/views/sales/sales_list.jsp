@@ -8,6 +8,18 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
+		<script>
+		function updateCostInput(val) {
+          document.getElementById('costInput').value=val; 
+        }
+		function updateAreaInput(val) {
+          document.getElementById('areaInput').value=val; 
+        }
+		
+		$(function(){
+			$("#BRbutton").hide();
+		});
+		</script>
 <script>
 	function updateCostInput(val) {
 		document.getElementById('costInput').value = val;
@@ -170,9 +182,15 @@
               
             </nav>
           </div>
-			 
+			 <c:if test = "${member_level eq 'BR'}">
+			 	<script type="text/javascript">
+				 	$(function(){
+						$("#BRbutton").show();
+					});
+			 	</script>
+			 </c:if>
 			 <!-- 매매업자에게만 보이는 글쓰기 버튼 -->
-			 <div class="p-2 flex-shrink-1 bd-highlight">
+			 <div class="p-2 flex-shrink-1 bd-highlight" id = "BRbutton">
 			  	<input type="button" value="매물올리기" class="btn btn-warning btn-sales">
 			 </div>
 		</div>

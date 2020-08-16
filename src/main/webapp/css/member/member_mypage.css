@@ -19,7 +19,7 @@ body {
 }
 
 #first p:first-child, #first p:last-child span {
-	margin-left: 100px;
+	margin-left: 49px;
 }
 
 #first p:last-child span{

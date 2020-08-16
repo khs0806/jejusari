@@ -11,8 +11,15 @@
 		width: 100%;
 	}
 	#main_page .card-img-overlay{padding:15rem; text-align: center;}
+	
+	#newsTitle {
+		list-style-position:inside;
+		white-space:nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
 </style>
- <c:set var="root" value="${pageContext.request.contextPath }"/>
+ <c:set var="root" value="${pageContext.request.contextPath}"/>
  
  <script>
  	$(function(){
@@ -81,9 +88,7 @@
                   <a href="${news.link}">
                      <div class="row table active">
                         <div class="col-md-1 pl-5"><strong>${status.index+1}</strong></div>
-<%--                         <div class="col-md-7"><strong>${news.title}</strong></div> --%>
-                        <c:set var="title" value="${news.title}"/>
-                        <div class="col-md-7"><strong>${fn:substring(title, 0, 20)}...</strong></div>
+                        <div class="col-md-7" id="newsTitle"><strong>${news.title}</strong></div>
                         <div class="col-md-3"><strong>${news.date}</strong></div>
                      </div>
                   </a>
