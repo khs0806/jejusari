@@ -129,7 +129,13 @@ public class SalesServiceImp implements SalesService {
 			if(sales_option[i].equals("CCTV")) salesDto.setSales_cctv(1);
 			if(sales_option[i].equals("엘리베이터")) salesDto.setSales_ele(1);
 		}
+		List<SalesImgDto> salesImgDtoList=salesDao.selectSalesImg(sales_number);
 		
+		String[] urlname = new String[salesImgDtoList.size()];
+		urlname = salesImgDtoList.get(1).getImage_url().split("\\|/");
+		System.out.println(urlname[urlname.length]);
+		
+		mav.addObject("salesImgDtoList",salesImgDtoList);
 		mav.addObject("pageNumber",pageNumber);
 		mav.addObject("salesDto",salesDto);
 		mav.setViewName("sales/sales_update.tiles");
@@ -302,7 +308,9 @@ public class SalesServiceImp implements SalesService {
 		System.out.println(check);
 		salesImgDto.setImage_url(safeFile);
 		salesImgDto.setSales_number(sales_number);
-
+		
+		mav.addObject("sales_number",sales_number);
+		mav.addObject("check", check);
 	}
 	
 	@Override
@@ -314,22 +322,12 @@ public class SalesServiceImp implements SalesService {
 		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
 		SalesDto salesDto = new SalesDto();
 		salesDto.setSales_number(sales_number);
+
+		int check = salesDao.salesDelete(salesDto);
 		
+		System.out.println("check : " + check);
 		
-		int check1 = salesDao.salesDelete1(salesDto);
-		int check2 = salesDao.salesDelete2(salesDto);
-		int check3 = salesDao.salesDelete3(salesDto);
-		int check4 = salesDao.salesDelete4(salesDto);
-		int check5 = salesDao.salesDelete5(salesDto);
-		
-		System.out.println("check : " + check1 + check2+check3+check4+check5);
-		
-		
-		mav.addObject("check1", check1);
-		mav.addObject("check2", check2);
-		mav.addObject("check3", check3);
-		mav.addObject("check4", check4);
-		mav.addObject("check5", check5);
+		mav.addObject("check", check);
 		mav.setViewName("sales/sales_deleteOk.tiles");
 		
 	}

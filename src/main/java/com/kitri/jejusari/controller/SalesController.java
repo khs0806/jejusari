@@ -45,24 +45,33 @@ public class SalesController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/sales/sales_insertCheck")
+	public String insertCheck(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "sales/sales_insertCheck.tiles";
+	}
+	
 	@RequestMapping(value="/sales/write")
 	public String salesWrite(HttpServletRequest request, HttpServletResponse response) {
+		
+		
 		
 		return "sales/sales_write.tiles";
 	}
 	
 	@RequestMapping(value="/sales/writeOk", method=RequestMethod.POST)
-	public String salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto,
-			@RequestParam(value="file", required = false) MultipartFile mf) {
+	public ModelAndView salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto,
+			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
 		
 		ModelAndView mav= new ModelAndView();
 		
-		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd";
+		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
 		
 		String originalFileName = mf.getOriginalFilename();
+		
 		long fileSize = mf.getSize();
 		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
-
+		
 		try {
 			mf.transferTo(new File(safeFile));
 
@@ -83,7 +92,10 @@ public class SalesController {
 		
 		mav.addObject("salesDto", salesDto);
 		salesService.salesWriteOk(mav);
-		return "sales/sales_write.tiles";
+		
+		mav.setViewName("sales/sales_insertCheck");
+		
+		return mav;
 
 	}
 	@RequestMapping(value="/sales/detail")
@@ -160,12 +172,12 @@ public class SalesController {
 		//String fileRoot="C:\\jejusari\\summernote_img\\";		//저장될 외부 파일 경로
 		String fileRoot="img\\summernote_img\\";		//저장될 외부 파일 경로
 		//경은path
-		String realPath="C:\\apache-tomcat-9.0.37\\wtpwebapps\\Jejusari\\";
-		String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
+//		String realPath="C:\\apache-tomcat-9.0.37\\wtpwebapps\\Jejusari\\";
+//		String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
 				
 		//윤정path
-		//String realPath = "C:\\CHOIYJ\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
-		//String workPath = "C:\\CHOIYJ\\git\\work\\jejusari\\src\\main\\webapp\\";
+//		String realPath = "C:\\CHOIYJ\\spring\\download\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
+//		String workPath = "C:\\CHOIYJ\\git\\work\\jejusari\\src\\main\\webapp\\";
 				
 		//정인path
 		//String realPath = "C:\\lji\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
@@ -180,8 +192,8 @@ public class SalesController {
 		//String workPath = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\";
 				
 		//현수path
-		//String realPath = "C:\Users\김현수\Desktop\khsworkspace\한국정보연구기술원\KHS\spring\download\apache-tomcat-9.0.35\wtpwebapps\jejusari\\";
-		//String workPath = "C:\Users\김현수\Desktop\khsworkspace\한국정보연구기술원\프로젝트\git\projectworkspace\jejusari\src\main\webapp\\";
+		String realPath = "C:\\Users\\김현수\\Desktop\\khsworkspace\\한국정보연구기술원\\KHS\\spring\\download\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
+		String workPath = "C:\\Users\\김현수\\Desktop\\hsworkspace\\한국정보연구기술원\\프로젝트\\git\\projectworkspace\\jejusari\\src\\main\\webapp\\";
 				
 		//동준path
 		//String realPath = "";
