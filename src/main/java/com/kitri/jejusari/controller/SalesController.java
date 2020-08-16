@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kitri.jejusari.dto.SalesDto;
 import com.kitri.jejusari.service.SalesService;
 
+
+
 @Controller
 public class SalesController {
 	
@@ -54,7 +56,7 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		
-		String SAVE_PATH = "C:\\lji\\git\\jungin\\jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
+		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd";
 		
 		String originalFileName = mf.getOriginalFilename();
 		long fileSize = mf.getSize();

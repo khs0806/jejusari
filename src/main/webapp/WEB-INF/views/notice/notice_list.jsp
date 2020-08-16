@@ -48,13 +48,13 @@
 </head>
 <body>
 <form>
-	<c:if test = "${member_id eq null}">
+	<%-- <c:if test = "${member_id eq null}">
 		<script type="text/javascript">
 			alert("회원이 아닙니다! 로그인 또는 회원가입을 해주세요.");
 			location.href = "${root}/member/login";
 		</script>
-	</c:if>
-	<c:if test = "${member_id != null}">
+	</c:if> --%>
+	
 	<div class = "container" id="admin_container">
 		<div class="btn-group">
 		    <button type="button" class="btn btn-secondary" id="memberAdmin">회원 관리</button>
@@ -141,7 +141,6 @@
 			 </div>
 		</div>
 	</div>
-	</c:if>
 </form>
 </body>
 </html>
