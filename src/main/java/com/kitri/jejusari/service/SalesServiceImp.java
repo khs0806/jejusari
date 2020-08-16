@@ -302,7 +302,9 @@ public class SalesServiceImp implements SalesService {
 		System.out.println(check);
 		salesImgDto.setImage_url(safeFile);
 		salesImgDto.setSales_number(sales_number);
-
+		
+		mav.addObject("sales_number",sales_number);
+		mav.addObject("check", check);
 	}
 	
 	@Override

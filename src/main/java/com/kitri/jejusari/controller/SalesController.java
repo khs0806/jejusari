@@ -45,21 +45,30 @@ public class SalesController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/sales/sales_insertCheck")
+	public String insertCheck(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "sales/sales_insertCheck.tiles";
+	}
+	
 	@RequestMapping(value="/sales/write")
 	public String salesWrite(HttpServletRequest request, HttpServletResponse response) {
+		
+		
 		
 		return "sales/sales_write.tiles";
 	}
 	
 	@RequestMapping(value="/sales/writeOk", method=RequestMethod.POST)
-	public String salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto,
-			@RequestParam(value="file", required = false) MultipartFile mf) {
+	public ModelAndView salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto,
+			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
 		
 		ModelAndView mav= new ModelAndView();
 		
-		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd";
+		String SAVE_PATH = "C:\\lji\\git\\work\\jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
 		
 		String originalFileName = mf.getOriginalFilename();
+		
 		long fileSize = mf.getSize();
 		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
 
@@ -83,7 +92,10 @@ public class SalesController {
 		
 		mav.addObject("salesDto", salesDto);
 		salesService.salesWriteOk(mav);
-		return "sales/sales_write.tiles";
+		
+		mav.setViewName("sales/sales_insertCheck");
+		
+		return mav;
 
 	}
 	@RequestMapping(value="/sales/detail")
