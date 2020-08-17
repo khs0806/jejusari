@@ -55,12 +55,6 @@
 			<ul class="navbar-nav ml-md-auto">
 				<li class="nav-item"><a class="nav-link" href="${root}/member/login" style="font-size:15px;">로그인 · 회원가입</a></li>
 			</ul>
-			<ul class="navbar-nav ml-md-auto">
-				<li class="nav-item"><a class="nav-link" href="${root}/member/tempjoin" style="font-size:15px;">임시 회원가입</a></li>
-			</ul>
-			<ul class="navbar-nav ml-md-auto">
-				<li class="nav-item"><a class="nav-link" href="${root}/member/templogin" style="font-size:15px;">임시 로그인</a></li>
-			</ul>
 		</c:if>
 		<c:if test="${member_name != null}">
 			<span>${member_name} 님 환영합니다.</span>
