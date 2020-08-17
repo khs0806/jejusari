@@ -134,8 +134,7 @@ public class SalesServiceImp implements SalesService {
 		
 		System.out.println("urlname : " + salesImgDtoList.toString());
 		String[] urlname = null;
-		List<String> urlNameList = null;
-		urlNameList = new ArrayList<String>();
+		List<String> urlNameList =  new ArrayList<String>();
 		for (int i=0; i<salesImgDtoList.size(); i++) {
 			urlname = salesImgDtoList.get(i).getImage_url().split("/");
 			urlNameList.add(urlname[urlname.length-1]);

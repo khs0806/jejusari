@@ -68,12 +68,11 @@
 	<form id="plus_info" action="${root}/member/joinOk" method="post" onsubmit = "return telCheck(this)">
 		<div class="tit">추가 정보 입력</div>
 		
-		<input type="hidden" name="member_id" value="${member_id}">
+		<input type="hidden" name="member_id" value="${signup_member_id}">
 		
 		<div class="nickname">
 			<div class="label">닉네임</div>
-			<input type="text" name="member_name" class="col-sm-3 h-25 form-control" value="${member_name}"/>
-			<button class="btn btn-outline-warning btn-sm" type="button" id="button-addon2" style="margin-top:2px;">중복 확인</button>
+			<input type="text" name="member_name" class="col-sm-3 h-25 form-control" value="${signup_member_name}"/>
 		</div>
 		
 		<div class="email">

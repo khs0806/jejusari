@@ -146,9 +146,8 @@ public class MemberController {
 			return "redirect:/main";
 		}
 
-		model.addAttribute("member_id", member_id);
-		model.addAttribute("member_name", member_name);
-		model.addAttribute("member_email", member_email);
+		model.addAttribute("signup_member_id", member_id);
+		model.addAttribute("signup_member_name", member_name);
 
 		return "member/member_signup.tiles";
 	}
