@@ -372,7 +372,7 @@
 	<!-- 중개인; 수정, 삭제 -->
 	<c:if test="${session_member_id==memberDto.member_id }">
 		<div id="plus_btn">
-			<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>	
+<!-- 			<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>	 -->
 			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
 		</div>
 	</c:if>

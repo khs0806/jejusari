@@ -166,7 +166,7 @@ public class SalesServiceImp implements SalesService {
 			salesImgDto.setSales_number(sales_number);
 			salesDao.updateSalesImg(salesImgDto);
 		}
-		
+		System.out.println(salesDto.toString());
 		  map.put("sales_number", sales_number); 
 		  map.put("salesDto",salesDto);
 		  

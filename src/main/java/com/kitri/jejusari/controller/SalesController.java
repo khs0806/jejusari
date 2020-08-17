@@ -249,12 +249,14 @@ public class SalesController {
 			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
 		ModelAndView mav=new ModelAndView();
 		
-		String SAVE_PATH = "C:/Users/LG-PC/Desktop/git/work/jejusari/src/main/webapp/psd/";
+		String SAVE_PATH = "D:/Desktop/KITRI/jejusari/git/work/Jejusari/src/main/webapp/psd/";
 		
-		System.out.println("mfsize : " + mf.getSize());
+		String originalFileName = mf.getOriginalFilename();;
+		System.out.println(originalFileName);
+		System.out.println("확인: " + salesDto);
 		
-		String originalFileName = null;
 		String safeFile = null;
+		
 		if (mf.getSize() != 0) {
 			originalFileName = mf.getOriginalFilename();
 			safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
