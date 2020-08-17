@@ -125,7 +125,12 @@ public class SalesDaoImp implements SalesDao {
 		return session.insert("salesImg_insert", salesImgDto);
 		
 	}
-	
+	@Override
+	public int updateSalesImg(SalesImgDto salesImgDto) {
+		session.delete("sales_delete1", salesImgDto.getSales_number());
+		
+		return session.insert("salesImg_insert", salesImgDto);
+	}
 	
 	
 }

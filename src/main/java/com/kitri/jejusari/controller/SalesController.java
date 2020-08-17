@@ -241,13 +241,40 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/updateOk", method=RequestMethod.POST)
-	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto) {
+	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto,
+			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
 		ModelAndView mav=new ModelAndView();
-		System.out.println(request.getParameter("sales_number"));
+		
+		String SAVE_PATH = "C:/Users/LG-PC/Desktop/git/work/jejusari/src/main/webapp/psd/";
+		
+		System.out.println("mfsize : " + mf.getSize());
+		
+		String originalFileName = null;
+		String safeFile = null;
+		if (mf.getSize() != 0) {
+			originalFileName = mf.getOriginalFilename();
+			safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
+			
+		} else {
+			safeFile = "none";
+		}
+		
+		
+		try {
+			mf.transferTo(new File(safeFile));
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("safeFile", safeFile);
 		mav.addObject("request",request);
 		mav.addObject("salesDto",salesDto);
 		
 		salesService.salesUpdateOk(mav);
+
 		return mav;
 	}
 
