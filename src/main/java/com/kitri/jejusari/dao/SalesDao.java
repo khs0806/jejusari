@@ -41,6 +41,7 @@ public interface SalesDao {
 	public int getSalesNumber(String member_id);
 	
 	public int insertSalesImg(SalesImgDto salesImgDto);
+	public int updateSalesImg(SalesImgDto salesImgDto);
 	
 	
 }

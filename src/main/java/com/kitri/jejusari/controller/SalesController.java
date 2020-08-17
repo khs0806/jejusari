@@ -176,6 +176,10 @@ public class SalesController {
 //		String realPath="C:\\apache-tomcat-9.0.37\\wtpwebapps\\Jejusari\\";
 //		String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
 				
+		//경은 kitri
+		String realPath="C:\\Kitri2020\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\JejusariProject\\";
+		String workPath="C:\\Kitri2020\\jeju\\JejusariProject\\src\\main\\webapp\\";
+		
 		//윤정path
 //		String realPath = "C:\\CHOIYJ\\spring\\download\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
 //		String workPath = "C:\\CHOIYJ\\git\\work\\jejusari\\src\\main\\webapp\\";
@@ -202,7 +206,7 @@ public class SalesController {
 		//String realPath=request.getSession().getServletContext().getRealPath("");
 		//System.out.println(realPath+fileRoot);
 		
-		//없는 경로면 생성하는 코드 만들어야하지 않나??
+		
 		String originalFileName=multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extention = originalFileName.substring(originalFileName.lastIndexOf("."));	//확장자명
 		
@@ -241,13 +245,40 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/updateOk", method=RequestMethod.POST)
-	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto) {
+	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto,
+			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
 		ModelAndView mav=new ModelAndView();
-		System.out.println(request.getParameter("sales_number"));
+		
+		String SAVE_PATH = "C:/Users/LG-PC/Desktop/git/work/jejusari/src/main/webapp/psd/";
+		
+		System.out.println("mfsize : " + mf.getSize());
+		
+		String originalFileName = null;
+		String safeFile = null;
+		if (mf.getSize() != 0) {
+			originalFileName = mf.getOriginalFilename();
+			safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
+			
+		} else {
+			safeFile = "none";
+		}
+		
+		
+		try {
+			mf.transferTo(new File(safeFile));
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("safeFile", safeFile);
 		mav.addObject("request",request);
 		mav.addObject("salesDto",salesDto);
 		
 		salesService.salesUpdateOk(mav);
+
 		return mav;
 	}
 
