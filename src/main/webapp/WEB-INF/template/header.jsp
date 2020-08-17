@@ -28,7 +28,12 @@
 	$(document).ready(function(){
 		$("#AdminPage").hide();
 		$("#AdminPage").attr('disabled', true);
+		var url = window.location.pathname;
+		var list_name=url.substring(6);
+		$('#'+list_name).addClass("active");
 	});
+	
+	
 </script>
 </head>
 <body>
@@ -37,12 +42,12 @@
 		
 		<div class="navbar-collapse justify-content-center" id="navbarColor01">
 			<ul class="navbar-nav mx-5">
-				<li class="nav-item active mx-5"><a class="nav-link" href="${root}/introduce">소개
+				<li class="nav-item mx-5" id="introduce"><a class="nav-link" href="${root}/introduce">소개
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item mx-5"><a class="nav-link" href="${root}/sales">매물정보</a></li>
-				<li class="nav-item mx-5"><a class="nav-link" href="${root}/notice">공지사항</a></li>
-				<li class="nav-item mx-5"><a class="nav-link" href="${root}/news">최신뉴스</a></li>
+				<li class="nav-item mx-5" id="sales"><a class="nav-link" href="${root}/sales">매물정보</a></li>
+				<li class="nav-item mx-5" id="notice"><a class="nav-link" href="${root}/notice">공지사항</a></li>
+				<li class="nav-item mx-5" id="news"><a class="nav-link" href="${root}/news">최신뉴스</a></li>
 			</ul>
 		</div>
 		<input type="submit"  class="btn btn-secondary" id="AdminPage" value="Admin"/>
