@@ -68,7 +68,7 @@
 </script>
 </head>
 <body>
-	<div id="wrap">
+	<div class="container">
 		<div id="first">
 			<p>
 				<span>${member_name} 님</span>

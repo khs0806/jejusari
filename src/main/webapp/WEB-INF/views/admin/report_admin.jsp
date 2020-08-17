@@ -86,7 +86,7 @@ $(document).ready(function(){
 					<div class="col-md-2" id="textCut"><strong>${ReportDto.report_date}</strong></div>
 					<div class="col-md-1" id="textCut">${ReportDto.sales_number}</div>
 					<div class="col-md-2" id="textCut"> <input type="button"  class="btn btn-secondary" value="상세보기" onclick="pop('${root}','${ReportDto.report_number}')" /></div>
-					<div class="col-md-2" id="textCut"> <a href="http://localhost:8181/jeju/sales/detail?sales_number=${ReportDto.sales_number}&pageNumber=1" >페이지로 이동</a> </div>
+					<div class="col-md-2" id="textCut"> <a href="http://192.168.0.8:8181/jeju/sales/detail?sales_number=${ReportDto.sales_number}&pageNumber=1" >페이지로 이동</a> </div>
 					<div class="col-md-2" id="textCut">${ReportDto.check_complete}</div>
 				</div>
 		</c:forEach>

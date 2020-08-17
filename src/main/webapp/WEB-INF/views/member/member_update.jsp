@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${root}/css/member/member_update.css">
 </head>
 <body>
-	<div id="content">
+	<div class="container">
 		<div class="info">
 			<p>회원 정보 수정</p>
 			<a href="#" id="a-first">기본 정보 수정</a>
