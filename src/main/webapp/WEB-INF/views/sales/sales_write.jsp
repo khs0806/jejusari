@@ -105,9 +105,10 @@ function salesCheck(obj){
 	if(obj.file.value == ""){
 		alert("사진을 등록해주세요.");
 		obj.file.focus();
-
+		
 		return false;
 	}
+	
 }
 $(document).ready(function() {
 	$(".custom-file-input").on("change", function() {
@@ -115,12 +116,15 @@ $(document).ready(function() {
 		  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
 });
+function writeFun(){
+	alert("매물 등록 후 매물 수정이 불가합니다.");
+}
 </script>
 </head>
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form action="${root}/sales/writeOk" method="POST" enctype = "multipart/form-data" onsubmit = "return salesCheck(this)">
+		<form id="salesWriteForm"action="${root}/sales/writeOk" method="POST" enctype = "multipart/form-data" onsubmit = "return salesCheck(this)">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			
@@ -377,7 +381,7 @@ $(document).ready(function() {
 		 -->
 		<!-- 작성버튼 -->
 		<div class="d-flex justify-content-end mb-5">
-			<button type="submit" class="btn btn-warning mr-3">작성</button>
+			<input type="submit" class="btn btn-warning mr-3" onclick="writeFun()" value="작성"/>
 			<button type="button" class="btn btn-light">취소</button>
 		</div>
 		</form>

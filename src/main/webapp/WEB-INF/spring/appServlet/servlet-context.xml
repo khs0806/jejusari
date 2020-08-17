@@ -15,7 +15,7 @@
 	<!-- Autowired config -->
     <context:annotation-config />
     
-	<!-- 정작파일(css,js) 경로 -->
+	<!-- 정적파일(css,js) 경로 -->
 	<resources mapping="/img/**" location="/img/" />
 	<resources mapping="/img_house/**" location="/img_house/" />
 	<resources mapping="/psd/**" location="/psd/" />

@@ -134,6 +134,7 @@ public class MemberController {
 		
 		// 이미 가입되어있는 회원인지 확인한다.
 		int id_check = memberService.member_id_check(member_id);
+		System.out.println("id_check : "+id_check);
 		if (id_check > 0) {
 			// 이미 가입된 회원일 경우 바로 로그인
 			HttpSession session = request.getSession();

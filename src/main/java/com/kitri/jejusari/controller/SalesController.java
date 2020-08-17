@@ -65,8 +65,8 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		
-//		String SAVE_PATH = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\WEB-INF\\psd\\";
-		String SAVE_PATH = "C:/Users/김현수/Desktop/khsworkspace/한국정보연구기술원/프로젝트/git/projectworkspace/jejusari/src/main/webapp/psd/";
+		String SAVE_PATH = "D:/Desktop/KITRI/jejusari/git/work/Jejusari/src/main/webapp/psd/";
+//		String SAVE_PATH = "C:/Users/김현수/Desktop/khsworkspace/한국정보연구기술원/프로젝트/git/projectworkspace/jejusari/src/main/webapp/psd/";
 		
 		String originalFileName = mf.getOriginalFilename();
 		
@@ -173,9 +173,13 @@ public class SalesController {
 		//String fileRoot="C:\\jejusari\\summernote_img\\";		//저장될 외부 파일 경로
 		String fileRoot="img\\summernote_img\\";		//저장될 외부 파일 경로
 		//경은path
-		String realPath="C:\\apache-tomcat-9.0.37\\wtpwebapps\\Jejusari\\";
-		String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
+//		String realPath="C:\\apache-tomcat-9.0.37\\wtpwebapps\\Jejusari\\";
+//		String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
 				
+		//경은 kitri
+//		String realPath="C:\\Kitri2020\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\JejusariProject\\";
+//		String workPath="C:\\Kitri2020\\jeju\\JejusariProject\\src\\main\\webapp\\";
+		
 		//윤정path
 //		String realPath = "C:\\CHOIYJ\\spring\\download\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
 //		String workPath = "C:\\CHOIYJ\\git\\work\\jejusari\\src\\main\\webapp\\";
@@ -189,8 +193,8 @@ public class SalesController {
 		//String workPath = "C:\\Users\\LG-PC\\Desktop\\git\\work\\jejusari\\src\\main\\webapp\\";
 				
 		//상후path
-		//String realPath = "D:\\Desktop\\KITRI\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\Jejusari\\";
-		//String workPath = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\";
+		String realPath = "D:\\Desktop\\KITRI\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\Jejusari\\";
+		String workPath = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\";
 				
 		//현수path
 //		String realPath = "C:\\Users\\김현수\\Desktop\\khsworkspace\\한국정보연구기술원\\KHS\\spring\\download\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
@@ -202,7 +206,7 @@ public class SalesController {
 		//String realPath=request.getSession().getServletContext().getRealPath("");
 		//System.out.println(realPath+fileRoot);
 		
-		//없는 경로면 생성하는 코드 만들어야하지 않나??
+		
 		String originalFileName=multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extention = originalFileName.substring(originalFileName.lastIndexOf("."));	//확장자명
 		
@@ -241,13 +245,42 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value="/sales/updateOk", method=RequestMethod.POST)
-	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto) {
+	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto,
+			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
 		ModelAndView mav=new ModelAndView();
-		System.out.println(request.getParameter("sales_number"));
+		
+		String SAVE_PATH = "D:/Desktop/KITRI/jejusari/git/work/Jejusari/src/main/webapp/psd/";
+		
+		String originalFileName = mf.getOriginalFilename();;
+		System.out.println(originalFileName);
+		System.out.println("확인: " + salesDto);
+		
+		String safeFile = null;
+		
+		if (mf.getSize() != 0) {
+			originalFileName = mf.getOriginalFilename();
+			safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
+			
+		} else {
+			safeFile = "none";
+		}
+		
+		
+		try {
+			mf.transferTo(new File(safeFile));
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("safeFile", safeFile);
 		mav.addObject("request",request);
 		mav.addObject("salesDto",salesDto);
 		
 		salesService.salesUpdateOk(mav);
+
 		return mav;
 	}
 

@@ -338,16 +338,14 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 매물 소개-중개인 작성 내용 -->
 	<div class="input-group mb-3">
 	  <div class="form-control text-justify sales-content" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 	  	${salesDto.sales_content}
 	  </div>
 	</div>
-	<!-- 매물 소개-중개인 작성 내용 -->
-	<div id="about_sales">
-		 <div class="sales_contents">${salesDto.sales_content}</div>
-	</div>
-	
+
 	<!-- 매물 이미지 -->
 	  <!-- 매물 이미지 -->
 	  <div id="sales_img">
@@ -374,7 +372,7 @@
 	<!-- 중개인; 수정, 삭제 -->
 	<c:if test="${session_member_id==memberDto.member_id }">
 		<div id="plus_btn">
-			<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>	
+<!-- 			<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>	 -->
 			<input type="button" name="sales_delete" value="삭제" class="btn btn-light btn-sm"/>
 		</div>
 	</c:if>
