@@ -32,7 +32,6 @@
 </head>
 <body>
 	<div class="container" id="sales_list">
-		<h3>매물게시판</h3>
 		<form action="${root}/sales?keyword=${keyword}">
 			<div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
 					<label class="btn btn-outline-warning">

@@ -36,6 +36,11 @@
 
 	$(function(){
 		$("#adminbutton").hide();
+		$("#memberAdmin").hide();
+		$("#noticeAdmin").hide();
+		$("#reportAdmin").hide();
+		$("#title").hide();
+		$("#badgeAd").hide();
 	});
 
 </script>
@@ -56,13 +61,13 @@
 	</c:if> --%>
 	
 	<div class = "container" id="admin_container">
-		<div class="btn-group">
+		<div class="btn-group mb-3">
 		    <button type="button" class="btn btn-secondary" id="memberAdmin">회원 관리</button>
 		    <button type="button" class="btn btn-secondary" id="noticeAdmin">공지사항 관리</button>
 		    <button type="button" class="btn btn-secondary" id="reportAdmin">신고 관리</button>
   		</div>
-		<h3 class="text-secondary">[공지사항]</h3>
-		<span class="badge badge-secondary">${member_level}</span>
+  		<div id="title" class="text-secondary"><h3>&#91;공지사항 관리&#93;</h3></div>
+		<span class="badge badge-secondary" id="badgeAd">${member_level}</span>
 		<br/>
 		
 		<div class="table active">
@@ -131,6 +136,12 @@
 			 	<script type="text/javascript">
 				 	$(function(){
 						$("#adminbutton").show();
+						$("#memberAdmin").show();
+						$("#noticeAdmin").show();
+						$("#reportAdmin").show();
+						$("#title").show();
+						$("#badgeAd").show();
+						
 					});
 			 	</script>
 			 </c:if>

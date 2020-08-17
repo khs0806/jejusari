@@ -15,7 +15,6 @@
 </head>
 <body>
 	<div class="container" id="sales_list">
-		<h3>제주 이슈</h3>
 		
 		<div class="table active">
 			<div class="row border-bottom" id="table_th">

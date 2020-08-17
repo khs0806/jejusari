@@ -78,13 +78,13 @@ $(document).ready(function(){
 	</script>
 </c:if>
 	<div class = "container">
-		<div class="btn-group">
+		<div class="btn-group mb-3">
 		    <button type="button" class="btn btn-secondary" id="memberAdmin">회원 관리</button>
 		    <button type="button" class="btn btn-secondary" id="noticeAdmin">공지사항 관리</button>
 		    <button type="button" class="btn btn-secondary" id="reportAdmin">신고 관리</button>
   		</div>
 		<div id="title" class="text-secondary"><h3>&#91;회원관리&#93;</h3></div>
-		<span  style="margin-top:0px;" class="badge badge-secondary">관리자</span>
+		<span  style="margin-top:0px;" class="badge badge-secondary">${member_level}</span>
 		
 		<div class="table active">
 			<div class="row border-bottom" id="table_th">

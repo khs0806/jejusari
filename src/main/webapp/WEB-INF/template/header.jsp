@@ -19,6 +19,7 @@
     #sales_list strong{margin-top: 0.5rem;}
 	#sales_list p{margin-bottom: 0.5rem;}
 	#sales_list #table_td .col-md-1, #sales_list #table_td .col-md-2{    line-height: 3rem}
+	.container{margin-top:100px; margin-bottom: 100px;}
 </style>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
@@ -28,9 +29,20 @@
 	$(document).ready(function(){
 		$("#AdminPage").hide();
 		$("#AdminPage").attr('disabled', true);
+		
 		var url = window.location.pathname;
-		var list_name=url.substring(6);
-		$('#'+list_name).addClass("active");
+		var url_param=url.substring(6);
+		console.log("url_param :"+url_param);
+		console.log(url_param);
+		console.log(url_param.indexOf("/"));
+		if(url_param.indexOf("/")!=-1){
+			var list_name=url_param.substring(0,url_param.indexOf("/"));
+			console.log("list_name: "+list_name);
+			$("#"+list_name).addClass("active");
+			console.log("#"+list_name);
+		}else{
+			$("#"+url_param).addClass("active");
+		}
 	});
 	
 	
@@ -68,7 +80,7 @@
 				<%-- <li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee&redirect_uri=http://localhost:8282${root}&response_type=code">로그인</a></li> --%>
 				<li class="nav-item"><a class="nav-link" href="${root}/member/mypage" style="font-size:15px;">마이페이지</a></li>
 				<li class="nav-item"><a class="nav-link" href="${root}/member/logout" style="font-size:15px;">로그아웃</a></li>
-<!-- 				<li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/logout?client_id=47d269828391ebdbbd9ef43e5d60962c&logout_redirect_uri=http://localhost:8282/jeju/member/logout" style="font-size:15px;">로그아웃</a></li> -->
+<!-- 			<li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/logout?client_id=47d269828391ebdbbd9ef43e5d60962c&logout_redirect_uri=http://localhost:8282/jeju/member/logout" style="font-size:15px;">로그아웃</a></li> -->
 			</ul>
 		</c:if>
 		<c:if test="${member_id eq 'admin'}">

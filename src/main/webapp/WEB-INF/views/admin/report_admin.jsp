@@ -60,7 +60,7 @@ $(document).ready(function(){
 	</script>
 </c:if>
 	<div class="container">
-		<div class="btn-group">
+		<div class="btn-group mb-3">
 		    <button type="button" class="btn btn-secondary" id="memberAdmin">회원 관리</button>
 		    <button type="button" class="btn btn-secondary" id="noticeAdmin">공지사항 관리</button>
 		    <button type="button" class="btn btn-secondary" id="reportAdmin">신고 관리</button>

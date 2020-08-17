@@ -65,8 +65,9 @@ public class SalesController {
 		
 		ModelAndView mav= new ModelAndView();
 		
-		String SAVE_PATH = "D:/Desktop/KITRI/jejusari/git/work/Jejusari/src/main/webapp/psd/";
-//		String SAVE_PATH = "C:/Users/김현수/Desktop/khsworkspace/한국정보연구기술원/프로젝트/git/projectworkspace/jejusari/src/main/webapp/psd/";
+		String SAVE_PATH = "C:/Kitri2020/jeju/JejusariProject/src/main/webapp/psd/";
+//		String SAVE_PATH = "D:/Desktop/KITRI/jejusari/git/work/Jejusari/src/main/webapp/psd/";
+////		String SAVE_PATH = "C:/Users/김현수/Desktop/khsworkspace/한국정보연구기술원/프로젝트/git/projectworkspace/jejusari/src/main/webapp/psd/";
 		
 		String originalFileName = mf.getOriginalFilename();
 		
@@ -177,8 +178,8 @@ public class SalesController {
 //		String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
 				
 		//경은 kitri
-//		String realPath="C:\\Kitri2020\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\JejusariProject\\";
-//		String workPath="C:\\Kitri2020\\jeju\\JejusariProject\\src\\main\\webapp\\";
+		String realPath="C:\\Kitri2020\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\JejusariProject\\";
+		String workPath="C:\\Kitri2020\\jeju\\JejusariProject\\src\\main\\webapp\\";
 		
 		//윤정path
 //		String realPath = "C:\\CHOIYJ\\spring\\download\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
@@ -193,8 +194,8 @@ public class SalesController {
 		//String workPath = "C:\\Users\\LG-PC\\Desktop\\git\\work\\jejusari\\src\\main\\webapp\\";
 				
 		//상후path
-		String realPath = "D:\\Desktop\\KITRI\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\Jejusari\\";
-		String workPath = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\";
+//		String realPath = "D:\\Desktop\\KITRI\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\Jejusari\\";
+//		String workPath = "D:\\Desktop\\KITRI\\jejusari\\git\\work\\Jejusari\\src\\main\\webapp\\";
 				
 		//현수path
 //		String realPath = "C:\\Users\\김현수\\Desktop\\khsworkspace\\한국정보연구기술원\\KHS\\spring\\download\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
@@ -249,7 +250,7 @@ public class SalesController {
 			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
 		ModelAndView mav=new ModelAndView();
 		
-		String SAVE_PATH = "D:/Desktop/KITRI/jejusari/git/work/Jejusari/src/main/webapp/psd/";
+		String SAVE_PATH = "C:/Kitri2020/jeju/JejusariProject/src/main/webapp/psd";
 		
 		String originalFileName = mf.getOriginalFilename();;
 		System.out.println(originalFileName);
