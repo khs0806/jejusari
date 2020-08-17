@@ -139,9 +139,12 @@ public class MemberController {
 			// 이미 가입된 회원일 경우 바로 로그인
 			HttpSession session = request.getSession();
 			if (userInfo.get("id") != null) {
-				
-				session.setAttribute("member_id", member_id);
-				session.setAttribute("member_name", member_name);
+				MemberDto memberDto = new MemberDto();
+				memberDto.setMember_id(member_id);
+				MemberDto member = memberService.tempLogin(memberDto);
+				session.setAttribute("member_id", member.getMember_id());
+				session.setAttribute("member_name", member.getMember_name());
+				session.setAttribute("member_level", member.getMember_level());
 				session.setAttribute("access_Token", access_Token);
 			}
 			return "redirect:/main";
