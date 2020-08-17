@@ -177,8 +177,8 @@ public class SalesController {
 //		String workPath="C:\\Users\\user\\Desktop\\JEJUSARI\\workspace2\\Jejusari\\src\\main\\webapp\\";
 				
 		//경은 kitri
-		String realPath="C:\\Kitri2020\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\JejusariProject\\";
-		String workPath="C:\\Kitri2020\\jeju\\JejusariProject\\src\\main\\webapp\\";
+//		String realPath="C:\\Kitri2020\\mvc\\apache-tomcat-9.0.35\\wtpwebapps\\JejusariProject\\";
+//		String workPath="C:\\Kitri2020\\jeju\\JejusariProject\\src\\main\\webapp\\";
 		
 		//윤정path
 //		String realPath = "C:\\CHOIYJ\\spring\\download\\apache-tomcat-9.0.35\\wtpwebapps\\jejusari\\";
