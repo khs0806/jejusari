@@ -282,7 +282,8 @@ public class BoardServiceImp implements BoardService{
 		int endRow = currentPage * boardSize;			//10 20 30 40
 
 		//count 사용해서 글이 아예 없는경우 페이징 사라지게
-		int count = boardDao.noticeCount();
+//		int count = boardDao.noticeCount();
+		int count = 0;
 		List<NoticeDto> noticeList = null;
 		System.out.println("count" + count);
 		if(count > 0) {
