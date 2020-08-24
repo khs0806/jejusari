@@ -8,7 +8,7 @@
 	<!-- DB 커넥션풀 -->
 	<bean id="driverManagerDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="url" value="jdbc:oracle:thin:@211.254.215.1:1521:xe"/>
 		<property name="username" value="jejusari"/>
 		<property name="password" value="1234"/>
 		<property name="maxActive" value="40"/>
@@ -19,7 +19,7 @@
 	<!-- MyBatis -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="driverManagerDataSource"/>
-		<property name="mapperLocations" value="classpath:com/kitri/**/*.xml"/>
+		<property name="mapperLocations" value="classpath:mapper/**/*.xml"/>
 	</bean>
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
