@@ -81,7 +81,7 @@ public class BoardDaoImp implements BoardDao{
 		}
 		
 		@Override
-		public List<String> reportList(int startRow, int endRow) {
+		public List<ReportDto> reportList(int startRow, int endRow) {
 			Map<String, Integer> hmap=new HashMap<String, Integer>();
 			hmap.put("startRow", startRow);
 			hmap.put("endRow", endRow);
@@ -100,9 +100,8 @@ public class BoardDaoImp implements BoardDao{
 		}
 		
 		@Override
-		public List<ReportDto> ReportDetail(int report_number) {
-			
-			return session.selectList("detailSelect",report_number);
+		public ReportDto ReportDetail(int report_number) {
+			return session.selectOne("detailSelect",report_number);
 		}
 
 		@Override

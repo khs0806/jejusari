@@ -12,9 +12,6 @@
 	<c:set var="root" value="${pageContext.request.contextPath}"/>
 	<c:choose>
 		<c:when test="${check>0}">
-			<c:remove var="id" scope="session"/>
-			<c:remove var="memberLevel" scope="session"/>
-			
 			<script type="text/javascript">
 				alert("신고 삭제되었습니다.");
 				location.href="${root}/report/admin";

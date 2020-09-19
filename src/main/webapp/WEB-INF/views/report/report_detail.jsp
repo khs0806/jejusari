@@ -23,22 +23,19 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text" id="inputGroup-sizing-sm">제목</span>
 					</div>
-					<c:forEach var="ReportDto" items="${list}" >
-					<input type="text" class="form-control" value="${ReportDto.report_title}"/>
+					<input type="text" class="form-control" value="${reportDto.report_title}"/>
 				</div>
 			</div>
 
 		</div>
-
 
 		<div class="input-group">
 			<div class="input-group-prepend">
 				<span class="input-group-text">내 용</span>
 			</div>
 			<textarea class="form-control" aria-label="With textarea" rows="14">
-				${ReportDto.report_content}
+				${reportDto.report_content}
 			</textarea>
-			</c:forEach>
 		</div>
 		<br />
 		<div class="float-right">

@@ -1,11 +1,9 @@
 package com.kitri.jejusari.service;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -16,19 +14,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.kitri.jejusari.dao.BoardDao;
 import com.kitri.jejusari.dto.NoticeDto;
@@ -41,13 +34,7 @@ public class BoardServiceImp implements BoardService{
 	BoardDao boardDao;
 
 	@Override
-	public List<String> testDB() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void newsList(ModelAndView mav) {
+	public List<Map<String, Object>> newsList() {
 		String clientId = "nRMcm30QpjGM_zMZaO_f"; //애플리케이션 클라이언트 아이디값"
 		String clientSecret = "4rZaN1wN27"; //애플리케이션 클라이언트 시크릿값"
 
@@ -154,10 +141,8 @@ public class BoardServiceImp implements BoardService{
 
 		System.out.println("newsList : " + newsList);
 
-		mav.addObject("newsList", newsList);
-		mav.setViewName("news/news_list.tiles");
+		return newsList;
 
-		//        System.out.println(mav);
 	}
 
 	private static String get(String apiUrl, Map<String, String> requestHeaders){
@@ -209,116 +194,62 @@ public class BoardServiceImp implements BoardService{
 		}
 	}
 
-	public void reportWriteOk(ModelAndView mav) {
-		// TODO Auto-generated method stub
-
-		Map<String, Object> map=mav.getModelMap();
-
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
-	 	HttpSession session=request.getSession();
-	  
-	 	String member_id=(String) session.getAttribute("member_id");
-
-		ReportDto reportDto=(ReportDto) map.get("reportDto");
-
-		//session받아서 id넣어주기 : "kke"대신에 (String)session.getAttr~( );
-		reportDto.setMember_id(member_id);
-
-		int check=boardDao.reportInsert(reportDto);
-		System.out.println("check : " + check);
-
-		mav.addObject("check", check);
-		mav.setViewName("report/report_writeOk.tiles");
+	@Override
+	public int reportWriteOk(ReportDto reportDto) {
+		return boardDao.reportInsert(reportDto);
 	}
-
-
-
 
 	//공지사항
 	//공지사항 게시판 읽기
 	@Override
-	public void noticeDetail(ModelAndView mav) {
-		Map<String,Object> map = mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest) map.get("request");
-		
-		HttpSession session = request.getSession();
-		String member_level = (String) session.getAttribute("member_level");
-		String member_id = (String) session.getAttribute("member_id");
-		System.out.println(member_level);
-		System.out.println(member_id);
-		
-		int notice_number=Integer.parseInt(request.getParameter("notice_number"));	
+	@Transactional
+	public NoticeDto noticeDetail(int noticeNumber) {
 
-		boardDao.noticeCountPlus(notice_number);
-		NoticeDto noticeDto = boardDao.noticeDetail(notice_number);
+		boardDao.noticeCountPlus(noticeNumber);
+		NoticeDto noticeDto = boardDao.noticeDetail(noticeNumber);
 		System.out.println(noticeDto);
-		mav.addObject("noticeDto",noticeDto);
-		mav.addObject("member_level", member_level);
-		mav.addObject("member_id", member_id);
-		mav.setViewName("notice/notice_read.tiles");
+
+		return noticeDto;
 
 	}
 
 	//공지사항 게시판
 	@Override
-	public void noticeList(ModelAndView mav) {
-		Map<String, Object> map= mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		
-		HttpSession session = request.getSession();
-		String member_level = (String) session.getAttribute("member_level");
-		String member_id = (String) session.getAttribute("member_id");
-		System.out.println(member_level);
-		System.out.println(member_id);
-		
+	public List<NoticeDto> noticeList(Model model) {
 
 		//페이징
-		String pageNumber=request.getParameter("pageNumber");
-		if(pageNumber == null) pageNumber = "1";
-		int currentPage = Integer.parseInt(pageNumber);	//요청한 페이지
-		int boardSize = 10;		// [1] start:1, end:10  [2] start:11, end:20
+		int pageNumber = 1;
+		int currentPage = pageNumber;
+		int boardSize = 10;		
 
-		int startRow = (currentPage - 1) * boardSize + 1;	//1  11 21 31
-		int endRow = currentPage * boardSize;			//10 20 30 40
+		int startRow = (currentPage - 1) * boardSize + 1;	
+		int endRow = currentPage * boardSize;
 
-		//count 사용해서 글이 아예 없는경우 페이징 사라지게
-//		int count = boardDao.noticeCount();
-		int count = 0;
-		List<NoticeDto> noticeList = null;
+		//		count 사용해서 글이 아예 없는경우 페이징 사라지게
+		int count = boardDao.noticeCount();
+		//		int count = 0;
 		System.out.println("count" + count);
+
+		List<NoticeDto> noticeList = null;
 		if(count > 0) {
 			//startRow, endRow
-			System.out.println("currnetPage : " + currentPage);
-			System.out.println("pageNumber : " + pageNumber);
 			noticeList = boardDao.noticeList(startRow, endRow);
 		}
 
-		mav.addObject("noticeList", noticeList);
-		mav.addObject("boardSize", boardSize);
-		mav.addObject("currentPage", currentPage);
-		mav.addObject("count", count);
-		mav.addObject("member_level", member_level);
-		mav.addObject("member_id", member_id);
-		mav.setViewName("/notice/notice_list.tiles");
+		Map<String, Object> pageInfo = new HashMap<String, Object>();
 
-	}
+		pageInfo.put("boardSize", boardSize);
+		pageInfo.put("currentPage", currentPage);
+		pageInfo.put("count", count);
+		model.addAttribute("pageInfo", pageInfo);
 
-	//공지사항 게시판 쓰기
-	@Override
-	public void noticeWrite(ModelAndView mav) {	//글작성 누르면 띄워지는 공지사항 글작성 페이지
-
-		mav.setViewName("/notice/notice_write.tiles");
+		return noticeList;
 
 	}
 
 	//공지사항 게시판 쓰기 완료
 	@Override
-	public void noticeWriteOk(ModelAndView mav) {
-
-		Map<String, Object> map = mav.getModelMap();	//불러오기
-		NoticeDto noticeDto = (NoticeDto) map.get("noticeDto");
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		System.out.println(noticeDto.toString());
+	public int noticeWriteOk(NoticeDto noticeDto) {
 
 		noticeDto.setNotice_date(new Date());
 		noticeDto.setNotice_count(0);
@@ -326,95 +257,47 @@ public class BoardServiceImp implements BoardService{
 		int check = boardDao.noticeWrite(noticeDto);
 		System.out.println(check);
 
-		mav.addObject("check", check);
-		mav.setViewName("/notice/notice_writeOk.tiles");
-
-	}
-	
-	
-	//공지사항 삭제
-	@Override
-	public void noticeDelete(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-
-		int notice_number = Integer.parseInt(request.getParameter("notice_number"));
-		System.out.println(notice_number);
-
-		mav.addObject("notice_number", notice_number);
-
-		mav.setViewName("notice/notice_delete.tiles");
-
+		return check;
 	}
 
 	//공지사항 삭제 완료
 	@Override
-	public void noticeDeleteOk(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-
-		int notice_number = Integer.parseInt(request.getParameter("notice_number"));
+	public int noticeDeleteOk(int notice_number) {
 		System.out.println(notice_number);
 
 		int check = boardDao.noticeDelete(notice_number);
 		System.out.println(check);
 
-		mav.addObject("notice_number", notice_number);
-		mav.addObject("check", check);
-
-		mav.setViewName("notice/notice_deleteOk.tiles");
-
+		return check;
 	}
 
 	//공지사항 수정 기존의 정보 뿌리기
 	@Override
-	public void noticeUpdate(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
+	public NoticeDto noticeUpdate(int noticeNumber) {
 
-		int notice_number = Integer.parseInt(request.getParameter("notice_number"));
-		System.out.println("update_notice_number : " + notice_number);
+		System.out.println("update_notice_number : " + noticeNumber);
+		NoticeDto noticeDto = boardDao.noticeSelect(noticeNumber);
 
-		NoticeDto noticeDto = boardDao.noticeSelect(notice_number);
-
-		mav.addObject("notice_number", notice_number);
-		mav.addObject("noticeDto", noticeDto);
-
-		mav.setViewName("notice/notice_update.tiles");
+		return noticeDto;
 	}
 
 	//공지사항 수정 완료
 	@Override
-	public void noticeUpdateOk(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		NoticeDto noticeDto = (NoticeDto) map.get("noticeDto");
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		System.out.println(noticeDto.toString());
+	public int noticeUpdateOk(NoticeDto noticeDto) {
 
-		int notice_number = Integer.parseInt(request.getParameter("notice_number"));
-		System.out.println("updateOk_notice_number : " + notice_number);
+		System.out.println(noticeDto.toString());
 
 		int check = boardDao.noticeUpdate(noticeDto);
 		System.out.println("check : " + check);
 
-		mav.addObject("notice_number", notice_number);
-		mav.addObject("noticeDto", noticeDto);
-		mav.addObject("check", check);
-
-		mav.setViewName("notice/notice_updateOk.tiles");
-
-
+		return check;
 	}
-	
+
 	@Override
-	public void getReportList(ModelAndView mav) {
-		Map<String, Object> map= mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		
-		//페이징
-		String pageNumber=request.getParameter("pageNumber");
-		System.out.println("pageNumber"+pageNumber);
-		if(pageNumber == null) pageNumber = "1";
+	public List<ReportDto> getReportList(String pageNumber, Model model) {
+		System.out.println("pageNumber : "+pageNumber);
+
+		//if(pageNumber == null) pageNumber = "1";		// Requestparam으로 무결성 보장하므로 주석 
 		int currentPage = Integer.parseInt(pageNumber);	//요청한 페이지
 		int boardSize = 10;		// [1] start:1, end:10  [2] start:11, end:20
 
@@ -423,81 +306,43 @@ public class BoardServiceImp implements BoardService{
 
 		//count 사용해서 글이 아예 없는경우 페이징 사라지게
 		int count = boardDao.reportCount();
-		List<String> reportList = null;
+		List<ReportDto> reportList = null;
 
 		if(count > 0) {
 			//startRow, endRow
-			 reportList = boardDao.reportList(startRow, endRow);
+			reportList = boardDao.reportList(startRow, endRow);
 		}
-		
-		mav.addObject("ReportList", reportList);
 		System.out.println(reportList);
-		
-		mav.addObject("boardSize", boardSize);
-		mav.addObject("currentPage", currentPage);
-		mav.addObject("count", count);
-		
-		mav.setViewName("/admin/report_admin.tiles");
+
+		model.addAttribute("boardSize", boardSize);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("count", count);
+
+		return reportList;
 	}
 
-	
-	  @Override 
-	  public void AdDelete(ModelAndView mav) {
-	  int check=0;
-	  Map<String, Object> map=mav.getModelMap();
-	  HttpServletRequest request=(HttpServletRequest)map.get("request");
-	  HttpSession session =request.getSession();
-	  
-	  String member_level = (String)session.getAttribute("member_level");
-	  int sales_number = Integer.parseInt(request.getParameter("sales_number"));
-	 
-	  check = boardDao.AdDelete(sales_number); 
-	  
-	  //System.out.println(check);
-	 
-	  //System.out.println("BoardService:"+sales_number+"\t"+check);
-	  
-	  mav.addObject("check", check); 
-	  mav.addObject("member_level",member_level);
-	  mav.addObject("sales_number",sales_number);
-	  
-	  }
+	@Override 
+	public int AdDelete(int sales_number) {
+		int check=0;
+		check = boardDao.AdDelete(sales_number); 
 
-	@Override
-	public void ReportDetail(ModelAndView mav) {
-		
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		
-		int report_number = Integer.parseInt(request.getParameter("report_number"));
-		
-		List<ReportDto> list = boardDao.ReportDetail(report_number);
-		
-		mav.addObject("list", list);
-		mav.addObject("report_number", report_number);
-		//System.out.println("BoardServiceDetail:"+report_number);
-		//System.out.println("BoardServiceDetail:"+list);
-	
-	
-		mav.setViewName("/report/report_detail");
-		
+		return check;
 	}
 
 	@Override
-	public int reportUpdate(ModelAndView mav) {
-		 Map<String, Object> map=mav.getModelMap();
-	     HttpServletRequest request=(HttpServletRequest)map.get("request");
-	     int sales_number = Integer.parseInt(request.getParameter("sales_number"));
-	     
-	     System.out.println("sales_number"+sales_number);
-	     
-	     int check = boardDao.reportUpdate(sales_number);
-	
-	     System.out.println(check);
-	     
-	     mav.addObject("check", check);	
-	     mav.addObject("sales_number", sales_number);	
-	     
-	     return check;
+	public ReportDto ReportDetail(int report_number) {
+		ReportDto reportDto = boardDao.ReportDetail(report_number);
+
+		return reportDto;
+
 	}
+
+	@Override
+	public int reportUpdate(int sales_number) {
+		int check = boardDao.reportUpdate(sales_number);
+		System.out.println(check);
+
+		return check;
+	}
+
 }
