@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
-import com.kitri.jejusari.dto.NoticeDto;
-import com.kitri.jejusari.dto.ReportDto;
+import com.kitri.jejusari.board.model.dto.NoticeDto;
+import com.kitri.jejusari.board.model.dto.ReportDto;
 
 public interface BoardService {
 	

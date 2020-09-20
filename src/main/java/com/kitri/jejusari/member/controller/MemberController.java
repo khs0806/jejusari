@@ -2,6 +2,7 @@ package com.kitri.jejusari.member.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,54 +25,55 @@ import com.kitri.jejusari.common.KakaoLoginAPI;
 import com.kitri.jejusari.member.model.dto.MemberDto;
 import com.kitri.jejusari.member.service.MemberService;
 
+
 @Controller
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
-	@Autowired
+
+	@Autowired 
 	MemberService memberService;
-	
+
 	// 회원 탈퇴
-	@RequestMapping(value="/member/withdraw1")
+	@GetMapping("/member/withdraw1")
 	public String withdraw() {
 		
 		return "member/member_withdraw1.tiles";
 	}
+	
 	// 회원 탈퇴
-	@RequestMapping(value="/member/withdraw2")
-	public String withdrawOk(HttpServletRequest request, Model model) {
-		
-		HttpSession session = request.getSession();
+	@GetMapping("/member/withdraw2")
+	public String withdrawOk(HttpSession session, Model model) {
+
 		String member_id = (String) session.getAttribute("member_id");
 		System.out.println(member_id);
+		
 		int check = memberService.member_delete(member_id);
 		model.addAttribute("check", check);
-		
+
 		session.invalidate();
-		
+
 		return "member/member_withdraw2.tiles";
 	}
-		
+
 	// 로그인 뷰
-	@RequestMapping(value="/member/login")
-	public String loginView(HttpSession session) {
-		
+	@GetMapping("/member/login")
+	public String loginView() {
+
 		return "member/member_login.tiles";
 	}
-	
+
 	// 임시 로그인 뷰
-	@RequestMapping(value="/member/templogin")
-	public String tempLoginView(HttpSession session) {
-		
+	@GetMapping("/member/templogin")
+	public String tempLoginView() {
+
 		return "member/member_tempLogin.tiles";
 	}
 	
 	// 임시 로그인 
-	@RequestMapping(value="/member/templogin", method=RequestMethod.POST)
-	public String temLogin(HttpServletRequest request, MemberDto memberDto, Model model) {
+	@PostMapping("/member/templogin")
+	public String temLogin(HttpSession session, MemberDto memberDto, Model model) {
 		
 		logger.info("templogin");
-		HttpSession session = request.getSession();
 		MemberDto member = memberService.tempLogin(memberDto);
 		
 		if (member == null) {
@@ -87,38 +89,43 @@ public class MemberController {
 		
 		return "redirect:/main";
 	}
-	
+
 	// 임시회원가입 뷰
-	@RequestMapping(value="/member/tempjoin", method=RequestMethod.GET)
-	public String temJoin(HttpSession session) {
-		
+	@GetMapping("/member/tempjoin")
+	public String temJoin() {
+
 		return "member/member_tempSignup.tiles";
 	}
-	
+
 	// 임시 회원가입
-	@RequestMapping(value="/member/tempjoin", method=RequestMethod.POST)
-	public ModelAndView temJoinDo(HttpServletRequest request, MemberDto memberDto) {
-		ModelAndView mav = new ModelAndView();
+	@PostMapping("/member/tempjoin")
+	public String temJoinDo(HttpServletRequest request, MemberDto memberDto, Model model, @RequestParam Map<String, Object> map) {
 		
 		String member_phone = request.getParameter("no1") 
-				  + "-" + request.getParameter("no2") 
-				  + "-" + request.getParameter("no3");
-		
+				+ "-" + request.getParameter("no2") 
+				+ "-" + request.getParameter("no3");
 		String member_email = memberDto.getMember_email() + "@" + request.getParameter("email");
 		
+		memberDto.setMember_email(member_email);
+		// 회원가입자가 일반회원이어서, 핸드폰 번호를 입력 안했을 경우 
+		if (request.getParameter("no2").length() == 0 || request.getParameter("no3").length() == 0) {
+			memberDto.setMember_phone(null);
+		} else {
+		// 중개업자인 경우
+			memberDto.setMember_phone(member_phone);
+		}
 		logger.info(memberDto.toString());
 		memberDto.setMember_phone(member_phone);
 		memberDto.setMember_email(member_email);
 		int check = memberService.memberJoin(memberDto);
 		
-		mav.addObject("check", check);
-		mav.setViewName("member/member_signupOk.tiles");
-		
-		return mav;
+		model.addAttribute("check", check);
+
+		return "member/member_signupOk.tiles";
 	}
-	
+
 	// 카카오로 로그인 or 회원가입
-	@RequestMapping("/test/join")
+	@GetMapping("/test/join")
 	public String kakaoLogin(HttpServletRequest request, Model model) {
 		
 		// 카카오의 인증과정
@@ -149,102 +156,80 @@ public class MemberController {
 			}
 			return "redirect:/main";
 		}
-
+		
 		model.addAttribute("signup_member_id", member_id);
 		model.addAttribute("signup_member_name", member_name);
-
+		
 		return "member/member_signup.tiles";
 	}
 	
 	// 회원가입
-	@RequestMapping("/member/joinOk")
-	public ModelAndView memberJoin(HttpServletRequest request, MemberDto memberDto) {
-		ModelAndView mav = new ModelAndView();
+	@GetMapping("/member/joinOk")
+	public String memberJoin(HttpServletRequest request, MemberDto memberDto, Model model) {
 		
 		String member_phone = request.getParameter("no1") 
-					  + "-" + request.getParameter("no2") 
-					  + "-" + request.getParameter("no3");
+				+ "-" + request.getParameter("no2") 
+				+ "-" + request.getParameter("no3");
 		
 		String email = memberDto.getMember_email() + "@" + request.getParameter("email");
 		
 		memberDto.setMember_email(email);
-		
 		// 회원가입자가 일반회원인 경우, 핸드폰 번호를 입력 안했을때
 		if (request.getParameter("no2").length() == 0 || request.getParameter("no3").length() == 0) {
 			memberDto.setMember_phone(null);
 		} else {
-		// 중개업자인 경우
+			// 중개업자인 경우
 			memberDto.setMember_phone(member_phone);
 		}
-		
-//		System.out.println(memberDto.toString());
+		logger.info(memberDto.toString());
 		
 		int check = memberService.memberJoin(memberDto);
-		mav.addObject("check", check);
-		mav.setViewName("member/member_signupOk.tiles");
-		
-		return	mav;
+		model.addAttribute("check", check);
+
+		return	"member/member_signupOk.tiles";
 	}
-	
+
 	// 로그아웃
-	@RequestMapping(value="/member/logout")
+	@GetMapping("/member/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("access_Token");
 		session.removeAttribute("member_id");
 		session.removeAttribute("member_name");
 		return "redirect:/";
 	}
-	
+
 	// 마이페이지
-	@RequestMapping(value="/member/mypage")
-	public ModelAndView myPage(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView();
+	@GetMapping("/member/mypage")
+	public String myPage(HttpSession session, Model model) {
 		
-		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
 		
-		String member_name=(String) session.getAttribute("member_name");
-		String member_level=(String) session.getAttribute("member_level");
-		System.out.println(member_level);
+		Map<String, Object> myInfo = memberService.myPage(member_id);
+		logger.info("scrapList : {}",myInfo.get("scrapList").toString());
 		
-		mav.addObject("session", session);
+		model.addAttribute("scrapList", myInfo.get("scrapList"));
+		model.addAttribute("salesList", myInfo.get("salesList"));
 		
-		mav.addObject("member_name", member_name);
-		mav.addObject("member_level", member_level);
-		mav.addObject("request", request);
-		
-		memberService.myPage(mav);
-		
-		return mav;
+		return "member/member_mypage.tiles";
 	}
-	
-	@RequestMapping(value="/member/mypage/scrap")
-	public ModelAndView deleteScrap(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView();
-		
-		mav.addObject("request", request);
-		
-		memberService.deleteScrap(mav);
-		
-		return mav;
-	}
-	
+
 	// 회원수정 화면
-	@RequestMapping(value="/member/update")
+	@GetMapping("/member/update")
 	public String updateView() {
-		
+
 		return "member/member_update.tiles";
 	}
-	
+
 	// 회원수정
-	@RequestMapping(value="/member/update", method=RequestMethod.POST)
-	public ModelAndView updateOk(HttpServletRequest request, MemberDto memberDto) {
+	@PostMapping("/member/update")
+	public String updateOk(HttpServletRequest request, MemberDto memberDto, Model model) {
+		
 		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView();
 		
 		String member_id = (String) session.getAttribute("member_id");
 		String member_phone = request.getParameter("no1") 
-					  + "-" + request.getParameter("no2") 
-					  + "-" + request.getParameter("no3");
+				+ "-" + request.getParameter("no2") 
+				+ "-" + request.getParameter("no3");
 		String email = memberDto.getMember_email() + "@" + request.getParameter("email");
 		
 		memberDto.setMember_id(member_id);
@@ -254,44 +239,39 @@ public class MemberController {
 		if (request.getParameter("no2").length() == 0 || request.getParameter("no3").length() == 0) {
 			memberDto.setMember_phone(null);
 		} else {
-		// 중개업자인 경우
+			// 중개업자인 경우
 			memberDto.setMember_phone(member_phone);
 		}
 		
 		System.out.println(memberDto.toString());
 		
 		int check = memberService.memberUpdate(memberDto);
-		mav.addObject("check", check);
-		mav.setViewName("member/member_updateOk.tiles");
-		
-		return mav;
+		model.addAttribute("check", check);
+
+		return "member/member_updateOk.tiles";
 	}
-	
+
 	// 회원 관리
-	@RequestMapping(value = "/member/admin")
-	public ModelAndView adminMemberList(HttpServletRequest request, HttpServletResponse response) {
+	@GetMapping("/member/admin")
+	public String adminMemberList(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		
+
 		memberService.getMemberList(mav);
 
-		return mav;
+		return "admin/member_admin.tiles";
 
 	}
-
+	
 	// 관리자 회원 삭제
 	@ResponseBody
-	@RequestMapping(value ="/member/drop", method = RequestMethod.POST)
-	public int dropMember(@RequestParam(value="drop[]") List<String> list, HttpServletResponse response) {
-	
-		//System.out.println(list); 
-		
+	@PostMapping("/member/drop")
+	public int dropMember(@RequestParam(value="drop[]") List<String> list) {
+
 		int dropUser = memberService.dropMember(list);
-		
-		//System.out.println(dropUser);
-		
+
 		return dropUser;
 
 	}
-	
+
 }

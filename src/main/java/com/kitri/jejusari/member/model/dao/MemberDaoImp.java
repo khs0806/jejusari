@@ -68,13 +68,11 @@ public class MemberDaoImp implements MemberDao{
 	// 마이페이지
 	@Override
 	public List<SalesImgDto> getScrap(String member_id) {
-		System.out.println("다오-겟스크랩 : " + session.selectList("getScrap", member_id));
 		return session.selectList("getScrap", member_id);
 	}
 	
 	@Override
 	public List<SalesImgDto> getSales(String member_id) {
-//		System.out.println("다오-겟세일즈 -" + session.selectList("getSales", member_id));
 		return session.selectList("getSales", member_id);
 	}
 	

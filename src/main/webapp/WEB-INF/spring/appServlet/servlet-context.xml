@@ -51,6 +51,6 @@
 	</beans:bean>
 	
 	<!-- 빈 스캔 -->
-	<context:component-scan base-package="com.kitri..*" />
+	<context:component-scan base-package="com.kitri.**.*" />
 	
 </beans:beans>

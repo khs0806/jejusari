@@ -63,7 +63,9 @@
 		      	}
 			});
 		});
-	
+		function defaultScrapImg(){
+			
+		}
 	});
 </script>
 </head>
@@ -83,7 +85,9 @@
 				<c:forEach items="${scrapList}" var="scrap">
 					<div id="myscrap" class="card border-warning card-sh" style="max-width: 20rem;">
 						<div class="card-body">
-							<a href="${root}/sales/detail?sales_number=${scrap.sales_number}&pageNumber=1"><img alt="test" src="${root}${scrap.image_url}" width="280px" height="250px"></a>
+							<a href="${root}/sales/detail?sales_number=${scrap.sales_number}&pageNumber=1">
+								<img alt="test" src="${root}${scrap.image_url}" onerror="this.src='${root}/img_house/h0_1.jpg';" width="280px" height="250px">
+							</a>
 <%-- 							<c:set var="title" value="${scrap.sales_title}"/> --%>
 <%-- 							${fn:substring(title, 0, 10)}...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --%>
 							<div id="scrapTitle">${scrap.sales_title}</div>

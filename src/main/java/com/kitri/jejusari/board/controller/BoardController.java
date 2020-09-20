@@ -21,14 +21,14 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
-
+	
 	// 메인 리다이렉트
 	@GetMapping("/")
 	public String home() {
 		return "redirect:main";
 	}
-
-	// 메인
+	
+	// 메인	
 	@GetMapping("/main")
 	public String main(HttpServletRequest request, Model model) {
 
@@ -40,7 +40,7 @@ public class BoardController {
 
 		return "main/main.tiles";
 	}
-
+	
 	// 사이트 소개
 	@GetMapping("/introduce")
 	public String introduce() {
@@ -174,10 +174,10 @@ public class BoardController {
 	// 신고 관리자
 	@GetMapping("/report/admin")			// pageNumber를 받는 파라미터를 추후에 paging 객체를 통해 받는걸로 수정해야함 
 	public String reportAdmin(@RequestParam(value="pageNumber", defaultValue="1") String pageNumber, Model model) {
-
+			
 		List<ReportDto> reportList = boardService.getReportList(pageNumber, model);
 		model.addAttribute("reportList", reportList);
-
+		
 		return "admin/report_admin.tiles";
 	}
 
@@ -210,7 +210,7 @@ public class BoardController {
 	public String reportUpdate(int sales_number, Model model) {
 		System.out.println("sales_number : " + sales_number);
 		int check = boardService.reportUpdate(sales_number);
-
+		
 		System.out.println("controller:"+check);
 		model.addAttribute("check", check);
 		

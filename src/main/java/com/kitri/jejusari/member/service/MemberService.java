@@ -1,6 +1,7 @@
 package com.kitri.jejusari.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,13 +26,11 @@ public interface MemberService {
 	public int dropMember(List<String> list);
 
 	// 마이페이지
-	public void myPage(ModelAndView mav);
-	
-	// 스크랩 카드 삭제
-	public void deleteScrap(ModelAndView mav);
+	public Map<String, Object> myPage(String member_id);
 	
 	// 임시 로그인
 	public MemberDto tempLogin(MemberDto memberDto);
+	
 	// 회원수정
 	public int memberUpdate(MemberDto memberDto);
 }

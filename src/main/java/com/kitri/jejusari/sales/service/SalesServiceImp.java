@@ -2,14 +2,14 @@ package com.kitri.jejusari.sales.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +23,7 @@ import com.kitri.jejusari.sales.model.dto.SalesImgDto;
 
 @Service
 public class SalesServiceImp implements SalesService {
+	private static final Logger logger = LoggerFactory.getLogger(SalesServiceImp.class);
 	
 	@Autowired
 	SalesDao salesDao;
@@ -94,7 +95,7 @@ public class SalesServiceImp implements SalesService {
 		// by.gustn
 		// 해당 매물의 지수 정보 가져오기
 		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
-		System.out.println(factorMap.toString());
+		logger.info(factorMap.toString());
 		
 		//매물더미데이터 업데이트_한번 돌리면 될듯?합니다?
 /*		for(int i=1;i<=123;i++) {

@@ -53,18 +53,8 @@
 	
 	<!-- 내 스크랩 가져오기 -->
 	<select id="getScrap" parameterType="String" resultType="com.kitri.jejusari.sales.model.dto.SalesImgDto">
-		<!-- select image_url
-		from sales_img
-		where sales_number in 
-		<foreach collection="list" item="item" separator="," open="(" close=")">
-			(
-				#{item}
-			)
-		</foreach>
-		and image_index=1
-		order by sales_number -->
 		
-		select image_url, s.sales_number, l.sales_title
+		<!-- select image_url, s.sales_number, l.sales_title
 		from sales_img s, sales l
 		where s.sales_number in (
             select sales_number
@@ -72,7 +62,16 @@
             where member_id = #{member_id}
         )
         and s.sales_number=l.sales_number
-		and image_index=1
+		and image_index=1 -->
+		
+		select sales_number, sales_title
+		from sales 
+		where sales_number in (
+			select sales_number
+			from scrap
+			where member_id = #{member_id}
+		)
+		
 	</select>
 	
 	<!-- 내 매물 가져오기 -->

@@ -1,5 +1,6 @@
 package com.kitri.jejusari.member.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,20 +41,17 @@ public class MemberServiceImp implements MemberService {
 	public void getMemberList(ModelAndView mav) {
 		Map<String, Object> map= mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		HttpSession session = request.getSession();
-		String member_level = (String) session.getAttribute("member_level");
-
-		session.getAttribute("member_level");
+		
 		//페이징
 		String pageNumber=request.getParameter("pageNumber");
 		System.out.println("pageNumber"+pageNumber);
 		if(pageNumber == null) pageNumber = "1";
 		int currentPage = Integer.parseInt(pageNumber);	//요청한 페이지
 		int boardSize = 10;		// [1] start:1, end:10  [2] start:11, end:20
-
+		
 		int startRow = (currentPage - 1) * boardSize + 1;	//1  11 21 31
 		int endRow = currentPage * boardSize;			//10 20 30 40
-
+		
 		//count 사용해서 글이 아예 없는경우 페이징 사라지게
 		int count = memberDao.memberCount();
 		List<String> memberList = null;
@@ -62,16 +60,14 @@ public class MemberServiceImp implements MemberService {
 			//startRow, endRow
 			memberList = memberDao.memberList(startRow, endRow);
 		}
-
+		
 		mav.addObject("MemberList", memberList);
 		System.out.println(memberList);
-
-		mav.addObject("member_level",member_level);
+		
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("count", count);
 
-		mav.setViewName("admin/member_admin.tiles");
 	}
 
 	@Override
@@ -81,27 +77,16 @@ public class MemberServiceImp implements MemberService {
 	}
 	
 	@Override
-	public void myPage(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		
-		HttpServletRequest request=(HttpServletRequest) map.get("request");
-		
-		HttpSession session =(HttpSession) map.get("session");
-		
-		String member_id=(String) session.getAttribute("member_id");
-		System.out.println("서비스-아이디 : " + member_id);
+	public Map<String, Object> myPage(String member_id) {
+		Map<String, Object> myInfo = new HashMap<>();
 		
 		List<SalesImgDto> scrapList=memberDao.getScrap(member_id);
-		System.out.println("서비스-스크랩리스트 : " + scrapList);
+		myInfo.put("scrapList", scrapList);
 		
 		List<SalesImgDto> salesList=memberDao.getSales(member_id);
-		System.out.println("서비스-세일즈리스트 : " + salesList);
+		myInfo.put("salesList", salesList);
 		
-//		SalesDto salesDto=memberDao.
-		
-		mav.addObject("scrapList", scrapList);
-		mav.addObject("salesList", salesList);
-		mav.setViewName("member/member_mypage.tiles");
+		return myInfo;
 	}
 	
 	@Override
@@ -114,11 +99,4 @@ public class MemberServiceImp implements MemberService {
 		return memberDao.memberUpdate(memberDto);
 	}
 	
-	@Override
-	public void deleteScrap(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest) map.get("request");
-		HttpSession session=request.getSession();
-	}
-	 
 }
