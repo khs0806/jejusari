@@ -202,7 +202,7 @@ public class BoardController {
 		
 		model.addAttribute("reportDto", reportDto);
 		
-		return "report/report_detail.tiles";
+		return "report/report_detail.empty";
 	}
 
 	// 신고 수정 
