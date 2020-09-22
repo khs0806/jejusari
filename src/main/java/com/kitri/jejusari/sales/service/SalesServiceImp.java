@@ -216,31 +216,20 @@ public class SalesServiceImp implements SalesService {
 	}
 
 	@Override
-	public void salesList(ModelAndView mav) {
-		Map<String, Object> map= mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		SalesDto salesDto=(SalesDto)map.get("salesDto");
+	public Map<String, Object> salesList(SalesDto salesDto) {
 		
-		// dao에 있던 기능 정리
-		Map<String, Object> hmap=new HashMap<String, Object>();
-		//String[] sales_category_type_list=null;
+		Map<String, Object> hmap = new HashMap<String, Object>();
+		
 		if(salesDto.getSales_category_type()!=null) {
 			String[] sales_category_type_list = salesDto.getSales_category_type().split(",");
 			 hmap.put("sales_category_type_list", sales_category_type_list);
-//			 System.out.println("salesDto.getSales_category_type():"+salesDto.getSales_category_type().toString());
 		}
 		
-		//String[] sales_option_list=null;
 		if(salesDto.getSales_option()!=null) {
 			String[] sales_option_list=salesDto.getSales_option().split(",");
-//			System.out.println("sales_option_list.toString()"+sales_option_list.toString());
 			hmap.put("sales_option_list", sales_option_list);
-			
 		}
-//		
-//		if(salesDto.getSales_category_rent()=="") {
-//			System.out.println("공간있어요");
-//		}
+		
 		hmap.put("sales_category_type",salesDto.getSales_category_type());
 		hmap.put("sales_option",salesDto.getSales_option());
 		hmap.put("sales_category_rent", salesDto.getSales_category_rent());
@@ -248,7 +237,6 @@ public class SalesServiceImp implements SalesService {
 		
 		//count 사용해서 글이 아예 없는경우 페이징 사라지게
 		int count=salesDao.salesCount(hmap);
-//		System.out.println(count);
 		List<SalesDto> salesList=null;
 		
 		pageMaker.setCri(salesDto);
@@ -260,30 +248,23 @@ public class SalesServiceImp implements SalesService {
 		if(count>0) {
 			//startRow, endRow
 			salesList=salesDao.salesList(hmap);
-			//System.out.println("saleslist : " + salesList.toString());
 		}
+		hmap.put("salesList", salesList);
+		hmap.put("pageMaker", pageMaker);
 		
-		mav.addObject("salesList", salesList);
-		mav.addObject("pageMaker", pageMaker);
-		mav.setViewName("sales/sales_list.tiles");
+		return hmap;
 	}
 
 	@Override
-	public void salesWriteOk(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		String safeFile = (String) map.get("safeFile");
+	public int salesWriteOk(SalesDto salesDto, String safeFile) {
 		// /jejusari/src/main/webapp/WEB-INF/psd/1597477771364KakaoTalk_20200723_185750052_01.jpg
 		System.out.println(safeFile);
-		
 		///jejusari/src/main/webapp/WEB-INF
 		safeFile = safeFile.substring(safeFile.indexOf("psd") - 1,safeFile.length());
 		// /psd/1597477771364KakaoTalk_20200723_185750052_01.jpg
-
 		System.out.println(safeFile);
-		
-		SalesDto salesDto=(SalesDto)map.get("salesDto");
 		System.out.println(salesDto.toString());
+		
 		int check = salesDao.salesWriteOk(salesDto);
 		SalesImgDto salesImgDto = new SalesImgDto();
 		salesImgDto.setImage_url(safeFile);
@@ -324,8 +305,7 @@ public class SalesServiceImp implements SalesService {
 		salesImgDto.setImage_url(safeFile);
 		salesImgDto.setSales_number(sales_number);
 		
-		mav.addObject("sales_number",sales_number);
-		mav.addObject("check", check);
+		return check;
 	}
 	
 	@Override

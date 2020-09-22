@@ -124,7 +124,7 @@ function writeFun(){
 <body>
 	<div class="container" id="sales_list">
 		<h3>매물 글쓰기</h3>
-		<form id="salesWriteForm"action="${root}/sales/writeOk" method="POST" enctype = "multipart/form-data" onsubmit = "return salesCheck(this)">
+		<form id="salesWriteForm" action="${root}/sales/writeOk" method="post" enctype = "multipart/form-data" onsubmit = "return salesCheck(this)">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-md-8">
 			

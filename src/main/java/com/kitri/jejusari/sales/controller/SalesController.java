@@ -3,6 +3,7 @@ package com.kitri.jejusari.sales.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.UUID;
 import java.io.PrintWriter;
 
@@ -16,12 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.common.PageMaker;
 import com.kitri.jejusari.sales.model.dto.SalesDto;
 import com.kitri.jejusari.sales.service.SalesService;
 
@@ -31,76 +36,60 @@ import com.kitri.jejusari.sales.service.SalesService;
 public class SalesController {
 	
 	private static final String realPath = null;
+	
+	private final SalesService salesService;
+	
+	public SalesController(SalesService salesService) {
+		this.salesService = salesService;
+	}
+	
 	@Autowired
-	private SalesService salesService;
+	HttpSession session;
 	
-	@RequestMapping(value="/sales")
-	public ModelAndView salesList(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
+	@GetMapping("/sales")
+	public String salesList(Model model, SalesDto salesDto) {
 		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
+		Map<String, Object> hmap = salesService.salesList(salesDto);
+		model.addAttribute("salesList", hmap.get("salesList"));
+		model.addAttribute("pageMaker", hmap.get("pageMaker"));
 		
-		mav.addObject("salesDto", salesDto);
-		salesService.salesList(mav);
-		return mav;
+		return "sales/sales_list.tiles";
 	}
 	
-	@RequestMapping(value="/sales/sales_insertCheck")
-	public String insertCheck(HttpServletRequest request, HttpServletResponse response) {
-		
-		return "sales/sales_insertCheck.tiles";
-	}
-	
-	@RequestMapping(value="/sales/write")
-	public String salesWrite(HttpServletRequest request, HttpServletResponse response) {
-		
-		
+	@GetMapping("/sales/write")
+	public String salesWrite() {
 		
 		return "sales/sales_write.tiles";
 	}
 	
-	@RequestMapping(value="/sales/writeOk", method=RequestMethod.POST)
-	public ModelAndView salesWriteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto,
+	@PostMapping("/sales/writeOk")
+	public String salesWriteOk(SalesDto salesDto, Model model,
 			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
-		
-		ModelAndView mav= new ModelAndView();
 		
 		String SAVE_PATH = "C:/Kitri2020/jeju/JejusariProject/src/main/webapp/psd/";
 //		String SAVE_PATH = "D:/Desktop/KITRI/jejusari/git/work/Jejusari/src/main/webapp/psd/";
-////		String SAVE_PATH = "C:/Users/김현수/Desktop/khsworkspace/한국정보연구기술원/프로젝트/git/projectworkspace/jejusari/src/main/webapp/psd/";
-		
+//		String SAVE_PATH = "C:/Users/김현수/Desktop/khsworkspace/한국정보연구기술원/프로젝트/git/projectworkspace/jejusari/src/main/webapp/psd/";
 		String originalFileName = mf.getOriginalFilename();
-		
-		long fileSize = mf.getSize();
 		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
 		
 		try {
 			mf.transferTo(new File(safeFile));
-			
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		mav.addObject("safeFile", safeFile);
-		mav.addObject("request", request);
-		HttpSession session = request.getSession();
-		//session으로 아이디 가져오고 나선 없어질 코드
 		salesDto.setMember_id((String)session.getAttribute("member_id"));
-		//System.out.println(salesDto);
+		int check = salesService.salesWriteOk(salesDto, safeFile);
 		
-		mav.addObject("salesDto", salesDto);
-		salesService.salesWriteOk(mav);
+		model.addAttribute("check", check);
 		
-		mav.setViewName("sales/sales_insertCheck");
-		
-		return mav;
+		return "sales/sales_insertCheck";
 
 	}
-	@RequestMapping(value="/sales/detail")
+	
+	@GetMapping("/sales/detail")
 	public ModelAndView salesDetail(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
@@ -110,7 +99,7 @@ public class SalesController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/sales/broker")
+	@GetMapping("/sales/broker")
 	public ModelAndView salesBroker(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
@@ -119,7 +108,7 @@ public class SalesController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/sales/scrap")
+	@GetMapping("/sales/scrap")
 	public void salesScrap(HttpServletRequest request, HttpServletResponse response) throws Throwable{
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
@@ -129,7 +118,7 @@ public class SalesController {
 		out.print(check);
 	}	
 	
-	@RequestMapping(value="/sales/delete", method=RequestMethod.GET)
+	@GetMapping("/sales/delete")
 	public ModelAndView salesDelete(HttpServletRequest request, HttpServletResponse response) {
 
 		
@@ -143,9 +132,8 @@ public class SalesController {
 		return mav;
 		
 	}
-	
 
-	@RequestMapping(value="/sales/delete", method=RequestMethod.POST)
+	@PostMapping("/sales/delete")
 	public ModelAndView salesDeleteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
 		
 		System.out.println( "salesDto : " + salesDto.toString());			// 넘어오는지 확인
@@ -166,7 +154,7 @@ public class SalesController {
 	
 	
 	/** 이미지 관련 controller 함수..! 작성중입니다.(kke) */
-	@RequestMapping(value="/uploadSummernoteImageFile", method=RequestMethod.POST)
+	@PostMapping(value="/uploadSummernoteImageFile")
 	public ResponseEntity<JSONObject> uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
 		//여기로 넘어오질 못하네...400 error
 		System.out.println("넘어왔어용");
@@ -236,7 +224,7 @@ public class SalesController {
 		return d;
 	}
 	
-	@RequestMapping(value="/sales/update")
+	@GetMapping("/sales/update")
 	public ModelAndView salesUpdate(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
@@ -245,7 +233,7 @@ public class SalesController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/sales/updateOk", method=RequestMethod.POST)
+	@PostMapping("/sales/updateOk")
 	public ModelAndView salesUpdateOk(HttpServletRequest request, HttpServletResponse response,SalesDto salesDto,
 			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
 		ModelAndView mav=new ModelAndView();

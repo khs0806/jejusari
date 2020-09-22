@@ -16,14 +16,14 @@ public class KakaoLocalAPI {
 	private static final String APPKEY = "47d269828391ebdbbd9ef43e5d60962c";
 	
 	@SuppressWarnings("unchecked")
-	public static List<String> kakaoAPI(String place){
+	public static List<String> kakaoAPI(String address){
 		
-//		String place = "제주특별자치도 제주시 화북이동 177";
+//		String address = "제주특별자치도 제주시 화북이동 177";
 		List<String> factor = null;
 		
 		try {
 			// 검색할 장소에 대한 좌표 x,y값을 찾을 URL을 요청
-			String queryString = "?query="+URLEncoder.encode(place, "UTF-8");
+			String queryString = "?query="+URLEncoder.encode(address, "UTF-8");
 			String apiURL = "https://dapi.kakao.com/v2/local/search/address.json" + queryString;
 			URL url = new URL(apiURL);
 			
