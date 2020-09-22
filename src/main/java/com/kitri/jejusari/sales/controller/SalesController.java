@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.io.PrintWriter;
 
@@ -63,8 +64,10 @@ public class SalesController {
 	}
 	
 	@PostMapping("/sales/writeOk")
-	public String salesWriteOk(SalesDto salesDto, Model model,
+	public String salesWriteOk(SalesDto salesDto, Model model, HttpServletRequest request,
 			@RequestParam(value="thumbnail", required = false) MultipartFile mf) {
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(rootPath);
 		
 		String SAVE_PATH = "C:/Kitri2020/jeju/JejusariProject/src/main/webapp/psd/";
 //		String SAVE_PATH = "D:/Desktop/KITRI/jejusari/git/work/Jejusari/src/main/webapp/psd/";
