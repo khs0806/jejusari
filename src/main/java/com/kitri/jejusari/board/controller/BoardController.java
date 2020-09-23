@@ -1,6 +1,5 @@
 package com.kitri.jejusari.board.controller;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -21,14 +20,14 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
-	
+
 	// 메인 리다이렉트
 	@GetMapping("/")
 	public String home() {
 		return "redirect:main";
 	}
-	
-	// 메인	
+
+	// 메인
 	@GetMapping("/main")
 	public String main(HttpServletRequest request, Model model) {
 
@@ -40,7 +39,7 @@ public class BoardController {
 
 		return "main/main.tiles";
 	}
-	
+
 	// 사이트 소개
 	@GetMapping("/introduce")
 	public String introduce() {
@@ -62,7 +61,7 @@ public class BoardController {
 	// 공지사항 목록
 	@GetMapping("/notice")
 	public String noticeList(Model model) {
-		
+
 		List<NoticeDto> noticeList = boardService.noticeList(model);
 		System.out.println(noticeList);
 
@@ -112,7 +111,7 @@ public class BoardController {
 	}
 
 	// 공지사항 수정
-	@PostMapping(value="/notice/updateOk")
+	@PostMapping(value = "/notice/updateOk")
 	public String noticeUpdateDo(NoticeDto noticeDto, Model model) {
 
 		int check = boardService.noticeUpdateOk(noticeDto);
@@ -122,7 +121,7 @@ public class BoardController {
 	}
 
 	// 공지사항 삭제화면
-	@RequestMapping(value="/notice/delete")
+	@RequestMapping(value = "/notice/delete")
 	public String noticeDelete(HttpServletRequest request, Model model) {
 
 		int notice_number = Integer.parseInt(request.getParameter("notice_number"));
@@ -145,13 +144,13 @@ public class BoardController {
 		return "notice/notice_deleteOk.tiles";
 	}
 
-	// 신고 작성 화면 
+	// 신고 작성 화면
 	@GetMapping("/report/write")
 	public String report(HttpServletRequest request, Model model) {
 
 		String sales_number = request.getParameter("sales_number");
 		String sales_title = request.getParameter("sales_title");
-		
+
 		model.addAttribute("sales_number", sales_number);
 		model.addAttribute("sales_title", sales_title);
 
@@ -161,36 +160,36 @@ public class BoardController {
 	// 신고작성 ok
 	@PostMapping("/report/write")
 	public String reportWriteOk(HttpSession session, ReportDto reportDto) {
-		System.out.println( "reportDto : " + reportDto.toString());			// 넘어오는지 확인
-		
+		System.out.println("reportDto : " + reportDto.toString()); // 넘어오는지 확인
+
 		String member_id = (String) session.getAttribute("member_id");
 		reportDto.setMember_id(member_id);
-		
-		boardService.reportWriteOk(reportDto);   // controller의 함수명과 같게 하는게 좋다.
+
+		boardService.reportWriteOk(reportDto); // controller의 함수명과 같게 하는게 좋다.
 
 		return "report/report_writeOk";
 	}
 
 	// 신고 관리자
-	@GetMapping("/report/admin")			// pageNumber를 받는 파라미터를 추후에 paging 객체를 통해 받는걸로 수정해야함 
-	public String reportAdmin(@RequestParam(value="pageNumber", defaultValue="1") String pageNumber, Model model) {
-			
+	@GetMapping("/report/admin") // pageNumber를 받는 파라미터를 추후에 paging 객체를 통해 받는걸로 수정해야함
+	public String reportAdmin(@RequestParam(value = "pageNumber", defaultValue = "1") String pageNumber, Model model) {
+
 		List<ReportDto> reportList = boardService.getReportList(pageNumber, model);
 		model.addAttribute("reportList", reportList);
-		
+
 		return "admin/report_admin.tiles";
 	}
 
 	// 신고 및 매물 삭제
-	// TODO - 화면단에서 신고 버튼을 구현을 안함, 추후에 추가해야함 
+	// TODO - 화면단에서 신고 버튼을 구현을 안함, 추후에 추가해야함
 	@GetMapping("/report/delete")
 	public String deleteReport(@RequestParam int salesNumber, Model model) {
 		System.out.println("salesNumber : " + salesNumber);
-		
-		int check = boardService.AdDelete(salesNumber); 
+
+		int check = boardService.AdDelete(salesNumber);
 
 		model.addAttribute("check", check);
-		
+
 		return "report/delete";
 	}
 
@@ -199,21 +198,21 @@ public class BoardController {
 	public String reportDetail(int report_number, Model model) {
 		System.out.println("reportNumber : " + report_number);
 		ReportDto reportDto = boardService.ReportDetail(report_number);
-		
+
 		model.addAttribute("reportDto", reportDto);
-		
+
 		return "report/report_detail.empty";
 	}
 
-	// 신고 수정 
+	// 신고 수정
 	@GetMapping("/report/update")
 	public String reportUpdate(int sales_number, Model model) {
 		System.out.println("sales_number : " + sales_number);
 		int check = boardService.reportUpdate(sales_number);
-		
-		System.out.println("controller:"+check);
+
+		System.out.println("controller:" + check);
 		model.addAttribute("check", check);
-		
+
 		return "report/update";
 	}
 }

@@ -3,6 +3,7 @@ package com.kitri.jejusari.sales.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.sales.model.dto.SalesDto;
@@ -11,7 +12,7 @@ import com.kitri.jejusari.sales.model.dto.SalesDto;
 public interface SalesService {
 	
 	//상세페이지
-	public void salesDetail(ModelAndView mav); 
+	public void salesDetail(Model model, int sales_number, int pageNumber, String session_member_id); 
 	
 	public void salesBroker(ModelAndView mav);
 	
