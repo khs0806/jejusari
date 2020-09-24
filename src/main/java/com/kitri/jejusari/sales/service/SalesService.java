@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.member.model.dto.MemberDto;
 import com.kitri.jejusari.sales.model.dto.SalesDto;
 
 
@@ -14,9 +15,9 @@ public interface SalesService {
 	//상세페이지
 	public void salesDetail(Model model, int sales_number, int pageNumber, String session_member_id); 
 	
-	public void salesBroker(ModelAndView mav);
+	public MemberDto salesBroker(String member_id);
 	
-	public int salesScrap(ModelAndView mav);
+	public int salesScrap(Map<String, Object> map);
 
 	public Map<String, Object> salesList(SalesDto salesDto);
 
@@ -26,7 +27,7 @@ public interface SalesService {
 	
 	public void salesUpdateOk(ModelAndView mav);
 	
-	public void salesDeleteOk(ModelAndView mav);
+	public int salesDeleteOk(int sales_number);
 	
 	public String salesIdCheck(int sales_number);
 	

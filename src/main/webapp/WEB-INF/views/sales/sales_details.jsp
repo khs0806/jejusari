@@ -20,7 +20,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {    
 		//게스트 막아주기?
-		if(${session.member_id==null}){
+		if(${member_id==null}){
 			alert("매물정보를 확인하시려면 로그인해주십시오.");
 			location.href="${root}/member/login";
 		}
@@ -113,7 +113,7 @@
 		
 		//중개인 더보기 클릭시
 		$("input:button[name=member_info]").click(function(){
-			window.open('${root}/sales/broker?member_id=${salesDto.member_id }', '', 'width = 300, height = 250');
+			window.open('${root}/sales/broker?member_id=${salesDto.member_id }', '', 'width=300,height=250');
 		})
 		
 		//매물 더보기 클릭시
@@ -404,7 +404,7 @@
 	</div>
 
 	<!-- 중개인; 수정, 삭제 -->
-	<c:if test="${session.member_id==memberDto.member_id }">
+	<c:if test="${member_id==memberDto.member_id }">
 		<div id="plus_btn">
 			<!-- 			<input type="button" name="sales_update" value="수정" class="btn btn-light btn-sm"/>	 -->
 			<input type="button" name="sales_delete" value="삭제"

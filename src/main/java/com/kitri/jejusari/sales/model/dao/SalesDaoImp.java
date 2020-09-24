@@ -72,13 +72,8 @@ public class SalesDaoImp implements SalesDao {
 	
 	@Override
 	public int salesDelete(SalesDto salesDto) {
-		session.delete("sales_delete1", salesDto);
-		session.delete("sales_delete2", salesDto);
-		session.delete("sales_delete3", salesDto);
-		session.delete("sales_delete4", salesDto);
-		return session.delete("sales_delete5", salesDto);
+		return session.delete("sales_delete", salesDto);
 	}
-	
 	
 	@Override
 	public String salesIdCheck(int sales_number) {

@@ -3,6 +3,7 @@ package com.kitri.jejusari.sales.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,54 +28,54 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.common.PageMaker;
+import com.kitri.jejusari.member.controller.MemberController;
+import com.kitri.jejusari.member.model.dto.MemberDto;
 import com.kitri.jejusari.sales.model.dto.SalesDto;
 import com.kitri.jejusari.sales.service.SalesService;
 
 @Controller
 public class SalesController {
-
+	private static final Logger logger = LoggerFactory.getLogger(SalesController.class);
 	private static final String realPath = null;
 
-	private final SalesService salesService;
-
-	public SalesController(SalesService salesService) {
-		this.salesService = salesService;
-	}
+	@Autowired
+	SalesService salesService;
 
 	@Autowired
 	HttpSession session;
 
 	@GetMapping("/sales")
 	public String salesList(Model model, SalesDto salesDto) {
-
+		
 		Map<String, Object> hmap = salesService.salesList(salesDto);
 		model.addAttribute("salesList", hmap.get("salesList"));
 		model.addAttribute("pageMaker", hmap.get("pageMaker"));
-
+		
 		return "sales/sales_list.tiles";
 	}
-
+	
 	@GetMapping("/sales/write")
 	public String salesWrite() {
-
+		
 		return "sales/sales_write.tiles";
 	}
-
+	
 	@PostMapping("/sales/writeOk")
 	public String salesWriteOk(SalesDto salesDto, Model model, HttpServletRequest request,
 			@RequestParam(value = "thumbnail", required = false) MultipartFile mf) {
-
+		
 		// 서블릿 컨텍스트의 물리적 실제 경로(/webapp)을 불러와서 /psd/ 경로를 추가한다.
 		String SAVE_PATH = request.getSession().getServletContext().getRealPath("psd/");
 		System.out.println("rootPath : " + SAVE_PATH);
-
+		
 		String originalFileName = mf.getOriginalFilename();
 		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
-
+		
 		try {
 			mf.transferTo(new File(safeFile));
 		} catch (IllegalStateException e) {
@@ -80,7 +83,7 @@ public class SalesController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		salesDto.setMember_id((String) session.getAttribute("member_id"));
 		int sales_number = salesService.salesWriteOk(salesDto, safeFile);
 		int check = 0;
@@ -96,68 +99,67 @@ public class SalesController {
 	}
 
 	@GetMapping("/sales/detail")
-	public String salesDetail(Model model, int sales_number, @ModelAttribute int page_number) {
+	public String salesDetail(Model model, int sales_number, @ModelAttribute("pageNumber") int page_number) {
 
 		String session_member_id = (String) session.getAttribute("member_id");
+		logger.info("session_member_id : {}",session_member_id);
 		salesService.salesDetail(model, sales_number, page_number, session_member_id);
-
+		
 		return "sales/sales_details.tiles";
 	}
 
 	@GetMapping("/sales/broker")
-	public ModelAndView salesBroker(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-
-		salesService.salesBroker(mav);
-		return mav;
+	public String salesBroker(String member_id, Model model) {
+		
+		MemberDto memberDto = salesService.salesBroker(member_id);
+		model.addAttribute("memberDto", memberDto);
+		
+		return "sales/sales_broker.empty";
 	}
 
+	@ResponseBody
 	@GetMapping("/sales/scrap")
-	public void salesScrap(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
+	public int salesScrap(HttpServletRequest request) throws Throwable {
+		
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
+		String sales_number = request.getParameter("sales_number");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("sales_number", sales_number);
 
-		int check = salesService.salesScrap(mav);
-		PrintWriter out = response.getWriter();
-		out.print(check);
+		int check = salesService.salesScrap(map);
+		
+		return check;
 	}
 
 	@GetMapping("/sales/delete")
-	public ModelAndView salesDelete(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView mav = new ModelAndView();
-		String sales_number = request.getParameter("sales_number");
-		mav.addObject("sales_number", sales_number);
-		mav.addObject("request", request);
-
-		mav.setViewName("sales/sales_delete");
-
-		return mav;
+	public String salesDelete(@ModelAttribute("sales_number") String sales_number) {
+		logger.info("sales_number {}", sales_number);
+		
+		return "sales/sales_delete";
 
 	}
 
 	@PostMapping("/sales/delete")
-	public ModelAndView salesDeleteOk(HttpServletRequest request, HttpServletResponse response, SalesDto salesDto) {
-
-		System.out.println("salesDto : " + salesDto.toString()); // 넘어오는지 확인
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
-		System.out.println(sales_number);
-		HttpSession session = request.getSession();
-
-		salesService.salesDeleteOk(mav);
-
-		return mav;
+	public String salesDeleteOk(int sales_number, Model model) {
+		logger.info("sales_number {}", sales_number);
+		int check = salesService.salesDeleteOk(sales_number);
+			
+		model.addAttribute("check", check);
+		
+		return "sales/sales_deleteOk.tiles";
 	}
 
 	/** 이미지 관련 controller 함수..! 작성중입니다.(kke) */
 	@PostMapping(value = "/uploadSummernoteImageFile")
-	public ResponseEntity<JSONObject> uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+	public ResponseEntity<JSONObject> uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
 		// 여기로 넘어오질 못하네...400 error
 		System.out.println("넘어왔어용");
+		String realpath = request.getSession().getServletContext().getRealPath("/");
+		logger.info("realPath {}", realpath);
+		
 		JSONObject obj = new JSONObject();
 		// String fileRoot="C:\\jejusari\\summernote_img\\"; //저장될 외부 파일 경로
 		String fileRoot = "img\\summernote_img\\"; // 저장될 외부 파일 경로

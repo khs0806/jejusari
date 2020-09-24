@@ -51,11 +51,12 @@ public class SalesServiceImp implements SalesService {
 				salesDto.setSales_ele(1);
 		}
 
+		int scrap_check = 0;
 		if (session_member_id != null) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("member_id", session_member_id);
 			map.put("sales_number", salesDto.getSales_number());
-			int scrap_check = salesDao.salesScrapCheck(map);
+			scrap_check = salesDao.salesScrapCheck(map);
 		}
 
 		String member_id = salesDto.getMember_id();
@@ -64,8 +65,7 @@ public class SalesServiceImp implements SalesService {
 		int scrap_count = salesDao.salesScrapCount(sales_number);
 
 		List<SalesImgDto> salesImgDtoList = salesDao.selectSalesImg(sales_number);
-
-		// by.gustn
+		
 		// 해당 매물의 지수 정보 가져오기
 		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
 		logger.info(factorMap.toString());
@@ -81,6 +81,7 @@ public class SalesServiceImp implements SalesService {
 		model.addAttribute("salesImgDtoList", salesImgDtoList);
 		model.addAttribute("factor_all_avg", factor_all_avg);
 		model.addAttribute("scrap_count", scrap_count);
+		model.addAttribute("scrap_check", scrap_check);
 //		model.addAttribute("pageNumber", pageNumber);
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("salesDto", salesDto);
@@ -156,29 +157,15 @@ public class SalesServiceImp implements SalesService {
 	}
 
 	@Override
-	public void salesBroker(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String member_id = request.getParameter("member_id");
-
+	public MemberDto salesBroker(String member_id) {
 		MemberDto memberDto = salesDao.salesBroker(member_id);
-
-		mav.addObject("memberDto", memberDto);
-		mav.setViewName("sales/sales_broker.empty");
+		return memberDto;
 	}
 
 	@Override
-	public int salesScrap(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		HttpSession session = request.getSession();
-
-		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
-		String member_id = (String) session.getAttribute("member_id");
-		System.out.println(sales_number + " , " + member_id);
-		map.put("sales_number", sales_number);
-		map.put("member_id", member_id);
-
+	public int salesScrap(Map<String, Object> map) {
+		logger.info("member_id {}, sales_number {}",map.get("member_id"),map.get("sales_number"));
+		
 		int check = 0;
 		int scrap_check = salesDao.salesScrapCheck(map);
 		if (scrap_check == 0) { // 스크랩추가
@@ -190,6 +177,7 @@ public class SalesServiceImp implements SalesService {
 			if (ok > 0)
 				check = -1;
 		}
+		
 		return check;
 	}
 
@@ -284,22 +272,17 @@ public class SalesServiceImp implements SalesService {
 	}
 
 	@Override
-	public void salesDeleteOk(ModelAndView mav) {
-		// TODO Auto-generated method stub
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		System.out.println(request.getParameter("sales_number"));
-		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
+	public int salesDeleteOk(int sales_number) {
+		
 		SalesDto salesDto = new SalesDto();
 		salesDto.setSales_number(sales_number);
 
 		int check = salesDao.salesDelete(salesDto);
 
 		System.out.println("check : " + check);
+		logger.info("check {}", check);
 
-		mav.addObject("check", check);
-		mav.setViewName("sales/sales_deleteOk.tiles");
-
+		return check;
 	}
 
 	@Override
