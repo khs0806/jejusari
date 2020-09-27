@@ -27,8 +27,6 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#AdminPage").hide();
-		$("#AdminPage").attr('disabled', true);
 		
 		var url = window.location.pathname;
 		var url_param=url.substring(6);
@@ -44,8 +42,6 @@
 			$("#"+url_param).addClass("active");
 		}
 	});
-	
-	
 </script>
 </head>
 <body>
@@ -62,7 +58,6 @@
 				<li class="nav-item mx-5" id="news"><a class="nav-link" href="${root}/news">최신뉴스</a></li>
 			</ul>
 		</div>
-		<input type="submit"  class="btn btn-secondary" id="AdminPage" value="Admin"/>
 		<c:if test="${member_name == null}">
 			<ul class="navbar-nav ml-md-auto">
 				<li class="nav-item"><a class="nav-link" href="${root}/member/login" style="font-size:15px;">로그인 · 회원가입</a></li>
@@ -78,21 +73,18 @@
 			<span>${member_name} 님 환영합니다.</span>
 			<ul class="navbar-nav ml-md-auto">
 				<%-- <li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee&redirect_uri=http://localhost:8282${root}&response_type=code">로그인</a></li> --%>
-				<li class="nav-item"><a class="nav-link" href="${root}/member/mypage" style="font-size:15px;">마이페이지</a></li>
+				<c:choose>
+					<c:when test="${member_id ne 'admin'}">
+					<li class="nav-item"><a class="nav-link" href="${root}/member/mypage" style="font-size:15px;">마이페이지</a></li>
+					</c:when>
+					<c:when test="${member_id eq 'admin'}">
+					<li class="nav-item"><a class="nav-link" href="${root}/member/admin" style="font-size:15px;">관리자 페이지</a></li>
+					</c:when>
+				</c:choose>
 				<li class="nav-item"><a class="nav-link" href="${root}/member/logout" style="font-size:15px;">로그아웃</a></li>
 <!-- 			<li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/logout?client_id=47d269828391ebdbbd9ef43e5d60962c&logout_redirect_uri=http://localhost:8282/jeju/member/logout" style="font-size:15px;">로그아웃</a></li> -->
 			</ul>
 			
 		</c:if>
-		<c:if test="${member_id eq 'admin'}">
-			<script type="text/javascript">
-			$(document).ready(function(){
-				$("#AdminPage").show();
-				$("#AdminPage").attr('disabled', false);
-			 	$("#AdminPage").click(function(){
-					location.href="${root}/member/admin";
-				});
-			});
-			</script>
-		</c:if>
+		
 	</header>

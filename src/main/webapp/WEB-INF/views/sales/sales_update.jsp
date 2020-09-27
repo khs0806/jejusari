@@ -160,7 +160,7 @@
 					<div class="input-group-prepend">
 				    	<span class="input-group-text">가격 (만원)</span>
 					</div>
-					<input name="sales_cost" type="text" class="form-control" placeholder="${salesDto.sales_deposit }" value="${salesDto.sales_deposit }"  aria-describedby="inputGroup-sizing-sm">
+					<input name="sales_deposit" type="text" class="form-control" placeholder="${salesDto.sales_deposit }" value="${salesDto.sales_deposit }"  aria-describedby="inputGroup-sizing-sm">
 				</div>
 				<div class="input-group input-group-sm mb-2" id="sales_cost">
 					<div class="input-group-prepend">
@@ -270,7 +270,7 @@
 		  <div class="input-group-prepend">
 		    <span class="input-group-text" id="addon-wrapping">현재 이미지</span>
 		  </div>
-		  <input type="text" class="form-control" placeholder="${urlNameAll }" aria-label="${urlNameAll }" aria-describedby="addon-wrapping" readOnly>
+		  <input type="text" class="form-control" placeholder="${urlNameAll}" aria-label="${urlNameAll}" aria-describedby="addon-wrapping" readOnly>
 		</div>
 		<div class="input-group mb-3">
 		  <div class="custom-file">

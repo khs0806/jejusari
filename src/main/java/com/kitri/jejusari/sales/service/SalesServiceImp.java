@@ -1,6 +1,7 @@
 package com.kitri.jejusari.sales.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,11 +90,7 @@ public class SalesServiceImp implements SalesService {
 	}
 
 	@Override
-	public void salesUpdate(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
-		int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	public HashMap<String, Object> salesUpdate(int sales_number) {
 
 		SalesDto salesDto = salesDao.salesDetail(sales_number);
 		String[] sales_option = salesDto.getSales_option().split(",");
@@ -109,51 +106,47 @@ public class SalesServiceImp implements SalesService {
 				salesDto.setSales_ele(1);
 		}
 		List<SalesImgDto> salesImgDtoList = salesDao.selectSalesImg(sales_number);
-
-		System.out.println("urlname : " + salesImgDtoList.toString());
-		String[] urlname = null;
+		logger.info("urlname : {}", salesImgDtoList.toString());
+		
+		String urlname = null;
 		List<String> urlNameList = new ArrayList<String>();
+		
 		for (int i = 0; i < salesImgDtoList.size(); i++) {
-			urlname = salesImgDtoList.get(i).getImage_url().split("/");
-			urlNameList.add(urlname[urlname.length - 1]);
+			urlname = salesImgDtoList.get(i).getImage_url().split("\\\\")[2];
+			urlNameList.add(urlname);
 		}
-		System.out.println(urlNameList.toString());
-
+		
+		logger.info("urlNameList : {}", urlNameList.toString());
 		String urlNameAll = urlNameList.toString();
+		
+		HashMap<String, Object> model = new HashMap<String,Object>();
+		model.put("urlNameAll", urlNameAll);
+		model.put("salesDto", salesDto);
 
-		mav.addObject("urlNameAll", urlNameAll);
-		mav.addObject("salesImgDtoList", salesImgDtoList);
-		mav.addObject("pageNumber", pageNumber);
-		mav.addObject("salesDto", salesDto);
-		mav.setViewName("sales/sales_update.tiles");
+//		mav.addObject("salesImgDtoList", salesImgDtoList);
+		
+		return model;
 	}
 
 	@Override
-	public void salesUpdateOk(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
+	public int salesUpdateOk(Map<String, Object> map) {
+		
 		SalesDto salesDto = (SalesDto) map.get("salesDto");
 		String safeFile = (String) map.get("safeFile");
-		int sales_number = Integer.parseInt(request.getParameter("sales_number"));
-		int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		
 		if (!safeFile.equals("none")) {
 			safeFile = safeFile.substring(safeFile.indexOf("psd") - 1, safeFile.length());
 			SalesImgDto salesImgDto = new SalesImgDto();
 			salesImgDto.setImage_url(safeFile);
-			salesImgDto.setSales_number(sales_number);
 			salesDao.updateSalesImg(salesImgDto);
 		}
 		System.out.println(salesDto.toString());
-		map.put("sales_number", sales_number);
 		map.put("salesDto", salesDto);
 
 		int check = salesDao.salesUpdate(map);
 		System.out.println("updateOk:" + check);
-
-		mav.addObject("pageNumber", pageNumber);
-		mav.addObject("sales_number", sales_number);
-		mav.addObject("check", check);
-		mav.setViewName("sales/sales_updateOk.tiles");
+		
+		return check;
 	}
 
 	@Override

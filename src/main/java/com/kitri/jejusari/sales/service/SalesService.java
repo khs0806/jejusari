@@ -1,5 +1,6 @@
 package com.kitri.jejusari.sales.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,9 +24,9 @@ public interface SalesService {
 
 	public int salesWriteOk(SalesDto salesDto, String sageFile);
 	
-	public void salesUpdate(ModelAndView mav);
+	public HashMap<String, Object> salesUpdate(int sales_number);
 	
-	public void salesUpdateOk(ModelAndView mav);
+	public int salesUpdateOk(Map<String, Object> map);
 	
 	public int salesDeleteOk(int sales_number);
 	

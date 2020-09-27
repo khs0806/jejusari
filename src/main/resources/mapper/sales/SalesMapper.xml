@@ -89,8 +89,37 @@
 	
 	
 	<insert id="sales_write" parameterType="com.kitri.jejusari.sales.model.dto.SalesDto">
-		insert into sales (sales_number, member_id, sales_date, sales_title, sales_content, sales_category_type, sales_category_rent, sales_deposit, sales_cost, sales_area, sales_address, sales_option, sales_build_year, sales_floor) 
-		values (seq_sales_number.nextval, #{member_id}, sysdate, #{sales_title}, #{sales_content}, #{sales_category_type}, #{sales_category_rent}, #{sales_deposit}, #{sales_cost}, #{sales_area}, #{sales_address}, #{sales_option}, #{sales_build_year}, #{sales_floor} )
+		insert into sales (
+			sales_number, 
+			member_id, 
+			sales_date, 
+			sales_title, 
+			sales_content, 
+			sales_category_type, 
+			sales_category_rent, 
+			sales_deposit, 
+			sales_cost, 
+			sales_area, 
+			sales_address, 
+			sales_option, 
+			sales_build_year, 
+			sales_floor) 
+		values (
+			seq_sales_number.nextval, 
+			#{member_id}, 
+			sysdate, 
+			#{sales_title}, 
+			#{sales_content}, 
+			#{sales_category_type}, 
+			#{sales_category_rent}, 
+			#{sales_deposit}, 
+			#{sales_cost}, 
+			#{sales_area}, 
+			#{sales_address}, 
+			#{sales_option}, 
+			#{sales_build_year}, 
+			#{sales_floor} 
+		)
 	</insert>
 	
 	
@@ -99,12 +128,20 @@
 	</delete>
 	
 	<update id="sales_update" parameterType="java.util.Map">
-		update sales set sales_title=#{salesDto.sales_title},sales_content=#{salesDto.sales_content},
-				sales_category_type=#{salesDto.sales_category_type},sales_category_rent=#{salesDto.sales_category_rent},
-				sales_deposit=#{salesDto.sales_deposit}, sales_cost=#{salesDto.sales_cost}, sales_area=#{salesDto.sales_area}, 
-				sales_address=#{salesDto.sales_address}, sales_option=#{salesDto.sales_option}, sales_build_year=#{salesDto.sales_build_year},
-				sales_floor=#{salesDto.sales_floor}
-		 where sales_number=#{sales_number}
+		update sales set 
+			sales_title = #{salesDto.sales_title},
+			sales_content = #{salesDto.sales_content},
+			sales_category_type = #{salesDto.sales_category_type},
+			sales_category_rent = #{salesDto.sales_category_rent},
+			sales_deposit = #{salesDto.sales_deposit}, 
+			sales_cost = #{salesDto.sales_cost}, 
+			sales_area = #{salesDto.sales_area}, 
+			sales_address = #{salesDto.sales_address}, 
+			sales_option = #{salesDto.sales_option}, 
+			sales_build_year = #{salesDto.sales_build_year},
+			sales_floor = #{salesDto.sales_floor}
+		 where 
+		 	sales_number = #{salesDto.sales_number}
 	</update>
 	
 	

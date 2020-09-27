@@ -79,8 +79,9 @@ public class MemberController {
 			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
 			return "redirect:/main";
 		}
-		System.out.println(member.toString());
-
+		
+		logger.info("member_id : {}", member.getMember_id());
+		
 		session.setAttribute("member_id", member.getMember_id());
 		session.setAttribute("member_name", member.getMember_name());
 		session.setAttribute("member_level", member.getMember_level());
@@ -137,7 +138,7 @@ public class MemberController {
 		String member_id = (String) userInfo.get("id");
 		String member_name = (String) userInfo.get("nickname");
 		String member_email = (String) userInfo.get("email");
-
+		
 		// 이미 가입되어있는 회원인지 확인한다.
 		int id_check = memberService.member_id_check(member_id);
 		System.out.println("id_check : " + id_check);
@@ -163,12 +164,12 @@ public class MemberController {
 	}
 
 	// 회원가입
-	@GetMapping("/member/joinOk")
+	@PostMapping("/member/joinOk")
 	public String memberJoin(HttpServletRequest request, MemberDto memberDto, Model model) {
 
 		String member_phone = request.getParameter("no1") + "-" + request.getParameter("no2") + "-"
 				+ request.getParameter("no3");
-
+		
 		String email = memberDto.getMember_email() + "@" + request.getParameter("email");
 
 		memberDto.setMember_email(email);
