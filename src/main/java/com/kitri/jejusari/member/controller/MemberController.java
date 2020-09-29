@@ -72,7 +72,8 @@ public class MemberController {
 	@PostMapping("/member/templogin")
 	public String temLogin(HttpSession session, MemberDto memberDto, Model model) {
 
-		logger.info("templogin");
+		logger.info(memberDto.toString());
+		
 		MemberDto member = memberService.tempLogin(memberDto);
 
 		if (member == null) {

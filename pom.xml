@@ -100,13 +100,6 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- @Inject -->
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
 				
 		<!-- Servlet -->
 		<dependency>
@@ -140,7 +133,7 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
-		    <version>3.0.5.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.mybatis</groupId>
