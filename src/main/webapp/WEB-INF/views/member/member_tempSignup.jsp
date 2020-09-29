@@ -12,6 +12,7 @@
 <script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
 	    $("input:radio[name=member_level]").click(function(){  	 
 	        if($("input[name=member_level]:checked").val() == "BR"){
 	 			$("#if_broker").show();
@@ -19,6 +20,30 @@
 	        	$("#if_broker").hide();
 	        }
 	    });
+		
+	    $("#idCheck").click(function(){
+			var data = $("input[name=member_id]").val();
+		    console.log(data);
+	    	$.ajax({
+				url: "${root}/member/idcheck",
+				data: {
+					"member_id" : data
+				},
+				type: "POST",
+				success: function(resp) {
+					console.log(resp);
+					if (resp == 0) {
+						alert("아이디를 사용하실 수 있습니다.");
+					} else if (resp > 0) {
+						alert("아이디를 사용하실 수 없습니다.");
+					}
+				},
+				error: function(resp) {
+					console.log(resp);
+				}
+			});
+	    });
+	    
 	})
 	
 	function valCheck(obj) {
@@ -53,13 +78,12 @@
 		<div class="nickname">
 			<div class="label">아이디</div>
 			<input type="text" name="member_id" class="col-sm-3 h-25 form-control"/>
-			<button class="btn btn-outline-warning btn-sm" type="button" id="button-addon2" style="margin-top:2px;">중복 확인</button>
+			<button class="btn btn-outline-warning btn-sm" type="button" id="idCheck" style="margin-top:2px;">중복 확인</button>
 		</div>
 		
 		<div class="nickname">
 			<div class="label">이름</div>
 			<input type="text" name="member_name" class="col-sm-3 h-25 form-control"/>
-			<button class="btn btn-outline-warning btn-sm" type="button" id="button-addon2" style="margin-top:2px;">중복 확인</button>
 		</div>
 		
 		<div class="email">

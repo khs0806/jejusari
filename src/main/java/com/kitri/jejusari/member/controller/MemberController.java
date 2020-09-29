@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,11 +72,11 @@ public class MemberController {
 	// 임시 로그인
 	@PostMapping("/member/templogin")
 	public String temLogin(HttpSession session, MemberDto memberDto, Model model) {
-
+		
 		logger.info(memberDto.toString());
 		
 		MemberDto member = memberService.tempLogin(memberDto);
-
+		
 		if (member == null) {
 			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
 			return "redirect:/main";
@@ -87,8 +88,19 @@ public class MemberController {
 		session.setAttribute("member_name", member.getMember_name());
 		session.setAttribute("member_level", member.getMember_level());
 		model.addAttribute("msg", "로그인 되었습니다.");
-
+		
 		return "redirect:/main";
+	}
+	
+	// 회원가입시 아이디 중복체크
+	@ResponseBody
+	@PostMapping("/member/idcheck")
+	public ResponseEntity<?> idCheck(String member_id){
+		
+		int check = memberService.member_id_check(member_id);
+		logger.info("check : {}", check);
+		
+		return ResponseEntity.ok(check);
 	}
 
 	// 임시회원가입 뷰

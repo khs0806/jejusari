@@ -132,17 +132,16 @@ public class SalesController {
 		logger.info("sales_number {}", sales_number);
 		
 		return "sales/sales_delete";
-
 	}
 
 	@PostMapping("/sales/delete")
 	public String salesDeleteOk(int sales_number, Model model) {
 		logger.info("sales_number {}", sales_number);
 		int check = salesService.salesDeleteOk(sales_number);
-			
+		
 		model.addAttribute("check", check);
 		
-		return "sales/sales_deleteOk.tiles";
+		return "sales/sales_deleteOk.empty";
 	}
 
 	@PostMapping(value = "/uploadSummernoteImageFile")
