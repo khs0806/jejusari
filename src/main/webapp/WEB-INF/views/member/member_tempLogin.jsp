@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.css">
 <link rel="stylesheet" href="${root}/css/member/member_update.css">
+
 </head>
 <body>
 	<div id="content">

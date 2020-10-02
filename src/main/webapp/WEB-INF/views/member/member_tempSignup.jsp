@@ -12,7 +12,6 @@
 <script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
 	    $("input:radio[name=member_level]").click(function(){  	 
 	        if($("input[name=member_level]:checked").val() == "BR"){
 	 			$("#if_broker").show();
@@ -52,7 +51,6 @@
 			obj.member_name.focus();
 			return false;
 		}
-		
 
 		var checked_items = 0;
 		for(i = 0; i < obj.elements.length; i++){
@@ -65,10 +63,6 @@
 		}
 		return true;
 	}
-	
-	
-	
-	
 </script>
 </head>
 <body>
@@ -82,14 +76,26 @@
 		</div>
 		
 		<div class="nickname">
+			<div class="label">비밀번호</div>
+			<input type="password" name="member_password" class="col-sm-3 h-25 form-control"/>
+		</div>
+		<div class="nickname">
+			<div class="label">비밀번호 확인</div>
+			<input type="password" name="member_password_chk" class="col-sm-3 h-25 form-control"/>
+		</div>
+		<div class="nickname">
 			<div class="label">이름</div>
 			<input type="text" name="member_name" class="col-sm-3 h-25 form-control"/>
 		</div>
-		
+		<div class="nickname">
+			<div class="label">생년월일</div>
+			<input type="text" name="member_name" class="col-sm-3 h-25 form-control"/>
+		</div>
+			
 		<div class="email">
 			<div class="label">이메일</div>
 			<input type="text" name="member_email" class="col-sm-3 h-25 form-control"/>
-			
+			@
 			<select class="col-sm-3 h-25 custom-select" id="inputGroupSelect01" name="email">
 			    <option selected>선택하세요.</option>
 			    <option value="hanmail.net">hanmail.net</option>
@@ -109,11 +115,11 @@
 		<div class="member_level">
 			<div class="label">가입 유형</div>
 			<input type="radio" name="member_level" value="GE" id = "member_level"/>
-			일반회원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
+			<span>일반회원</span>		
 			<input type="radio" name="member_level" value="BR" id = "member_level"/>
-			중개업자
+			<span>중개업자</span>
 			<input type="radio" name="member_level" value="admin" id = "member_level"/>
-			관리자
+			<span>관리자</span>
 		</div>
 		
 		<div id="if_broker" style="display:none;">

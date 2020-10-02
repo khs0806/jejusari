@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -71,18 +71,18 @@ public class MemberController {
 
 	// 임시 로그인
 	@PostMapping("/member/templogin")
-	public String temLogin(HttpSession session, MemberDto memberDto, Model model) {
+	public String temLogin(HttpSession session, MemberDto memberDto, Model model, RedirectAttributes rttr) {
 		
 		logger.info(memberDto.toString());
 		
 		MemberDto member = memberService.tempLogin(memberDto);
 		
 		if (member == null) {
-			model.addAttribute("msg", "아이디가 잘못 되었습니다.");
-			return "redirect:/main";
+			rttr.addFlashAttribute("msg", "failure");
+			return "redirect:/member/login";
 		}
 		
-		logger.info("member_id : {}", member.getMember_id());
+		logger.info(member.toString());
 		
 		session.setAttribute("member_id", member.getMember_id());
 		session.setAttribute("member_name", member.getMember_name());
@@ -102,7 +102,7 @@ public class MemberController {
 		
 		return ResponseEntity.ok(check);
 	}
-
+	
 	// 임시회원가입 뷰
 	@GetMapping("/member/tempjoin")
 	public String temJoin() {

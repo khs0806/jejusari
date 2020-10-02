@@ -56,6 +56,7 @@ public class MemberDaoImp implements MemberDao{
 	
 	@Override
 	public MemberDto tempLogin(MemberDto memberDto) {
+		System.out.println(memberDto.toString());
 		MemberDto member = session.selectOne("member_login", memberDto);
 		return member;
 	}

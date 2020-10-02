@@ -140,7 +140,7 @@ public class BoardServiceImp implements BoardService {
 			}
 		}
 
-		System.out.println("newsList : " + newsList);
+		System.out.println("newsList : " + newsList.size() + "개");
 
 		return newsList;
 
