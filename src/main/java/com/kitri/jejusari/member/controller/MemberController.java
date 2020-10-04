@@ -114,22 +114,19 @@ public class MemberController {
 	@PostMapping("/member/tempjoin")
 	public String temJoinDo(HttpServletRequest request, MemberDto memberDto, Model model,
 			@RequestParam Map<String, Object> map) {
+		logger.info(memberDto.toString());
+		String member_phone = request.getParameter("num1") + "-" + request.getParameter("num2") + "-"
+				+ request.getParameter("num3");
 
-		String member_phone = request.getParameter("no1") + "-" + request.getParameter("no2") + "-"
-				+ request.getParameter("no3");
-		String member_email = memberDto.getMember_email() + "@" + request.getParameter("email");
-
-		memberDto.setMember_email(member_email);
 		// 회원가입자가 일반회원이어서, 핸드폰 번호를 입력 안했을 경우
-		if (request.getParameter("no2").length() == 0 || request.getParameter("no3").length() == 0) {
+		if (request.getParameter("num2").length() == 0 || request.getParameter("num3").length() == 0) {
 			memberDto.setMember_phone(null);
 		} else {
 			// 중개업자인 경우
 			memberDto.setMember_phone(member_phone);
 		}
+		
 		logger.info(memberDto.toString());
-		memberDto.setMember_phone(member_phone);
-		memberDto.setMember_email(member_email);
 		int check = memberService.memberJoin(memberDto);
 
 		model.addAttribute("check", check);
@@ -180,14 +177,14 @@ public class MemberController {
 	@PostMapping("/member/joinOk")
 	public String memberJoin(HttpServletRequest request, MemberDto memberDto, Model model) {
 
-		String member_phone = request.getParameter("no1") + "-" + request.getParameter("no2") + "-"
-				+ request.getParameter("no3");
+		String member_phone = request.getParameter("num1") + "-" + request.getParameter("num2") + "-"
+				+ request.getParameter("num3");
 		
 		String email = memberDto.getMember_email() + "@" + request.getParameter("email");
 
 		memberDto.setMember_email(email);
 		// 회원가입자가 일반회원인 경우, 핸드폰 번호를 입력 안했을때
-		if (request.getParameter("no2").length() == 0 || request.getParameter("no3").length() == 0) {
+		if (request.getParameter("num2").length() == 0 || request.getParameter("num3").length() == 0) {
 			memberDto.setMember_phone(null);
 		} else {
 			// 중개업자인 경우

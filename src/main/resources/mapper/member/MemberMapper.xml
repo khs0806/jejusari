@@ -17,7 +17,9 @@
 			#{member_email}, 
 			#{member_phone, jdbcType=VARCHAR}, 
 			#{member_level}, 
-			sysdate
+			sysdate,
+			#{member_pwd}, 
+			#{member_birthday}
 		)
 	</insert>
 	

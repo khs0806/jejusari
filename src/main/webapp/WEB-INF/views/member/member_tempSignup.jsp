@@ -10,106 +10,42 @@
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.css">
 <link rel="stylesheet" href="${root}/css/member/member_signup.css">
 <script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
-<script type="text/javascript">
-	$(function(){
-	    $("input:radio[name=member_level]").click(function(){  	 
-	        if($("input[name=member_level]:checked").val() == "BR"){
-	 			$("#if_broker").show();
-	        }else{
-	        	$("#if_broker").hide();
-	        }
-	    });
-		
-	    $("#idCheck").click(function(){
-			var data = $("input[name=member_id]").val();
-		    console.log(data);
-	    	$.ajax({
-				url: "${root}/member/idcheck",
-				data: {
-					"member_id" : data
-				},
-				type: "POST",
-				success: function(resp) {
-					console.log(resp);
-					if (resp == 0) {
-						alert("아이디를 사용하실 수 있습니다.");
-					} else if (resp > 0) {
-						alert("아이디를 사용하실 수 없습니다.");
-					}
-				},
-				error: function(resp) {
-					console.log(resp);
-				}
-			});
-	    });
-	    
-	})
-	
-	function valCheck(obj) {
-		if(obj.member_name.value == "") {
-			alert("이름을 입력해주세요.");
-			obj.member_name.focus();
-			return false;
-		}
-
-		var checked_items = 0;
-		for(i = 0; i < obj.elements.length; i++){
-			if((obj.elements[i].name == "member_level") && (obj.elements[i].checked)) checked_items++;
-		}
-		if(checked_items == 0){
-			alert("유형을 선택해주세요.");
-			obj.member_level[0].focus();
-			return false;
-		}
-		return true;
-	}
-</script>
+<script type="text/javascript" src="${root}/javascript/member/member_signup.js"></script>
 </head>
 <body>
-	<form id="plus_info" action="${root}/member/tempjoin" method="post" onsubmit = "return valCheck(this)">
-		<div class="tit">임시 회원가입</div>
+	<form id="plus_info" onsubmit="return validate(this)" action="${root}/member/tempjoin" method="post">
+		<div class="tit">회원가입</div>
 		
 		<div class="nickname">
 			<div class="label">아이디</div>
-			<input type="text" name="member_id" class="col-sm-3 h-25 form-control"/>
+			<input type="text" name="member_id" class="col-sm-4 h-25 form-control" maxlength="15" 
+				placeholder="6~20자 사이의 대소문자와 숫자만"/>
 			<button class="btn btn-outline-warning btn-sm" type="button" id="idCheck" style="margin-top:2px;">중복 확인</button>
 		</div>
 		
 		<div class="nickname">
 			<div class="label">비밀번호</div>
-			<input type="password" name="member_password" class="col-sm-3 h-25 form-control"/>
+			<input type="password" name="member_pwd" class="col-sm-4 h-25 form-control" maxlength="15" 
+				placeholder="8~12자,영문자/숫자/특수문자 포함"/>
 		</div>
 		<div class="nickname">
 			<div class="label">비밀번호 확인</div>
-			<input type="password" name="member_password_chk" class="col-sm-3 h-25 form-control"/>
+			<input type="password" name="member_pwd_chk" class="col-sm-4 h-25 form-control"/>
 		</div>
 		<div class="nickname">
 			<div class="label">이름</div>
-			<input type="text" name="member_name" class="col-sm-3 h-25 form-control"/>
+			<input type="text" name="member_name" class="col-sm-4 h-25 form-control" maxlength="15"/>
 		</div>
 		<div class="nickname">
 			<div class="label">생년월일</div>
-			<input type="text" name="member_name" class="col-sm-3 h-25 form-control"/>
+			<input type="text" name="member_birthday" class="col-sm-4 h-25 form-control" maxlength="15" 
+				placeholder="YYYYMMDD ex) 19910806"/>
 		</div>
 			
 		<div class="email">
 			<div class="label">이메일</div>
-			<input type="text" name="member_email" class="col-sm-3 h-25 form-control"/>
-			@
-			<select class="col-sm-3 h-25 custom-select" id="inputGroupSelect01" name="email">
-			    <option selected>선택하세요.</option>
-			    <option value="hanmail.net">hanmail.net</option>
-			    <option value="naver.com">naver.com</option>
-			    <option value="yahoo.co.kr">yahoo.co.kr</option>
-			    <option value="hotmail.com">hotmail.com</option>
-			    <option value="paran.com">paran.com</option>
-			    <option value="nate.com">nate.com</option>
-			    <option value="google.com">google.com</option>
-			    <option value="gmail.com">gmail.com</option>
-			    <option value="empal.com">empal.com</option>
-			    <option value="korea.com">korea.com</option>
-			    <option value="freechal.com">freechal.com</option>
-			  </select>
+			<input type="text" name="member_email" class="col-sm-5 h-25 form-control" autocomplete="off"
+			placeholder="ex) abcd12@naver.com"/>
 		</div>
 		
 		<div class="member_level">
@@ -126,22 +62,25 @@
 			<div class="msg">국가공간정보포털의 부동산중개업 정보에 등록된<br/>대표 공인중개사만 회원가입이 가능합니다.</div>
 			<div class="phone_num">
 				<div class="label2">대표공인중개사<br/>휴대폰 번호</div>
-				<select class="col-sm-2 h-25 custom-select" name="no1">
+				<select class="col-sm-2 h-25 custom-select" name="num1">
 					<option selected>010</option>
 					<option value="1">011</option>
 					<option value="2">016</option>
 				</select>
 				<div style="color:black;">-</div>
-				<input type="text" class="col-sm-2 h-25 form-control" name="no2">
+				<input type="text" class="col-sm-2 h-25 form-control" name="num2">
 				<div style="color:black;">-</div>
-				<input type="text" class="col-sm-2 h-25 form-control" name="no3">
+				<input type="text" class="col-sm-2 h-25 form-control" name="num3">
 			</div>	
 		</div>
 		
 		<div class="last_btn">
-			<input type="submit" value="완료" class="btn btn-warning btn-sm"/>
+			<input type="submit" value="완료" class="btn btn-warning btn-sm" />
 			<input type="reset" value="취소" class="btn btn-light btn-sm"/>
 		</div>
 	</form>
+	
+	
+	
 </body>
 </html>

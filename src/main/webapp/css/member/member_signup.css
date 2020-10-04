@@ -5,7 +5,11 @@
 	margin:100px auto;
 	width:700px;
 }
-
+input::placeholder {
+  color: red;
+  font-style: italic;
+  font-size: 12px;
+}
 .tit{
 	font-size:25px;
 	color:#ffc107;
