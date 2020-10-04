@@ -15,7 +15,7 @@ $(function(){
 		var data = $("input[name=member_id]").val();
 	    console.log(data);
     	$.ajax({
-			url: "${root}/member/idcheck",
+			url: "idcheck",
 			data: {
 				"member_id" : data
 			},

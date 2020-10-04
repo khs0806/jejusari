@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.css">
 <link rel="stylesheet" href="${root}/css/member/member_signup.css">
-<script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="${root}/javascript/member/member_signup.js"></script>
 </head>
 <body>

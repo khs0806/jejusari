@@ -25,7 +25,7 @@ public class MemberDaoImp implements MemberDao{
 	
 	@Override
 	public int member_id_check(String member_id) {
-		return session.selectOne("member_id_check",member_id);
+		return session.selectOne("member_id_check", member_id);
 	}
 
 	@Override
