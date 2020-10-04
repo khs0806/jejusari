@@ -13,6 +13,9 @@ public interface MemberDao {
 	// 아이디 중복 체크
 	public int member_id_check(String member_id);
 	
+	// 카카오 로그인시 회원가입 되있는지 체크
+	public int member_kakao_id_check(String member_kakao_id);
+	
 	// 회원탈퇴
 	public int member_delete(String member_id);
 	
@@ -28,20 +31,16 @@ public interface MemberDao {
 	// 마이페이지 카드 삭제 - 매물 번호
 	public List<String> getSalesNumber(String member_id);
 
-
 	public int memberCount();
 	
 	// 회원 리스트
 	public List<String> memberList(int startRow, int endRow);
 
-
 	// 임시 로그인
 	public MemberDto tempLogin(MemberDto memberDto);
-
 	
-	/*
-	 * // 임시 로그인 public MemberDto tempLogin(MemberDto memberDto);
-	 */
+	// 카카오 로그인 
+	public MemberDto kakaoLogin(MemberDto memberDto);
 	
 	// 회원 수정
 	public int memberUpdate(MemberDto memberDto);

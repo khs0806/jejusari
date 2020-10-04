@@ -144,21 +144,21 @@ public class MemberController {
 
 		// access_token으로 사용자의 카카오 로그인 정보를 가져온다.
 		HashMap<String, Object> userInfo = KakaoLoginAPI.getUserInfo(access_Token);
-
-		String member_id = (String) userInfo.get("id");
-		String member_name = (String) userInfo.get("nickname");
-		String member_email = (String) userInfo.get("email");
+		
+		String member_kakao_id = (String) userInfo.get("id");
+		String member_kakao_name = (String) userInfo.get("nickname");
+		String member_kakao_email = (String) userInfo.get("email");
 		
 		// 이미 가입되어있는 회원인지 확인한다.
-		int id_check = memberService.member_id_check(member_id);
-		System.out.println("id_check : " + id_check);
-		if (id_check > 0) {
+		int kakao_id_check = memberService.member_kakao_id_check(member_kakao_id);
+		System.out.println("kakao_id_check : " + kakao_id_check);
+		if (kakao_id_check > 0) {
 			// 이미 가입된 회원일 경우 바로 로그인
 			HttpSession session = request.getSession();
 			if (userInfo.get("id") != null) {
 				MemberDto memberDto = new MemberDto();
-				memberDto.setMember_id(member_id);
-				MemberDto member = memberService.tempLogin(memberDto);
+				memberDto.setMember_kakao_id(member_kakao_id);
+				MemberDto member = memberService.kakaoLogin(memberDto);
 				session.setAttribute("member_id", member.getMember_id());
 				session.setAttribute("member_name", member.getMember_name());
 				session.setAttribute("member_level", member.getMember_level());
@@ -167,9 +167,10 @@ public class MemberController {
 			return "redirect:/main";
 		}
 
-		model.addAttribute("signup_member_id", member_id);
-		model.addAttribute("signup_member_name", member_name);
-
+		model.addAttribute("member_kakao_id", member_kakao_id);
+		model.addAttribute("member_kakao_name", member_kakao_name);
+		model.addAttribute("member_kakao_email", member_kakao_email);
+		
 		return "member/member_signup.tiles";
 	}
 
@@ -179,10 +180,7 @@ public class MemberController {
 
 		String member_phone = request.getParameter("num1") + "-" + request.getParameter("num2") + "-"
 				+ request.getParameter("num3");
-		
-		String email = memberDto.getMember_email() + "@" + request.getParameter("email");
 
-		memberDto.setMember_email(email);
 		// 회원가입자가 일반회원인 경우, 핸드폰 번호를 입력 안했을때
 		if (request.getParameter("num2").length() == 0 || request.getParameter("num3").length() == 0) {
 			memberDto.setMember_phone(null);

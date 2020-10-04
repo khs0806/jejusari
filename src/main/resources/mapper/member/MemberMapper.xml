@@ -19,7 +19,8 @@
 			#{member_level}, 
 			sysdate,
 			#{member_pwd}, 
-			#{member_birthday}
+			#{member_birthday, jdbcType=VARCHAR},
+			#{member_kakao_id, jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -28,11 +29,23 @@
 		select 
 		    member_id, 
 		    member_name, 
-		    member_level
+		    member_level 
 		from 
 		    member 
 		where 
 		    member_id = #{member_id} and member_pwd = #{member_pwd}
+	</select>
+	
+	<!-- 카카오 로그인 -->
+	<select id="member_kakao_login" resultType="com.kitri.jejusari.member.model.dto.MemberDto">
+		select 
+		    member_id, 
+		    member_name, 
+		    member_level 
+		from 
+		    member 
+		where 
+		    member_kakao_id = #{member_kakao_id}
 	</select>
 	
 	<!-- 관리자 회원 -->
@@ -49,6 +62,10 @@
         where
             member_number IN <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
     </delete>
+	
+	<select id="member_kakao_id_check" resultType="int">
+		select count(*) from member where member_kakao_id = #{member_kakao_id}
+	</select>
 	
 	<select id="member_id_check" resultType="int">
 		select count(*) from member where member_id = #{member_id}

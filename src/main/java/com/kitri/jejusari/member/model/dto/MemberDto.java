@@ -3,6 +3,7 @@ package com.kitri.jejusari.member.model.dto;
 public class MemberDto {
 	
 	private String member_id;
+	private String member_kakao_id;
 	private String member_pwd;
 	private int member_number;
 	private String member_name;
@@ -12,11 +13,18 @@ public class MemberDto {
 	private String member_level;
 	private String member_register_date;
 	
+	
 	public String getMember_id() {
 		return member_id;
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+	public String getMember_kakao_id() {
+		return member_kakao_id;
+	}
+	public void setMember_kakao_id(String member_kakao_id) {
+		this.member_kakao_id = member_kakao_id;
 	}
 	public String getMember_pwd() {
 		return member_pwd;
@@ -69,10 +77,10 @@ public class MemberDto {
 	
 	@Override
 	public String toString() {
-		return "MemberDto [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_number=" + member_number
-				+ ", member_name=" + member_name + ", member_birthday=" + member_birthday + ", member_email="
-				+ member_email + ", member_phone=" + member_phone + ", member_level=" + member_level
-				+ ", member_register_date=" + member_register_date + "]";
+		return "MemberDto [member_id=" + member_id + ", member_kakao_id=" + member_kakao_id + ", member_pwd="
+				+ member_pwd + ", member_number=" + member_number + ", member_name=" + member_name
+				+ ", member_birthday=" + member_birthday + ", member_email=" + member_email + ", member_phone="
+				+ member_phone + ", member_level=" + member_level + ", member_register_date=" + member_register_date
+				+ "]";
 	}
-	
 }

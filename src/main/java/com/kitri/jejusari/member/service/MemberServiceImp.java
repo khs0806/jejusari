@@ -32,6 +32,11 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
+	public int member_kakao_id_check(String member_kakao_id) {
+		return memberDao.member_kakao_id_check(member_kakao_id);
+	}
+
+	@Override
 	public int member_delete(String member_id) {
 
 		return memberDao.member_delete(member_id);
@@ -93,6 +98,11 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public MemberDto tempLogin(MemberDto memberDto) {
 		return memberDao.tempLogin(memberDto);
+	}
+
+	@Override
+	public MemberDto kakaoLogin(MemberDto memberDto) {
+		return memberDao.kakaoLogin(memberDto);
 	}
 
 	@Override

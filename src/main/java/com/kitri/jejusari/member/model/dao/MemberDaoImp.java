@@ -27,6 +27,11 @@ public class MemberDaoImp implements MemberDao{
 	public int member_id_check(String member_id) {
 		return session.selectOne("member_id_check",member_id);
 	}
+
+	@Override
+	public int member_kakao_id_check(String member_kakao_id) {
+		return session.selectOne("member_kakao_id_check", member_kakao_id);
+	}
 	
 	@Override
 	public int member_delete(String member_id) {
@@ -57,8 +62,13 @@ public class MemberDaoImp implements MemberDao{
 	@Override
 	public MemberDto tempLogin(MemberDto memberDto) {
 		System.out.println(memberDto.toString());
-		MemberDto member = session.selectOne("member_login", memberDto);
-		return member;
+		
+		return session.selectOne("member_login", memberDto);
+	}
+
+	@Override
+	public MemberDto kakaoLogin(MemberDto memberDto) {
+		return session.selectOne("member_kakao_login", memberDto);
 	}
 	
 	@Override
@@ -81,5 +91,5 @@ public class MemberDaoImp implements MemberDao{
 	public List<String> getSalesNumber(String member_id) {
 		return session.selectList("getScrapSalesNumber", member_id);
 	}
-	
+
 }
