@@ -20,55 +20,56 @@
 	#sales_list p{margin-bottom: 0.5rem;}
 	#sales_list #table_td .col-md-1, #sales_list #table_td .col-md-2{    line-height: 3rem}
 	.container{margin-top:100px; margin-bottom: 100px;}
+	.active {
+	    font-weight: 700;
+	}
 </style>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${root}/javascript/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="${root }/javascript/bootstrap/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>제주살이</title>
 <script type="text/javascript">
-	$(document).ready(function(){
-		
-		var url = window.location.pathname;
-		var url_param=url.substring(6);
-		console.log("url_param :"+url_param);
-		console.log(url_param);
-		console.log(url_param.indexOf("/"));
-		if(url_param.indexOf("/")!=-1){
-			var list_name=url_param.substring(0,url_param.indexOf("/"));
-			console.log("list_name: "+list_name);
-			$("#"+list_name).addClass("active");
-			console.log("#"+list_name);
-		}else{
-			$("#"+url_param).addClass("active");
-		}
+	$(function(){
+		$(".menu li a").click(function(){
+			$(".menu li").removeClass('active');
+			$(this).parent().addClass('active');
+		});
 	});
 </script>
 </head>
 <body>
-	<header class="navbar navbar-expand-lg navbar-light border-bottom">
-		<a class="navbar-brand" href="${root}/">제주살이</a>
-		
-		<div class="navbar-collapse justify-content-center" id="navbarColor01">
-			<ul class="navbar-nav mx-5">
-				<li class="nav-item mx-5" id="introduce"><a class="nav-link" href="${root}/introduce">소개
-						<span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item mx-5" id="sales"><a class="nav-link" href="${root}/sales">매물정보</a></li>
-				<li class="nav-item mx-5" id="notice"><a class="nav-link" href="${root}/notice">공지사항</a></li>
-				<li class="nav-item mx-5" id="news"><a class="nav-link" href="${root}/news">최신뉴스</a></li>
-			</ul>
-		</div>
-		<c:if test="${member_name == null}">
-			<ul class="navbar-nav ml-md-auto">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="${root}/">제주살이</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	
+	  <div class="collapse navbar-collapse" id="navbarColor03">
+	    <ul class="navbar-nav mx-auto menu">
+	      <li class="nav-item mx-5 ${active eq 'introduce' ? 'active' : ''}">
+	        <a class="nav-link" href="${root}/introduce">소개</a>
+	      </li>
+	      <li class="nav-item mx-5 ${active eq 'sales' ? 'active' : ''}">
+	        <a class="nav-link" href="${root}/sales">매물정보<span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item mx-5 ${active eq 'notice' ? 'active' : ''}">
+	        <a class="nav-link" href="${root}/notice">공지사항</a>
+	      </li>
+	      <li class="nav-item mx-5 ${active eq 'news' ? 'active' : ''}"> 
+	        <a class="nav-link" href="${root}/news">최신뉴스</a>
+	      </li>
+	    </ul>
+	    <c:if test="${member_name == null}">
+			<ul class="navbar-nav my-2 my-lg-0">
 				<li class="nav-item"><a class="nav-link" href="${root}/member/login" style="font-size:15px;">로그인</a></li>
 			</ul>
-			<ul class="navbar-nav ml-md-auto">
+			<ul class="navbar-nav my-2 my-lg-0">
 				<li class="nav-item"><a class="nav-link" href="${root}/member/tempjoin" style="font-size:15px;">회원가입</a></li>
 			</ul>
 		</c:if>
 		<c:if test="${member_name != null}">
 			<span>${member_name} 님 환영합니다.</span>
-			<ul class="navbar-nav ml-md-auto">
+			<ul class="navbar-nav my-2 my-lg-0">
 				<%-- <li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/authorize?client_id=8c08273a21863da84621e6bb6aca71ee&redirect_uri=http://localhost:8282${root}&response_type=code">로그인</a></li> --%>
 				<c:choose>
 					<c:when test="${member_id ne 'admin'}">
@@ -79,9 +80,8 @@
 					</c:when>
 				</c:choose>
 				<li class="nav-item"><a class="nav-link" href="${root}/member/logout" style="font-size:15px;">로그아웃</a></li>
-<!-- 			<li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/logout?client_id=47d269828391ebdbbd9ef43e5d60962c&logout_redirect_uri=http://localhost:8282/jeju/member/logout" style="font-size:15px;">로그아웃</a></li> -->
+	<!-- 			<li class="nav-item"><a class="nav-link" href="https://kauth.kakao.com/oauth/logout?client_id=47d269828391ebdbbd9ef43e5d60962c&logout_redirect_uri=http://localhost:8282/jeju/member/logout" style="font-size:15px;">로그아웃</a></li> -->
 			</ul>
-			
 		</c:if>
-		
-	</header>
+	  </div>
+	</nav>

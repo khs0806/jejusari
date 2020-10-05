@@ -45,8 +45,9 @@ public class BoardController {
 	
 	// 사이트 소개
 	@GetMapping("/introduce")
-	public String introduce() {
+	public String introduce(Model model) {
 
+		model.addAttribute("active", "introduce");
 		return "main/introduce.tiles";
 	}
 	
@@ -55,9 +56,9 @@ public class BoardController {
 	public String news(Model model) {
 
 		List<Map<String, Object>> newsList = boardService.newsList();
-
 		model.addAttribute("newsList", newsList);
-
+		model.addAttribute("active", "news");
+		
 		return "news/news_list.tiles";
 	}
 	
@@ -69,7 +70,8 @@ public class BoardController {
 		System.out.println(noticeList);
 
 		model.addAttribute("noticeList", noticeList);
-
+		model.addAttribute("active", "notice");
+		
 		return "notice/notice_list.tiles";
 	}
 	
@@ -78,7 +80,6 @@ public class BoardController {
 	public String noticeDetail(int notice_number, Model model) {
 
 		NoticeDto noticeDto = boardService.noticeDetail(notice_number);
-
 		model.addAttribute("noticeDto", noticeDto);
 
 		return "notice/notice_read.tiles";

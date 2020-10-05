@@ -48,6 +48,7 @@ public class SalesController {
 		Map<String, Object> hmap = salesService.salesList(salesDto);
 		model.addAttribute("salesList", hmap.get("salesList"));
 		model.addAttribute("pageMaker", hmap.get("pageMaker"));
+		model.addAttribute("active", "sales");
 		
 		return "sales/sales_list.tiles";
 	}

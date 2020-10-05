@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="footer">
-	<div id="footer_body" class="mt-5 mb-3" >
-		<div id="happycall">
+	<div id="footer_body" class="mt-5 mb-3 row" >
+		<div id="happycall" class="col-lg-4">
 			<div class="center">고객센터</div>
 			
 			<div class="ques">
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		
-		<div id="exp_kar">
+		<div id="exp_kar" class="col-lg-4">
 			<div class="about">
 				<ul>
 					<li><a href="#">제주살이소개</a></li>
@@ -61,14 +61,6 @@
 				</ul>
 			</div>
 		</div>
-		
-		<!-- <div id="certi">
-			<ul>
-				<li><a href="#">certification 1</a></li>
-				<li><a href="#">certification 2</a></li>
-				<li><a href="#">certification 3</a></li>
-			</ul>
-		</div> -->
 	</div>
 </div>
 </body>

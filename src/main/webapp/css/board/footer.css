@@ -16,10 +16,10 @@ li {
 }
 
 #footer_body {
-	margin: auto 200px;
+	margin: 0 auto;
 	border:0px solid red;
-	float:left;
-	height:300px;
+	height:400px;
+	width:1300px;
 }
 
 #footer_body a{
