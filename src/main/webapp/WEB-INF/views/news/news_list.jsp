@@ -10,7 +10,10 @@
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="${root}/css/news/news_list.css">
 <style type="text/css">
-	a {color: black; text-decoration: none !important;}
+a {color: black; text-decoration: none !important;}
+.table {
+    width: 110%;
+}
 </style>
 </head>
 <body>
