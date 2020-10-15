@@ -95,14 +95,14 @@ $(document).ready(function(){
 				<div class="col-md-2"><strong>등급</strong></div>
 				<div class="col-md-3"><strong>가입일시</strong></div>
 			</div>
-		<c:forEach var="MemberDto" items="${MemberList}">	
+		<c:forEach var="member" items="${MemberList}">	
 			<div class="row border-bottom" id="table_td">
-				<div class="col-md-1"><input type="checkbox" value="${MemberDto.member_number}" name="drop"/></div>
-				<div class="col-md-1">${MemberDto.member_number}</div>
-				<div class="col-md-2"><p><strong>${MemberDto.member_id}</strong></p></div>
-				<div class="col-md-3">${MemberDto.member_email}</div>
-				<div class="col-md-2">${MemberDto.member_level}</div>
-				<div class="col-md-3">${MemberDto.member_register_date}</div>
+				<div class="col-md-1"><input type="checkbox" value="${member.member_number}" name="drop"/></div>
+				<div class="col-md-1">${member.member_number}</div>
+				<div class="col-md-2"><p><strong>${member.member_id}</strong></p></div>
+				<div class="col-md-3">${member.member_email}</div>
+				<div class="col-md-2">${member.member_level}</div>
+				<div class="col-md-3">${member.member_register_date}</div>
 			</div>
 		</c:forEach>
 		</div>

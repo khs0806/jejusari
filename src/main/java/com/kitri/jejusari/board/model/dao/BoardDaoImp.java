@@ -12,7 +12,7 @@ import com.kitri.jejusari.board.model.dto.NoticeDto;
 import com.kitri.jejusari.board.model.dto.ReportDto;
 
 @Repository
-public class BoardDaoImp implements BoardDao{
+public class BoardDaoImp implements BoardDao {
 	
 	@Autowired
 	SqlSessionTemplate session;

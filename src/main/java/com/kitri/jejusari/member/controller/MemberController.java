@@ -259,13 +259,14 @@ public class MemberController {
 
 	// 회원 관리
 	@GetMapping("/member/admin")
-	public String adminMemberList(HttpServletRequest request) {
+	public ModelAndView adminMemberList(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		
 		mav.addObject("request", request);
-
 		memberService.getMemberList(mav);
-
-		return "admin/member_admin.tiles";
+		mav.setViewName("admin/member_admin.tiles");
+		
+		return mav;
 
 	}
 
@@ -273,11 +274,8 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/member/drop")
 	public int dropMember(@RequestParam(value = "drop[]") List<String> list) {
-
 		int dropUser = memberService.dropMember(list);
-
 		return dropUser;
-
 	}
 
 }

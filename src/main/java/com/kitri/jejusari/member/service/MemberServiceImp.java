@@ -66,14 +66,13 @@ public class MemberServiceImp implements MemberService {
 			// startRow, endRow
 			memberList = memberDao.memberList(startRow, endRow);
 		}
-
-		mav.addObject("MemberList", memberList);
+		
 		System.out.println(memberList);
-
+		mav.addObject("MemberList", memberList);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("count", count);
-
+		
 	}
 
 	@Override
