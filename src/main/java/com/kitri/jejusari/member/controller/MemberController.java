@@ -259,14 +259,13 @@ public class MemberController {
 
 	// 회원 관리
 	@GetMapping("/member/admin")
-	public ModelAndView adminMemberList(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
+	public String adminMemberList(HttpServletRequest request, Model model) {
 		
-		mav.addObject("request", request);
-		memberService.getMemberList(mav);
-		mav.setViewName("admin/member_admin.tiles");
+		int pageNumber = (int) request.getAttribute("pageNumber");
+		List<String> memberList = memberService.getMemberList(pageNumber, model);
 		
-		return mav;
+		model.addAttribute("MemberList", memberList);
+		return "admin/member_admin.tiles";
 
 	}
 

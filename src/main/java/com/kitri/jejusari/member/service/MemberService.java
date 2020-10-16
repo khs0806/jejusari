@@ -3,6 +3,7 @@ package com.kitri.jejusari.member.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.board.model.dto.NoticeDto;
@@ -23,7 +24,7 @@ public interface MemberService {
 	public int member_delete(String member_id);
 
 	// 회원리스트
-	public void getMemberList(ModelAndView mav);
+	public List<String> getMemberList(int pageNumber, Model model);
 	
 	// 회원삭제
 	public int dropMember(List<String> list);

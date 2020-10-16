@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.jejusari.member.model.dao.MemberDao;
@@ -43,16 +44,13 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
-	public void getMemberList(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
+	public List<String> getMemberList(int pageNumber, Model model) {
 
 		// 페이징
-		String pageNumber = request.getParameter("pageNumber");
 		System.out.println("pageNumber" + pageNumber);
-		if (pageNumber == null)
-			pageNumber = "1";
-		int currentPage = Integer.parseInt(pageNumber); // 요청한 페이지
+		if (pageNumber == 0)
+			pageNumber = 1;
+		int currentPage = pageNumber; // 요청한 페이지
 		int boardSize = 10; // [1] start:1, end:10 [2] start:11, end:20
 
 		int startRow = (currentPage - 1) * boardSize + 1; // 1 11 21 31
@@ -65,14 +63,14 @@ public class MemberServiceImp implements MemberService {
 		if (count > 0) {
 			// startRow, endRow
 			memberList = memberDao.memberList(startRow, endRow);
+			System.out.println(memberList);
 		}
 		
-		System.out.println(memberList);
-		mav.addObject("MemberList", memberList);
-		mav.addObject("boardSize", boardSize);
-		mav.addObject("currentPage", currentPage);
-		mav.addObject("count", count);
+		model.addAttribute("boardSize", boardSize);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("count", count);
 		
+		return memberList;
 	}
 
 	@Override
