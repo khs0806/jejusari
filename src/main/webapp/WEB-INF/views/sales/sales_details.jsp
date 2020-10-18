@@ -35,6 +35,56 @@
 		
 		var opac_num=(${factorMap.factor_total}/${factor_all_avg})*100
 		$(".factor_img").css("filter","opacity("+opac_num+")");
+
+		// 주유소 지수 색 투명도
+		var factor_gas = ${factorMap.factor_gas}
+		if (factor_gas <= 5) {
+			$(".factor_gas").css("filter","opacity(0.3)");
+		} else if (factor_gas > 5 && factor_gas <= 10) {
+			$(".factor_gas").css("filter","opacity(0.7)");
+		} else {
+			$(".factor_gas").css("filter","opacity(1)");
+		}
+
+		// 병원 지수 색 투명도
+		var factor_hospital = ${factorMap.factor_hospital}
+		if (factor_hospital <= 5) {
+			$(".factor_hospital").css("filter","opacity(0.3)");
+		} else if (factor_gas > 5 && factor_gas <= 10) {
+			$(".factor_hospital").css("filter","opacity(0.7)");
+		} else {
+			$(".factor_hospital").css("filter","opacity(1)");
+		}
+
+		// 관광명소 지수 색 투명도
+		var factor_tour = ${factorMap.factor_tour}
+		if (factor_tour <= 5) {
+			$(".factor_tour").css("filter","opacity(0.3)");
+		} else if (factor_gas > 5 && factor_gas <= 10) {
+			$(".factor_tour").css("filter","opacity(0.7)");
+		} else {
+			$(".factor_tour").css("filter","opacity(1)");
+		}
+
+		// 공공기관 지수 색 투명도
+		var factor_public = ${factorMap.factor_public}
+		if (factor_public <= 5) {
+			$(".factor_public").css("filter","opacity(0.3)");
+		} else if (factor_gas > 5 && factor_gas <= 10) {
+			$(".factor_public").css("filter","opacity(0.7)");
+		} else {
+			$(".factor_public").css("filter","opacity(1)");
+		}
+
+		// 마켓 지수 색 투명도
+		var factor_mart = ${factorMap.factor_mart}
+		if (factor_mart <= 5) {
+			$(".factor_mart").css("filter","opacity(0.3)");
+		} else if (factor_gas > 5 && factor_gas <= 10) {
+			$(".factor_mart").css("filter","opacity(0.7)");
+		} else {
+			$(".factor_mart").css("filter","opacity(1)");
+		}
 		
 		if(${factorMap.factor_total}<=${factor_all_avg}){
 			$(".factor_img").css("filter","opacity(0.5)");
@@ -79,18 +129,22 @@
 
 		//옵션 이미지 변경
 		if(${salesDto.sales_full!=1}){
+			$(".opt_full").attr("src", "${root}/img/armchair.png");
 			$(".opt_full").css("filter","invert(80%)");
 			$(".opt_full_msg").css("filter","invert(80%)");
 		}
 		if(${salesDto.sales_parking!=1}){
+			$(".opt_parking").attr("src", "${root}/img/parking.png");
 			$(".opt_parking").css("filter","invert(80%)");
 			$(".opt_parking_msg").css("filter","invert(80%)");
 		}
 		if(${salesDto.sales_cctv!=1}){
+			$(".opt_cctv").attr("src", "${root}/img/camera.png");
 			$(".opt_cctv").css("filter","invert(80%)");
 			$(".opt_cctv_msg").css("filter","invert(80%)");
 		}
 		if(${salesDto.sales_ele!=1}){
+			$(".opt_ele").attr("src", "${root}/img/elevator.png");
 			$(".opt_ele").css("filter","invert(80%)");
 			$(".opt_ele_msg").css("filter","invert(80%)");
 		}
@@ -279,28 +333,28 @@
 		<div class="all_opt">
 			<div class="opt">
 				<ul>
-					<li><img class="opt_full" src="${root}/img/armchair.png"
+					<li><img class="opt_full" src="${root}/img/armchairColor.png"
 						width="60px" height="60px" /></li>
 					<li class="opt_full_msg">풀옵션</li>
 				</ul>
 			</div>
 			<div class="opt">
 				<ul>
-					<li><img class="opt_parking" src="${root}/img/parking.png"
+					<li><img class="opt_parking" src="${root}/img/parkingColor.png"
 						width="60px" height="60px" /></li>
 					<li class="opt_parking_msg">주차장</li>
 				</ul>
 			</div>
 			<div class="opt">
 				<ul>
-					<li><img class="opt_cctv" src="${root}/img/camera.png"
+					<li><img class="opt_cctv" src="${root}/img/cameraColor.png"
 						width="60px" height="60px" /></li>
 					<li class="opt_cctv_msg">CCTV</li>
 				</ul>
 			</div>
 			<div class="opt">
 				<ul>
-					<li><img class="opt_ele" src="${root}/img/elevator.png"
+					<li><img class="opt_ele" src="${root}/img/elevatorColor.png"
 						width="60px" height="60px" /></li>
 					<li class="opt_ele_msg">엘리베이터</li>
 				</ul>
@@ -314,14 +368,14 @@
 		<div class="all_index">
 			<div class="index">
 				<ul>
-					<li><img src="${root}/img/gas.png" width="50px" height="50px" /></li>
+					<li><img class="factor_gas" src="${root}/img/gasstationColor.png" width="50px" height="50px" /></li>
 					<li>주유소</li>
 					<li>${factorMap.factor_gas}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
-					<li><img src="${root }/img/market.png" width="50px"
+					<li><img class="factor_mart" src="${root}/img/marketColor.png" width="50px"
 						height="50px" /></li>
 					<li>대형마트</li>
 					<li>${factorMap.factor_mart}</li>
@@ -329,14 +383,14 @@
 			</div>
 			<div class="index">
 				<ul>
-					<li><img src="${root}/img/hall.png" width="50px" height="50px" /></li>
+					<li><img class="factor_public" src="${root}/img/hallColor.png" width="50px" height="50px" /></li>
 					<li>공공기관</li>
 					<li>${factorMap.factor_public}</li>
 				</ul>
 			</div>
 			<div class="index">
 				<ul>
-					<li><img src="${root}/img/hospital.png" width="50px"
+					<li><img class="factor_hospital" src="${root}/img/hospitalColor.png" width="50px"
 						height="50px" /></li>
 					<li>병원</li>
 					<li>${factorMap.factor_hospital}</li>
@@ -344,7 +398,7 @@
 			</div>
 			<div class="index">
 				<ul>
-					<li><img src="${root}/img/entertainment.png" width="50px"
+					<li><img class="factor_tour" src="${root}/img/entertainmentColor.png" width="50px"
 						height="50px" /></li>
 					<li>관광</li>
 					<li>${factorMap.factor_tour}</li>

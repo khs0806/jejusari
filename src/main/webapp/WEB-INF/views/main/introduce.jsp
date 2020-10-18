@@ -26,35 +26,35 @@
 
 			<div class="about_tot">
 				<div class="about">
-					<img src="${root}/img/gas.png" width="50px" height="50px"/>
+					<img src="${root}/img/gasstationColor.png" width="50px" height="50px"/>
 					<ul>
 						<li>주유소 지수</li>
 						<li>매물 주택에서 3km이내에 있는 주유소의 개수가 점수로 표현됩니다.</li>
 					</ul>
 				</div>
 				<div class="about">
-					<img src="${root}/img/market.png" width="50px" height="50px"/>
+					<img src="${root}/img/marketColor.png" width="50px" height="50px"/>
 					<ul>
 						<li>대형마트 지수</li>
 						<li>매물 주택에서 3km이내에 있는 대형마트의 개수가 점수로 표현됩니다.</li>
 					</ul>
 				</div>
 				<div class="about">
-					<img src="${root}/img/hall.png" width="50px" height="50px"/>
+					<img src="${root}/img/hallColor.png" width="50px" height="50px"/>
 					<ul>
 						<li>공공기관 지수</li>
 						<li>매물 주택에서 3km이내에 있는 공공기관의 개수가 점수로 표현됩니다.</li>
 					</ul>
 				</div>
 				<div class="about">
-					<img src="${root}/img/hospital.png" width="50px" height="50px"/>
+					<img src="${root}/img/hospitalColor.png" width="50px" height="50px"/>
 					<ul>
 						<li>병원 지수</li>
 						<li>매물 주택에서 3km이내에 있는 병원의 개수가 점수로 표현됩니다..</li>
 					</ul>
 				</div>
 				<div class="about">
-					<img src="${root}/img/entertainment.png" width="50px" height="50px"/>
+					<img src="${root}/img/entertainmentColor2.png" width="50px" height="50px"/>
 					<ul>
 						<li>관광명소 지수</li>
 						<li>매물 주택에서 3km이내에 있는 관광명소의 개수가 점수로 표현됩니다.</li>
