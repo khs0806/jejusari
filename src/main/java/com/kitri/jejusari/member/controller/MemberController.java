@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,10 @@ public class MemberController {
 
 	@Autowired
 	MemberService memberService;
-
+	
+	@Autowired
+	BCryptPasswordEncoder pwdEncoder;
+	
 	// 회원 탈퇴
 	@GetMapping("/member/withdraw1")
 	public String withdraw() {
@@ -55,29 +59,21 @@ public class MemberController {
 		return "member/member_withdraw2.tiles";
 	}
 
-	// 로그인 뷰
+	// 로그인 화면
 	@GetMapping("/member/login")
 	public String loginView() {
-
 		return "member/member_login.tiles";
 	}
 
-	// 임시 로그인 뷰
-	@GetMapping("/member/templogin")
-	public String tempLoginView() {
-
-		return "member/member_tempLogin.tiles";
-	}
-
-	// 임시 로그인
-	@PostMapping("/member/templogin")
+	// 로그인
+	@PostMapping("/member/login")
 	public String temLogin(HttpSession session, MemberDto memberDto, Model model, RedirectAttributes rttr) {
-		
 		logger.info(memberDto.toString());
 		
 		MemberDto member = memberService.tempLogin(memberDto);
-		
-		if (member == null) {
+		boolean pwdMatch = pwdEncoder.matches(memberDto.getMember_pwd(), member.getMember_pwd());
+		logger.info("비밀번호 매칭? : {}", pwdMatch);
+		if (member == null || pwdMatch == false) {
 			rttr.addFlashAttribute("msg", "failure");
 			return "redirect:/member/login";
 		}
@@ -103,15 +99,15 @@ public class MemberController {
 		return ResponseEntity.ok(check);
 	}
 	
-	// 임시회원가입 뷰
-	@GetMapping("/member/tempjoin")
+	// 회원가입 뷰
+	@GetMapping("/member/join")
 	public String temJoin() {
 
 		return "member/member_tempSignup.tiles";
 	}
 
-	// 임시 회원가입
-	@PostMapping("/member/tempjoin")
+	// 회원가입
+	@PostMapping("/member/join")
 	public String temJoinDo(HttpServletRequest request, MemberDto memberDto, Model model,
 			@RequestParam Map<String, Object> map) {
 		logger.info(memberDto.toString());
@@ -126,16 +122,20 @@ public class MemberController {
 			memberDto.setMember_phone(member_phone);
 		}
 		
+		String inputPwd = memberDto.getMember_pwd();
+		String encodePwd = pwdEncoder.encode(inputPwd);
+		memberDto.setMember_pwd(encodePwd);
+		
 		logger.info(memberDto.toString());
 		int check = memberService.memberJoin(memberDto);
-
+		
 		model.addAttribute("check", check);
 
 		return "member/member_signupOk.tiles";
 	}
 
 	// 카카오로 로그인 or 회원가입
-	@GetMapping("/test/join")
+	@GetMapping("/member/kakaologin")
 	public String kakaoLogin(HttpServletRequest request, Model model) {
 
 		// 카카오의 인증과정
@@ -171,29 +171,8 @@ public class MemberController {
 		model.addAttribute("member_kakao_name", member_kakao_name);
 		model.addAttribute("member_kakao_email", member_kakao_email);
 		
+		// 가입되어 있는 회원이 아닌 경우 가입화면으로
 		return "member/member_signup.tiles";
-	}
-
-	// 회원가입
-	@PostMapping("/member/joinOk")
-	public String memberJoin(HttpServletRequest request, MemberDto memberDto, Model model) {
-
-		String member_phone = request.getParameter("num1") + "-" + request.getParameter("num2") + "-"
-				+ request.getParameter("num3");
-
-		// 회원가입자가 일반회원인 경우, 핸드폰 번호를 입력 안했을때
-		if (request.getParameter("num2").length() == 0 || request.getParameter("num3").length() == 0) {
-			memberDto.setMember_phone(null);
-		} else {
-			// 중개업자인 경우
-			memberDto.setMember_phone(member_phone);
-		}
-		logger.info(memberDto.toString());
-
-		int check = memberService.memberJoin(memberDto);
-		model.addAttribute("check", check);
-
-		return "member/member_signupOk.tiles";
 	}
 
 	// 로그아웃

@@ -113,7 +113,7 @@ function validate(forms) {
 </script>
 </head>
 <body>
-	<form id="plus_info" action="${root}/member/joinOk" method="post" onsubmit = "return validate(this)">
+	<form id="plus_info" action="${root}/member/join" method="post" onsubmit = "return validate(this)">
 		<div class="tit">추가 정보 입력</div>
 		<input type="hidden" name="member_kakao_id" value="${member_kakao_id}"/>
 		<div class="nickname">

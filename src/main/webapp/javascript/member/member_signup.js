@@ -55,11 +55,11 @@ function validate(forms) {
 		return false;
     }
 
-    if(!pwReg.test(pw)) {
+    /*if(!pwReg.test(pw)) {
 		alert("비밀번호는 숫자,문자,특수문자를 1회 이상 포함하여 8~12자 사이로 입력");
 		forms.member_pwd.focus();
 		return false;
-    }
+    }*/
 
     if(pw != forms.member_pwd_chk.value) {
 		alert("비밀번호가 다릅니다. 다시 확인");

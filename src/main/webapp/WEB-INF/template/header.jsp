@@ -64,7 +64,7 @@
 				<li class="nav-item"><a class="nav-link" href="${root}/member/login" style="font-size:15px;">로그인</a></li>
 			</ul>
 			<ul class="navbar-nav my-2 my-lg-0">
-				<li class="nav-item"><a class="nav-link" href="${root}/member/tempjoin" style="font-size:15px;">회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="${root}/member/join" style="font-size:15px;">회원가입</a></li>
 			</ul>
 		</c:if>
 		<c:if test="${member_name != null}">

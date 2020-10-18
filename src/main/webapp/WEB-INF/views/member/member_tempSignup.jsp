@@ -13,7 +13,7 @@
 <script type="text/javascript" src="${root}/javascript/member/member_signup.js"></script>
 </head>
 <body>
-	<form id="plus_info" onsubmit="return validate(this)" action="${root}/member/tempjoin" method="post">
+	<form id="plus_info" onsubmit="return validate(this)" action="${root}/member/join" method="post">
 		<div class="tit">회원가입</div>
 		
 		<div class="nickname">

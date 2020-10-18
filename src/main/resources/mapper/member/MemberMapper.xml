@@ -28,12 +28,13 @@
 	<select id="member_login" resultType="com.kitri.jejusari.member.model.dto.MemberDto">
 		select 
 		    member_id, 
-		    member_name, 
+		    member_name,
+		    member_pwd,
 		    member_level 
 		from 
 		    member 
 		where 
-		    member_id = #{member_id} and member_pwd = #{member_pwd}
+		    member_id = #{member_id}
 	</select>
 	
 	<!-- 카카오 로그인 -->
