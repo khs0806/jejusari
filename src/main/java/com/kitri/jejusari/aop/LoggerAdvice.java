@@ -6,11 +6,9 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,20 +23,9 @@ import com.google.common.base.Joiner;
 public class LoggerAdvice {
 	private static final Logger logger = LoggerFactory.getLogger(LoggerAdvice.class);
 	
-//	@Pointcut("within(com.kitri.jejusari..*.controller.*)")
-//	public void loggerPointCut() {}
 	
 	@Pointcut("within(com.kitri.jejusari..*.controller.*)")
 	public void onRequest() {}
-	
-//	@Before("loggerPointCut()")
-//	public void startLog(JoinPoint jp) {
-//		logger.info("-------------------------------");
-//		logger.info(jp.getSignature().toString());
-//		logger.info(Arrays.toString(jp.getArgs()));
-//		
-//	}
-
 
 	@Around("onRequest()") 
 	public Object doLogging(ProceedingJoinPoint pjp) throws Throwable {

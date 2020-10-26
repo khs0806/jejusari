@@ -1,12 +1,17 @@
 package com.kitri.jejusari.board.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.userdetails.User;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -219,5 +224,15 @@ public class BoardController {
 		model.addAttribute("check", check);
 
 		return "report/update";
+	}
+	
+	@GetMapping("/chatting")
+	public String chat(Model model, HttpSession session) {
+		
+		//사용자 정보 출력(세션)//
+//		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("userid", session.getAttribute("member_id"));
+		
+		return "chat/chattingview";
 	}
 }
