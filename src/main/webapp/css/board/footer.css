@@ -47,7 +47,7 @@ li {
 #footer_body > #happycall .ques .ask{
 	border:1px solid #CCCCCC;
 	font-size: 0.9em;
-	width:130px;
+	width:100px;
 	height: 40px;
 	float:left;
 	text-align: center;
@@ -69,7 +69,7 @@ li {
 #footer_body > #happycall .ques_side{
 	border:0px solid blue;
 	height: 40px;
-	margin-left:150px;
+	margin-left:105px;
 }
 
 #footer_body > #happycall .ques_side div:nth-child(1){
