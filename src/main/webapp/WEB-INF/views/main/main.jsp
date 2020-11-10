@@ -18,6 +18,18 @@
 		overflow:hidden;
 		text-overflow:ellipsis;
 	}
+	
+	#searchKeyword {
+		height: 60px;
+	    border-top-left-radius: 8px;
+	    line-height: 1.5;
+	    border-bottom-left-radius: 8px;
+	}
+	
+	#button-addon2 {
+		border-top-right-radius: 8px;
+    	border-bottom-right-radius: 8px;
+	}
 </style>
  <c:set var="root" value="${pageContext.request.contextPath}"/>
  
@@ -35,8 +47,8 @@
 	  <img src="${root}/img/cozy-seopji-1833560_1920.jpg" class="card-img" alt="...">
 	  <div class="card-img-overlay ">
 		<form action="${root}/sales?keyword=${keyword}" >
-		<div class="input-group mb-3">
-		  <input id="searchKeyword" type="text" class="form-control" name="sales_address" placeholder="지역명을 검색하세요" aria-label="Recipient's username" aria-describedby="button-addon2">
+		<div class="input-group mb-3" style="margin: 0 auto; width: 664px;">
+		  <input id="searchKeyword" type="text" class="form-control" name="sales_address" placeholder="원하시는 지역명, 지하철역, 단지명(아파트명)을 입력해주세요" aria-label="Recipient's username" aria-describedby="button-addon2">
 		  <div class="input-group-append">
 		    <button class="btn btn-warning" type="submit" id="button-addon2">매물찾기</button>
 		  </div>
