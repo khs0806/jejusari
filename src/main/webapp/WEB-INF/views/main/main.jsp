@@ -46,6 +46,9 @@
 	 <div class="card bg-dark text-white">
 	  <img src="${root}/img/cozy-seopji-1833560_1920.jpg" class="card-img" alt="...">
 	  <div class="card-img-overlay ">
+	  	<div>
+		    <p class="card-text">제 주 살 이</p>
+	  	</div>
 		<form action="${root}/sales?keyword=${keyword}" >
 		<div class="input-group mb-3" style="margin: 0 auto; width: 664px;">
 		  <input id="searchKeyword" type="text" class="form-control" name="sales_address" placeholder="원하시는 지역명, 지하철역, 단지명(아파트명)을 입력해주세요" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -54,7 +57,6 @@
 		  </div>
 		</div>
 		</form>
-	    <h5 class="card-title">제 주 살 이</h5>
 	    <p class="card-text">제주살이는 제주거주를 꿈꾸는 이들을 위한 부동산 매물 정보 제공 사이트입니다.</p>
 	    <p class="card-text">제주살이를 통해서 당신만의 특별한 제주살이를 실현하세요!</p>
 	  </div>
