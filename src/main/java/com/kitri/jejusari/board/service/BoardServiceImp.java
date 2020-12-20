@@ -60,13 +60,13 @@ public class BoardServiceImp implements BoardService {
 		ContainerFactory orderedKeyFactory = new ContainerFactory() {
 
 			@Override
-			public Map createObjectContainer() {
-				return new HashMap();
+			public Map<String, Object> createObjectContainer() {
+				return new HashMap<>();
 			}
 
 			@Override
-			public List creatArrayContainer() {
-				return new ArrayList();
+			public List<Object> creatArrayContainer() {
+				return new ArrayList<>();
 			}
 		};
 
@@ -78,7 +78,9 @@ public class BoardServiceImp implements BoardService {
 			e.printStackTrace();
 		}
 
-		HashMap map = (HashMap) obj;
+		@SuppressWarnings("unchecked")
+		HashMap<String, Object> map = (HashMap<String, Object>) obj;
+		@SuppressWarnings("unchecked")
 		List<Map<String, Object>> newsList = (List<Map<String, Object>>) map.get("items");
 
 		for (int i = 0; i < newsList.size(); i++) {
