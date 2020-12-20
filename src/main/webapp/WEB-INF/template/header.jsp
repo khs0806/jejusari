@@ -11,10 +11,11 @@
 <link rel="stylesheet" href="${root}/css/board/board_main.css">
 <link rel="stylesheet" href="${root}/css/member/memberJoin.css">
 <link rel="stylesheet" href="${root}/css/bootstrap/bootstrap.min.css">
-<meta property="og:url" content="http://jejusari.shop:8080/jejusari" />
-<meta property="og:title" content="When Great Minds Don’t Think Alike" />
-<meta property="og:description" content="How much does culture influence creative thinking?" />
-<meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://jejusari.shop:8080/jejusari/main" />
+<meta property="og:title" content="제주살이" />
+<meta property="og:description" content="제주살이에 오신걸 환영합니다!" />
+<meta property="og:image" content="https://www.jeju.go.kr/files/link/67e92970-f08d-4a45-a4dc-da751fd454df.png" />
 <style type="text/css">
 	a {color: black; text-decoration: none !important;}
 	#addr_detail{display: none;}
