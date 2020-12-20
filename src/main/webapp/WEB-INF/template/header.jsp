@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://jejusari.shop:8080/jejusari/main" />
 <meta property="og:title" content="제주살이" />
 <meta property="og:description" content="제주살이에 오신걸 환영합니다!" />
-<meta property="og:image" content="https://www.jeju.go.kr/files/link/67e92970-f08d-4a45-a4dc-da751fd454df.png" />
+<meta property="og:image" content="http://jejusari.shop:8080/jejusari/img/cozy-seopji-1833560_1920.jpg" />
 <style type="text/css">
 	a {color: black; text-decoration: none !important;}
 	#addr_detail{display: none;}
