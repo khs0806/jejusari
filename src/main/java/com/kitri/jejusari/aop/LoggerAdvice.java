@@ -32,6 +32,7 @@ public class LoggerAdvice {
 		HttpServletRequest request =
 				((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
+		@SuppressWarnings("unchecked")
 		Map<String, String[]> paramMap = request.getParameterMap();
 		String params = "";
 		if (paramMap.isEmpty() == false) {
