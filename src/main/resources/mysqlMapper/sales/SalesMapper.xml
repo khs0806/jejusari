@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kitri.jejusari.mapper.SalesMapper">
+	
+	<!-- 상세페이지 -->
+	<select id="sales_detail_select" parameterType="int" resultType="com.kitri.jejusari.sales.model.dto.SalesDto">
+		SELECT *
+		FROM 
+			sales 
+		WHERE 
+			SALES_NUMBER = #{sales_number}
+	</select>
+	
+	<select id="sales_broker_select" parameterType="String" resultType="com.kitri.jejusari.member.model.dto.MemberDto">
+		SELECT *
+		FROM 
+			member
+		WHERE 
+			MEMBER_ID = #{member_id} 
+	</select>
+	
+	<select id="sales_scrap_check" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM 
+			scrap
+		WHERE 
+			SALES_NUMBER = 	#{sales_number} 
+		AND MEMBER_ID = 	#{member_id}
+	</select>
+	
+	<insert id="sales_scrap_do" parameterType="java.util.Map">
+		INSERT INTO scrap 
+		VALUES 
+			(#{member_id}, seq_scrap_number.nextval, #{sales_number})
+	</insert>
+	
+	<delete id="sales_scrap_delete" parameterType="java.util.Map">
+		DELETE FROM scrap
+		WHERE 
+			MEMBER_ID = 	#{member_id}
+		AND SALES_NUMBER =	#{sales_number}
+	</delete>
+	
+	<select id="sales_scrap_count" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM 
+			scrap
+		WHERE 
+			SALES_NUMBER = #{sales_number}
+	</select>
+	
+	<select id="sales_select_img" parameterType="int" resultType="com.kitri.jejusari.sales.model.dto.SalesImgDto">
+		SELECT *
+		FROM sales_img
+		WHERE
+			SALES_NUMBER = #{sales_number}
+		ORDER BY
+			IMAGE_INDEX
+	</select>
+
+	<!--  -->
+	<select id="sales_getCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT COALESCE(COUNT(*), 0) 
+		FROM (
+			SELECT SALES_NUMBER 
+			FROM 
+				sales 
+			WHERE (
+				SALES_CHECK_BLIND IS NULL OR SALES_CHECK_BLIND = 0
+				)
+				<if test="sales_category_type!=null and !sales_category_type.equals('')">
+					AND SALES_CATEGORY_TYPE IN
+				<foreach collection="sales_category_type_list" item="item" index="index"  open="(" separator="," close=")">
+				    #{item}
+				</foreach>
+				</if>
+				<if test="sales_category_rent!=null">
+					<if test="!sales_category_rent.equals('')">
+						AND SALES_CATEGORY_RENT = #{sales_category_rent}
+					</if>
+				</if>
+				<if test="sales_address!=null and !sales_address.equals('')">
+					AND ((SALES_ADDRESS || SALES_TITLE) LIKE '%' || #{sales_address} || '%')
+				</if>
+				<if test="sales_option!=null and !sales_option.equals('')">
+					<foreach collection="sales_option_list" item="item" index="index"  open="and" separator="and">
+						SALES_OPTION LIKE '%' || #{item} || '%'
+					</foreach>
+				</if>
+		) A
+	</select>
+	
+	<select id="sales_list" parameterType="java.util.HashMap" resultType="com.kitri.jejusari.sales.model.dto.SalesDto">
+		SELECT A.* 
+		FROM (
+				SELECT * 
+				FROM sales
+				WHERE (
+					SALES_CHECK_BLIND IS NULL 
+					OR SALES_CHECK_BLIND = 0
+				) 
+  					<if test="sales_category_type!=null and !sales_category_type.equals('')">
+					AND SALES_CATEGORY_TYPE IN
+					<foreach collection="sales_category_type_list" item="item" index="index"  open="(" separator="," close=")">
+				        #{item}
+					</foreach>
+				</if>
+				<if test="sales_category_rent!=null">
+					<if test="!sales_category_rent.equals('')">
+						AND SALES_CATEGORY_RENT = #{sales_category_rent}
+					</if>
+				</if>
+				<if test="sales_address!=null and !sales_address.equals('')">
+					AND ( (SALES_ADDRESS || SALES_TITLE) LIKE '%' || #{sales_address} || '%') 
+				</if>
+				<if test="sales_option!=null and !sales_option.equals('')">
+					<foreach collection="sales_option_list" item="item" index="index"  open="and" separator="and">
+						SALES_OPTION LIKE '%'||#{item}||'%'
+					</foreach>
+				</if>
+		<![CDATA[	
+					ORDER BY SALES_NUMBER DESC		
+				) A 
+			LIMIT #{startRow}, 10
+		]]>
+	</select>
+	
+	
+	<insert id="sales_write" parameterType="com.kitri.jejusari.sales.model.dto.SalesDto">
+		INSERT INTO sales(
+			SALES_NUMBER, 
+			MEMBER_ID, 
+			SALES_DATE, 
+			SALES_TITLE, 
+			SALES_CONTENT, 
+			SALES_CATEGORY_TYPE, 
+			SALES_CATEGORY_RENT, 
+			SALES_DEPOSIT, 
+			SALES_COST, 
+			SALES_AREA, 
+			SALES_ADDRESS, 
+			SALES_OPTION, 
+			SALES_BUILD_YEAR, 
+			SALES_FLOOR
+		) VALUES (
+			null, 
+			#{member_id}, 
+			NOW(), 
+			#{sales_title}, 
+			#{sales_content}, 
+			#{sales_category_type}, 
+			#{sales_category_rent}, 
+			#{sales_deposit}, 
+			#{sales_cost}, 
+			#{sales_area}, 
+			#{sales_address}, 
+			#{sales_option}, 
+			#{sales_build_year}, 
+			#{sales_floor} 
+		)
+	</insert>
+	
+	<delete id="sales_delete" parameterType="com.kitri.jejusari.sales.model.dto.SalesDto">
+		DELETE FROM sales
+		WHERE 
+			SALES_NUMBER = #{sales_number}
+	</delete>
+	
+	<update id="sales_update" parameterType="java.util.Map">
+		UPDATE sales SET 
+			SALES_TITLE = #{salesDto.sales_title},
+			SALES_CONTENT = #{salesDto.sales_content},
+			SALES_CATEGORY_TYPE = #{salesDto.sales_category_type},
+			SALES_CATEGORY_RENT = #{salesDto.sales_category_rent},
+			SALES_DEPOSIT = #{salesDto.sales_deposit}, 
+			SALES_COST = #{salesDto.sales_cost}, 
+			SALES_AREA = #{salesDto.sales_area}, 
+			SALES_ADDRESS = #{salesDto.sales_address}, 
+			SALES_OPTION = #{salesDto.sales_option}, 
+			SALES_BUILD_YEAR = #{salesDto.sales_build_year},
+			SALES_FLOOR = #{salesDto.sales_floor}
+		 WHERE 
+		 	SALES_NUMBER = #{salesDto.sales_number}
+	</update>
+	
+	
+	<select id="get_member_id" resultType="String">
+		SELECT MEMBER_ID 
+		FROM sales
+		WHERE SALES_NUMBER = #{sales_number}
+	</select>
+
+	<select id="get_address" resultType="String">
+		SELECT SALES_ADDRESS 
+		FROM sales
+		WHERE SALES_NUMBER = #{sales_number}
+	</select> 
+	
+	<!--  -->
+	<insert id="insert_factor">
+		INSERT INTO FACTOR values (
+			#{sales_number}, 
+			#{factor_total}, 
+			#{factor_gas}, 
+			#{factor_hospital}, 
+			#{factor_tour}, 
+			#{factor_public},
+			#{factor_mart}
+		)
+	</insert>
+	
+	<select id="get_factor" resultType="com.kitri.jejusari.common.LowerKeyMap">
+		SELECT * 
+		FROM factor 
+		WHERE SALES_NUMBER = #{sales_number}
+	</select>
+	
+	<update id="db_sales_update" parameterType="java.util.Map">
+		UPDATE sales
+		SET 
+		  	SALES_FACTOR_TOTAL = #{factor_total} 
+		WHERE SALES_NUMBER = 	 #{sales_number}
+	</update>
+	
+	<select id="factor_all_avg" resultType="float">
+		SELECT AVG(FACTOR_TOTAL) 
+		FROM factor
+	</select>
+	
+	<!--  등록한 매물의 sales_number 가져오기-->
+	<select id="get_sales_number" resultType="int">
+		SELECT *
+		FROM (
+		    SELECT SALES_NUMBER
+		    FROM sales
+		    WHERE MEMBER_ID = #{member_id}
+		    ORDER BY SALES_NUMBER DESC
+		    )
+		WHERE ROWNUM = 1
+	</select>
+	
+	<insert id = "salesImg_insert" parameterType = "com.kitri.jejusari.sales.model.dto.SalesImgDto">
+      INSERT INTO SALES_IMG (
+      		IMAGE_INDEX,
+      		SALES_NUMBER,
+      		IMAGE_URL) 
+      VALUES(1, #{sales_number}, #{image_url})
+   </insert>
+   
+</mapper>

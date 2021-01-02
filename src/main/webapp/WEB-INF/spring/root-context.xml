@@ -11,8 +11,8 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
-	<!-- DB 커넥션풀 -->
-	<bean id="driverManagerDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<!-- Oracle DB 커넥션풀 -->
+	<!-- <bean id="oracleDriverManagerDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.219.111:1521:xe"/>
 		<property name="username" value="jejusari"/>
@@ -20,12 +20,20 @@
 		<property name="maxActive" value="40"/>
 		<property name="maxIdle" value="20"/>
 		<property name="maxWait" value="3000"/>
+	</bean> -->
+	
+	<!-- MySQL DB 커넥션풀 -->
+	<bean id="mysqlDriverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://13.209.19.84:3306/jejusari?useSSL=false&amp;serverTimezone=UTC"/>
+		<property name="username" value="jejusari"/>
+		<property name="password" value="1234"/>
 	</bean>
 	
 	<!-- MyBatis -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="driverManagerDataSource"/>
-		<property name="mapperLocations" value="classpath:mapper/**/*.xml"/>
+		<property name="dataSource" ref="mysqlDriverManagerDataSource"/>
+		<property name="mapperLocations" value="classpath:mysqlMapper/**/*.xml"/>
 	</bean>
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -34,7 +42,7 @@
 
 	<!-- Transaction -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="driverManagerDataSource"/>
+		<property name="dataSource" ref="mysqlDriverManagerDataSource"/>
 	</bean>
 	
 </beans>

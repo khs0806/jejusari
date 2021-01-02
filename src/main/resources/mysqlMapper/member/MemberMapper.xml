@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kitri.jejusari.mapper.MemberMapper">
+	
+	<select id="member_id" resultType="String">
+		SELECT * FROM member
+	</select>
+	
+	<insert id="member_join">
+		INSERT INTO member (
+			member_id,
+			member_number,
+			member_name,
+			member_email,
+			member_phone,
+			member_level,
+			member_register_date,
+			member_birthday,
+			member_kakao_id,
+			member_pwd
+		) VALUES (
+			#{member_id}, 
+			null, 
+			#{member_name}, 
+			#{member_email}, 
+			#{member_phone, jdbcType=VARCHAR}, 
+			#{member_level}, 
+			NOW(),
+			#{member_birthday, jdbcType=VARCHAR},
+			#{member_kakao_id, jdbcType=VARCHAR},
+			#{member_pwd}
+		)
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="member_login" resultType="com.kitri.jejusari.member.model.dto.MemberDto">
+		SELECT 
+		    MEMBER_ID, 
+		    MEMBER_NAME,
+		    MEMBER_PWD,
+		    MEMBER_LEVEL 
+		FROM 
+		    member 
+		WHERE 
+		    MEMBER_ID = #{member_id}
+	</select>
+	
+	<!-- 카카오 로그인 -->
+	<select id="member_kakao_login" resultType="com.kitri.jejusari.member.model.dto.MemberDto">
+		SELECT 
+		    MEMBER_ID, 
+		    MEMBER_NAME, 
+		    MEMBER_LEVEL 
+		FROM 
+		    member 
+		WHERE 
+		    MEMBER_KAKAO_ID = #{member_kakao_id}
+	</select>
+	
+	<!-- 관리자 회원 -->
+	<!-- 회원 내역 리스트 -->
+	<select id="memberList" resultType="com.kitri.jejusari.member.model.dto.MemberDto">
+		SELECT * FROM member
+	</select>
+	
+	<!-- 회원 삭제 -->
+	<delete id="dropMember" parameterType="java.util.HashMap">
+        DELETE
+        FROM
+            member
+        WHERE
+            MEMBER_NUMBER IN <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+	
+	<select id="member_kakao_id_check" resultType="int">
+		SELECT COUNT(*) 
+		FROM member 
+		WHERE MEMBER_KAKAO_ID = #{member_kakao_id}
+	</select>
+	
+	<select id="member_id_check" resultType="int">
+		SELECT COUNT(*) 
+		FROM member 
+		WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="member_delete">
+		DELETE FROM member 
+		WHERE MEMBER_ID = #{member_id}
+	</delete>
+	
+	<!-- 내 스크랩 가져오기 -->
+	<select id="getScrap" parameterType="String" resultType="com.kitri.jejusari.sales.model.dto.SalesImgDto">
+		SELECT SALES_NUMBER, SALES_TITLE
+		FROM sales 
+		WHERE SALES_NUMBER IN (
+			SELECT SALES_NUMBER
+			FROM scrap
+			WHERE MEMBER_ID = #{member_id}
+		)
+	</select>
+	
+	<!-- 내 매물 가져오기 -->
+	<select id="getSales" parameterType="String" resultType="com.kitri.jejusari.sales.model.dto.SalesImgDto">
+		SELECT IMAGE_URL, S.SALES_NUMBER, L.SALES_TITLE
+		FROM sales_img S, sales L
+		WHERE S.SALES_NUMBER IN (
+            SELECT SALES_NUMBER
+            FROM sales
+            WHERE MEMBER_ID = #{member_id}
+        )
+        AND S.SALES_NUMBER=L.SALES_NUMBER
+		AND IMAGE_INDEX=1
+	</select>
+	
+	<!-- 매물번호 from 스크랩 게시판 -->
+	<!-- <select id="getScrapSalesNumber" parameterType="String" resultType="String">
+		select sales_number from scrap where member_id=#{member_id} order by scarp_number
+	</select> -->
+	
+	<!-- 매물번호 from 매물 게시판 -->
+	<!-- <select id="getSalesSalesNumber" parameterType="String" resultType="String">
+		select sales_number from sales where member_id=#{member_id}
+	</select> -->
+	
+	<select id="memberadmin_count" resultType="int">
+		select coalesce(count(*),0) from member
+	</select>
+	
+	<select id="memberadmin_list" parameterType="java.util.HashMap" resultType="com.kitri.jejusari.member.model.dto.MemberDto">
+		<![CDATA[
+			select b.* From (select rownum rnum, a.* From (select * from member order by member_number desc) a) b where b.rnum>=#{startRow} and b.rnum<=#{endRow}
+		]]>
+	</select>
+	
+	<update id="member_update">
+		update member set 
+			member_name = #{member_name},
+			member_phone = #{member_phone, jdbcType=VARCHAR},
+			member_email = #{member_email}
+		where member_id = #{member_id}
+	</update>
+	
+</mapper>

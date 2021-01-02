@@ -52,6 +52,14 @@
 		    <version>3.2.1</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
+		<dependency>
+		    <groupId>javax.inject</groupId>
+		    <artifactId>javax.inject</artifactId>
+		    <version>1</version>
+		</dependency>
+		
+		
 		<!-- AOP -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -165,6 +173,13 @@
 		    <version>1.1.2</version>
 		</dependency>
 		
+		<!-- MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
+        </dependency>
+		
 		<!-- 오라클 ojdbc는 따로 지원을 안하기 때문에 톰캣서버에 직접넣는다. -->
 		<!-- DB / spring-jdbc, mybatis, spring-mybatis, oracle(tomcat server) -->
 		<dependency>
@@ -224,9 +239,15 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Spring-test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
 		
 		<!-- JSON -->
 		<dependency>

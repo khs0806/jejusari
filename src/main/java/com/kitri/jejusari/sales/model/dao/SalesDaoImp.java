@@ -60,6 +60,7 @@ public class SalesDaoImp implements SalesDao {
 
 	@Override
 	public List<SalesDto> salesList(Map<String, Object> hmap) {
+		System.out.println(hmap.toString());
 		return session.selectList("sales_list", hmap);
 	}
 	
