@@ -9,6 +9,7 @@ public class SalesDto extends Criteria{
 	private String sales_title;				// 글 제목
 	private String sales_content;			// 글 내용
 	private String sales_category_type;		// 아파트/원룸/오피스텔 구분
+	private String[] sales_category_type_list;
 	private String sales_category_rent;		// 전월세 구분
 	private Integer sales_deposit;				// 보증금
 	private Integer sales_cost;					// 매매가 or 전월세
@@ -18,6 +19,7 @@ public class SalesDto extends Criteria{
 	private int sales_check_blind;			// 신고처리시 블라인드 처리 유무
 	private int sales_count;				//조회수
 	private String sales_option;			// 옵션
+	private String[] sales_option_list;
 	private int sales_build_year;			//준공년도
 	private String sales_floor;				//층수
 	
@@ -26,8 +28,7 @@ public class SalesDto extends Criteria{
 	private int sales_cctv;				//CCTV 유무
 	private int sales_ele;				//엘베 유무
 	
-	public SalesDto() {
-	}
+	public SalesDto() {}
 
 	public SalesDto(int sales_number, String member_id, String sales_date, String sales_title, String sales_content,
 			String sales_category_type, String sales_category_rent, int sales_deposit, int sales_cost,
@@ -104,8 +105,19 @@ public class SalesDto extends Criteria{
 
 	public void setSales_category_type(String sales_category_type) {
 		this.sales_category_type = sales_category_type;
+		setSales_category_type_list();
 	}
-
+	
+	public String[] getSales_category_type_list() {
+		return sales_category_type_list;
+	}
+	
+	public void setSales_category_type_list() {
+		if (getSales_category_type().split(",").length > 1) {
+			sales_category_type_list = getSales_category_type().split(",");
+		}
+	}
+	
 	public String getSales_category_rent() {
 		return sales_category_rent;
 	}
@@ -176,8 +188,18 @@ public class SalesDto extends Criteria{
 
 	public void setSales_option(String sales_option) {
 		this.sales_option = sales_option;
+		setSales_option_list();
 	}
 
+	public String[] getSales_option_list() {
+		return sales_option_list;
+	}
+	
+	public void setSales_option_list() {
+		if (getSales_option().split(",").length > 1) {
+			sales_option_list = getSales_option().split(",");
+		}
+	}
 
 	public int getSales_build_year() {
 		return sales_build_year;
@@ -227,6 +249,10 @@ public class SalesDto extends Criteria{
 	public void setSales_ele(int sales_ele) {
 		this.sales_ele = sales_ele;
 	}
+	
+	public int getBoardSize() {
+		return super.getBoardSize();
+	}
 
 	@Override
 	public String toString() {
@@ -240,6 +266,6 @@ public class SalesDto extends Criteria{
 				+ ", sales_parking=" + sales_parking + ", sales_cctv=" + sales_cctv + ", sales_ele=" + sales_ele + "]";
 	}
 
-
+	
 	
 }

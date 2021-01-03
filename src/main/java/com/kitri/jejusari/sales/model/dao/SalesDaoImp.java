@@ -49,8 +49,8 @@ public class SalesDaoImp implements SalesDao {
 	}
 
 	@Override
-	public int salesCount(Map<String, Object> hmap) {
-		return session.selectOne("sales_getCount", hmap);
+	public int salesCount(SalesDto salesDto) {
+		return session.selectOne("sales_getCount", salesDto);
 	}
 	
 	@Override
@@ -59,9 +59,8 @@ public class SalesDaoImp implements SalesDao {
 	}
 
 	@Override
-	public List<SalesDto> salesList(Map<String, Object> hmap) {
-		System.out.println(hmap.toString());
-		return session.selectList("sales_list", hmap);
+	public List<SalesDto> salesList(SalesDto salesDto) {
+		return session.selectList("sales_list", salesDto);
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ public interface SalesService {
 	
 	public int salesScrap(Map<String, Object> map);
 
-	public Map<String, Object> salesList(SalesDto salesDto);
+	public List<SalesDto> salesList(SalesDto salesDto);
 
 	public int salesWriteOk(SalesDto salesDto, String sageFile);
 	
@@ -33,4 +33,6 @@ public interface SalesService {
 	public String salesIdCheck(int sales_number);
 	
 	public String getAddress(int sales_number);
+	
+	public int salesCount(SalesDto salesDto);
 }

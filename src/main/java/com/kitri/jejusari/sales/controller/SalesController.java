@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.jejusari.common.PageMaker;
 import com.kitri.jejusari.member.model.dto.MemberDto;
 import com.kitri.jejusari.sales.model.dto.SalesDto;
 import com.kitri.jejusari.sales.service.SalesService;
@@ -45,9 +47,13 @@ public class SalesController {
 	@GetMapping("/sales")
 	public String salesList(Model model, SalesDto salesDto) {
 		
-		Map<String, Object> hmap = salesService.salesList(salesDto);
-		model.addAttribute("salesList", hmap.get("salesList"));
-		model.addAttribute("pageMaker", hmap.get("pageMaker"));
+		List<SalesDto> salesList = salesService.salesList(salesDto);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(salesDto);
+		pageMaker.setTotalCount(salesService.salesCount(salesDto));
+		
+		model.addAttribute("salesList", salesList);
+		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("active", "sales");
 		
 		return "sales/sales_list.tiles";

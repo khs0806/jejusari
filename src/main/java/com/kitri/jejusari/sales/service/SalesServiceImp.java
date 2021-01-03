@@ -175,43 +175,21 @@ public class SalesServiceImp implements SalesService {
 	}
 
 	@Override
-	public Map<String, Object> salesList(SalesDto salesDto) {
-
-		Map<String, Object> hmap = new HashMap<String, Object>();
-
-		if (salesDto.getSales_category_type() != null) {
-			String[] sales_category_type_list = salesDto.getSales_category_type().split(",");
-			hmap.put("sales_category_type_list", sales_category_type_list);
-		}
-
-		if (salesDto.getSales_option() != null) {
-			String[] sales_option_list = salesDto.getSales_option().split(",");
-			hmap.put("sales_option_list", sales_option_list);
-		}
-
-		hmap.put("sales_category_type", salesDto.getSales_category_type());
-		hmap.put("sales_option", salesDto.getSales_option());
-		hmap.put("sales_category_rent", salesDto.getSales_category_rent());
-		hmap.put("sales_address", salesDto.getSales_address()); // 검색키워드
+	public List<SalesDto> salesList(SalesDto salesDto) {
 
 		// count 사용해서 글이 아예 없는경우 페이징 사라지게
-		int count = salesDao.salesCount(hmap);
+		int count = salesDao.salesCount(salesDto);
 		List<SalesDto> salesList = null;
-
-		pageMaker.setCri(salesDto);
-		pageMaker.setTotalCount(count);
-
-		hmap.put("startRow", salesDto.getStartRow());
-		hmap.put("endRow", salesDto.getEndRow());
-
-		if (count > 0) {
-			// startRow, endRow
-			salesList = salesDao.salesList(hmap);
+		
+		for (String arg : salesDto.getSales_category_type_list()) {
+			System.out.println(arg);
 		}
-		hmap.put("salesList", salesList);
-		hmap.put("pageMaker", pageMaker);
-
-		return hmap;
+		
+		if (count > 0) {
+			salesList = salesDao.salesList(salesDto);
+		}
+		
+		return salesList;
 	}
 
 	@Override
@@ -286,6 +264,11 @@ public class SalesServiceImp implements SalesService {
 	@Override
 	public String getAddress(int sales_number) {
 		return salesDao.getAddress(sales_number);
+	}
+
+	@Override
+	public int salesCount(SalesDto salesDto) {
+		return salesDao.salesCount(salesDto);
 	}
 
 }

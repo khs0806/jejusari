@@ -62,7 +62,7 @@
 	</select>
 
 	<!--  -->
-	<select id="sales_getCount" parameterType="java.util.HashMap" resultType="int">
+	<select id="sales_getCount" parameterType="com.kitri.jejusari.sales.model.dto.SalesDto" resultType="int">
 		SELECT COALESCE(COUNT(*), 0) 
 		FROM (
 			SELECT SALES_NUMBER 
@@ -93,7 +93,7 @@
 		) A
 	</select>
 	
-	<select id="sales_list" parameterType="java.util.HashMap" resultType="com.kitri.jejusari.sales.model.dto.SalesDto">
+	<select id="sales_list" parameterType="com.kitri.jejusari.sales.model.dto.SalesDto" resultType="com.kitri.jejusari.sales.model.dto.SalesDto">
 		SELECT A.* 
 		FROM (
 				SELECT * 
@@ -124,7 +124,7 @@
 		<![CDATA[	
 					ORDER BY SALES_NUMBER DESC		
 				) A 
-			LIMIT #{startRow}, 10
+			LIMIT #{startRow}, #{boardSize}
 		]]>
 	</select>
 	
