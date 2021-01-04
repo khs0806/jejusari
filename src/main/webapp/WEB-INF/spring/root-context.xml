@@ -24,10 +24,10 @@
 	
 	<!-- MySQL DB 커넥션풀 -->
 	<bean id="mysqlDriverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://13.209.19.84:3306/jejusari?useSSL=false&amp;serverTimezone=UTC"/>
-		<property name="username" value="jejusari"/>
-		<property name="password" value="1234"/>
+		<property name="driverClassName" value="${mysql.driverClassName}"/>
+		<property name="url" value="${mysql.jdbcUrl}"/>
+		<property name="username" value="${mysql.username}"/>
+		<property name="password" value="${mysql.password}"/>
 	</bean>
 	
 	<!-- MyBatis -->
@@ -44,5 +44,5 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="mysqlDriverManagerDataSource"/>
 	</bean>
-	
+	<context:property-placeholder location="classpath:database.properties" />
 </beans>
