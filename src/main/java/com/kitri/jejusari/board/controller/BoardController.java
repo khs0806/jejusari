@@ -18,6 +18,9 @@ import com.kitri.jejusari.board.model.dto.NoticeDto;
 import com.kitri.jejusari.board.model.dto.ReportDto;
 import com.kitri.jejusari.board.service.BoardService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class BoardController {
 
@@ -33,6 +36,7 @@ public class BoardController {
 	// 메인
 	@GetMapping("/main")
 	public String main(HttpServletRequest request, Model model) {
+		log.debug("logback test~");
 
 		List<NoticeDto> noticeList = boardService.noticeList(model);
 		List<Map<String, Object>> newsList = boardService.newsList();

@@ -181,10 +181,6 @@ public class SalesServiceImp implements SalesService {
 		int count = salesDao.salesCount(salesDto);
 		List<SalesDto> salesList = null;
 		
-		for (String arg : salesDto.getSales_category_type_list()) {
-			System.out.println(arg);
-		}
-		
 		if (count > 0) {
 			salesList = salesDao.salesList(salesDto);
 		}
