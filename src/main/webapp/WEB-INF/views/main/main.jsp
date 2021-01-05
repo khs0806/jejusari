@@ -4,6 +4,13 @@
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style type="text/css">
+	@font-face {
+		font-family:"JejuGothic";
+		src:url("font/JejuGothic.ttf") format("truetype");
+		font-style:normal;
+		font-weight:normal;
+	}
+
 	#main_page .card {height: 700px; overflow: hidden;display: flex;
             align-items: center;
             justify-content: flex-end;}
@@ -11,6 +18,12 @@
 		width: 100%;
 	}
 	#main_page .card-img-overlay{padding:15rem; text-align: center;}
+	
+	#main_page .card-img-overlay .card-title{
+	    font-size: 2rem;
+   	 	margin-bottom: 50px;
+   	 	font-family:JejuGothic;
+	}
 	
 	#newsTitle, #noticeTitle {
 		list-style-position:inside;
@@ -24,6 +37,7 @@
 	    border-top-left-radius: 8px;
 	    line-height: 1.5;
 	    border-bottom-left-radius: 8px;
+	    padding-left: 45px;
 	}
 	
 	#button-addon2 {
@@ -39,15 +53,14 @@
  			alert('${msg}');
  		}
  	});
- 	
  </script>
  
  <div id="main_page">
 	 <div class="card bg-dark text-white">
 	  <img src="${root}/img/cozy-seopji-1833560_1920.jpg" class="card-img" alt="...">
-	  <div class="card-img-overlay ">
+	  <div class="card-img-overlay">
 	  	<div>
-		    <p class="card-text">제 주 살 이</p>
+		    <p class="card-title">제 주 살 이</p>
 	  	</div>
 		<form action="${root}/sales?keyword=${keyword}" >
 		<div class="input-group mb-3" style="margin: 0 auto; width: 664px;">
