@@ -192,8 +192,6 @@ public class SalesServiceImp implements SalesService {
 	public int salesWriteOk(SalesDto salesDto, String safeFile) {
 
 		safeFile = safeFile.substring(safeFile.indexOf("psd") - 1, safeFile.length());
-		System.out.println("salesFile : " + safeFile);
-		System.out.println(salesDto.toString());
 
 		int check = salesDao.salesWriteOk(salesDto);
 		SalesImgDto salesImgDto = new SalesImgDto();
@@ -204,25 +202,9 @@ public class SalesServiceImp implements SalesService {
 			sales_number = salesDao.getSalesNumber(salesDto.getMember_id());
 
 			String address = getAddress(sales_number);
-			System.out.println("address : " + address);
 			List<String> factors = KakaoLocalAPI.kakaoAPI(address);
-			System.out.println(factors.toString());
-			Map<String, Object> factorMap = new HashMap<String, Object>();
-			// 지수map에 데이터 담기
-			factorMap.put("factor_gas", factors.get(0));
-			factorMap.put("factor_mart", factors.get(1));
-			factorMap.put("factor_public", factors.get(2));
-			factorMap.put("factor_hospital", factors.get(3));
-			factorMap.put("factor_tour", factors.get(4));
-
-			// 지수 토탈점수 구하기
-			int sum = 0;
-			for (int i = 0; i < factors.size(); i++) {
-				sum += Integer.parseInt(factors.get(i));
-			}
-			factorMap.put("factor_total", sum);
+			Map<String, Object> factorMap = KakaoLocalAPI.getFactorMap(factors);
 			factorMap.put("sales_number", sales_number);
-			System.out.println(factorMap.toString());
 
 			// DB에 전달
 			salesDao.insertFactor(factorMap);
@@ -231,7 +213,6 @@ public class SalesServiceImp implements SalesService {
 			salesImgDto.setSales_number(sales_number);
 			salesDao.insertSalesImg(salesImgDto);
 		}
-		System.out.println(check);
 		salesImgDto.setImage_url(safeFile);
 		salesImgDto.setSales_number(sales_number);
 

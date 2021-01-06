@@ -50,7 +50,7 @@
 					<img src="${root}/img/hospitalColor.png" width="50px" height="50px"/>
 					<ul>
 						<li>병원 지수</li>
-						<li>매물 주택에서 3km이내에 있는 병원의 개수가 점수로 표현됩니다..</li>
+						<li>매물 주택에서 3km이내에 있는 병원의 개수가 점수로 표현됩니다.</li>
 					</ul>
 				</div>
 				<div class="about">

@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -144,6 +145,27 @@ public class KakaoLocalAPI {
 		}
 			
 		return factor;
+	}
+	
+	public static Map<String, Object> getFactorMap(List<String> factors){
+		
+		Map<String, Object> factorMap = new HashMap<String, Object>();
+		
+		// 지수map에 데이터 담기
+		factorMap.put("factor_gas", factors.get(0));
+		factorMap.put("factor_mart", factors.get(1));
+		factorMap.put("factor_public", factors.get(2));
+		factorMap.put("factor_hospital", factors.get(3));
+		factorMap.put("factor_tour", factors.get(4));
+
+		// 지수 토탈점수 구하기
+		int sum = 0;
+		for (int i = 0; i < factors.size(); i++) {
+			sum += Integer.parseInt(factors.get(i));
+		}
+		factorMap.put("factor_total", sum);
+		
+		return factorMap;
 	}
 	
 }
