@@ -151,7 +151,6 @@ public class MemberController {
 		
 		// 이미 가입되어있는 회원인지 확인한다.
 		int kakao_id_check = memberService.member_kakao_id_check(member_kakao_id);
-		System.out.println("kakao_id_check : " + kakao_id_check);
 		if (kakao_id_check > 0) {
 			// 이미 가입된 회원일 경우 바로 로그인
 			HttpSession session = request.getSession();
