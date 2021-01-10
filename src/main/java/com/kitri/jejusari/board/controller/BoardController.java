@@ -181,7 +181,7 @@ public class BoardController {
 	// 신고 관리자
 	@GetMapping("/report/admin") // pageNumber를 받는 파라미터를 추후에 paging 객체를 통해 받는걸로 수정해야함
 	public String reportAdmin(@RequestParam(value = "pageNumber", defaultValue = "1") String pageNumber, Model model) {
-
+		
 		List<ReportDto> reportList = boardService.getReportList(pageNumber, model);
 		model.addAttribute("reportList", reportList);
 
