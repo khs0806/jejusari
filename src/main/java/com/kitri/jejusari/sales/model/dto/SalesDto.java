@@ -113,7 +113,7 @@ public class SalesDto extends Criteria{
 	}
 	
 	public void setSales_category_type_list() {
-		if (getSales_category_type().split(",").length > 1) {
+		if (getSales_category_type().split(",").length > 0) {
 			sales_category_type_list = getSales_category_type().split(",");
 		}
 	}
@@ -196,7 +196,7 @@ public class SalesDto extends Criteria{
 	}
 	
 	public void setSales_option_list() {
-		if (getSales_option().split(",").length > 1) {
+		if (getSales_option().split(",").length > 0) {
 			sales_option_list = getSales_option().split(",");
 		}
 	}
