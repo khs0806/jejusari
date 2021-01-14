@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -236,9 +237,8 @@ public class MemberController {
 
 	// 회원 관리
 	@GetMapping("/member/admin")
-	public String adminMemberList(HttpServletRequest request, Model model) {
+	public String adminMemberList(HttpServletRequest request, Model model, @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
 		
-		int pageNumber = (int) request.getAttribute("pageNumber");
 		List<String> memberList = memberService.getMemberList(pageNumber, model);
 		
 		model.addAttribute("MemberList", memberList);

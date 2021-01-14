@@ -106,7 +106,7 @@ public class MemberServiceImp implements MemberService {
 			}
 		}
 				
-		return member;
+		return null;
 	}
 
 	@Override

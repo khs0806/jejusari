@@ -304,7 +304,7 @@ public class BoardServiceImp implements BoardService {
 		int currentPage = Integer.parseInt(pageNumber); // 요청한 페이지
 		int boardSize = 10; // [1] start:1, end:10 [2] start:11, end:20
 
-		int startRow = (currentPage - 1) * boardSize + 1; // 1 11 21 31
+		int startRow = (currentPage - 1) * boardSize; // 1 11 21 31
 		int endRow = currentPage * boardSize; // 10 20 30 40
 
 		// count 사용해서 글이 아예 없는경우 페이징 사라지게
