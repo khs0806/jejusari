@@ -32,9 +32,9 @@
 	</select>
 	
 	<insert id="sales_scrap_do" parameterType="java.util.Map">
-		INSERT INTO scrap 
+		INSERT INTO scrap (MEMBER_ID, SALES_NUMBER)
 		VALUES 
-			(#{member_id}, seq_scrap_number.nextval, #{sales_number})
+			(#{member_id}, #{sales_number})
 	</insert>
 	
 	<delete id="sales_scrap_delete" parameterType="java.util.Map">

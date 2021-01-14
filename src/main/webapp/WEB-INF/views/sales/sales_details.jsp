@@ -109,7 +109,6 @@
 							$(".scrap_count").text(scount);
 							$("input:button[name=scrap_btn]").val("스크랩취소");
 
-							alert("스크랩이 완료되었습니다."); 
 			      		}else if(check==-1){
 			      			$("input:button[name=scrap_btn]").css("color","#ffc107");
 							$("input:button[name=scrap_btn]").css("background-color","#ffffff");
@@ -119,7 +118,6 @@
 							$(".scrap_count").text(scount);
 							$("input:button[name=scrap_btn]").val("스크랩");
 							
-							alert("스크랩이 취소되었습니다."); 
 			      		}
 			      		
 			      	}
