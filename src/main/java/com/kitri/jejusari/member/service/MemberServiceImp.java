@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,9 @@ public class MemberServiceImp implements MemberService {
 
 	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	BCryptPasswordEncoder pwdEncoder;
 
 	@Override
 	public int memberJoin(MemberDto memberDto) {
@@ -94,7 +98,15 @@ public class MemberServiceImp implements MemberService {
 
 	@Override
 	public MemberDto tempLogin(MemberDto memberDto) {
-		return memberDao.tempLogin(memberDto);
+		
+		MemberDto member = memberDao.tempLogin(memberDto);
+		if (member != null) {
+			if (pwdEncoder.matches(memberDto.getMember_pwd(), member.getMember_pwd())) {
+				return member;
+			}
+		}
+				
+		return member;
 	}
 
 	@Override

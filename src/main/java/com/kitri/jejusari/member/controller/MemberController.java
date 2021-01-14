@@ -71,9 +71,8 @@ public class MemberController {
 		logger.info(memberDto.toString());
 		
 		MemberDto member = memberService.tempLogin(memberDto);
-		boolean pwdMatch = pwdEncoder.matches(memberDto.getMember_pwd(), member.getMember_pwd());
-		logger.info("비밀번호 매칭? : {}", pwdMatch);
-		if (member == null || pwdMatch == false) {
+		
+		if (member == null) {
 			rttr.addFlashAttribute("msg", "failure");
 			return "redirect:/member/login";
 		}
