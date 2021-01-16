@@ -153,7 +153,6 @@ public class SalesController {
 
 	@PostMapping(value = "/uploadSummernoteImageFile")
 	public ResponseEntity<JSONObject> uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
-		
 		String realpath = request.getSession().getServletContext().getRealPath("/");		// 프로젝트 실제 경로
 		logger.info("realPath : {}", realpath);
 		
