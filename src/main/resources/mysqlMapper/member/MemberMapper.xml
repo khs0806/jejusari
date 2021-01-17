@@ -133,7 +133,13 @@
 	
 	<select id="memberadmin_list" parameterType="java.util.HashMap" resultType="com.kitri.jejusari.member.model.dto.MemberDto">
 		<![CDATA[
-			select b.* From (select rownum rnum, a.* From (select * from member order by member_number desc) a) b where b.rnum>=#{startRow} and b.rnum<=#{endRow}
+			select a.* 
+			From (
+				select * 
+				from member 
+				order by member_number desc
+			) a 
+			LIMIT #{startRow}, 10
 		]]>
 	</select>
 	
