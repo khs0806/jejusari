@@ -10,6 +10,9 @@
 	</select>
 	
 	<insert id="member_join">
+		<selectKey resultType="int" keyProperty="member_number" order="BEFORE">
+	        SELECT MAX(member_number)+1 FROM member        
+	    </selectKey>
 		INSERT INTO member (
 			member_id,
 			member_number,
@@ -23,7 +26,7 @@
 			member_pwd
 		) VALUES (
 			#{member_id}, 
-			null, 
+			#{member_number}, 
 			#{member_name}, 
 			#{member_email}, 
 			#{member_phone, jdbcType=VARCHAR}, 
