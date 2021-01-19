@@ -232,14 +232,11 @@
 	
 	<!--  등록한 매물의 sales_number 가져오기-->
 	<select id="get_sales_number" resultType="int">
-		SELECT *
-		FROM (
-		    SELECT SALES_NUMBER
-		    FROM sales
-		    WHERE MEMBER_ID = #{member_id}
-		    ORDER BY SALES_NUMBER DESC
-		    )
-		WHERE ROWNUM = 1
+	    SELECT SALES_NUMBER
+	    FROM sales
+	    WHERE MEMBER_ID = #{member_id}
+	    ORDER BY SALES_NUMBER DESC
+	    LIMIT 1
 	</select>
 	
 	<insert id = "salesImg_insert" parameterType = "com.kitri.jejusari.sales.model.dto.SalesImgDto">
