@@ -69,7 +69,7 @@ public class SalesServiceImp implements SalesService {
 		
 		// 해당 매물의 지수 정보 가져오기
 		Map<String, Object> factorMap = salesDao.getFactor(sales_number);
-		logger.info(factorMap.toString());
+		if (factorMap != null) logger.info(factorMap.toString());
 
 		// 매물더미데이터 업데이트_한번 돌리면 될듯?합니다?
 		/*

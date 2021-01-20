@@ -8,19 +8,17 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="${root }/javascript/jquery-3.5.1.js"></script>
-		<script>
-		function updateCostInput(val) {
-          document.getElementById('costInput').value=val; 
-        }
-		function updateAreaInput(val) {
-          document.getElementById('areaInput').value=val; 
-        }
-		
-		$(function(){
-			$("#BRbutton").hide();
-		});
-		</script>
 <script>
+	function updateCostInput(val) {
+         document.getElementById('costInput').value=val; 
+       }
+	function updateAreaInput(val) {
+         document.getElementById('areaInput').value=val; 
+       }
+	$(function(){
+		$("#BRbutton").hide();
+		if(${loginChk == '0'}) alert("매물정보를 확인하시려면 로그인해주십시오.") 
+	});
 	function updateCostInput(val) {
 		document.getElementById('costInput').value = val;
 	}

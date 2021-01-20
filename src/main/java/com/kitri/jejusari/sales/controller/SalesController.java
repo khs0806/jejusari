@@ -103,8 +103,12 @@ public class SalesController {
 
 		String session_member_id = (String) session.getAttribute("member_id");
 		logger.info("session_member_id : {}",session_member_id);
-		salesService.salesDetail(model, sales_number, page_number, session_member_id);
+		if (session_member_id == null) {
+			model.addAttribute("loginChk", "0");
+			return "redirect:/sales";
+		}
 		
+		salesService.salesDetail(model, sales_number, page_number, session_member_id);
 		return "sales/sales_details.tiles";
 	}
 
