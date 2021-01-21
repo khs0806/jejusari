@@ -241,10 +241,9 @@
 	
 	<insert id = "salesImg_insert" parameterType = "com.kitri.jejusari.sales.model.dto.SalesImgDto">
       INSERT INTO SALES_IMG (
-      		IMAGE_INDEX,
       		SALES_NUMBER,
       		IMAGE_URL) 
-      VALUES(1, #{sales_number}, #{image_url})
+      VALUES(#{sales_number}, #{image_url})
    </insert>
    
 </mapper>

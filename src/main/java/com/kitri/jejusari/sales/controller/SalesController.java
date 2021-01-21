@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kitri.jejusari.common.PageMaker;
 import com.kitri.jejusari.member.model.dto.MemberDto;
@@ -99,12 +100,12 @@ public class SalesController {
 	}
 
 	@GetMapping("/sales/detail")
-	public String salesDetail(Model model, int sales_number, @ModelAttribute("pageNumber") int page_number) {
+	public String salesDetail(Model model, int sales_number, @ModelAttribute("pageNumber") int page_number, RedirectAttributes rttr) {
 
 		String session_member_id = (String) session.getAttribute("member_id");
 		logger.info("session_member_id : {}",session_member_id);
 		if (session_member_id == null) {
-			model.addAttribute("loginChk", "0");
+			rttr.addFlashAttribute("loginChk", "0");
 			return "redirect:/sales";
 		}
 		

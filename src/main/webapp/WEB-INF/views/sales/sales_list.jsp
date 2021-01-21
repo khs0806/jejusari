@@ -17,7 +17,7 @@
        }
 	$(function(){
 		$("#BRbutton").hide();
-		if(${loginChk == '0'}) alert("매물정보를 확인하시려면 로그인해주십시오.") 
+		if(${loginChk == '0'}) alert("매물정보를 확인하시려면 로그인해주십시오.");
 	});
 	function updateCostInput(val) {
 		document.getElementById('costInput').value = val;
@@ -26,6 +26,15 @@
 		document.getElementById('areaInput').value = val;
 	}
 </script>
+<style type="text/css">
+.container {
+	max-width: 1400px;
+}
+.salesAddress {
+	font-size: 14px;
+	font-weight: 400;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -133,7 +142,7 @@
 		</script>
 			<a href="${root}/sales/detail?sales_number=${salesList.sales_number }&pageNumber=${pageMaker.cri.pageNumber}">
 			<div class="row border-bottom" id="table_td">
-				<div class="col-md-6"><strong>${salesList.sales_title}</strong><p>${salesList.sales_address}</p></div>
+				<div class="col-md-6"><strong>${salesList.sales_title}</strong><p class="salesAddress">${salesList.sales_address}</p></div>
 				<div class="col-md-1">${salesList.sales_category_type}</div>
 				<div class="col-md-2"><fmt:formatNumber value="${salesList.sales_area/(3.3)}" type="number" pattern="0.0"/>평/
 						<fmt:formatNumber value="${salesList.sales_area}" type="number" pattern="0.0"/>m<sup>2</sup>/${salesList.sales_floor}층</div>
