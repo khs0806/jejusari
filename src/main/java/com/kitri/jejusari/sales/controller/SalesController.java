@@ -115,6 +115,7 @@ public class SalesController {
 
 	@GetMapping("/sales/broker")
 	public String salesBroker(String member_id, Model model) {
+		logger.info("salesBroker===");
 		
 		MemberDto memberDto = salesService.salesBroker(member_id);
 		model.addAttribute("memberDto", memberDto);
