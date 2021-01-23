@@ -123,8 +123,6 @@ public class SalesServiceImp implements SalesService {
 		model.put("urlNameAll", urlNameAll);
 		model.put("salesDto", salesDto);
 
-//		mav.addObject("salesImgDtoList", salesImgDtoList);
-		
 		return model;
 	}
 
