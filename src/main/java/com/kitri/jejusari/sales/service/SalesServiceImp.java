@@ -94,6 +94,7 @@ public class SalesServiceImp implements SalesService {
 
 		SalesDto salesDto = salesDao.salesDetail(sales_number);
 		String[] sales_option = salesDto.getSales_option().split(",");
+		
 		for (int i = 0; i < sales_option.length; i++) {
 			if (sales_option[i].equals("풀옵션"))
 				salesDto.setSales_full(1);
@@ -105,6 +106,7 @@ public class SalesServiceImp implements SalesService {
 			if (sales_option[i].equals("엘리베이터"))
 				salesDto.setSales_ele(1);
 		}
+		
 		List<SalesImgDto> salesImgDtoList = salesDao.selectSalesImg(sales_number);
 		logger.info("urlname : {}", salesImgDtoList.toString());
 		
