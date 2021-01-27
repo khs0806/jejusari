@@ -35,7 +35,6 @@ public class SalesServiceImp implements SalesService {
 
 	@Override
 	public void salesDetail(Model model, int sales_number, int pageNumber, String session_member_id) {
-		
 		SalesDto salesDto = salesDao.salesDetail(sales_number);
 		String[] sales_option = salesDto.getSales_option().split(",");
 		for (int i = 0; i < sales_option.length; i++) {
