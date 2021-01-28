@@ -99,7 +99,7 @@ public class SalesServiceImp implements SalesService {
 				salesDto.setSales_full(1);
 			if (sales_option[i].equals("주차장"))
 				salesDto.setSales_parking(1);
-			;
+			
 			if (sales_option[i].equals("CCTV"))
 				salesDto.setSales_cctv(1);
 			if (sales_option[i].equals("엘리베이터"))
