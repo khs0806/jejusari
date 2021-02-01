@@ -23,7 +23,6 @@ import com.google.common.base.Joiner;
 public class LoggerAdvice {
 	private static final Logger logger = LoggerFactory.getLogger(LoggerAdvice.class);
 	
-	
 	@Pointcut("within(com.kitri.jejusari..*.controller.*)")
 	public void onRequest() {}
 
