@@ -28,6 +28,7 @@ public class LoggerAdvice {
 
 	@Around("onRequest()") 
 	public Object doLogging(ProceedingJoinPoint pjp) throws Throwable {
+		
 		HttpServletRequest request =
 				((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
